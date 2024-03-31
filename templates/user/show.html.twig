@@ -1,0 +1,42 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block content %}
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idu</th>
+                <td>{{ user.idu }}</td>
+            </tr>
+            <tr>
+                <th>Nomu</th>
+                <td>{{ user.nomu }}</td>
+            </tr>
+            <tr>
+                <th>Prenomu</th>
+                <td>{{ user.prenomu }}</td>
+            </tr>
+            <tr>
+                <th>Emailu</th>
+                <td>{{ user.emailu }}</td>
+            </tr>
+            <tr>
+                <th>Mdpu</th>
+                <td>{{ user.mdpu }}</td>
+            </tr>
+            <tr>
+                <th>Roleu</th>
+                <td>{{ user.roleu }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_user_index') }}">back to list</a>
+
+    <a href="{{ path('app_user_edit', {'idu': user.idu}) }}">edit</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+{% endblock %}

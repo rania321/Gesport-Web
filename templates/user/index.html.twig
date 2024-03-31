@@ -1,0 +1,41 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Liste des Utilisateurs</h1>
+        <a href="{{ path('app_user_new') }}" class="btn btn-primary mb-3">Créer un nouvel utilisateur</a>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Rôle</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.idu }}</td>
+                        <td>{{ user.nomu }}</td>
+                        <td>{{ user.prenomu }}</td>
+                        <td>{{ user.emailu }}</td>
+                        <td>{{ user.roleu }}</td>
+                        <td>
+                            <a href="{{ path('app_user_show', {'idu': user.idu}) }}" class="btn btn-info btn-sm">Afficher</a>
+                            <a href="{{ path('app_user_edit', {'idu': user.idu}) }}" class="btn btn-warning btn-sm">Éditer</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6">Aucun utilisateur trouvé</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

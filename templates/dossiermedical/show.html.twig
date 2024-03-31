@@ -1,0 +1,34 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Dossiermedical{% endblock %}
+
+{% block content %}
+   
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Iddm</th>
+                <td>{{ dossiermedical.iddm }}</td>
+            </tr>
+            <tr>
+                <th>Poidsdm</th>
+                <td>{{ dossiermedical.poidsdm }}</td>
+            </tr>
+            <tr>
+                <th>Tailledm</th>
+                <td>{{ dossiermedical.tailledm }}</td>
+            </tr>
+            <tr>
+                <th>Agedm</th>
+                <td>{{ dossiermedical.agedm }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_dossiermedical_index') }}">back to list</a>
+
+    <a href="{{ path('app_dossiermedical_edit', {'iddm': dossiermedical.iddm}) }}">edit</a>
+
+    {{ include('dossiermedical/_delete_form.html.twig') }}
+{% endblock %}

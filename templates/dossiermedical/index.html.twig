@@ -1,0 +1,41 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Dossiermedical index{% endblock %}
+
+{% block content %}
+  
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Iddm</th>
+                <th>Poidsdm</th>
+                <th>Tailledm</th>
+                <th>Agedm</th>
+                <th>User</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dossiermedical in dossiermedicals %}
+            <tr>
+                <td>{{ dossiermedical.iddm }}</td>
+                <td>{{ dossiermedical.poidsdm }}</td>
+                <td>{{ dossiermedical.tailledm }}</td>
+                <td>{{ dossiermedical.agedm }}</td>
+                <td>{{ dossiermedical.user.nomu }}</td>
+                <td>
+                    <a href="{{ path('app_dossiermedical_show', {'iddm': dossiermedical.iddm}) }}" class="btn btn-primary">Show</a>
+                    <a href="{{ path('app_dossiermedical_edit', {'iddm': dossiermedical.iddm}) }}" class="btn btn-secondary">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_dossiermedical_new') }}" class="btn btn-success">Create new</a>
+{% endblock %}
