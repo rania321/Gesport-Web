@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservationactivite index{% endblock %}
+{% block carousel %}
+<div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h3 class="text-white display-3 mb-4">Réservez maintenant !</h3>
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="./base">Accueil</a></li>
+                    <li class="breadcrumb-item active text-white">Activite</li>
+                </ol>    
+            </div>
+        </div>
+{% endblock %}
+
+{% block content %}
+    <h1>Reservationactivite index</h1>
+    <div class="container-fluid py-5">
+            <div class="container py-5">
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+              <!--  <th>Idr</th> -->
+                <th>Activité</th>
+                <th>Nom</th>
+                <th>Date</th>
+                <th>Heure</th>
+                <th>Statut</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservationactivite in reservationactivites %}
+            <tr>
+              <!--  <td>{{ reservationactivite.idr }}</td> -->
+                <td><img src="{{ asset('uploads/' ~ reservationactivite.ida.imagea) }}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="{{ reservationactivite.ida.noma }}"></td>
+                <td>{{ reservationactivite.ida.noma }}</td>
+                <td>{{ reservationactivite.datedebutr ? reservationactivite.datedebutr|date('Y-m-d') : '' }}</td>
+                <td>{{ reservationactivite.heurer }}</td>
+                <td>{{ reservationactivite.statutr }}</td>
+                <td>
+                    <a href="{{ path('app_reservationactivite_show', {'idr': reservationactivite.idr}) }}">show</a>
+                    <a href="{{ path('app_reservationactivite_edit', {'idr': reservationactivite.idr}) }}">edit</a>
+                    {{ include('reservationactivite/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+
+    <a href="{{ path('app_reservationactivite_new') }}">Create new</a>
+    
+{% endblock %}

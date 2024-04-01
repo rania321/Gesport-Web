@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Activite{% endblock %}
+{% block carousel %} 
+        <div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h3 class="text-white display-3 mb-4">Our Services</h3>
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item active text-white">Services</li>
+                </ol>    
+            </div>
+        </div>
+{% endblock %}
+
+{% block content %}
+    <h1>Activite</h1>
+    <div class="col-lg-8 col-xl-9">
+<div class="row g-4">
+                            <div class="col-lg-6">
+    
+           <!-- 
+                <th>Ida</th>
+                <td>{{ activite.ida }}</td>
+             -->
+            
+               <!-- <th>Imagea</th>  -->
+               <div class="border rounded">
+                <img src="{{ asset('uploads/' ~ activite.imagea) }}" class="img-fluid rounded"  alt="{{ activite.noma }}">
+            </div>
+            </div>
+            <div class="col-lg-6">
+            <h4 class="fw-bold mb-3">{{ activite.noma }}</h4>
+            
+            <p class="mb-3">Type: {{ activite.typea }}</p>
+            
+            <h5 class="fw-bold mb-3">{{ activite.dispoa }}</h5>
+                
+            <p class="mb-4">{{ activite.descria }}</p>
+            
+            </div>
+            
+        </div>
+</div>
+
+    <a href="{{ path('app_activite_index') }}">back to list</a>
+
+{% endblock %}
