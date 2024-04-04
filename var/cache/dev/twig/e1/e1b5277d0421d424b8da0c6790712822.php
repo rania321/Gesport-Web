@@ -270,20 +270,18 @@ class __TwigTemplate_e21a9d62a27e67b03ac49bf9b853af2d extends Template
         echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 137, $this->source); })()), "imagea", [], "any", false, false, false, 137), 'errors');
         echo "</div>
                     </div>
-                    ";
-        // line 139
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 139, $this->source); })()), "_token", [], "any", false, false, false, 139), 'row');
-        echo "
+                    
                     <button type=\"submit\" class=\"btn btn-primary me-2\">Ajouter</button>
-                    ";
-        // line 141
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 141, $this->source); })()), 'form_end');
-        echo "
                     <a href=\"";
-        // line 142
+        // line 141
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_indexBack");
         echo "\" class=\"btn btn-light\">La liste</a>
-                  </form>
+                    </form>
+                    ";
+        // line 143
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 143, $this->source); })()), 'form_end');
+        echo "
+                  
                 </div>
               </div>
             </div>
@@ -318,7 +316,7 @@ class __TwigTemplate_e21a9d62a27e67b03ac49bf9b853af2d extends Template
      */
     public function getDebugInfo()
     {
-        return array (  284 => 142,  280 => 141,  275 => 139,  270 => 137,  266 => 136,  259 => 132,  255 => 131,  248 => 127,  244 => 126,  237 => 122,  233 => 121,  226 => 117,  222 => 116,  215 => 112,  201 => 100,  191 => 99,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
+        return array (  282 => 143,  277 => 141,  270 => 137,  266 => 136,  259 => 132,  255 => 131,  248 => 127,  244 => 126,  237 => 122,  233 => 121,  226 => 117,  222 => 116,  215 => 112,  201 => 100,  191 => 99,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -461,11 +459,12 @@ class __TwigTemplate_e21a9d62a27e67b03ac49bf9b853af2d extends Template
                       {{ form_widget(form.imagea, {'attr': {'class': 'form-control'}}) }}
                       <div class=\"text-danger\">{{ form_errors(form.imagea) }}</div>
                     </div>
-                    {{ form_row(form._token) }}
+                    
                     <button type=\"submit\" class=\"btn btn-primary me-2\">Ajouter</button>
-                    {{ form_end(form) }}
                     <a href=\"{{ path('app_activite_indexBack') }}\" class=\"btn btn-light\">La liste</a>
-                  </form>
+                    </form>
+                    {{ form_end(form) }}
+                  
                 </div>
               </div>
             </div>

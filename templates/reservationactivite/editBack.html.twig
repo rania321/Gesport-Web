@@ -40,10 +40,11 @@
                     </div>
                     {{ form_row(form._token) }}
                     <button type="submit" class="btn btn-primary me-2">Modifier</button>
-                    {{ form_end(form) }}
+                    
                     <a href="{{ path('app_reservationactivite_indexBack') }}" class="btn btn-light">La liste</a>
                     {{ include('reservationactivite/_delete_form.html.twig') }}
                   </form>
+                  {{ form_end(form) }}
                 </div>
               </div>
             </div>

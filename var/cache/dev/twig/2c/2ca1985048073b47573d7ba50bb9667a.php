@@ -199,13 +199,12 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
 
         // line 100
         echo "<div class=\"content-wrapper\">
-<h1> activité</h1>
 <div class=\"col-lg-12 grid-margin stretch-card\">
 <div class=\"card\">
 <div class=\"card-body\">
-    <h1>      </h1>
+    <h4 class=\"card-title\">Activités</h4>
     <a href=\"";
-        // line 106
+        // line 105
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_new");
         echo "\" class=\"btn btn-primary btn-rounded btn-fw\">Ajouter Activité</a>
 <div class=\"table-responsive\">
@@ -223,9 +222,9 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
         </thead>
         <tbody>
         ";
-        // line 121
+        // line 120
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["activites"]) || array_key_exists("activites", $context) ? $context["activites"] : (function () { throw new RuntimeError('Variable "activites" does not exist.', 121, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["activites"]) || array_key_exists("activites", $context) ? $context["activites"] : (function () { throw new RuntimeError('Variable "activites" does not exist.', 120, $this->source); })()));
         $context['_iterated'] = false;
         $context['loop'] = [
           'parent' => $context['_parent'],
@@ -241,40 +240,53 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["activite"]) {
-            // line 122
+            // line 121
             echo "            <tr>
                 
                 <td>";
+            // line 123
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 123), "html", null, true);
+            echo "</td>
+                <td>";
             // line 124
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 124), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "typea", [], "any", false, false, false, 124), "html", null, true);
             echo "</td>
-                <td>";
-            // line 125
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "typea", [], "any", false, false, false, 125), "html", null, true);
-            echo "</td>
-                <td><label class=\"badge badge-success\">";
+                <td>
+                    ";
             // line 126
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "dispoa", [], "any", false, false, false, 126), "html", null, true);
-            echo "</label></td>
+            if ((twig_get_attribute($this->env, $this->source, $context["activite"], "dispoa", [], "any", false, false, false, 126) == "Disponible")) {
+                // line 127
+                echo "                            <span class=\"badge badge-success\">Disponible</span>
+                     ";
+            } else {
+                // line 129
+                echo "                            <span class=\"badge badge-danger\">Non disponible</span>
+                     ";
+            }
+            // line 131
+            echo "                </td>
+                
                 <td>";
-            // line 127
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "descria", [], "any", false, false, false, 127), "html", null, true);
+            // line 133
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "descria", [], "any", false, false, false, 133), "html", null, true);
             echo "</td>
                 <td><img src=\"";
-            // line 128
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["activite"], "imagea", [], "any", false, false, false, 128))), "html", null, true);
+            // line 134
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["activite"], "imagea", [], "any", false, false, false, 134))), "html", null, true);
             echo "\" class=\"card-img-top\" alt=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 128), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 134), "html", null, true);
             echo "\"></td>
                 <td>
+                <div class=\"d-flex\">
                     <a href=\"";
-            // line 130
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_edit", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 130)]), "html", null, true);
-            echo "\" class=\"btn btn-primary btn-rounded btn-fw\">Modifier</a>
+            // line 137
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_edit", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 137)]), "html", null, true);
+            echo "\" class=\"btn btn-warning btn-sm\">Modifier</a>
                     ";
-            // line 131
+            // line 138
             echo twig_include($this->env, $context, "activite/_delete_form.html.twig");
             echo "
+                </div>
                 </td>
             </tr>
         ";
@@ -289,7 +301,7 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
             }
         }
         if (!$context['_iterated']) {
-            // line 135
+            // line 143
             echo "            <tr>
                 <td colspan=\"7\">no records found</td>
             </tr>
@@ -298,7 +310,7 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['activite'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 139
+        // line 147
         echo "        </tbody>
     </table>
 
@@ -337,7 +349,7 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  302 => 139,  293 => 135,  276 => 131,  272 => 130,  265 => 128,  261 => 127,  257 => 126,  253 => 125,  249 => 124,  245 => 122,  227 => 121,  209 => 106,  201 => 100,  191 => 99,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
+        return array (  314 => 147,  305 => 143,  287 => 138,  283 => 137,  275 => 134,  271 => 133,  267 => 131,  263 => 129,  259 => 127,  257 => 126,  252 => 124,  248 => 123,  244 => 121,  226 => 120,  208 => 105,  201 => 100,  191 => 99,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -442,11 +454,10 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
 
 {% block content %}
 <div class=\"content-wrapper\">
-<h1> activité</h1>
 <div class=\"col-lg-12 grid-margin stretch-card\">
 <div class=\"card\">
 <div class=\"card-body\">
-    <h1>      </h1>
+    <h4 class=\"card-title\">Activités</h4>
     <a href=\"{{ path('app_activite_new') }}\" class=\"btn btn-primary btn-rounded btn-fw\">Ajouter Activité</a>
 <div class=\"table-responsive\">
     <table class=\"table table-striped\">
@@ -467,12 +478,21 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
                 
                 <td>{{ activite.noma }}</td>
                 <td>{{ activite.typea }}</td>
-                <td><label class=\"badge badge-success\">{{ activite.dispoa }}</label></td>
+                <td>
+                    {% if activite.dispoa == 'Disponible' %}
+                            <span class=\"badge badge-success\">Disponible</span>
+                     {% else %}
+                            <span class=\"badge badge-danger\">Non disponible</span>
+                     {% endif %}
+                </td>
+                
                 <td>{{ activite.descria }}</td>
                 <td><img src=\"{{ asset('uploads/' ~ activite.imagea) }}\" class=\"card-img-top\" alt=\"{{ activite.noma }}\"></td>
                 <td>
-                    <a href=\"{{ path('app_activite_edit', {'ida': activite.ida}) }}\" class=\"btn btn-primary btn-rounded btn-fw\">Modifier</a>
+                <div class=\"d-flex\">
+                    <a href=\"{{ path('app_activite_edit', {'ida': activite.ida}) }}\" class=\"btn btn-warning btn-sm\">Modifier</a>
                     {{ include('activite/_delete_form.html.twig') }}
+                </div>
                 </td>
             </tr>
         {% else %}

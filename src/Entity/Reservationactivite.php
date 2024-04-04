@@ -67,7 +67,7 @@ class Reservationactivite
         return $this->heurer;
     }
 
-    public function setHeurer(string $heurer): static
+    public function setHeurer(?string $heurer): self
     {
         $this->heurer = $heurer;
 

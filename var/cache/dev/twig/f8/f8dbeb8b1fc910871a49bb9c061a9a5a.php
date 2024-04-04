@@ -165,7 +165,10 @@ class __TwigTemplate_170a4e2aefc2487ffa63ce0cdcadba9b extends Template
         // line 51
         echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 51, $this->source); })()), "datedebutr", [], "any", false, false, false, 51), 'widget', ["attr" => ["class" => "form-control bg-white border-0"]]);
         echo "
-                                        
+                                        <div class=\"text-danger\">";
+        // line 52
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 52, $this->source); })()), "datedebutr", [], "any", false, false, false, 52), 'errors');
+        echo "</div>
                                            
                                     </div>
                                 </div>
@@ -244,7 +247,7 @@ class __TwigTemplate_170a4e2aefc2487ffa63ce0cdcadba9b extends Template
      */
     public function getDebugInfo()
     {
-        return array (  207 => 74,  202 => 72,  194 => 67,  190 => 66,  182 => 61,  177 => 59,  166 => 51,  157 => 45,  148 => 39,  140 => 34,  126 => 23,  118 => 17,  108 => 16,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
+        return array (  210 => 74,  205 => 72,  197 => 67,  193 => 66,  185 => 61,  180 => 59,  170 => 52,  166 => 51,  157 => 45,  148 => 39,  140 => 34,  126 => 23,  118 => 17,  108 => 16,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -300,7 +303,7 @@ class __TwigTemplate_170a4e2aefc2487ffa63ce0cdcadba9b extends Template
                                     <div class=\"form-floating\">
                                         
                                         {{ form_widget(form.datedebutr, {'attr': {'class': 'form-control bg-white border-0'}}) }}
-                                        
+                                        <div class=\"text-danger\">{{ form_errors(form.datedebutr) }}</div>
                                            
                                     </div>
                                 </div>

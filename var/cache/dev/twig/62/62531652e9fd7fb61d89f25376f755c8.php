@@ -94,7 +94,7 @@ class __TwigTemplate_650e6e5aa09ebd8288c19c0a88f5e355 extends Template
   <div class=\"navbar-menu-wrapper d-flex align-items-top\">
     <ul class=\"navbar-nav\">
       <li class=\"nav-item font-weight-semibold d-none d-lg-block ms-0\">
-        <h1 class=\"welcome-text\">Good Morning, <span class=\"text-black fw-bold\">John Doe</span></h1>
+        <h1 class=\"welcome-text\">Good Morning, <span class=\"text-black fw-bold\">Rania Guelmami</span></h1>
         <h3 class=\"welcome-sub-text\">Your performance summary this week </h3>
       </li>
     </ul>
@@ -1122,7 +1122,7 @@ class __TwigTemplate_650e6e5aa09ebd8288c19c0a88f5e355 extends Template
   <div class=\"navbar-menu-wrapper d-flex align-items-top\">
     <ul class=\"navbar-nav\">
       <li class=\"nav-item font-weight-semibold d-none d-lg-block ms-0\">
-        <h1 class=\"welcome-text\">Good Morning, <span class=\"text-black fw-bold\">John Doe</span></h1>
+        <h1 class=\"welcome-text\">Good Morning, <span class=\"text-black fw-bold\">Rania Guelmami</span></h1>
         <h3 class=\"welcome-sub-text\">Your performance summary this week </h3>
       </li>
     </ul>

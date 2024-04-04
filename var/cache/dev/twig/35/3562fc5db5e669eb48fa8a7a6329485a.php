@@ -199,10 +199,10 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
 
         // line 100
         echo "<div class=\"content-wrapper\">
-<h1> reservation</h1>
 <div class=\"col-lg-12 grid-margin stretch-card\">
 <div class=\"card\">
 <div class=\"card-body\">
+<h4 class=\"card-title\">Reservations</h4>
    <!-- <a href=\"";
         // line 105
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_new");
@@ -262,23 +262,35 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
             // line 126
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "heurer", [], "any", false, false, false, 126), "html", null, true);
             echo "</td>
-                <td><label class=\"badge badge-success\">";
-            // line 127
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "statutr", [], "any", false, false, false, 127), "html", null, true);
-            echo "</label></td>
                 <td>
-                    <a href=\"";
-            // line 129
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_show", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 129)]), "html", null, true);
-            echo "\">show</a>
-                    <a href=\"";
-            // line 130
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_editBack", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 130)]), "html", null, true);
-            echo "\">edit</a>
                     ";
-            // line 131
+            // line 128
+            if ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "statutr", [], "any", false, false, false, 128) == "confirmée")) {
+                // line 129
+                echo "                            <span class=\"badge badge-success\">Confirmée</span>
+                     ";
+            } else {
+                // line 131
+                echo "                            <span class=\"badge badge-warning\">En cours</span>
+                     ";
+            }
+            // line 133
+            echo "                </td>
+                <td>
+                <div class=\"d-flex\">
+                    <a href=\"";
+            // line 136
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_showBack", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 136)]), "html", null, true);
+            echo "\" class=\"btn btn-info btn-sm\">show</a>
+                    <a href=\"";
+            // line 137
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_editBack", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 137)]), "html", null, true);
+            echo "\" class=\"btn btn-warning btn-sm\">edit</a>
+                    ";
+            // line 138
             echo twig_include($this->env, $context, "reservationactivite/_delete_form.html.twig");
             echo "
+                </div>
                 </td>
             </tr>
         ";
@@ -293,7 +305,7 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
             }
         }
         if (!$context['_iterated']) {
-            // line 135
+            // line 143
             echo "            <tr>
                 <td colspan=\"5\">no records found</td>
             </tr>
@@ -302,7 +314,7 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['reservationactivite'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 139
+        // line 147
         echo "        </tbody>
     </table>
 </div>
@@ -341,7 +353,7 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  306 => 139,  297 => 135,  280 => 131,  276 => 130,  272 => 129,  267 => 127,  263 => 126,  259 => 125,  255 => 124,  251 => 123,  247 => 122,  244 => 121,  226 => 120,  208 => 105,  201 => 100,  191 => 99,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
+        return array (  318 => 147,  309 => 143,  291 => 138,  287 => 137,  283 => 136,  278 => 133,  274 => 131,  270 => 129,  268 => 128,  263 => 126,  259 => 125,  255 => 124,  251 => 123,  247 => 122,  244 => 121,  226 => 120,  208 => 105,  201 => 100,  191 => 99,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -446,10 +458,10 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
 
 {% block content %}
 <div class=\"content-wrapper\">
-<h1> reservation</h1>
 <div class=\"col-lg-12 grid-margin stretch-card\">
 <div class=\"card\">
 <div class=\"card-body\">
+<h4 class=\"card-title\">Reservations</h4>
    <!-- <a href=\"{{ path('app_reservationactivite_new') }}\" class=\"btn btn-primary btn-rounded btn-fw\">Ajouter Réservation</a> -->
 <div class=\"table-responsive\">
     <table class=\"table table-striped\">
@@ -472,11 +484,19 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
                 <td>{{ reservationactivite.idu.prenomu }}</td>
                 <td>{{ reservationactivite.datedebutr ? reservationactivite.datedebutr|date('Y-m-d') : '' }}</td>
                 <td>{{ reservationactivite.heurer }}</td>
-                <td><label class=\"badge badge-success\">{{ reservationactivite.statutr }}</label></td>
                 <td>
-                    <a href=\"{{ path('app_reservationactivite_show', {'idr': reservationactivite.idr}) }}\">show</a>
-                    <a href=\"{{ path('app_reservationactivite_editBack', {'idr': reservationactivite.idr}) }}\">edit</a>
+                    {% if reservationactivite.statutr == 'confirmée' %}
+                            <span class=\"badge badge-success\">Confirmée</span>
+                     {% else %}
+                            <span class=\"badge badge-warning\">En cours</span>
+                     {% endif %}
+                </td>
+                <td>
+                <div class=\"d-flex\">
+                    <a href=\"{{ path('app_reservationactivite_showBack', {'idr': reservationactivite.idr}) }}\" class=\"btn btn-info btn-sm\">show</a>
+                    <a href=\"{{ path('app_reservationactivite_editBack', {'idr': reservationactivite.idr}) }}\" class=\"btn btn-warning btn-sm\">edit</a>
                     {{ include('reservationactivite/_delete_form.html.twig') }}
+                </div>
                 </td>
             </tr>
         {% else %}

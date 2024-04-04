@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Activite;
 use App\Form\ActiviteType;
+use App\Form\ReservationactiviteType;
 use App\Repository\ActiviteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Reservationactivite as ReservationactiviteEntity;
 
 #[Route('/activite')]
 class ActiviteController extends AbstractController
@@ -98,5 +100,29 @@ class ActiviteController extends AbstractController
         }
 
         return $this->redirectToRoute('app_activite_indexBack', [], Response::HTTP_SEE_OTHER);
+    }
+    #[Route('/reserv/{ida}', name: 'app_activite_reserv')]
+    public function reserv(Request $request, Activite $activite): Response
+    {
+        // Create a new Reservation entity object
+        $reservationactiviteEntity = new ReservationactiviteEntity();
+        $form = $this->createForm(ReservationactiviteType::class, $reservationactiviteEntity);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $reservationactiviteEntity->setIda($activite);
+
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($reservationactiviteEntity);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_activite_reserv', ['ida' => $activite->getIda()]);
+        }
+
+        return $this->renderForm('reservationactivite/new.html.twig', [
+            'activite' => $activite,
+            'form' => $form,
+        ]);
     }
 }

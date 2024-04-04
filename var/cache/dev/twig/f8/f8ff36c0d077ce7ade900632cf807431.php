@@ -145,10 +145,7 @@ class __TwigTemplate_3ea86d8f46d6f7e551fdfc5c25b54cb4 extends Template
         echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 41, $this->source); })()), "_token", [], "any", false, false, false, 41), 'row');
         echo "
                     <button type=\"submit\" class=\"btn btn-primary me-2\">Modifier</button>
-                    ";
-        // line 43
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 43, $this->source); })()), 'form_end');
-        echo "
+                    
                     <a href=\"";
         // line 44
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_indexBack");
@@ -158,6 +155,10 @@ class __TwigTemplate_3ea86d8f46d6f7e551fdfc5c25b54cb4 extends Template
         echo twig_include($this->env, $context, "reservationactivite/_delete_form.html.twig");
         echo "
                   </form>
+                  ";
+        // line 47
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 47, $this->source); })()), 'form_end');
+        echo "
                 </div>
               </div>
             </div>
@@ -195,7 +196,7 @@ class __TwigTemplate_3ea86d8f46d6f7e551fdfc5c25b54cb4 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  158 => 45,  154 => 44,  150 => 43,  145 => 41,  139 => 38,  131 => 33,  127 => 32,  119 => 27,  112 => 23,  105 => 19,  98 => 15,  88 => 7,  78 => 6,  59 => 3,  36 => 1,);
+        return array (  160 => 47,  155 => 45,  151 => 44,  145 => 41,  139 => 38,  131 => 33,  127 => 32,  119 => 27,  112 => 23,  105 => 19,  98 => 15,  88 => 7,  78 => 6,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -242,10 +243,11 @@ class __TwigTemplate_3ea86d8f46d6f7e551fdfc5c25b54cb4 extends Template
                     </div>
                     {{ form_row(form._token) }}
                     <button type=\"submit\" class=\"btn btn-primary me-2\">Modifier</button>
-                    {{ form_end(form) }}
+                    
                     <a href=\"{{ path('app_reservationactivite_indexBack') }}\" class=\"btn btn-light\">La liste</a>
                     {{ include('reservationactivite/_delete_form.html.twig') }}
                   </form>
+                  {{ form_end(form) }}
                 </div>
               </div>
             </div>

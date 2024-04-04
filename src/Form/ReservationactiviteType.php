@@ -11,6 +11,7 @@ use App\Entity\Activite;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class ReservationactiviteType extends AbstractType
 {
@@ -30,14 +31,15 @@ class ReservationactiviteType extends AbstractType
                 ],
                 'placeholder' => 'Choisissez une heure', // Optionnel : affichez un message par défaut
             ])
-            ->add('ida', EntityType::class, [
-                'class' => Activite::class,
-                'choice_label' => 'noma', // Le champ de l'entité à afficher dans le formulaire
-            ])
+            
             ->add('idu', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'prenomu', // Le champ de l'entité à afficher dans le formulaire
+            ])
+            ->add('ida', HiddenType::class, [
+                'mapped' => false, // Empêche ce champ d'être lié à l'entité
             ]);
+
         
         // Si l'option 'editMode' est définie à true, on ajoute le champ du statut
         if ($options['editMode']) {

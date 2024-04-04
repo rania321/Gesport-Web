@@ -47,7 +47,7 @@ class __TwigTemplate_02a48e4a6c7d359051443bfa9e8775e3 extends Template
         // line 2
         echo twig_escape_filter($this->env, $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 2, $this->source); })()), "ida", [], "any", false, false, false, 2))), "html", null, true);
         echo "\">
-    <button class=\"btn\">Delete</button>
+    <button class=\"btn btn-danger btn-sm\">Delete</button>
 </form>
 ";
         
@@ -86,7 +86,7 @@ class __TwigTemplate_02a48e4a6c7d359051443bfa9e8775e3 extends Template
     {
         return new Source("<form method=\"post\" action=\"{{ path('app_activite_delete', {'ida': activite.ida}) }}\" onsubmit=\"return confirm('Are you sure you want to delete this item?');\">
     <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ activite.ida) }}\">
-    <button class=\"btn\">Delete</button>
+    <button class=\"btn btn-danger btn-sm\">Delete</button>
 </form>
 ", "activite/_delete_form.html.twig", "C:\\Users\\Rania\\Desktop\\gesportWeb\\templates\\activite\\_delete_form.html.twig");
     }

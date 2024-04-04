@@ -98,10 +98,10 @@
 
 {% block content %}
 <div class="content-wrapper">
-<h1> reservation</h1>
 <div class="col-lg-12 grid-margin stretch-card">
 <div class="card">
 <div class="card-body">
+<h4 class="card-title">Reservations</h4>
    <!-- <a href="{{ path('app_reservationactivite_new') }}" class="btn btn-primary btn-rounded btn-fw">Ajouter Réservation</a> -->
 <div class="table-responsive">
     <table class="table table-striped">
@@ -124,11 +124,19 @@
                 <td>{{ reservationactivite.idu.prenomu }}</td>
                 <td>{{ reservationactivite.datedebutr ? reservationactivite.datedebutr|date('Y-m-d') : '' }}</td>
                 <td>{{ reservationactivite.heurer }}</td>
-                <td><label class="badge badge-success">{{ reservationactivite.statutr }}</label></td>
                 <td>
-                    <a href="{{ path('app_reservationactivite_show', {'idr': reservationactivite.idr}) }}">show</a>
-                    <a href="{{ path('app_reservationactivite_editBack', {'idr': reservationactivite.idr}) }}">edit</a>
+                    {% if reservationactivite.statutr == 'confirmée' %}
+                            <span class="badge badge-success">Confirmée</span>
+                     {% else %}
+                            <span class="badge badge-warning">En cours</span>
+                     {% endif %}
+                </td>
+                <td>
+                <div class="d-flex">
+                    <a href="{{ path('app_reservationactivite_showBack', {'idr': reservationactivite.idr}) }}" class="btn btn-info btn-sm">show</a>
+                    <a href="{{ path('app_reservationactivite_editBack', {'idr': reservationactivite.idr}) }}" class="btn btn-warning btn-sm">edit</a>
                     {{ include('reservationactivite/_delete_form.html.twig') }}
+                </div>
                 </td>
             </tr>
         {% else %}

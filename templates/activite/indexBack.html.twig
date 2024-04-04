@@ -98,11 +98,10 @@
 
 {% block content %}
 <div class="content-wrapper">
-<h1> activité</h1>
 <div class="col-lg-12 grid-margin stretch-card">
 <div class="card">
 <div class="card-body">
-    <h1>      </h1>
+    <h4 class="card-title">Activités</h4>
     <a href="{{ path('app_activite_new') }}" class="btn btn-primary btn-rounded btn-fw">Ajouter Activité</a>
 <div class="table-responsive">
     <table class="table table-striped">
@@ -123,12 +122,21 @@
                 
                 <td>{{ activite.noma }}</td>
                 <td>{{ activite.typea }}</td>
-                <td><label class="badge badge-success">{{ activite.dispoa }}</label></td>
+                <td>
+                    {% if activite.dispoa == 'Disponible' %}
+                            <span class="badge badge-success">Disponible</span>
+                     {% else %}
+                            <span class="badge badge-danger">Non disponible</span>
+                     {% endif %}
+                </td>
+                
                 <td>{{ activite.descria }}</td>
                 <td><img src="{{ asset('uploads/' ~ activite.imagea) }}" class="card-img-top" alt="{{ activite.noma }}"></td>
                 <td>
-                    <a href="{{ path('app_activite_edit', {'ida': activite.ida}) }}" class="btn btn-primary btn-rounded btn-fw">Modifier</a>
+                <div class="d-flex">
+                    <a href="{{ path('app_activite_edit', {'ida': activite.ida}) }}" class="btn btn-warning btn-sm">Modifier</a>
                     {{ include('activite/_delete_form.html.twig') }}
+                </div>
                 </td>
             </tr>
         {% else %}

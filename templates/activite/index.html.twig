@@ -99,6 +99,7 @@
                         <h5 class="card-title">{{ activite.noma }}</h5>
                         <p class="card-text">{{ activite.descria }}</p>
                         <a href="{{ path('app_activite_show', {'ida': activite.ida}) }}" class="btn btn-primary rounded-pill py-2 px-4">Voir</a>
+                        <a href="{{ path('app_reservation_new_for_activity', {'activityId': activite.ida}) }}" class="btn btn-primary rounded-pill py-2 px-4">Reserver</a>
                     <!--    <a href="{{ path('app_reservationactivite_new', {'ida': activite.ida}) }}" class="btn btn-primary rounded-pill py-2 px-4">Réserver</a>  -->
                     </div>
                     </div>

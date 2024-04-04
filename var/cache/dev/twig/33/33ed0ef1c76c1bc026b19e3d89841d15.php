@@ -243,9 +243,13 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
             // line 101
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_show", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 101)]), "html", null, true);
             echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Voir</a>
-                    <!--    <a href=\"";
+                        <a href=\"";
             // line 102
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_new", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 102)]), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservation_new_for_activity", ["activityId" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 102)]), "html", null, true);
+            echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Reserver</a>
+                    <!--    <a href=\"";
+            // line 103
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_new", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 103)]), "html", null, true);
             echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Réserver</a>  -->
                     </div>
                     </div>
@@ -255,7 +259,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 108
+            // line 109
             echo "            <div class=\"col\">
                 <p>No records found</p>
             </div>
@@ -264,7 +268,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['activite'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 112
+        // line 113
         echo "    </div>
 ";
         
@@ -296,7 +300,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
      */
     public function getDebugInfo()
     {
-        return array (  268 => 112,  259 => 108,  248 => 102,  244 => 101,  240 => 100,  236 => 99,  224 => 92,  217 => 87,  212 => 86,  207 => 84,  204 => 83,  194 => 82,  175 => 72,  165 => 71,  90 => 5,  80 => 4,  61 => 3,  38 => 1,);
+        return array (  272 => 113,  263 => 109,  252 => 103,  248 => 102,  244 => 101,  240 => 100,  236 => 99,  224 => 92,  217 => 87,  212 => 86,  207 => 84,  204 => 83,  194 => 82,  175 => 72,  165 => 71,  90 => 5,  80 => 4,  61 => 3,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -402,6 +406,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
                         <h5 class=\"card-title\">{{ activite.noma }}</h5>
                         <p class=\"card-text\">{{ activite.descria }}</p>
                         <a href=\"{{ path('app_activite_show', {'ida': activite.ida}) }}\" class=\"btn btn-primary rounded-pill py-2 px-4\">Voir</a>
+                        <a href=\"{{ path('app_reservation_new_for_activity', {'activityId': activite.ida}) }}\" class=\"btn btn-primary rounded-pill py-2 px-4\">Reserver</a>
                     <!--    <a href=\"{{ path('app_reservationactivite_new', {'ida': activite.ida}) }}\" class=\"btn btn-primary rounded-pill py-2 px-4\">Réserver</a>  -->
                     </div>
                     </div>

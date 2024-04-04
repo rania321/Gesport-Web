@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Activite;
 
 #[Route('/reservationactivite')]
 class ReservationactiviteController extends AbstractController
@@ -53,10 +54,18 @@ class ReservationactiviteController extends AbstractController
         ]);
     }
 
-    #[Route('/{idr}', name: 'app_reservationactivite_show', methods: ['GET'])]
+    #[Route('/{idr}/show', name: 'app_reservationactivite_show', methods: ['GET'])]
     public function show(Reservationactivite $reservationactivite): Response
     {
         return $this->render('reservationactivite/show.html.twig', [
+            'reservationactivite' => $reservationactivite,
+        ]);
+    }
+
+    #[Route('/{idr}', name: 'app_reservationactivite_showBack', methods: ['GET'])]
+    public function showBack(Reservationactivite $reservationactivite): Response
+    {
+        return $this->render('reservationactivite/showBack.html.twig', [
             'reservationactivite' => $reservationactivite,
         ]);
     }
@@ -108,5 +117,38 @@ class ReservationactiviteController extends AbstractController
         }
 
         return $this->redirectToRoute('app_reservationactivite_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/new/{activityId}', name: 'app_reservation_new_for_activity', methods: ['GET', 'POST'])]
+    public function newForActivity(Request $request, int $activityId): Response
+    {
+        $activite = $this->getDoctrine()->getRepository(Activite::class)->find($activityId);
+        
+        if (!$activite) {
+            throw $this->createNotFoundException('Activité non trouvée.');
+        }
+
+        $reservation = new Reservationactivite();
+        $reservation->setStatutr("En cours");
+        $reservation->setIda($activite);
+        
+
+        $form = $this->createForm(ReservationactiviteType::class, $reservation,[
+            'editMode' => false, // Le formulaire est en mode ajout
+        ]);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($reservation);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_reservationactivite_index');
+        }
+
+        return $this->render('reservationactivite/new.html.twig', [
+            'activite' => $activite,
+            'form' => $form->createView(),
+        ]);
     }
 }
