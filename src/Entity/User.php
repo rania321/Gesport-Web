@@ -17,14 +17,23 @@ class User implements UserInterface
     private ?int $idu = null;
 
     #[Assert\NotBlank(message:"Veuillez saisir le nom.")]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z\-]+$/',
+        message: 'Le nom ne doit contenir que des lettres et des tirets.'
+    )]
     #[ORM\Column(length: 255)]
     private ?string $nomu = null;
 
     #[Assert\NotBlank(message:"Veuillez saisir le prenom.")]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z\-]+$/',
+        message: 'Le prénom ne doit contenir que des lettres et des tirets.'
+    )]
     #[ORM\Column(length: 255)]
     private ?string $prenomu = null;
 
     #[Assert\NotBlank(message:"Veuillez saisir l'email.")]
+    #[Assert\Email(message: "L'adresse email '{{ value }}' n'est pas valide.")]
     #[ORM\Column(length: 255)]
     private ?string $emailu = null;
 

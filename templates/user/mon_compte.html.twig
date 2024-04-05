@@ -1,26 +1,40 @@
-{% if user %}
-    <p>User email: {{ user.emailu }}</p>
-    <p>User role: {{ user.roleu }}</p>
-    {# Vous pouvez ajouter d'autres informations de l'utilisateur ici #}
+{% extends 'base.html.twig' %}
 
-    {# Formulaire de modification des informations de l'utilisateur #}
-    <h2>Modifier les informations du compte</h2>
-    {{ form_start(form) }}
-    {{ form_row(form.emailu) }}
-    {{ form_row(form.roleu) }} {# Si vous souhaitez modifier le rôle de l'utilisateur #}
-    {# Ajoutez d'autres champs selon vos besoins #}
-    <button type="submit">Enregistrer les modifications</button>
-    {{ form_end(form) }}
+{% block content %}
+    {# Contenu de votre page, y compris le formulaire #}
+    {% if user %}
+       
 
-    {# Formulaire de suppression du compte utilisateur #}
-   <h2>Supprimer le compte</h2>
-<form action="{{ path('delete_account', { 'idu': user.idu }) }}" method="post">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.idu) }}">
-    <button type="submit">Supprimer mon compte</button>
-</form>
+        {# Formulaire de modification des informations de l'utilisateur #}
+        <div class="user-form my-5 text-center">
+            <h2>Modifier les informations du compte</h2>
+            <form method="post" action="{{ path('app_user_edit', {'idu': user.idu}) }}" class="needs-validation" novalidate>
+                {{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
+                {{ form_row(form.emailu, {'attr': {'class': 'form-control'}}) }}
+                {{ form_row(form.nomu, {'attr': {'class': 'form-control'}}) }}
+                {{ form_row(form.prenomu, {'attr': {'class': 'form-control'}}) }}
+                {{ form_row(form.mdpu, {'attr': {'class': 'form-control'}}) }}
+                  {{ form_row(form.roleu, {'attr': {'class': 'form-control'}}) }}
+                {# Ajoutez d'autres champs selon vos besoins #}
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                </div>
+                {{ form_end(form) }}
+            </form>
+        </div>
 
-
-{% else %}
-    <p>User not logged in.</p>
-{% endif %}
+        {# Formulaire de suppression du compte utilisateur #}
+        <div class="user-form my-5 text-center">
+            
+            <form action="{{ path('delete_account', { 'idu': user.idu }) }}" method="post" class="needs-validation" novalidate>
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.idu) }}">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-danger">Supprimer mon compte</button>
+                </div>
+            </form>
+        </div>
+    {% else %}
+        <p>User not logged in.</p>
+    {% endif %}
+{% endblock %}

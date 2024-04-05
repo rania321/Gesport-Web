@@ -106,16 +106,16 @@ class UserController extends AbstractController
                     $session->set('username', $user->getUsername());
     
                     // Rediriger l'utilisateur en fonction de son rôle
-                    if ($user->getRoleu() === 'user') {
+                    if ($user->getRoleu() === 'Admin') {
                         // Ajouter un message flash pour indiquer une connexion réussie
                         $this->addFlash('success', 'Vous êtes connecté en tant que ' . $user->getUsername());
                         // Redirection vers la page de profil
-                        return $this->redirectToRoute('mon_compte');
+                        return $this->redirectToRoute('baseBack');
                     } else {
                         // Ajouter un message flash pour indiquer une connexion réussie
                         $this->addFlash('success', 'Vous êtes connecté en tant que ' . $user->getUsername());
                         // Redirection vers la page d'administration (ou autre page appropriée)
-                        return $this->redirectToRoute('baseBack');
+                        return $this->redirectToRoute('mon-compte');
                     }
                 } else {
                     // Ajouter un message flash pour indiquer une erreur d'authentification
@@ -129,6 +129,115 @@ class UserController extends AbstractController
             'error' => $error,
         ]);
     }
+    #[Route('/user/redirect', name: 'app_user_redirect')]
+public function redirectAfterLogin(): Response
+{
+    // Récupérer l'utilisateur actuellement connecté
+    $user = $this->getUser();
+
+    // Rediriger en fonction du rôle de l'utilisateur
+    if ($user->getRoleu() === 'Admin') {
+        return $this->redirectToRoute('baseBack');
+    } else {
+        return $this->redirectToRoute('base');
+    }
+}
+ #[Route("/oubli_pass", name:"forgotten_password")]
+public function forgottenPass(Request $request, UserRepository $usersRepo, \Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator){
+   // On crée le formulaire
+   $form = $this->createForm(ResetPassType::class);
+
+   // On traite le formulaire
+   $form->handleRequest($request);
+
+   // Si le formulaire est valide
+   if($form->isSubmitted() && $form->isValid()){
+       // On récupère les données
+       $donnees = $form->getData();
+
+       // On cherche si un utilisateur a cet email
+       $user = $usersRepo->findOneByEmail($donnees['email']);
+
+       // Si l'utilisateur n'existe pas
+       if(!$user){
+           // On envoie un message flash
+           $this->addFlash('danger', 'Cette adresse n\'existe pas');
+
+           return $this->redirectToRoute('security_login');
+       }
+
+       // On génère un token
+       $token = $tokenGenerator->generateToken();
+
+       try{
+           $user->setResetToken($token);
+           $entityManager = $this->getDoctrine()->getManager();
+           $entityManager->persist($user);
+           $entityManager->flush();
+       }catch(\Exception $e){
+           $this->addFlash('warning', 'Une erreur est survenue : '. $e->getMessage());
+           return $this->redirectToRoute('security_login');
+       }
+
+       // On génère l'URL de réinitialisation de mot de passe
+       $url = $this->generateUrl('app_reset_password', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
+
+       // On envoie le message
+       $message = (new \Swift_Message('Mot de passe oublié'))
+       ->setFrom('travel.me.pridev@gmail.com')
+       ->setTo($user->getEmail())
+       ->setBody(
+           "<p>Bonjour,</p><p>Une demande de réinitialisation de mot de passe a été effectuée pour le site Travel Me. Veuillez cliquer sur le lien suivant : " . $url .'</p>',
+           'text/html'
+           )
+       ;
+
+       // On envoie l'e-mail
+       $mailer->send($message);
+
+       // On crée le message flash
+       $this->addFlash('message', 'Un e-mail de réinitialisation de mot de passe vous a été envoyé');
+
+       return $this->redirectToRoute('security_login');
+   }
+
+   // On envoie vers la page de demande de l'e-mail
+   return $this->render('security/forgotten_password.html.twig', ['emailForm' => $form->createView()]);
+}
+
+
+
+ #[Route("/reset_pass/{token}", name="app_reset_password")]
+
+public function resetPassword($token, Request $request, EntityManagerInterface $manager){
+   // On cherche l'utilisateur avec le token fourni
+   $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['reset_token' => $token]);
+
+   if(!$user){
+       $this->addFlash('danger', 'Token inconnu');
+       return $this->redirectToRoute('security_login');
+   }
+
+   
+   if($request->isMethod('POST')){
+       
+       $user->setResetToken(null);
+
+       #$hash = $encoder->encodePassword($user, $user->getPassword());
+       $user->setPassword($user->getPassword());
+       
+       $manager->persist($user);
+       $manager->flush();
+
+       $this->addFlash('message', 'Mot de passe modifié avec succès');
+
+       return $this->redirectToRoute('security_login');
+   }else{
+       return $this->render('security/reset_password.html.twig', ['token' => $token]);
+   }
+
+}
+
     
 
     

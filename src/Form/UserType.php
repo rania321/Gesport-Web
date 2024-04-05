@@ -18,7 +18,8 @@ class UserType extends AbstractType
             ->add('mdpu');
            // Vérifiez si le champ de sélection du rôle doit être masqué
         if (!$options['hide_role_field']) {
-            $builder->add('roleu');
+            $builder->add('roleu', null, ['disabled' => true]);
+            
         }
     }
 
