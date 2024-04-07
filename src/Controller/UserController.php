@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Form\UserType;
+use App\Form\ResetPassType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +16,8 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 
 
@@ -156,14 +159,14 @@ public function forgottenPass(Request $request, UserRepository $usersRepo, \Swif
        $donnees = $form->getData();
 
        // On cherche si un utilisateur a cet email
-       $user = $usersRepo->findOneByEmail($donnees['email']);
+       $user = $usersRepo->findOneByEmailu($donnees['emailu']);
 
        // Si l'utilisateur n'existe pas
        if(!$user){
            // On envoie un message flash
            $this->addFlash('danger', 'Cette adresse n\'existe pas');
 
-           return $this->redirectToRoute('security_login');
+           return $this->redirectToRoute('app_login');
        }
 
        // On génère un token
@@ -176,7 +179,7 @@ public function forgottenPass(Request $request, UserRepository $usersRepo, \Swif
            $entityManager->flush();
        }catch(\Exception $e){
            $this->addFlash('warning', 'Une erreur est survenue : '. $e->getMessage());
-           return $this->redirectToRoute('security_login');
+           return $this->redirectToRoute('app_login');
        }
 
        // On génère l'URL de réinitialisation de mot de passe
@@ -198,16 +201,16 @@ public function forgottenPass(Request $request, UserRepository $usersRepo, \Swif
        // On crée le message flash
        $this->addFlash('message', 'Un e-mail de réinitialisation de mot de passe vous a été envoyé');
 
-       return $this->redirectToRoute('security_login');
+       return $this->redirectToRoute('app_login');
    }
 
    // On envoie vers la page de demande de l'e-mail
-   return $this->render('security/forgotten_password.html.twig', ['emailForm' => $form->createView()]);
+   return $this->render('user/forgotten_password.html.twig', ['emailForm' => $form->createView()]);
 }
 
 
 
- #[Route("/reset_pass/{token}", name="app_reset_password")]
+ #[Route("/reset_pass/{token}", name:"app_reset_password")]
 
 public function resetPassword($token, Request $request, EntityManagerInterface $manager){
    // On cherche l'utilisateur avec le token fourni
@@ -215,7 +218,7 @@ public function resetPassword($token, Request $request, EntityManagerInterface $
 
    if(!$user){
        $this->addFlash('danger', 'Token inconnu');
-       return $this->redirectToRoute('security_login');
+       return $this->redirectToRoute('app_login');
    }
 
    
@@ -231,9 +234,9 @@ public function resetPassword($token, Request $request, EntityManagerInterface $
 
        $this->addFlash('message', 'Mot de passe modifié avec succès');
 
-       return $this->redirectToRoute('security_login');
+       return $this->redirectToRoute('app_login');
    }else{
-       return $this->render('security/reset_password.html.twig', ['token' => $token]);
+       return $this->render('user/reset_password.html.twig', ['token' => $token]);
    }
 
 }

@@ -44,6 +44,11 @@ class User implements UserInterface
   
     #[ORM\Column(length: 255)]
     private ?string $roleu = null;
+    
+    #[ORM\Column(type:"string", length:255, nullable:true)]
+     
+    private $resetToken;
+
 
     public function getIdu(): ?int
     {
@@ -148,6 +153,18 @@ class User implements UserInterface
     {
         // Retournez ici l'identifiant de l'utilisateur, par exemple l'email
         return $this->emailu;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
+
+        return $this;
     }
 
 
