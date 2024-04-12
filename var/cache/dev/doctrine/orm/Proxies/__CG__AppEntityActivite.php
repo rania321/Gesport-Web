@@ -206,7 +206,7 @@ class Activite extends \App\Entity\Activite implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setNoma(string $noma): static
+    public function setNoma(?string $noma): static
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNoma', [$noma]);
@@ -228,7 +228,7 @@ class Activite extends \App\Entity\Activite implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setTypea(string $typea): static
+    public function setTypea(?string $typea): static
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTypea', [$typea]);
@@ -250,7 +250,7 @@ class Activite extends \App\Entity\Activite implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setDispoa(string $dispoa): static
+    public function setDispoa(?string $dispoa): static
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDispoa', [$dispoa]);
@@ -272,7 +272,7 @@ class Activite extends \App\Entity\Activite implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setDescria(string $descria): static
+    public function setDescria(?string $descria): static
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDescria', [$descria]);
@@ -294,7 +294,7 @@ class Activite extends \App\Entity\Activite implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setImagea(string $imagea): static
+    public function setImagea(?string $imagea): static
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setImagea', [$imagea]);

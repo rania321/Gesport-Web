@@ -47,7 +47,7 @@ class Activite
         return $this->noma;
     }
 
-    public function setNoma(string $noma): static
+    public function setNoma(?string $noma): static
     {
         $this->noma = $noma;
 
@@ -59,7 +59,7 @@ class Activite
         return $this->typea;
     }
 
-    public function setTypea(string $typea): static
+    public function setTypea(?string $typea): static
     {
         $this->typea = $typea;
 
@@ -71,7 +71,7 @@ class Activite
         return $this->dispoa;
     }
 
-    public function setDispoa(string $dispoa): static
+    public function setDispoa(?string $dispoa): static
     {
         $this->dispoa = $dispoa;
 
@@ -83,7 +83,7 @@ class Activite
         return $this->descria;
     }
 
-    public function setDescria(string $descria): static
+    public function setDescria(?string $descria): static
     {
         $this->descria = $descria;
 
@@ -95,7 +95,7 @@ class Activite
         return $this->imagea;
     }
 
-    public function setImagea(string $imagea): static
+    public function setImagea(?string $imagea): static
     {
         $this->imagea = $imagea;
 
