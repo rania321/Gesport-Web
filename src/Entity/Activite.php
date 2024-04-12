@@ -13,6 +13,8 @@ class Activite
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $ida = null;
+    #[ORM\OneToMany(mappedBy: 'activite', targetEntity: Activitefavoris::class)]
+    private $activitefavoris;
 
     #[Assert\NotBlank(message:"Veuillez saisir le nom de l'activité.")]
     #[ORM\Column(length: 255)]

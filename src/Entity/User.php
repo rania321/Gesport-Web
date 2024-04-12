@@ -16,6 +16,12 @@ class User implements UserInterface
     #[ORM\Column]
     private ?int $idu = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Activitefavoris::class)]
+    private $activitefavoris;
+    
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Equipe::class)]
+    private $equipes;
+
     #[Assert\NotBlank(message:"Veuillez saisir le nom.")]
     #[Assert\Regex(
         pattern: '/^[a-zA-Z\-]+$/',
@@ -45,10 +51,6 @@ class User implements UserInterface
     #[ORM\Column(length: 255)]
     private ?string $roleu = null;
     
-    #[ORM\Column(type:"string", length:255, nullable:true)]
-     
-    private $resetToken;
-
 
     public function getIdu(): ?int
     {
@@ -121,7 +123,7 @@ class User implements UserInterface
     public function getRoles(): array
     {
         // Retournez un tableau de rôles de l'utilisateur
-        return ['ROLE_USER']; // Par exemple, vous pouvez avoir un rôle utilisateur par défaut
+        return ['user']; // Par exemple, vous pouvez avoir un rôle utilisateur par défaut
     }
 
     public function getPassword(): string

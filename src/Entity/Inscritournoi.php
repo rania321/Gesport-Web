@@ -16,11 +16,13 @@ class Inscritournoi
     private ?int $idit;
 
     #[ORM\ManyToOne(targetEntity: Equipe::class,inversedBy: 'Equipe')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'equipe_id', referencedColumnName: 'ide', nullable: false)]
+    
     private ?Equipe $Equipe = null;
 
-    #[ORM\ManyToOne(targetEntity: Tournoi::class,inversedBy: 'Tournoi')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: Tournoi::class,inversedBy: 'Inscritournoi')]
+    #[ORM\JoinColumn(name: 'tournoi_id', referencedColumnName: 'idt', nullable: false)]
+  
     private ?Tournoi $Tournoi = null;
 
     

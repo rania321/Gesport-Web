@@ -28,9 +28,12 @@ class Reservationactivite
     private ?string $statutr = null;
 
     #[ORM\ManyToOne(targetEntity: Activite::class,inversedBy: 'Reservationsactivite')]
+    #[ORM\JoinColumn(name: 'activite_id', referencedColumnName: 'ida')]
+    
     private ?Activite $activite= null;
 
     #[ORM\ManyToOne(targetEntity: User::class,inversedBy: 'Reservationsactivite')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'idu')]
     private ?User $user= null;
 
     public function getIdr(): ?int

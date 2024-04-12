@@ -14,11 +14,13 @@ class Activitefavoris
     private ?int $idf = null;
 
     
-    #[ORM\ManyToOne(targetEntity: User::class,inversedBy: 'activitefavoriss')]
+    #[ORM\ManyToOne(targetEntity: User::class,inversedBy: 'activitefavoris')]
+    #[ORM\JoinColumn(name: 'idu', referencedColumnName: 'idu')]
     private ?User $user= null;
 
     
-    #[ORM\ManyToOne(targetEntity: Activite::class,inversedBy: 'activitefavoriss')]
+    #[ORM\ManyToOne(targetEntity: Activite::class,inversedBy: 'activitefavoris')]
+    #[ORM\JoinColumn(name: 'ida', referencedColumnName: 'ida')]
     private ?Activite $activite = null;
 
     public function getIdf(): ?int

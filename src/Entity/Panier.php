@@ -1,33 +1,29 @@
 <?php
-
-namespace App\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\PanierRepository;
+use App\Entity\Vente;
+use App\Entity\Produit;
 
 #[ORM\Entity(repositoryClass: PanierRepository::class)]
-
 class Panier
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-
-    private ?int $idpa=null;
-
-    #[ORM\Column]
-    private ?int $quantitep = NULL;
+    private ?int $idpa = null;
 
     #[ORM\Column]
-    private ?float $totalpa = NULL;
+    private ?int $quantitep = null;
 
-    #[ORM\ManyToOne(targetEntity: Vente::class,inversedBy: 'Vente')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Vente $Vente = null;
+    #[ORM\Column]
+    private ?float $totalpa = null;
 
-    #[ORM\ManyToOne(targetEntity: Produit::class,inversedBy: 'Produit')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Produit $Produit = null;
+    #[ORM\ManyToOne(targetEntity: Vente::class, inversedBy: 'panier')]
+    #[ORM\JoinColumn(name: 'vente_id', referencedColumnName: 'idv', nullable: false)]
+    private ?Vente $vente = null;
+
+    #[ORM\ManyToOne(targetEntity: Produit::class, inversedBy: 'panier')]
+    #[ORM\JoinColumn(name: 'produit_id', referencedColumnName: 'idp', nullable: false)]
+    private ?Produit $produit = null;
 
     public function getIdpa(): ?int
     {
@@ -39,10 +35,9 @@ class Panier
         return $this->quantitep;
     }
 
-    public function setQuantitep(?int $quantitep): static
+    public function setQuantitep(?int $quantitep): self
     {
         $this->quantitep = $quantitep;
-
         return $this;
     }
 
@@ -51,58 +46,31 @@ class Panier
         return $this->totalpa;
     }
 
-    public function setTotalpa(?float $totalpa): static
+    public function setTotalpa(?float $totalpa): self
     {
         $this->totalpa = $totalpa;
-
         return $this;
     }
 
     public function getVente(): ?Vente
     {
-        return $this->Vente;
+        return $this->vente;
     }
 
-    public function setVente(?Vente $Vente): static
+    public function setVente(?Vente $vente): self
     {
-        $this->Vente = $Vente;
-
+        $this->vente = $vente;
         return $this;
     }
 
     public function getProduit(): ?Produit
     {
-        return $this->Produit;
+        return $this->produit;
     }
 
-    public function setProduit(?Produit $Produit): static
+    public function setProduit(?Produit $produit): self
     {
-        $this->Produit = $Produit;
-
+        $this->produit = $produit;
         return $this;
     }
-
-    /*public function getIdv(): ?Vente
-    {
-        return $this->idv;
-    }
-
-    public function setIdv(?Vente $idv): static
-    {
-        $this->idv = $idv;
-
-        return $this;
-    }
-
-    public function getIdp(): ?Produit
-    {
-        return $this->idp;
-    }
-
-    public function setIdp(?Produit $idp): static
-    {
-        $this->idp = $idp;
-
-        return $this;
-    } */
 }

@@ -6,13 +6,11 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EquipeRepository;
 
 #[ORM\Entity(repositoryClass: EquipeRepository::class)]
-
 class Equipe
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-
     private ?int $ide;
 
     #[ORM\Column(length: 255)]
@@ -21,15 +19,14 @@ class Equipe
     #[ORM\Column(length: 255)]
     private ?string  $statute;
     
-    #[ORM\ManyToOne(targetEntity: User::class,inversedBy: 'User')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $User = null;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'equipe')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'idu')]
+    private ?User $user = null;
 
-    #[ORM\ManyToOne(targetEntity: Tournoi::class,inversedBy: 'Tournoi')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Tournoi $Tournoi = null;
+    #[ORM\ManyToOne(targetEntity: Tournoi::class, inversedBy: 'equipe')]
+    #[ORM\JoinColumn(name: 'tournois_id', referencedColumnName: 'idt')]
+    private ?Tournoi $tournoi = null;
 
-    
     public function getIde(): ?int
     {
         return $this->ide;
@@ -61,50 +58,25 @@ class Equipe
 
     public function getUser(): ?User
     {
-        return $this->User;
+        return $this->user;
     }
 
-    public function setUser(?User $User): static
+    public function setUser(?User $user): static
     {
-        $this->User = $User;
+        $this->user = $user;
 
         return $this;
     }
 
     public function getTournoi(): ?Tournoi
     {
-        return $this->Tournoi;
+        return $this->tournoi;
     }
 
-    public function setTournoi(?Tournoi $Tournoi): static
+    public function setTournoi(?Tournoi $tournoi): static
     {
-        $this->Tournoi = $Tournoi;
+        $this->tournoi = $tournoi;
 
         return $this;
     }
-
-    /*public function getIdu(): ?User
-    {
-        return $this->idu;
-    }
-
-    public function setIdu(?User $idu): static
-    {
-        $this->idu = $idu;
-
-        return $this;
-    }
-
-    public function getIdt(): ?Tournoi
-    {
-        return $this->idt;
-    }
-
-    public function setIdt(?Tournoi $idt): static
-    {
-        $this->idt = $idt;
-
-        return $this;
-    }*/
-
 }

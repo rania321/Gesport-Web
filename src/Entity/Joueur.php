@@ -19,7 +19,8 @@ class Joueur
     private ?string $joueur = 'NULL';
 
     #[ORM\ManyToOne(targetEntity: Activite::class,inversedBy: 'Equipe')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'activite_id', referencedColumnName: 'ida')]
+   
     private ?Equipe $Equipe = null;
 
     public function getIdj(): ?int

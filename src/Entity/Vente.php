@@ -27,14 +27,18 @@ class Vente
     #[ORM\Column]
     private ?float $montantv;
 
-    #[ORM\ManyToOne(targetEntity: Activite::class,inversedBy: 'Produit')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: Produit::class,inversedBy: 'vente')]
+    #[ORM\JoinColumn(name: 'produit_id', referencedColumnName: 'idp')]
+    
+   
     private ?Produit $Produit = null;
 
-    #[ORM\ManyToOne(targetEntity: Activite::class,inversedBy: 'User')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: User::class,inversedBy: 'vente')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'idu')]
+    
     private ?User $User = null;
 
+    
     
     public function getIdv(): ?int
     {

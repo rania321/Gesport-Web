@@ -15,6 +15,10 @@ class Tournoi
     #[ORM\Column]
 
     private ?int $idt=null;
+    
+    #[ORM\OneToMany(mappedBy: 'tournoi', targetEntity: Equipe::class)]
+    private $equipes;
+    
    
     #[ORM\Column(length: 255)]
     private ?string $nomt;
