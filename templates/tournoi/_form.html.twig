@@ -1,0 +1,67 @@
+{{ form_start(form, {'attr': {
+    'onsubmit': 'return validateDates()',
+    'class': 'form',
+    'enctype': 'multipart/form-data',
+    'novalidate': 'novalidate'
+}
+}) }}
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_label(form.nomt, 'Nom du Tournoi') }}
+            {{ form_widget(form.nomt, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le nom du tournoi'}}) }}
+            <div class="text-danger">{{ form_errors(form.nomt) }}</div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_label(form.datedebutt, 'Date de début') }}
+            {{ form_widget(form.datedebutt, {'attr': {'class': 'form-control', 'placeholder': 'Entrez la date de début'}}) }}
+            <div class="text-danger">{{ form_errors(form.datedebutt) }}</div>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_label(form.datefint, 'Date de fin') }}
+            {{ form_widget(form.datefint, {'attr': {'class': 'form-control', 'placeholder': 'Entrez la date de fin'}}) }}
+            <div class="text-danger">{{ form_errors(form.datefint) }}</div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_label(form.descrit, 'Description') }}
+            {{ form_widget(form.descrit, {'attr': {'class': 'form-control', 'placeholder': 'Entrez la description'}}) }}
+            <div class="text-danger">{{ form_errors(form.descrit) }}</div>
+
+        </div>
+    </div>
+</div>
+<div class="d-grid">
+        
+    <button type="submit" class="btn btn-inverse-info btn-xs me-1" style="font-size: 13px;">{{ button_label|default('Save') }}</button>
+
+</div>
+{{ form_end(form) }}
+
+<script>
+    function validateDates() {
+        var startDate = new Date(document.getElementById('tournoi_datedebutt').value);
+        var endDate = new Date(document.getElementById('tournoi_datefint').value);
+
+        if (startDate > endDate) {
+            alert('La date de début doit être antérieure à la date de fin.');
+            return false; // Prevent form submission
+        }
+        return true; // Allow form submission
+    }
+</script>
+

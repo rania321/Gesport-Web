@@ -1,0 +1,169 @@
+
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Equipe index{% endblock %}
+{% block sidebar %}
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+<ul class="nav">
+<li class="nav-item ">
+<a class="nav-link" href="../index.html">
+  <i class="mdi mdi-grid-large menu-icon"></i>
+  <span class="menu-title">Dashboard</span>
+</a>
+</li>
+
+<li class="nav-item ">
+<a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+  <i class="menu-icon mdi mdi-floor-plan"></i>
+  <span class="menu-title">Activités</span>
+  <i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="ui-basic">
+  <ul class="nav flex-column sub-menu">
+    <li class="nav-item"> <a class="nav-link" href="activite/back">Activité</a></li>
+    <li class="nav-item"> <a class="nav-link" href="reservationactivite/">Réservations</a></li>
+  </ul>
+</div>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+  <i class="menu-icon mdi mdi-card-text-outline"></i>
+  <span class="menu-title">Buvette</span>
+  <i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="form-elements">
+  <ul class="nav flex-column sub-menu">
+    <li class="nav-item"><a class="nav-link" href="../pages/forms/basic_elements.html">Produits</a></li>
+    <li class="nav-item"> <a class="nav-link" href="../pages/ui-features/dropdowns.html">Ventes</a></li>
+  </ul>
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+  <i class="menu-icon mdi mdi-chart-line"></i>
+  <span class="menu-title">Charts</span>
+  <i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="charts">
+  <ul class="nav flex-column sub-menu">
+    <li class="nav-item"> <a class="nav-link" href="../pages/charts/chartjs.html">ChartJs</a></li>
+  </ul>
+</div>
+</li>
+<li class="nav-item active">
+<a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+  <i class="menu-icon mdi mdi-table"></i>
+  <span class="menu-title">Tournois</span>
+  <i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="tables">
+  <ul class="nav flex-column sub-menu">
+    <li class="nav-item"> <a class="nav-link" href="{{ path('app_equipe_indexBack') }}">Equipes</a></li>
+    <li class="nav-item active "> <a class="nav-link" href="{{ path('app_tournoi_indexBack') }}">Tournois</a></li>
+  </ul>
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+  <i class="menu-icon mdi mdi-layers-outline"></i>
+  <span class="menu-title">Réclamations</span>
+  <i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="icons">
+  <ul class="nav flex-column sub-menu">
+    <li class="nav-item"> <a class="nav-link" href="../pages/icons/mdi.html">Réclamations</a></li>
+    <li class="nav-item"> <a class="nav-link" href="../pages/icons/mdi.html">Réponses</a></li>
+  </ul>
+</div>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+  <i class="menu-icon mdi mdi-account-circle-outline"></i>
+  <span class="menu-title">Users</span>
+  <i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="auth">
+  <ul class="nav flex-column sub-menu">
+    <li class="nav-item"> <a class="nav-link" href="../pages/samples/login.html"> Liste Users</a></li>
+    <li class="nav-item"> <a class="nav-link" href="../pages/samples/login.html"> Dossiers Médicaux</a></li>
+  </ul>
+</div>
+</li>
+
+
+</ul>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-sm-6">
+        <h2 class="mb-4" style="color: rgb(7, 76, 141);">Liste des Equipes</h2>
+      </div>
+      <div class="col-sm-4 d-flex justify-content-end">
+        <a href="{{ path('app_equipe_newBack') }}" class="btn btn-inverse-primary mb-3">Create New</a>
+    </div>
+    </div>
+
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Equipe</th>
+          <th scope="col">Tournoi</th>
+          <th scope="col">Capitaine</th>
+          <th scope="col">Statut</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for equipe in equipes %}
+        <tr>
+          <td>{{ equipe.nome }}</td>
+          <td>{{ equipe.tournoi.nomt }}</td>
+          <td>{{ equipe.user.nomu }}</td>
+          <td>
+            <span class="badge 
+            {% if equipe.statute == 'Qualifiée' %}
+            badge-success
+            {% elseif equipe.statute == 'Éliminée' %}
+            badge-danger
+            {% elseif equipe.statute == 'inscrite' %}
+            badge-primary
+            {% else %}
+            badge-primary
+            {% endif %}
+            ">
+            {{ equipe.statute }}
+        </span>
+        </td>
+          <td>
+            <div class="d-flex">
+                <a href="{{ path('app_equipe_showBack', {'ide': equipe.ide}) }}" class="btn btn-sm btn-outline-info btn-inverse-info me-1">
+                    <i class="mdi mdi-eye"></i> Show
+                </a>
+                <a href="{{ path('app_equipe_editBack', {'ide': equipe.ide}) }}" class="btn btn-sm btn-outline-warning btn-inverse-warning me-1">
+                  <i class="mdi mdi-pencil"></i> Edit
+                </a>
+                <form method="post" action="{{ path('app_equipe_delete', {'ide': equipe.ide}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                  <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ equipe.ide) }}">
+                  <button type="submit" class="btn btn-sm btn-danger btn-inverse-danger" style="font-size: 13px;">
+                    <i class="mdi mdi-delete"></i> Delete
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        {% else %}
+        <tr>
+          <td colspan="5">No records found</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends 'baseBack.html.twig' %}
+{% block title %}Edit Tournoi{% endblock %}
+{% block sidebar %}
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+<ul class="nav">
+<li class="nav-item ">
+<a class="nav-link" href="../index.html">
+  <i class="mdi mdi-grid-large menu-icon"></i>
+  <span class="menu-title">Dashboard</span>
+</a>
+</li>
+
+<li class="nav-item ">
+<a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+  <i class="menu-icon mdi mdi-floor-plan"></i>
+  <span class="menu-title">Activités</span>
+  <i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="ui-basic">
+  <ul class="nav flex-column sub-menu">
+    <li class="nav-item"> <a class="nav-link" href="activite/back">Activité</a></li>
+    <li class="nav-item"> <a class="nav-link" href="reservationactivite/">Réservations</a></li>
+  </ul>
+</div>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+  <i class="menu-icon mdi mdi-card-text-outline"></i>
+  <span class="menu-title">Buvette</span>
+  <i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="form-elements">
+  <ul class="nav flex-column sub-menu">
+    <li class="nav-item"><a class="nav-link" href="../pages/forms/basic_elements.html">Produits</a></li>
+    <li class="nav-item"> <a class="nav-link" href="../pages/ui-features/dropdowns.html">Ventes</a></li>
+  </ul>
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+  <i class="menu-icon mdi mdi-chart-line"></i>
+  <span class="menu-title">Charts</span>
+  <i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="charts">
+  <ul class="nav flex-column sub-menu">
+    <li class="nav-item"> <a class="nav-link" href="../pages/charts/chartjs.html">ChartJs</a></li>
+  </ul>
+</div>
+</li>
+<li class="nav-item active">
+<a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+  <i class="menu-icon mdi mdi-table"></i>
+  <span class="menu-title">Tournois</span>
+  <i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="tables">
+  <ul class="nav flex-column sub-menu">
+    <li class="nav-item"> <a class="nav-link" href="{{ path('app_equipe_indexBack') }}">Equipes</a></li>
+    <li class="nav-item active "> <a class="nav-link" href="{{ path('app_tournoi_indexBack') }}">Tournois</a></li>
+  </ul>
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+  <i class="menu-icon mdi mdi-layers-outline"></i>
+  <span class="menu-title">Réclamations</span>
+  <i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="icons">
+  <ul class="nav flex-column sub-menu">
+    <li class="nav-item"> <a class="nav-link" href="../pages/icons/mdi.html">Réclamations</a></li>
+    <li class="nav-item"> <a class="nav-link" href="../pages/icons/mdi.html">Réponses</a></li>
+  </ul>
+</div>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+  <i class="menu-icon mdi mdi-account-circle-outline"></i>
+  <span class="menu-title">Users</span>
+  <i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="auth">
+  <ul class="nav flex-column sub-menu">
+    <li class="nav-item"> <a class="nav-link" href="../pages/samples/login.html"> Liste Users</a></li>
+    <li class="nav-item"> <a class="nav-link" href="../pages/samples/login.html"> Dossiers Médicaux</a></li>
+  </ul>
+</div>
+</li>
+
+
+</ul>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div style="height: 30px;"></div> 
+            <div class="card">
+                
+                <div class="card-body">
+                    <h1 class="card-title">Edit Tournoi</h1>
+
+                    {{ include('tournoi/_form.html.twig', {'button_label': 'Update', 'button_class': 'btn-inverse-warning'}) }}
+
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div>
+                            {{ include('tournoi/_delete_form.html.twig') }}
+                        </div>
+                        <div>
+                            <a href="{{ path('app_tournoi_indexBack') }}" class="btn btn-inverse-warning">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

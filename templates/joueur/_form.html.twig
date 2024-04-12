@@ -1,0 +1,8 @@
+{{ form_start(joueurForm, {'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
+    <div class="mb-3">
+        {{ form_widget(joueurForm.joueur, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le nom du joueur'}}) }}
+        {{ form_errors(joueurForm.joueur, {'attr': {'class': 'invalid-feedback'}}) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(joueurForm) }}

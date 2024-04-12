@@ -1,0 +1,36 @@
+{{ form_start(form, {'attr': {'class': 'mt-4 form', 'enctype': 'multipart/form-data', 'novalidate': 'novalidate'}}) }}
+
+
+
+    <div class="mb-3">
+        {{ form_label(form.nome, 'Nom de l\'équipe', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.nome, {'attr': {'class': 'form-control'}}) }}
+        <div class="text-danger">{{ form_errors(form.nome) }}</div>
+
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.statute, 'Statut de l\'équipe', {'label_attr': {'class': 'form-label'}}) }}
+        <div class="btn-group-toggle" data-toggle="buttons">
+            {% for child in form.statute %}
+                <label class="btn btn-outline-info {{ child.vars.checked ? 'active' : '' }}">
+                    {{ form_widget(child) }} {{ child.vars.label }}
+                </label>
+            {% endfor %}
+        </div>
+        <div class="text-danger">{{ form_errors(form.statute) }}</div>
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.Tournoi, 'Tournoi', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.Tournoi, {'attr': {'class': 'form-select'}}) }}
+        <div class="text-danger">{{ form_errors(form.Tournoi) }}</div>
+
+    </div>
+
+    <div class="d-grid">
+        
+        <button type="submit" class="btn btn-inverse-info btn-xs me-1" style="font-size: 13px;">{{ button_label|default('Save') }}</button>
+
+    </div>
+{{ form_end(form) }}
