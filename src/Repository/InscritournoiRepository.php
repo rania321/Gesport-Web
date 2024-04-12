@@ -45,4 +45,14 @@ class InscritournoiRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findByTournoi($tournoiId)
+{
+    return $this->createQueryBuilder('i')
+        ->andWhere('i.tournoi = :tournoiId')
+        ->setParameter('tournoiId', $tournoiId)
+        ->getQuery()
+        ->getResult();
+}
+
 }

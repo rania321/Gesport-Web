@@ -1,0 +1,65 @@
+{{ form_start(formedit, {'attr': {
+    'class': 'form',
+    'enctype': 'multipart/form-data',
+    'novalidate': 'novalidate'
+}}) }}
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_label(formedit.nomt, 'Nom du Tournoi') }}
+            {{ form_widget(formedit.nomt, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le nom du tournoi'}}) }}
+            <div class="text-danger">{{ form_errors(formedit.nomt) }}</div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_label(formedit.datedebutt, 'Date de début') }}
+            {{ form_widget(formedit.datedebutt, {'attr': {'class': 'form-control', 'placeholder': 'Entrez la date de début'}}) }}
+            <div class="text-danger">{{ form_errors(formedit.datedebutt) }}</div>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_label(formedit.datefint, 'Date de fin') }}
+            {{ form_widget(formedit.datefint, {'attr': {'class': 'form-control', 'placeholder': 'Entrez la date de fin'}}) }}
+            <div class="text-danger">{{ form_errors(formedit.datefint) }}</div>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_label(formedit.statutt, 'Statut du tournoi', {'label_attr': {'class': 'form-label'}}) }}
+            <div class="btn-group-toggle" data-toggle="buttons">
+                {% for child in formedit.statutt %}
+                    <label class="btn btn-outline-info {{ child.vars.checked ? 'active' : '' }}">
+                        {{ form_widget(child) }} {{ child.vars.label }}
+                    </label>
+                {% endfor %}
+            </div>
+            <div class="text-danger">{{ form_errors(formedit.statutt) }}</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_label(formedit.descrit, 'Description') }}
+            {{ form_widget(formedit.descrit, {'attr': {'class': 'form-control', 'placeholder': 'Entrez la description'}}) }}
+            <div class="text-danger">{{ form_errors(formedit.descrit) }}</div>
+
+        </div>
+    </div>
+</div>
+<div class="d-grid">
+        
+    <button type="submit" class="btn btn-inverse-info btn-xs me-1" style="font-size: 13px;">{{ button_label|default('Save') }}</button>
+
+</div>
+{{ form_end(formedit) }}
+

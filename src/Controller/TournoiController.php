@@ -6,9 +6,11 @@ use App\Entity\Tournoi;
 use App\Entity\Equipe;
 use App\Entity\Inscritournoi;
 use App\Form\TournoiType;
+use App\Form\TournoiTypeEdit;
 use App\Repository\TournoiRepository;
 use App\Repository\EquipeRepository;
 use App\Repository\JoueurRepository;
+use App\Repository\InscritournoiRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use DateTime;
 
@@ -52,10 +55,12 @@ class TournoiController extends AbstractController
     
             // Déterminer le statut en fonction des dates de début et de fin
             $now = new \DateTime();
-            if ($tournoi->getDatedebutt() > $now) {
+            if ($tournoi->getDatedebutt()->format('Y-m-d') > $now->format('Y-m-d')) {
                 $tournoi->setStatutt('À venir');
-            } elseif ($tournoi->getDatefint() < $now) {
+            } elseif ($tournoi->getDatefint()->format('Y-m-d') < $now->format('Y-m-d')) {
                 $tournoi->setStatutt('Terminé');
+            } elseif ($tournoi->getDatefint()->format('Y-m-d') >= $now->format('Y-m-d') || $tournoi->getDatedebutt()->format('Y-m-d') <= $now->format('Y-m-d')) {
+                $tournoi->setStatutt('En cours');
             } else {
                 $tournoi->setStatutt('En cours');
             }
@@ -75,32 +80,45 @@ class TournoiController extends AbstractController
     }
 
     #[Route('/{idt}', name: 'app_tournoi_show', methods: ['GET'])]
-    public function show(Tournoi $tournoi): Response
+    public function show(Tournoi $tournoi, InscritournoiRepository $inscritournoiRepository): Response
     {
+        // Récupérer toutes les inscriptions pour ce tournoi
+        $inscriptions = $inscritournoiRepository->findBy(['Tournoi' => $tournoi->getIdt()]);
+
+        // Créer un tableau pour stocker toutes les équipes inscrites
+        $equipesInscrites = [];
+        foreach ($inscriptions as $inscription) {
+            // Ajouter l'équipe de chaque inscription au tableau
+            $equipesInscrites[] = $inscription->getEquipe();
+        }
+
         return $this->render('tournoi/show.html.twig', [
             'tournoi' => $tournoi,
+            'equipesInscrites' => $equipesInscrites,
         ]);
-    } 
+    }
     
  
 
     #[Route('/{idt}/edit', name: 'app_tournoi_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Tournoi $tournoi, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(TournoiType::class, $tournoi);
-        $form->handleRequest($request);
+        $formedit = $this->createForm(TournoiTypeEdit::class, $tournoi);
+        $formedit->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($formedit->isSubmitted() && $formedit->isValid()) {
             $entityManager->flush();
 
             return $this->redirectToRoute('app_tournoi_indexBack', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('tournoi/edit.html.twig', [
+        return $this->render('tournoi/edit.html.twig', [
             'tournoi' => $tournoi,
-            'form' => $form,
+    'formedit' => $formedit->createView(),
         ]);
     }
+
+
 
   
     #[Route('/{idt}', name: 'app_tournoi_delete', methods: ['POST'])]

@@ -100,7 +100,7 @@
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-6">
         <div class="card">
           <div class="card-header">
             <div style="height: 20px;"></div> 
@@ -134,11 +134,28 @@
             </table>
           </div>
         </div>
-        <div style="height: 20px;"></div> 
+      </div>
+      <div class="col-lg-6">
+        <div style="height: 50px;"></div> 
+        <div class="card">
+          <div class="card-header">
+            <div style="height: 20px;"></div> 
 
-        <a href="{{ path('app_tournoi_indexBack') }}" class="btn btn-inverse-warning">Back to List</a>
+            <h2 class="card-title">Équipes Inscrites</h2>
+          </div>
+          <div class="card-body">
+            <ul>
+              {% for equipe in equipesInscrites %}
+                <li>{{ equipe.getNome }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
+    <div style="height: 20px;"></div> 
+
+    <a href="{{ path('app_tournoi_indexBack') }}" class="btn btn-inverse-warning">Retour à la liste</a>
   </div>
 </div>
 {% endblock %}

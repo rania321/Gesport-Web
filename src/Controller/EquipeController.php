@@ -32,18 +32,23 @@ class EquipeController extends AbstractController
         $formFront = $this->createForm(EquipeTypeFront::class, $equipe);
         $formFront->handleRequest($request);
     
-        // Traitement du formulaire d'équipe
         if ($formFront->isSubmitted() && $formFront->isValid()) {
             $equipe->setStatutE("inscrite");
             $entityManager->persist($equipe);
             $entityManager->flush();
+
+            $tournoiId = $formFront->get('Tournoi')->getData();
+        $tournoi = $entityManager->getRepository(Tournoi::class)->find($tournoiId);
+        $inscritournoi = new Inscritournoi();
+        $inscritournoi->setEquipe($equipe);
+        $inscritournoi->setTournoi($tournoi);
+        $entityManager->persist($inscritournoi);
+        $entityManager->flush();
     
     
-            // Rediriger vers la page de détails de l'équipe avec l'id de la nouvelle équipe ajoutée
             return $this->redirectToRoute('app_equipe_show', ['ide' => $equipe->getIde()]);
         }
     
-        // Récupérer toutes les équipes pour l'affichage
         $equipes = $equipeRepository->findAll();
     
         return $this->renderForm('equipe/index.html.twig', [
@@ -100,6 +105,15 @@ public function newBack(Request $request, EntityManagerInterface $entityManager)
     if ($form->isSubmitted() && $form->isValid()) {
         $entityManager->persist($equipe);
         $entityManager->flush();
+
+        $tournoiId = $form->get('Tournoi')->getData();
+        $tournoi = $entityManager->getRepository(Tournoi::class)->find($tournoiId);
+        $inscritournoi = new Inscritournoi();
+        $inscritournoi->setEquipe($equipe);
+        $inscritournoi->setTournoi($tournoi);
+        $entityManager->persist($inscritournoi);
+        $entityManager->flush();
+
 
 
         return $this->redirectToRoute('app_equipe_indexBack', [], Response::HTTP_SEE_OTHER);
@@ -185,14 +199,19 @@ public function show(Request $request, Equipe $equipe, JoueurRepository $joueurR
 
     // Traitement du formulaire de mise à jour
     if ($formFront->isSubmitted() && $formFront->isValid()) {
-        $entityManager->flush();
+        $inscritournoi = $entityManager->getRepository(Inscritournoi::class)->findOneBy(['Equipe' => $equipe]);
+        if ($inscritournoi) {
+            $tournoi = $equipe->getTournoi();
+            $inscritournoi->setTournoi($tournoi);
+
+            $entityManager->flush();
+        }
+       
 
         $this->addFlash('success', 'L\'équipe a été mise à jour avec succès.');
 
-        // Rediriger vers la page de détails de l'équipe avec l'ID de l'équipe mise à jour
         return $this->redirectToRoute('app_equipe_show', ['ide' => $equipe->getIde()]);
     }
-
     // Rendre le formulaire de mise à jour dans le modèle Twig edit.html.twig
     return $this->render('equipe/edit.html.twig', [
         'equipe' => $equipe,
@@ -206,9 +225,18 @@ public function show(Request $request, Equipe $equipe, JoueurRepository $joueurR
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
+           // Récupérer l'entité Inscritournoi associée à l'équipe
+        $inscritournoi = $entityManager->getRepository(Inscritournoi::class)->findOneBy(['Equipe' => $equipe]);
+
+        if ($inscritournoi) {
+            // Mettre à jour l'association avec le nouveau tournoi
+            $tournoi = $equipe->getTournoi(); // Récupérer le nouveau tournoi depuis l'équipe
+            $inscritournoi->setTournoi($tournoi);
+
+            // Flush l'EntityManager pour enregistrer les modifications
             $entityManager->flush();
-    
-            return $this->redirectToRoute('app_equipe_indexBack', [], Response::HTTP_SEE_OTHER);
+        }
+            return $this->redirectToRoute('app_equipe_showBack', ['ide' => $equipe->getIde()]);
         }
     
         return $this->render('equipe/editBack.html.twig', [
@@ -228,6 +256,12 @@ public function show(Request $request, Equipe $equipe, JoueurRepository $joueurR
         foreach ($joueurs as $joueur) {
             $entityManager->remove($joueur);
         }
+
+        $inscritsAuTournoi = $entityManager->getRepository(Inscritournoi::class)->findBy(['Equipe' => $equipe]);
+        foreach ($inscritsAuTournoi as $inscrit) {
+            $entityManager->remove($inscrit);
+        }
+    
     
         // Supprimer l'équipe
         $entityManager->remove($equipe);
