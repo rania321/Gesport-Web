@@ -17,11 +17,12 @@
                     <div class="form-group">
                       <label for="exampleInputUsername1">Activite</label>
                       {{ form_widget(form.ida, {'attr': {'class': 'form-control'}}) }}
+                      <dd class="col-sm-9">{{ reservationactivite.ida.noma }}</dd>
                     </div>
-                    <div class="form-group">
+                     <div class="form-group">
                       <label for="exampleInputEmail1">User</label>
-                      {{ form_widget(form.idu, {'attr': {'class': 'form-control'}}) }}
-                    </div>
+                      <dd class="col-sm-9">{{ reservationactivite.idu.prenomu }}</dd>
+                    </div> 
                     <div class="form-group">
                       <label for="exampleInputPassword1">Date</label>
                       {{ form_widget(form.datedebutr, {'attr': {'class': 'form-control'}}) }}
@@ -30,12 +31,13 @@
                     <div class="form-group">
                       <label>Heure</label>
                       {{ form_widget(form.heurer, {'attr': {'class': 'form-control'}}) }}
-                      {{ form_errors(form.heurer) }}
+                      <div class="text-danger">{{ form_errors(form.heurer) }}</div>
                       
                     </div>
                     <div class="form-group">
                       <label for="exampleInputConfirmPassword1">Statut</label>
                       {{ form_widget(form.statutr, {'attr': {'class': 'form-control'}}) }}
+                      <div class="text-danger">{{ form_errors(form.statutr) }}</div>
                       
                     </div>
                     {{ form_row(form._token) }}

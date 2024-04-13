@@ -288,7 +288,7 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
             echo "\" class=\"btn btn-warning btn-sm\">edit</a>
                     ";
             // line 138
-            echo twig_include($this->env, $context, "reservationactivite/_delete_form.html.twig");
+            echo twig_include($this->env, $context, "reservationactivite/_delete_form1.html.twig");
             echo "
                 </div>
                 </td>
@@ -495,7 +495,7 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
                 <div class=\"d-flex\">
                     <a href=\"{{ path('app_reservationactivite_showBack', {'idr': reservationactivite.idr}) }}\" class=\"btn btn-info btn-sm\">show</a>
                     <a href=\"{{ path('app_reservationactivite_editBack', {'idr': reservationactivite.idr}) }}\" class=\"btn btn-warning btn-sm\">edit</a>
-                    {{ include('reservationactivite/_delete_form.html.twig') }}
+                    {{ include('reservationactivite/_delete_form1.html.twig') }}
                 </div>
                 </td>
             </tr>

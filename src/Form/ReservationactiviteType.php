@@ -32,10 +32,7 @@ class ReservationactiviteType extends AbstractType
                 'placeholder' => 'Choisissez une heure', // Optionnel : affichez un message par défaut
             ])
             
-            ->add('idu', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'prenomu', // Le champ de l'entité à afficher dans le formulaire
-            ])
+            
             ->add('ida', HiddenType::class, [
                 'mapped' => false, // Empêche ce champ d'être lié à l'entité
             ]);

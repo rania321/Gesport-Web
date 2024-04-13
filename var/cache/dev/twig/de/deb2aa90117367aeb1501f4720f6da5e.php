@@ -178,20 +178,20 @@ class __TwigTemplate_1a66b27b4367f6ec14c24954c82ff71f extends Template
             // line 43
             echo "                        </dd>
                     </dl>
+                   <div class=\"d-flex\">
                     <a href=\"";
-            // line 45
+            // line 46
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_index");
-            echo "\">back to list</a>
-
-    <a href=\"";
+            echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">back to list</a>
+                    <a href=\"";
             // line 47
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_edit", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 47)]), "html", null, true);
-            echo "\">edit</a>
-
-    ";
-            // line 49
+            echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">edit</a>
+                    ";
+            // line 48
             echo twig_include($this->env, $context, "reservationactivite/_delete_form.html.twig");
             echo "
+                    </div>
                 </div>
                 
             </div>
@@ -213,119 +213,6 @@ class __TwigTemplate_1a66b27b4367f6ec14c24954c82ff71f extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 57
         echo "
-
-    <h1>Reservationactivite index</h1>
-    <div class=\"container-fluid py-5\">
-            <div class=\"container py-5\">
-<div class=\"table-responsive\">
-    <table class=\"table\">
-        <thead>
-            <tr>
-              <!--  <th>Idr</th> -->
-                <th>Activité</th>
-                <th>Nom</th>
-                <th>Date</th>
-                <th>Heure</th>
-                <th>Statut</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        ";
-        // line 76
-        $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["reservationactivites"]) || array_key_exists("reservationactivites", $context) ? $context["reservationactivites"] : (function () { throw new RuntimeError('Variable "reservationactivites" does not exist.', 76, $this->source); })()));
-        $context['_iterated'] = false;
-        $context['loop'] = [
-          'parent' => $context['_parent'],
-          'index0' => 0,
-          'index'  => 1,
-          'first'  => true,
-        ];
-        if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
-            $length = count($context['_seq']);
-            $context['loop']['revindex0'] = $length - 1;
-            $context['loop']['revindex'] = $length;
-            $context['loop']['length'] = $length;
-            $context['loop']['last'] = 1 === $length;
-        }
-        foreach ($context['_seq'] as $context["_key"] => $context["reservationactivite"]) {
-            // line 77
-            echo "            <tr>
-              <!--  <td>";
-            // line 78
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 78), "html", null, true);
-            echo "</td> -->
-                <td><img src=\"";
-            // line 79
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "ida", [], "any", false, false, false, 79), "imagea", [], "any", false, false, false, 79))), "html", null, true);
-            echo "\" class=\"img-fluid me-5 rounded-circle\" style=\"width: 80px; height: 80px;\" alt=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "ida", [], "any", false, false, false, 79), "noma", [], "any", false, false, false, 79), "html", null, true);
-            echo "\"></td>
-                <td>";
-            // line 80
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "ida", [], "any", false, false, false, 80), "noma", [], "any", false, false, false, 80), "html", null, true);
-            echo "</td>
-                <td>";
-            // line 81
-            ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "datedebutr", [], "any", false, false, false, 81)) ? (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "datedebutr", [], "any", false, false, false, 81), "Y-m-d"), "html", null, true))) : (print ("")));
-            echo "</td>
-                <td>";
-            // line 82
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "heurer", [], "any", false, false, false, 82), "html", null, true);
-            echo "</td>
-                <td>";
-            // line 83
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "statutr", [], "any", false, false, false, 83), "html", null, true);
-            echo "</td>
-                <td>
-                    <a href=\"";
-            // line 85
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_show", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 85)]), "html", null, true);
-            echo "\">show</a>
-                    <a href=\"";
-            // line 86
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_edit", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 86)]), "html", null, true);
-            echo "\">edit</a>
-                    ";
-            // line 87
-            echo twig_include($this->env, $context, "reservationactivite/_delete_form.html.twig");
-            echo "
-                </td>
-            </tr>
-        ";
-            $context['_iterated'] = true;
-            ++$context['loop']['index0'];
-            ++$context['loop']['index'];
-            $context['loop']['first'] = false;
-            if (isset($context['loop']['length'])) {
-                --$context['loop']['revindex0'];
-                --$context['loop']['revindex'];
-                $context['loop']['last'] = 0 === $context['loop']['revindex0'];
-            }
-        }
-        if (!$context['_iterated']) {
-            // line 91
-            echo "            <tr>
-                <td colspan=\"5\">no records found</td>
-            </tr>
-        ";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['reservationactivite'], $context['_parent'], $context['loop']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 95
-        echo "        </tbody>
-    </table>
-</div>
-</div>
-</div>
-
-    <a href=\"";
-        // line 101
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_new");
-        echo "\">Create new</a>
-    
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -356,7 +243,7 @@ class __TwigTemplate_1a66b27b4367f6ec14c24954c82ff71f extends Template
      */
     public function getDebugInfo()
     {
-        return array (  326 => 101,  318 => 95,  309 => 91,  292 => 87,  288 => 86,  284 => 85,  279 => 83,  275 => 82,  271 => 81,  267 => 80,  261 => 79,  257 => 78,  254 => 77,  236 => 76,  215 => 57,  193 => 49,  188 => 47,  183 => 45,  179 => 43,  175 => 41,  171 => 39,  169 => 38,  162 => 34,  156 => 31,  150 => 28,  142 => 23,  135 => 18,  118 => 17,  108 => 16,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
+        return array (  215 => 57,  192 => 48,  188 => 47,  184 => 46,  179 => 43,  175 => 41,  171 => 39,  169 => 38,  162 => 34,  156 => 31,  150 => 28,  142 => 23,  135 => 18,  118 => 17,  108 => 16,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -405,11 +292,11 @@ class __TwigTemplate_1a66b27b4367f6ec14c24954c82ff71f extends Template
                             {% endif %}
                         </dd>
                     </dl>
-                    <a href=\"{{ path('app_reservationactivite_index') }}\">back to list</a>
-
-    <a href=\"{{ path('app_reservationactivite_edit', {'idr': reservationactivite.idr}) }}\">edit</a>
-
-    {{ include('reservationactivite/_delete_form.html.twig') }}
+                   <div class=\"d-flex\">
+                    <a href=\"{{ path('app_reservationactivite_index') }}\" class=\"btn btn-primary rounded-pill py-2 px-4\">back to list</a>
+                    <a href=\"{{ path('app_reservationactivite_edit', {'idr': reservationactivite.idr}) }}\" class=\"btn btn-primary rounded-pill py-2 px-4\">edit</a>
+                    {{ include('reservationactivite/_delete_form.html.twig') }}
+                    </div>
                 </div>
                 
             </div>
@@ -418,51 +305,6 @@ class __TwigTemplate_1a66b27b4367f6ec14c24954c82ff71f extends Template
 </div>    
 {% endfor %}
 
-
-    <h1>Reservationactivite index</h1>
-    <div class=\"container-fluid py-5\">
-            <div class=\"container py-5\">
-<div class=\"table-responsive\">
-    <table class=\"table\">
-        <thead>
-            <tr>
-              <!--  <th>Idr</th> -->
-                <th>Activité</th>
-                <th>Nom</th>
-                <th>Date</th>
-                <th>Heure</th>
-                <th>Statut</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for reservationactivite in reservationactivites %}
-            <tr>
-              <!--  <td>{{ reservationactivite.idr }}</td> -->
-                <td><img src=\"{{ asset('uploads/' ~ reservationactivite.ida.imagea) }}\" class=\"img-fluid me-5 rounded-circle\" style=\"width: 80px; height: 80px;\" alt=\"{{ reservationactivite.ida.noma }}\"></td>
-                <td>{{ reservationactivite.ida.noma }}</td>
-                <td>{{ reservationactivite.datedebutr ? reservationactivite.datedebutr|date('Y-m-d') : '' }}</td>
-                <td>{{ reservationactivite.heurer }}</td>
-                <td>{{ reservationactivite.statutr }}</td>
-                <td>
-                    <a href=\"{{ path('app_reservationactivite_show', {'idr': reservationactivite.idr}) }}\">show</a>
-                    <a href=\"{{ path('app_reservationactivite_edit', {'idr': reservationactivite.idr}) }}\">edit</a>
-                    {{ include('reservationactivite/_delete_form.html.twig') }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan=\"5\">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
-</div>
-</div>
-
-    <a href=\"{{ path('app_reservationactivite_new') }}\">Create new</a>
-    
 {% endblock %}
 ", "reservationactivite/index.html.twig", "C:\\Users\\Rania\\Desktop\\gesportWeb\\templates\\reservationactivite\\index.html.twig");
     }

@@ -30,4 +30,5 @@ class ExampleController extends AbstractController
             'ma_variable' => $ma_variable,
         ]);
     }
+    
 }

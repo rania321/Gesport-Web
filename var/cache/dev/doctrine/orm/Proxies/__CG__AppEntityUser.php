@@ -67,10 +67,10 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'idu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'nomu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'prenomu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'emailu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'mdpu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'roleu'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'idu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'activitefavoris', '' . "\0" . 'App\\Entity\\User' . "\0" . 'equipes', '' . "\0" . 'App\\Entity\\User' . "\0" . 'nomu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'prenomu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'emailu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'mdpu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'roleu'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'idu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'nomu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'prenomu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'emailu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'mdpu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'roleu'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'idu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'activitefavoris', '' . "\0" . 'App\\Entity\\User' . "\0" . 'equipes', '' . "\0" . 'App\\Entity\\User' . "\0" . 'nomu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'prenomu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'emailu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'mdpu', '' . "\0" . 'App\\Entity\\User' . "\0" . 'roleu'];
     }
 
     /**
@@ -300,6 +300,105 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRoleu', [$roleu]);
 
         return parent::setRoleu($roleu);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function __toString(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, '__toString', []);
+
+        return parent::__toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRoles(): array
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRoles', []);
+
+        return parent::getRoles();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPassword(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPassword', []);
+
+        return parent::getPassword();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSalt(): ?string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSalt', []);
+
+        return parent::getSalt();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUsername(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsername', []);
+
+        return parent::getUsername();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function eraseCredentials(): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'eraseCredentials', []);
+
+        parent::eraseCredentials();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUserIdentifier(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUserIdentifier', []);
+
+        return parent::getUserIdentifier();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getResetToken(): ?string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getResetToken', []);
+
+        return parent::getResetToken();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setResetToken(?string $resetToken): \App\Entity\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setResetToken', [$resetToken]);
+
+        return parent::setResetToken($resetToken);
     }
 
 }
