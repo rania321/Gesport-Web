@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Form\UserType;
 use App\Form\ResetPassType;
+use App\Form\NewPasswordType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -176,7 +177,11 @@ class UserController extends AbstractController
             // Si l'utilisateur existe
             if ($user) {
                 // Générer un token
-                $token = $tokenGenerator->generateToken();
+                // Générer un token en incluant le champ 'emailu'
+                $tokenData = ['emailu' => $emailu];
+
+ 
+                $token = base64_encode(json_encode($tokenData));
     
                 // Stocker le token dans un cookie
                 $response = new Response();
@@ -226,67 +231,55 @@ class UserController extends AbstractController
 #[Route("/reset_pass", name:"app_reset_password")]
 public function resetPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, SessionInterface $session): Response
 {
-    // Récupérer le token depuis le cookie
     $resetToken = $request->cookies->get('reset_password_token');
 
-    // Vérifier si le token est présent
     if (!$resetToken) {
-        // Rediriger vers une page d'erreur ou afficher un message d'erreur
         $this->addFlash('danger', 'Token de réinitialisation de mot de passe invalide.');
         return $this->redirectToRoute('app_login');
     }
 
-    // Récupérer les données associées au token
-    $data = json_decode(base64_decode($resetToken), true);
-    $emailu = isset($data['emaiu']) ? $data['emailu'] : null;
+    $tokenData = json_decode(base64_decode($resetToken), true);
+    $emailu = isset($tokenData['emailu']) ? $tokenData['emailu'] : null;
 
-    // Créer un formulaire de réinitialisation de mot de passe
-    $form = $this->createForm(ResetPassType::class);
+    $form = $this->createForm(NewPasswordType::class);
     $form->handleRequest($request);
 
-    // Si le formulaire est soumis et valide
     if ($form->isSubmitted() && $form->isValid()) {
-        // Récupérer le mot de passe saisi dans le formulaire
-        $password = $form->get('password')->getData();
+        $mdpu = $form->get('password')->getData();
 
-        // Charger l'utilisateur depuis la base de données
         $userRepository = $this->getDoctrine()->getRepository(User::class);
         $user = $userRepository->findOneByEmailu($emailu);
 
-        // Vérifier si l'utilisateur existe
         if ($user) {
-            // Encoder et définir le nouveau mot de passe
-            $encodedPassword = $passwordEncoder->encodePassword($user, $password);
-            $user->setPassword($encodedPassword);
+            $encodedPassword = $passwordEncoder->encodePassword($user, $mdpu);
+            $user->setMdpu($encodedPassword);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             // Supprimer le cookie de réinitialisation de mot de passe
             $response = new Response();
             $response->headers->clearCookie('reset_password_token');
             $response->sendHeaders();
 
-            // Mettre à jour l'utilisateur dans la base de données
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
 
-            // Ajouter un message de succès et rediriger vers la page de connexion
+            
+
             $this->addFlash('success', 'Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter.');
             return $this->redirectToRoute('app_login');
         } else {
-            // Si l'utilisateur n'est pas trouvé, afficher un message d'erreur
             $this->addFlash('danger', 'Utilisateur introuvable.');
             return $this->redirectToRoute('app_login');
         }
     }
-    
 
-    // Afficher le formulaire de réinitialisation de mot de passe
     return $this->render('user/reset_password.html.twig', [
         'form' => $form->createView(),
         'token' => $resetToken,
+        'emailu' => $emailu,
     ]);
 }
-
 
     
 
