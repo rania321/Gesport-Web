@@ -29,12 +29,15 @@ class TournoiController extends AbstractController
     public function index(TournoiRepository $tournoiRepository): Response
     {
         $currentDate = new \DateTime();
-        $tournois = $tournoiRepository->triT($currentDate);
+        $tournois = $tournoiRepository->createQueryBuilder('t')
+            ->andWhere('t.statutt != :statutt')
+            ->setParameter('statutt', 'Terminé')
+            ->getQuery()
+            ->getResult();
+    
         return $this->render('tournoi/index.html.twig', [
             'tournois' => $tournois,
         ]);
-        
-        
     }
     
     #[Route('/tournoiback', name: 'app_tournoi_indexBack', methods: ['GET'])]

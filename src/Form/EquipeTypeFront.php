@@ -28,10 +28,10 @@ class EquipeTypeFront extends AbstractType
             ])
             ->add('Tournoi', EntityType::class, [
                 'class' => Tournoi::class,
-                'query_builder' => function (EntityRepository $er) { // Utilisez Doctrine\ORM\EntityRepository
+                'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('t')
-                        ->where('t.datedebutt >= CURRENT_DATE()') // Tournois à venir
-                        ->orWhere('t.datefint>= CURRENT_DATE()'); // Tournois en cours
+                        ->where('t.statutt != :statutt')
+                        ->setParameter('statutt', 'Terminé');
                 },
                 'choice_label' => 'nomt',
                 'placeholder' => 'Choisissez un tournoi',
