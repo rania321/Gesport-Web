@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gesport - Détail{% endblock %}
+
+{% block content %}
+<div style="margin-left: 200px; margin-right: 200px;">
+    <br>
+    <a href="{{ path('app_produit_index') }}">Retour</a>
+    <br><br><br><br>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <td rowspan="3">
+                        <img src="{{ asset('FrontOffice/' ~ produit.imagep) }}" class="img-fluid rounded"  alt="{{ produit.nomp }}">
+                </td>
+                <td><h3>#{{ produit.referencep }}</h3></td>
+            </tr>
+            <tr>
+                <td><h1>{{ produit.nomp }}</h1></td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <th>Description : </th>
+                            <td>{{ produit.descrip }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prix : </th>
+                            <td>{{ produit.prixp }} dt</td>
+                        </tr>
+                        <tr>
+                            <td> 
+                                <div class="row g-3">   
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0" id="name" placeholder="Your Name">
+                                            <label for="name">Quantité..</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr><td>
+                               <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3" type="button" >Ajouter au panier</button>
+                                            <a href="{{ path('app_panier_new') }}">Ajouter au panier</a>
+
+                                </div>
+                        </td></tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br><br><br><br>
+</div>
+
+
+
+
+
+{% endblock %}

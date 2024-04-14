@@ -1,0 +1,15 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+# Route pour le front-end
+
+# config/routes.yaml
+ajouter_au_panier:
+    path: '/ajouter-au-panier/{idp}'
+    controller: 'App\Controller\PanierController::ajouterAuPanier'
+
+
+app_panier_index:
+    path: /panier/
+    controller: App\Controller\PanierController::index
+    methods: GET
