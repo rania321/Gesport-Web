@@ -45,4 +45,20 @@ class TournoiRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+public function triT(\DateTimeInterface $currentDate)
+{
+    return $this->createQueryBuilder('t')
+    ->andWhere('t.datedebutt <= :currentDate')
+    ->andWhere('t.datefint >= :currentDate')
+    ->setParameter('currentDate', $currentDate)
+    ->getQuery()
+    ->getResult();
+}
+
+
+
+
+
 }

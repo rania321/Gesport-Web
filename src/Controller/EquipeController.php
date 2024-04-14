@@ -244,7 +244,30 @@ public function show(Request $request, Equipe $equipe, JoueurRepository $joueurR
             'form' => $form->createView(),
         ]);
     }
+    #[Route('/{ide}I', name: 'app_equipe_deleteinscri', methods: ['POST'])]
+    public function deleteinscri(Equipe $equipe, EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer tous les joueurs associés à cette équipe
+        $joueurs = $entityManager->getRepository(Joueur::class)->findBy(['equipe' => $equipe]);
+    
+        // Supprimer chaque joueur associé
+        foreach ($joueurs as $joueur) {
+            $entityManager->remove($joueur);
+        }
 
+        $inscritsAuTournoi = $entityManager->getRepository(Inscritournoi::class)->findBy(['Equipe' => $equipe]);
+        foreach ($inscritsAuTournoi as $inscrit) {
+            $entityManager->remove($inscrit);
+        }
+    
+    
+        // Supprimer l'équipe
+        $entityManager->remove($equipe);
+        $entityManager->flush();
+    
+        // Rediriger vers la liste des équipes après la suppression
+        return $this->redirectToRoute('app_tournoi_indexBack', [], Response::HTTP_SEE_OTHER);
+    }
 
     #[Route('/{ide}', name: 'app_equipe_delete', methods: ['POST'])]
     public function delete(Equipe $equipe, EntityManagerInterface $entityManager): Response
@@ -270,6 +293,8 @@ public function show(Request $request, Equipe $equipe, JoueurRepository $joueurR
         // Rediriger vers la liste des équipes après la suppression
         return $this->redirectToRoute('app_equipe_indexBack', [], Response::HTTP_SEE_OTHER);
     }
+
+   
 
 
    /* public function getLastAddedTeam(): ?Equipe

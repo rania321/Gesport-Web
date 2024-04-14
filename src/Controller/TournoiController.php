@@ -28,9 +28,13 @@ class TournoiController extends AbstractController
     #[Route('/', name: 'app_tournoi_index', methods: ['GET'])]
     public function index(TournoiRepository $tournoiRepository): Response
     {
+        $currentDate = new \DateTime();
+        $tournois = $tournoiRepository->triT($currentDate);
         return $this->render('tournoi/index.html.twig', [
-            'tournois' => $tournoiRepository->findAll(),
+            'tournois' => $tournois,
         ]);
+        
+        
     }
     
     #[Route('/tournoiback', name: 'app_tournoi_indexBack', methods: ['GET'])]

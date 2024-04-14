@@ -7,6 +7,7 @@ use App\Form\InscritournoiType;
 use App\Repository\InscritournoiRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +21,28 @@ class InscritournoiController extends AbstractController
         return $this->render('inscritournoi/index.html.twig', [
             'inscritournois' => $inscritournoiRepository->findAll(),
         ]);
+    }
+
+    #[Route('/{idit}', name: 'app_inscritournoi_delete', methods: ['POST'])]
+    public function delete(Request $request, int $idit, InscritournoiRepository $inscritournoiRepository, EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer l'inscritournoi par son identifiant
+        $inscritournoi = $inscritournoiRepository->find($idit);
+    
+        // Vérifier si l'inscritournoi existe
+        if (!$inscritournoi) {
+            throw $this->createNotFoundException('Inscritournoi not found');
+        }
+    
+        // Vérifier le jeton CSRF
+        if ($this->isCsrfTokenValid('delete'.$inscritournoi->getIdit(), $request->request->get('_token'))) {
+            // Supprimer l'inscritournoi
+            $entityManager->remove($inscritournoi);
+            $entityManager->flush();
+        }
+    
+        // Rediriger vers la liste des inscritournois
+        return $this->redirectToRoute('app_inscritournoi_index');
     }
 
     #[Route('/new', name: 'app_inscritournoi_new', methods: ['GET', 'POST'])]
@@ -42,7 +65,7 @@ class InscritournoiController extends AbstractController
         ]);
     }
 
-    #[Route('/{idit}', name: 'app_inscritournoi_show', methods: ['GET'])]
+    #[Route('/{idit}S', name: 'app_inscritournoi_show', methods: ['GET'])]
     public function show(Inscritournoi $inscritournoi): Response
     {
         return $this->render('inscritournoi/show.html.twig', [
@@ -68,14 +91,5 @@ class InscritournoiController extends AbstractController
         ]);
     }
 
-    #[Route('/{idit}', name: 'app_inscritournoi_delete', methods: ['POST'])]
-    public function delete(Request $request, Inscritournoi $inscritournoi, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$inscritournoi->getIdit(), $request->request->get('_token'))) {
-            $entityManager->remove($inscritournoi);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_inscritournoi_index', [], Response::HTTP_SEE_OTHER);
-    }
+    
 }

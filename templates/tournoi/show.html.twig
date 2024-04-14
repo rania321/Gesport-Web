@@ -146,8 +146,14 @@
           <div class="card-body">
             <ul>
               {% for equipe in equipesInscrites %}
-                <li>{{ equipe.getNome }}</li>
-              {% endfor %}
+              <li>
+                {{ equipe.getNome }}
+                <form method="post" action="{{ path('app_equipe_deleteinscri', {'ide': equipe.ide}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                  <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ equipe.ide) }}">
+                  <button type="submit" class="btn btn-inverse-danger btn-xs" style="font-size: 13px;">Delete</button></form>
+              </form>
+            </li>   
+               {% endfor %}
             </ul>
           </div>
         </div>
