@@ -28,6 +28,7 @@ class UserType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'hide_role_field' => false,
+            
         ]);
     }
 }

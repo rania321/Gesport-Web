@@ -8,7 +8,7 @@
         {# Formulaire de modification des informations de l'utilisateur #}
         <div class="user-form my-5 text-center">
             <h2>Modifier les informations du compte</h2>
-            <form method="post" action="{{ path('app_user_edit', {'idu': user.idu}) }}" class="needs-validation" novalidate>
+            <form method="post" action="{{ path('app_user_edituser', {'idu': user.idu}) }}" class="needs-validation" novalidate>
                 {{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
                 {{ form_row(form.emailu, {'attr': {'class': 'form-control'}}) }}
                 {{ form_row(form.nomu, {'attr': {'class': 'form-control'}}) }}
