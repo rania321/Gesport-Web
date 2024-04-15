@@ -150,6 +150,107 @@
 </div>
 </div>
 </div>
-</div>
-   
+<div class="row">
+<!-- Code de l'histogramme des statistiques -->
+            <div class="col-lg-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Chart</h4>
+                  <canvas id="statistiquesChart" style="height: 400px;"></canvas>
+                </div>
+              </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var statistiquesData = {{ statistiques|json_encode|raw }};
+        
+        var ctx = document.getElementById('statistiquesChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['En cours', 'confirmées'],
+                datasets: [{
+                    label: 'Nombre de réservations',
+                    data: [statistiquesData.en_cours, statistiquesData.confirmées],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>
+            <div class="col-lg-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Chart</h4>
+                  <canvas id="statistiquesPieChart" width="432" height="432" style="display: block; box-sizing: border-box; height: 432px; width: 432px;"></canvas>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+
+
+
+
+
+
+  <!-- Code du pie chart pour les statistiques -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var statistiquesData = {{ statistiques|json_encode|raw }};
+        
+        var ctx = document.getElementById('statistiquesPieChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['En cours', 'Confirmées'],
+                datasets: [{
+                    label: 'Nombre de réservations',
+                    data: [statistiquesData.en_cours, statistiquesData.confirmées],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>
+
 {% endblock %}

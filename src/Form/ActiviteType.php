@@ -17,7 +17,6 @@ class ActiviteType extends AbstractType
             
             ->add('noma')
             ->add('typea')
-            
             ->add('dispoa', ChoiceType::class, [
                 'choices' => [
                     'Disponible' => 'Disponible',
@@ -28,10 +27,10 @@ class ActiviteType extends AbstractType
             ->add('descria')
             ->add('imagea', FileType::class, [
                 'label' => 'Image de lactivité',
-                'required' => true, // Si l'image n'est pas obligatoire
+                'required' => false, // Si l'image n'est pas obligatoire
                 'mapped' => false, // Pour que le champ n'essaie pas de mapper la propriété dans l'entité
                 'attr' => ['class' => 'form-control'],
-                ])
+            ])
         ;
     }
 

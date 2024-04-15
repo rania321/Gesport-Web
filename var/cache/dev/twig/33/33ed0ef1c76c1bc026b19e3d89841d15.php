@@ -122,7 +122,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
         <div class=\"container-fluid position-relative p-0\">
             <nav class=\"navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0\">
                 <a href=\"\" class=\"navbar-brand p-0\">
-                    <h1 class=\"m-0\"><i class=\"fa fa-map-marker-alt me-3\"></i>GeSport</h1>
+                    <h1 class=\"m-0\"><i class=\"\"></i>GeSport</h1>
                     <!-- <img src=\"img/logo.png\" alt=\"Logo\"> -->
                 </a>
                 <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarCollapse\">
@@ -149,7 +149,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
                         </div>
                         <a href=\"contact.html\" class=\"nav-item nav-link\">Reclamation</a>
                     </div>
-                    <a href=\"\" class=\"btn btn-primary rounded-pill py-2 px-4 ms-lg-4\">Book Now</a>
+                    <a href=\"../reservationactivite/\" class=\"btn btn-primary rounded-pill py-2 px-4 ms-lg-4\">Mes Réservations</a>
                 </div>
             </nav>
 ";
@@ -202,28 +202,24 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
 
         // line 83
         echo "   <h1>     </h1> 
-<a href=\"";
-        // line 84
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_new");
-        echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Réserver</a>
     <div class=\"row\">
         ";
-        // line 86
+        // line 85
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["activites"]) || array_key_exists("activites", $context) ? $context["activites"] : (function () { throw new RuntimeError('Variable "activites" does not exist.', 86, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["activites"]) || array_key_exists("activites", $context) ? $context["activites"] : (function () { throw new RuntimeError('Variable "activites" does not exist.', 85, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["activite"]) {
-            // line 87
+            // line 86
             echo "            <div class=\"col-md-4\">
                 <div class=\"card mb-4\">
                     <div class=\"blog-item\">
                      <div class=\"blog-img\">
                         <div class=\"blog-img-inner\">     
                             <img src=\"";
-            // line 92
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["activite"], "imagea", [], "any", false, false, false, 92))), "html", null, true);
+            // line 91
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["activite"], "imagea", [], "any", false, false, false, 91))), "html", null, true);
             echo "\" class=\"img-fluid w-100 rounded-top\" alt=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 92), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 91), "html", null, true);
             echo "\">
                             <div class=\"blog-icon\">
                                         <a href=\"#\" class=\"my-auto\"><i class=\"fas fa-link fa-2x text-white\"></i></a>
@@ -232,24 +228,29 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
                     </div>   
                     <div class=\"card-body\">
                         <h5 class=\"card-title\">";
-            // line 99
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 99), "html", null, true);
+            // line 98
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 98), "html", null, true);
             echo "</h5>
                         <p class=\"card-text\">";
-            // line 100
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "descria", [], "any", false, false, false, 100), "html", null, true);
+            // line 99
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "descria", [], "any", false, false, false, 99), "html", null, true);
             echo "</p>
                         <a href=\"";
-            // line 101
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_show", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 101)]), "html", null, true);
+            // line 100
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_show", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 100)]), "html", null, true);
             echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Voir</a>
-                        <a href=\"";
-            // line 102
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservation_new_for_activity", ["activityId" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 102)]), "html", null, true);
-            echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Reserver</a>
-                    <!--    <a href=\"";
-            // line 103
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_new", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 103)]), "html", null, true);
+                        ";
+            // line 101
+            if ((twig_get_attribute($this->env, $this->source, $context["activite"], "dispoa", [], "any", false, false, false, 101) == "Disponible")) {
+                // line 102
+                echo "                        <a href=\"";
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservation_new_for_activity", ["activityId" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 102)]), "html", null, true);
+                echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Reserver</a>
+                        ";
+            }
+            // line 104
+            echo "                    <!--    <a href=\"";
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_new", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 104)]), "html", null, true);
             echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Réserver</a>  -->
                     </div>
                     </div>
@@ -259,7 +260,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 109
+            // line 110
             echo "            <div class=\"col\">
                 <p>No records found</p>
             </div>
@@ -268,7 +269,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['activite'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 113
+        // line 114
         echo "    </div>
 ";
         
@@ -300,7 +301,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
      */
     public function getDebugInfo()
     {
-        return array (  272 => 113,  263 => 109,  252 => 103,  248 => 102,  244 => 101,  240 => 100,  236 => 99,  224 => 92,  217 => 87,  212 => 86,  207 => 84,  204 => 83,  194 => 82,  175 => 72,  165 => 71,  90 => 5,  80 => 4,  61 => 3,  38 => 1,);
+        return array (  273 => 114,  264 => 110,  252 => 104,  246 => 102,  244 => 101,  240 => 100,  236 => 99,  232 => 98,  220 => 91,  213 => 86,  208 => 85,  204 => 83,  194 => 82,  175 => 72,  165 => 71,  90 => 5,  80 => 4,  61 => 3,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -344,7 +345,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
         <div class=\"container-fluid position-relative p-0\">
             <nav class=\"navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0\">
                 <a href=\"\" class=\"navbar-brand p-0\">
-                    <h1 class=\"m-0\"><i class=\"fa fa-map-marker-alt me-3\"></i>GeSport</h1>
+                    <h1 class=\"m-0\"><i class=\"\"></i>GeSport</h1>
                     <!-- <img src=\"img/logo.png\" alt=\"Logo\"> -->
                 </a>
                 <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarCollapse\">
@@ -371,7 +372,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
                         </div>
                         <a href=\"contact.html\" class=\"nav-item nav-link\">Reclamation</a>
                     </div>
-                    <a href=\"\" class=\"btn btn-primary rounded-pill py-2 px-4 ms-lg-4\">Book Now</a>
+                    <a href=\"../reservationactivite/\" class=\"btn btn-primary rounded-pill py-2 px-4 ms-lg-4\">Mes Réservations</a>
                 </div>
             </nav>
 {% endblock %}
@@ -388,7 +389,6 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
 {% endblock %}
 {% block content %}
    <h1>     </h1> 
-<a href=\"{{ path('app_reservationactivite_new')}}\" class=\"btn btn-primary rounded-pill py-2 px-4\">Réserver</a>
     <div class=\"row\">
         {% for activite in activites %}
             <div class=\"col-md-4\">
@@ -406,7 +406,9 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
                         <h5 class=\"card-title\">{{ activite.noma }}</h5>
                         <p class=\"card-text\">{{ activite.descria }}</p>
                         <a href=\"{{ path('app_activite_show', {'ida': activite.ida}) }}\" class=\"btn btn-primary rounded-pill py-2 px-4\">Voir</a>
+                        {% if activite.dispoa == 'Disponible' %}
                         <a href=\"{{ path('app_reservation_new_for_activity', {'activityId': activite.ida}) }}\" class=\"btn btn-primary rounded-pill py-2 px-4\">Reserver</a>
+                        {% endif %}
                     <!--    <a href=\"{{ path('app_reservationactivite_new', {'ida': activite.ida}) }}\" class=\"btn btn-primary rounded-pill py-2 px-4\">Réserver</a>  -->
                     </div>
                     </div>

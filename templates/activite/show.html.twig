@@ -44,6 +44,12 @@
         </div>
 </div>
 
+{% if isFavorite %}
+    <a href="{{ path('remove_from_favorites', {'ida': activite.ida}) }}" class="btn btn-danger">❤️ Retirer des favoris</a>
+{% else %}
+    <a href="{{ path('add_to_favorites', {'ida': activite.ida}) }}" class="btn btn-outline-danger">🤍 Ajouter aux favoris</a>
+{% endif %}
+
     <a href="{{ path('app_activite_index') }}">back to list</a>
 
 {% endblock %}

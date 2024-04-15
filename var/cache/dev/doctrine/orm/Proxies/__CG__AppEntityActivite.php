@@ -67,10 +67,10 @@ class Activite extends \App\Entity\Activite implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'ida', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'noma', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'typea', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'dispoa', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'descria', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'imagea'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'ida', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'noma', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'typea', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'dispoa', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'descria', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'imagea', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'activitefavoriss'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'ida', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'noma', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'typea', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'dispoa', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'descria', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'imagea'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'ida', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'noma', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'typea', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'dispoa', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'descria', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'imagea', '' . "\0" . 'App\\Entity\\Activite' . "\0" . 'activitefavoriss'];
     }
 
     /**
@@ -300,6 +300,50 @@ class Activite extends \App\Entity\Activite implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setImagea', [$imagea]);
 
         return parent::setImagea($imagea);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isFavoriteForUser(\App\Entity\User $user): bool
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'isFavoriteForUser', [$user]);
+
+        return parent::isFavoriteForUser($user);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getActivitefavoriss(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getActivitefavoriss', []);
+
+        return parent::getActivitefavoriss();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addActivitefavoris(\App\Entity\Activitefavoris $activitefavoris): \App\Entity\Activite
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addActivitefavoris', [$activitefavoris]);
+
+        return parent::addActivitefavoris($activitefavoris);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeActivitefavoris(\App\Entity\Activitefavoris $activitefavoris): \App\Entity\Activite
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeActivitefavoris', [$activitefavoris]);
+
+        return parent::removeActivitefavoris($activitefavoris);
     }
 
 }

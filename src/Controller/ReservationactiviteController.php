@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Activite;
 use App\Entity\User;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 #[Route('/reservationactivite')]
 class ReservationactiviteController extends AbstractController
@@ -28,14 +30,31 @@ class ReservationactiviteController extends AbstractController
         ]);
     }
 
-
     #[Route('/back', name: 'app_reservationactivite_indexBack', methods: ['GET'])]
     public function indexBack(ReservationactiviteRepository $reservationactiviteRepository): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entites = $entityManager->getRepository(ReservationActivite::class)->findAll(); 
+        
+        $statistiques = [
+            'en_cours' => 0,
+            'confirmées' => 0,
+        ];
+        
+        foreach ($entites as $entite) {
+            if ($entite->getStatutr() == 'En cours') {
+                $statistiques['en_cours']++;
+            } elseif ($entite->getStatutr() == 'confirmée') {
+                $statistiques['confirmées']++;
+            }
+        }
+        
         return $this->render('reservationactivite/indexBack.html.twig', [
             'reservationactivites' => $reservationactiviteRepository->findAll(),
+            'statistiques' => $statistiques,
         ]);
     }
+    
 
     #[Route('/new', name: 'app_reservationactivite_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -172,6 +191,49 @@ class ReservationactiviteController extends AbstractController
                 'activite' => $activite,
                 'form' => $form->createView(),
             ]);
+        }
+
+        #[Route('/{idr}/generate-pdf', name: 'app_reservationactivite_generate_pdf', methods: ['GET'])]
+        public function generatePDF(Reservationactivite $reservationactivite): Response
+        {
+            // Vérifier si la réservation est confirmée
+            if ($reservationactivite->getStatutr() !== 'confirmée') {
+                throw $this->createNotFoundException('Impossible de générer un PDF pour une réservation non confirmée.');
+            }
+        
+            // Créer une instance de Dompdf
+            $options = new Options();
+            $options->set('isHtml5ParserEnabled', true);
+            $dompdf = new Dompdf($options);
+        
+            // Construction du contenu HTML du PDF
+            $html = '<html>';
+            $html .= '<body>';
+            $html .= '<h1>Réservation</h1>';
+            $html .= '<p>ID de la réservation : ' . $reservationactivite->getIdr() . '</p>';
+            // Ajouter d'autres détails de la réservation ici...
+        
+            $html .= '</body>';
+            $html .= '</html>';
+        
+            // Charger le contenu HTML dans Dompdf
+            $dompdf->loadHtml($html);
+        
+            // Rendu du PDF
+            $dompdf->render();
+        
+            // Nom du fichier PDF
+            $fileName = 'reservation_' . $reservationactivite->getIdr() . '.pdf';
+        
+            // Envoi du PDF en sortie
+            return new Response(
+                $dompdf->output(),
+                Response::HTTP_OK,
+                array(
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'attachment; filename="' . $fileName . '"'
+                )
+            );
         }
 
 }

@@ -108,7 +108,7 @@
             
         </div>
 </div>
-    
+    {% if activite.dispoa == 'Disponible' %}
     <div class="container-fluid booking py-5">
             <div class="container py-5">
                 <div class="row g-5 align-items-center">
@@ -158,4 +158,5 @@
                 </div>
             </div>
         </div>
+        {% endif %}
 {% endblock %}

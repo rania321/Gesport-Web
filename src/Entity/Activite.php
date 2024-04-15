@@ -2,11 +2,15 @@
 
 namespace App\Entity;
 
+use App\Entity\Activitefavoris;
+use App\Entity\User;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ActiviteRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[UniqueEntity(fields: ['noma'], message: 'Ce nom de l"activité est déjà utilisé.')]
 #[ORM\Entity(repositoryClass: ActiviteRepository::class)]
@@ -33,8 +37,7 @@ class Activite
     #[ORM\Column(length: 65535)]
     private ?string $descria = null;
 
-    #[Assert\NotBlank(message:"Veuillez saisir l'image de l'activité.")]
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable: true)]
     private ?string $imagea= null;
 
     public function getIda(): ?int
@@ -98,6 +101,61 @@ class Activite
     public function setImagea(?string $imagea): static
     {
         $this->imagea = $imagea;
+
+        return $this;
+    }
+
+    public function isFavoriteForUser(User $user): bool
+    {
+        if ($this->activitefavoriss === null) {
+            return false;
+        }
+
+        foreach ($this->activitefavoriss as $favoris) {
+            if ($favoris->getIdu() === $user) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * @ORM\OneToMany(targetEntity=Activitefavoris::class, mappedBy="activite")
+     */
+    private $activitefavoriss;
+
+    public function __construct()
+    {
+        $this->activitefavoriss = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Activitefavoris[]
+     */
+    public function getActivitefavoriss(): Collection
+    {
+        return $this->activitefavoriss;
+    }
+
+    public function addActivitefavoris(Activitefavoris $activitefavoris): self
+    {
+        if (!$this->activitefavoriss->contains($activitefavoris)) {
+            $this->activitefavoriss[] = $activitefavoris;
+            $activitefavoris->setActivite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActivitefavoris(Activitefavoris $activitefavoris): self
+    {
+        if ($this->activitefavoriss->removeElement($activitefavoris)) {
+            // set the owning side to null (unless already changed)
+            if ($activitefavoris->getActivite() === $this) {
+                $activitefavoris->setActivite(null);
+            }
+        }
 
         return $this;
     }

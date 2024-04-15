@@ -321,8 +321,115 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
 </div>
 </div>
 </div>
-</div>
-   
+<div class=\"row\">
+<!-- Code de l'histogramme des statistiques -->
+            <div class=\"col-lg-6 grid-margin stretch-card\">
+              <div class=\"card\">
+                <div class=\"card-body\">
+                  <h4 class=\"card-title\">Chart</h4>
+                  <canvas id=\"statistiquesChart\" style=\"height: 400px;\"></canvas>
+                </div>
+              </div>
+            </div>
+            <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var statistiquesData = ";
+        // line 166
+        echo json_encode((isset($context["statistiques"]) || array_key_exists("statistiques", $context) ? $context["statistiques"] : (function () { throw new RuntimeError('Variable "statistiques" does not exist.', 166, $this->source); })()));
+        echo ";
+        
+        var ctx = document.getElementById('statistiquesChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['En cours', 'confirmées'],
+                datasets: [{
+                    label: 'Nombre de réservations',
+                    data: [statistiquesData.en_cours, statistiquesData.confirmées],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>
+            <div class=\"col-lg-6 grid-margin stretch-card\">
+              <div class=\"card\">
+                <div class=\"card-body\">
+                  <h4 class=\"card-title\">Chart</h4>
+                  <canvas id=\"statistiquesPieChart\" width=\"432\" height=\"432\" style=\"display: block; box-sizing: border-box; height: 432px; width: 432px;\"></canvas>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+
+
+
+
+
+
+  <!-- Code du pie chart pour les statistiques -->
+
+
+<script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var statistiquesData = ";
+        // line 222
+        echo json_encode((isset($context["statistiques"]) || array_key_exists("statistiques", $context) ? $context["statistiques"] : (function () { throw new RuntimeError('Variable "statistiques" does not exist.', 222, $this->source); })()));
+        echo ";
+        
+        var ctx = document.getElementById('statistiquesPieChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['En cours', 'Confirmées'],
+                datasets: [{
+                    label: 'Nombre de réservations',
+                    data: [statistiquesData.en_cours, statistiquesData.confirmées],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>
+
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -353,7 +460,7 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  318 => 147,  309 => 143,  291 => 138,  287 => 137,  283 => 136,  278 => 133,  274 => 131,  270 => 129,  268 => 128,  263 => 126,  259 => 125,  255 => 124,  251 => 123,  247 => 122,  244 => 121,  226 => 120,  208 => 105,  201 => 100,  191 => 99,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
+        return array (  398 => 222,  339 => 166,  318 => 147,  309 => 143,  291 => 138,  287 => 137,  283 => 136,  278 => 133,  274 => 131,  270 => 129,  268 => 128,  263 => 126,  259 => 125,  255 => 124,  251 => 123,  247 => 122,  244 => 121,  226 => 120,  208 => 105,  201 => 100,  191 => 99,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -510,9 +617,109 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
 </div>
 </div>
 </div>
-</div>
-   
-{% endblock %}
-", "reservationactivite/indexBack.html.twig", "C:\\Users\\Rania\\Desktop\\gesportWeb\\templates\\reservationactivite\\indexBack.html.twig");
+<div class=\"row\">
+<!-- Code de l'histogramme des statistiques -->
+            <div class=\"col-lg-6 grid-margin stretch-card\">
+              <div class=\"card\">
+                <div class=\"card-body\">
+                  <h4 class=\"card-title\">Chart</h4>
+                  <canvas id=\"statistiquesChart\" style=\"height: 400px;\"></canvas>
+                </div>
+              </div>
+            </div>
+            <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var statistiquesData = {{ statistiques|json_encode|raw }};
+        
+        var ctx = document.getElementById('statistiquesChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['En cours', 'confirmées'],
+                datasets: [{
+                    label: 'Nombre de réservations',
+                    data: [statistiquesData.en_cours, statistiquesData.confirmées],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>
+            <div class=\"col-lg-6 grid-margin stretch-card\">
+              <div class=\"card\">
+                <div class=\"card-body\">
+                  <h4 class=\"card-title\">Chart</h4>
+                  <canvas id=\"statistiquesPieChart\" width=\"432\" height=\"432\" style=\"display: block; box-sizing: border-box; height: 432px; width: 432px;\"></canvas>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+
+
+
+
+
+
+  <!-- Code du pie chart pour les statistiques -->
+
+
+<script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var statistiquesData = {{ statistiques|json_encode|raw }};
+        
+        var ctx = document.getElementById('statistiquesPieChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['En cours', 'Confirmées'],
+                datasets: [{
+                    label: 'Nombre de réservations',
+                    data: [statistiquesData.en_cours, statistiquesData.confirmées],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>
+
+{% endblock %}", "reservationactivite/indexBack.html.twig", "C:\\Users\\Rania\\Desktop\\gesportWeb\\templates\\reservationactivite\\indexBack.html.twig");
     }
 }

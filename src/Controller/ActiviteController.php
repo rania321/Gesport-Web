@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Activite;
+use App\Entity\User;
+use App\Entity\Activitefavoris;
 use App\Form\ActiviteType;
 use App\Form\ReservationactiviteType;
 use App\Repository\ActiviteRepository;
@@ -42,35 +44,44 @@ class ActiviteController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $imageFile = $form->get('imagea')->getData();
             if ($imageFile) {
-                // Move uploaded file to desired location
-                // Example:
                 $uploadsDirectory = $this->getParameter('uploads_directory');
                 $imageFileName = md5(uniqid()) . '.' . $imageFile->guessExtension();
-                $imageFile->move(
-                    $uploadsDirectory,
-                    $imageFileName
-                );
-                // Set image file name to activite entity
+                $imageFile->move($uploadsDirectory, $imageFileName);
                 $activite->setImagea($imageFileName);
+            } else {
+                // Si aucun fichier n'est téléchargé, définissez le champ imagea comme null
+                $activite->setImagea(null);
             }
+    
             $entityManager->persist($activite);
             $entityManager->flush();
-
+    
             return $this->redirectToRoute('app_activite_indexBack', [], Response::HTTP_SEE_OTHER);
         }
-
-        return $this->renderForm('activite/new.html.twig', [
-            'activite' => $activite,
-            'form' => $form,
-        ]);
+        else{
+            dump($form->getErrors(true, false));
+            return $this->renderForm('activite/new.html.twig', [
+                'activite' => $activite,
+                'form' => $form,
+            ]);
+        }
+        
     }
+
 
     #[Route('/{ida}', name: 'app_activite_show', methods: ['GET'])]
     public function show(Activite $activite): Response
     {
-        return $this->render('activite/show.html.twig', [
-            'activite' => $activite,
-        ]);
+        // Récupérez l'utilisateur par défaut (idU=2)
+    $user = $this->getDoctrine()->getRepository(User::class)->find(2);
+
+    // Vérifiez si l'activité est favorite pour l'utilisateur
+    $isFavorite = $activite->isFavoriteForUser($user);
+
+    return $this->render('activite/show.html.twig', [
+        'activite' => $activite,
+        'isFavorite' => $isFavorite, // Passer la variable isFavorite au modèle Twig
+    ]);
     }
 
     #[Route('/{ida}/edit', name: 'app_activite_edit', methods: ['GET', 'POST'])]
@@ -124,5 +135,38 @@ class ActiviteController extends AbstractController
             'activite' => $activite,
             'form' => $form,
         ]);
+    }
+
+    #[Route('/{ida}/add_to_favorites', name: 'add_to_favorites')]
+    public function addToFavorites(Activite $activite): Response
+    {
+        // Récupérez l'utilisateur par défaut (idU=2)
+        $user = $this->getDoctrine()->getRepository(User::class)->find(2);
+
+        // Vérifiez si l'activité est déjà favorite pour l'utilisateur
+        $isFavorite = $activite->isFavoriteForUser($user);
+
+        if (!$isFavorite) {
+            // Si l'activité n'est pas encore favorite, ajoutez-la aux favoris
+            $activiteFavoris = new Activitefavoris();
+            $activiteFavoris->setUser($user);
+            $activiteFavoris->setActivite($activite);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($activiteFavoris);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_activite_index'); // Redirigez vers la page des activités
+    }
+
+    #[Route('/{ida}/remove_from_favorites', name: 'remove_from_favorites')]
+    public function removeFromFavorites(Activitefavoris $activiteFavoris): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($activiteFavoris);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_activite_index'); // Redirigez vers la page des activités
     }
 }

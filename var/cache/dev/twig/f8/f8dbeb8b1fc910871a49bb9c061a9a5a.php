@@ -118,11 +118,8 @@ class __TwigTemplate_170a4e2aefc2487ffa63ce0cdcadba9b extends Template
         echo "    <h1>Réserver une activité</h1>
 
     
-
-    <div class=\"am-advsc__slots\"><div class=\"am-advsc__slots-item am-advsc__slots-item__selected am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">06:00  - 07:30</div></div><div class=\"am-advsc__slots-item am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">07:30  - 09:00</div></div><div class=\"am-advsc__slots-item am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">09:00  - 10:30</div></div><div class=\"am-advsc__slots-item am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">10:30  - 12:00</div></div><div class=\"am-advsc__slots-item am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">12:00  - 13:30</div></div><div class=\"am-advsc__slots-item am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">13:30  - 15:00</div></div><div class=\"am-advsc__slots-item am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">18:00  - 19:30</div></div><div class=\"am-advsc__slots-item am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">19:30  - 21:00</div></div></div>
-
     <a href=\"";
-        // line 23
+        // line 20
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_index");
         echo "\">back to list</a>
 
@@ -136,7 +133,7 @@ class __TwigTemplate_170a4e2aefc2487ffa63ce0cdcadba9b extends Template
                         <p class=\"text-white mb-4\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur maxime ullam esse fuga blanditiis accusantium pariatur quis sapiente, veniam doloribus praesentium? Repudiandae iste voluptatem fugiat doloribus quasi quo iure officia.
                         </p>
                         <a href=\"";
-        // line 34
+        // line 31
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_index");
         echo "\" class=\"btn btn-light text-primary rounded-pill py-3 px-5 mt-2\">Mes Réservations</a>
                     </div>
@@ -144,8 +141,8 @@ class __TwigTemplate_170a4e2aefc2487ffa63ce0cdcadba9b extends Template
                         <h1 class=\"text-white mb-3\">Réserver une activité</h1>
                         <p class=\"text-white mb-4\">Choisissez <span class=\"text-warning\">l'activité</span> qui vous correspond.</p>
                             ";
-        // line 39
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 39, $this->source); })()), 'form_start', ["attr" => ["novalidate" => "novalidate"]]);
+        // line 36
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 36, $this->source); })()), 'form_start', ["attr" => ["novalidate" => "novalidate"]]);
         echo "
 
                         <form>
@@ -153,8 +150,8 @@ class __TwigTemplate_170a4e2aefc2487ffa63ce0cdcadba9b extends Template
                                 <div class=\"col-12\">
                                     <div class=\"form-floating\">
                                         ";
-        // line 45
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 45, $this->source); })()), "ida", [], "any", false, false, false, 45), 'widget', ["attr" => ["class" => "form-select bg-white border-0"]]);
+        // line 42
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 42, $this->source); })()), "ida", [], "any", false, false, false, 42), 'widget', ["attr" => ["class" => "form-select bg-white border-0"]]);
         echo "
                                     </div>
                                 </div>
@@ -162,12 +159,12 @@ class __TwigTemplate_170a4e2aefc2487ffa63ce0cdcadba9b extends Template
                                     <div class=\"form-floating\">
                                         
                                         ";
-        // line 51
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 51, $this->source); })()), "datedebutr", [], "any", false, false, false, 51), 'widget', ["attr" => ["class" => "form-control bg-white border-0"]]);
+        // line 48
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 48, $this->source); })()), "datedebutr", [], "any", false, false, false, 48), 'widget', ["attr" => ["class" => "form-control bg-white border-0"]]);
         echo "
                                         <div class=\"text-danger\">";
-        // line 52
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 52, $this->source); })()), "datedebutr", [], "any", false, false, false, 52), 'errors');
+        // line 49
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 49, $this->source); })()), "datedebutr", [], "any", false, false, false, 49), 'errors');
         echo "</div>
                                            
                                     </div>
@@ -176,13 +173,13 @@ class __TwigTemplate_170a4e2aefc2487ffa63ce0cdcadba9b extends Template
                                     <div class=\"form-floating\">
                                         
                                         ";
-        // line 59
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 59, $this->source); })()), "heurer", [], "any", false, false, false, 59), 'widget', ["attr" => ["class" => "form-select bg-white border-0"]]);
+        // line 56
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 56, $this->source); })()), "heurer", [], "any", false, false, false, 56), 'widget', ["attr" => ["class" => "form-select bg-white border-0"]]);
         echo "
                                         
                                                 ";
-        // line 61
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 61, $this->source); })()), "heurer", [], "any", false, false, false, 61), 'errors');
+        // line 58
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 58, $this->source); })()), "heurer", [], "any", false, false, false, 58), 'errors');
         echo "
                                                 
                                     </div>
@@ -191,13 +188,13 @@ class __TwigTemplate_170a4e2aefc2487ffa63ce0cdcadba9b extends Template
                                 
                                 <div class=\"col-12\">
                                 ";
-        // line 68
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 68, $this->source); })()), "_token", [], "any", false, false, false, 68), 'row');
+        // line 65
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 65, $this->source); })()), "_token", [], "any", false, false, false, 65), 'row');
         echo "
                                     <button class=\"btn btn-primary text-white w-100 py-3\" type=\"submit\">Réserver</button>
                                     ";
-        // line 70
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 70, $this->source); })()), 'form_end');
+        // line 67
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 67, $this->source); })()), 'form_end');
         echo "
                                 </div>
                                 
@@ -237,7 +234,7 @@ class __TwigTemplate_170a4e2aefc2487ffa63ce0cdcadba9b extends Template
      */
     public function getDebugInfo()
     {
-        return array (  200 => 70,  195 => 68,  185 => 61,  180 => 59,  170 => 52,  166 => 51,  157 => 45,  148 => 39,  140 => 34,  126 => 23,  118 => 17,  108 => 16,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
+        return array (  197 => 67,  192 => 65,  182 => 58,  177 => 56,  167 => 49,  163 => 48,  154 => 42,  145 => 36,  137 => 31,  123 => 20,  118 => 17,  108 => 16,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -261,9 +258,6 @@ class __TwigTemplate_170a4e2aefc2487ffa63ce0cdcadba9b extends Template
     <h1>Réserver une activité</h1>
 
     
-
-    <div class=\"am-advsc__slots\"><div class=\"am-advsc__slots-item am-advsc__slots-item__selected am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">06:00  - 07:30</div></div><div class=\"am-advsc__slots-item am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">07:30  - 09:00</div></div><div class=\"am-advsc__slots-item am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">09:00  - 10:30</div></div><div class=\"am-advsc__slots-item am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">10:30  - 12:00</div></div><div class=\"am-advsc__slots-item am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">12:00  - 13:30</div></div><div class=\"am-advsc__slots-item am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">13:30  - 15:00</div></div><div class=\"am-advsc__slots-item am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">18:00  - 19:30</div></div><div class=\"am-advsc__slots-item am-advsc__slots-item-mobile\"><div class=\"am-advsc__slots-item__inner\">19:30  - 21:00</div></div></div>
-
     <a href=\"{{ path('app_reservationactivite_index') }}\">back to list</a>
 
     

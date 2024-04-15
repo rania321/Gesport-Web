@@ -165,8 +165,25 @@ class __TwigTemplate_f3a86db0919ad71910ac133becd0e231 extends Template
         </div>
 </div>
 
-    <a href=\"";
+";
         // line 47
+        if ((isset($context["isFavorite"]) || array_key_exists("isFavorite", $context) ? $context["isFavorite"] : (function () { throw new RuntimeError('Variable "isFavorite" does not exist.', 47, $this->source); })())) {
+            // line 48
+            echo "    <a href=\"";
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("remove_from_favorites", ["ida" => twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 48, $this->source); })()), "ida", [], "any", false, false, false, 48)]), "html", null, true);
+            echo "\" class=\"btn btn-danger\">❤️ Retirer des favoris</a>
+";
+        } else {
+            // line 50
+            echo "    <a href=\"";
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("add_to_favorites", ["ida" => twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 50, $this->source); })()), "ida", [], "any", false, false, false, 50)]), "html", null, true);
+            echo "\" class=\"btn btn-outline-danger\">🤍 Ajouter aux favoris</a>
+";
+        }
+        // line 52
+        echo "
+    <a href=\"";
+        // line 53
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_index");
         echo "\">back to list</a>
 
@@ -200,7 +217,7 @@ class __TwigTemplate_f3a86db0919ad71910ac133becd0e231 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  170 => 47,  160 => 40,  155 => 38,  150 => 36,  145 => 34,  136 => 30,  128 => 25,  119 => 18,  109 => 17,  79 => 4,  60 => 3,  37 => 1,);
+        return array (  187 => 53,  184 => 52,  178 => 50,  172 => 48,  170 => 47,  160 => 40,  155 => 38,  150 => 36,  145 => 34,  136 => 30,  128 => 25,  119 => 18,  109 => 17,  79 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -250,6 +267,12 @@ class __TwigTemplate_f3a86db0919ad71910ac133becd0e231 extends Template
             
         </div>
 </div>
+
+{% if isFavorite %}
+    <a href=\"{{ path('remove_from_favorites', {'ida': activite.ida}) }}\" class=\"btn btn-danger\">❤️ Retirer des favoris</a>
+{% else %}
+    <a href=\"{{ path('add_to_favorites', {'ida': activite.ida}) }}\" class=\"btn btn-outline-danger\">🤍 Ajouter aux favoris</a>
+{% endif %}
 
     <a href=\"{{ path('app_activite_index') }}\">back to list</a>
 
