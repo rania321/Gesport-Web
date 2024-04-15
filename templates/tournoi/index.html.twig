@@ -142,36 +142,28 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <h2 class="text-primary mb-4">Liste des Tournois</h2>
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">Nom du Tournoi</th>
-                                <th scope="col">Date de début</th>
-                                <th scope="col">Date de fin</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Statut</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for tournoi in tournois %}
-                            <tr>
-                                <td>{{ tournoi.nomt }}</td>
-                                <td>{{ tournoi.datedebutt ? tournoi.datedebutt|date('Y-m-d') : '' }}</td>
-                                <td>{{ tournoi.datefint ? tournoi.datefint|date('Y-m-d') : '' }}</td>
-                                <td>{{ tournoi.descrit }}</td>
-                                <td>{{ tournoi.statutt }}</td>
-                            </tr>
-                            {% else %}
-                            <tr>
-                                <td colspan="5">Aucun enregistrement trouvé</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                <div class="row">
+                    {% for tournoi in tournois %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">{{ tournoi.nomt }}</h5>
+                                <p class="card-text text-muted">Date de début: {{ tournoi.datedebutt ? tournoi.datedebutt|date('Y-m-d') : '' }}</p>
+                                <p class="card-text text-muted">Date de fin: {{ tournoi.datefint ? tournoi.datefint|date('Y-m-d') : '' }}</p>
+                                <p class="card-text">{{ tournoi.descrit }}</p>
+                                <p class="card-text">Statut: <span class="text-success">{{ tournoi.statutt }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="col-md-12">
+                        <p>Aucun enregistrement trouvé</p>
+                    </div>
+                    {% endfor %}
                 </div>
-                <a href="{{ path('app_equipe_index') }}" class="btn btn-primary">S'inscrire</a>
+                <a href="{{ path('app_equipe_index') }}" class="btn btn-primary mt-3">S'inscrire</a>
             </div>
         </div>
     </div>
+    
     {% endblock %}
