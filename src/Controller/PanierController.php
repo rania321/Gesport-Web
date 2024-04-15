@@ -19,11 +19,22 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 #[Route('/panier')]
 class PanierController extends AbstractController
 {
+    private $votreRepository;
+
+    public function __construct(PanierRepository $votreRepository)
+    {
+        $this->votreRepository = $votreRepository;
+    }
+
     #[Route('/', name: 'app_panier_index', methods: ['GET'])]
     public function index(PanierRepository $panierRepository): Response
     {
+        $somme =  $panierRepository->sommeMontantQuantite();
+
         return $this->render('panier/index.html.twig', [
             'paniers' => $panierRepository->findAll(),
+            'somme' => $somme,
+
         ]);
     }
 
@@ -122,7 +133,20 @@ public function confirmerVente(Request $request, EntityManagerInterface $entityM
 */
 
 
-#[Route('/ajouter-au-panier/{idp}', name: 'ajouter_au_panier')]
+    #[Route('/', name: 'app_panier_index', methods: ['GET'])]
+    public function votreMethodeDeController()
+    {
+        $somme = $this->votreRepository->sommeMontantQuantite();
+
+        return $this->render('/panier/index.html.twig', [
+            'somme' => $somme,
+        ]);
+    }
+    
+
+/*
+
+    #[Route('/ajouter-au-panier/{idp}', name: 'ajouter_au_panier')]
     public function ajouterAuPanier(Request $request, EntityManagerInterface $entityManager, ProduitRepository $produitRepository, $idp): Response
     {
         // Récupérer le produit depuis l'identifiant
@@ -135,12 +159,10 @@ public function confirmerVente(Request $request, EntityManagerInterface $entityM
 
         // Créer une nouvelle entrée de panier
         $panierItem = new Panier();
+        $panierItem->setidv(1);
         $panierItem->setidp($idp);
         $panierItem->setQuantitep(1);
         $panierItem->setTotalpa(1);
-
-
-        // Vous pouvez également définir d'autres propriétés du panier, comme la quantité, le prix, etc.
 
         // Persister et flusher l'entité du panier
         $entityManager->persist($panierItem);
@@ -148,16 +170,6 @@ public function confirmerVente(Request $request, EntityManagerInterface $entityM
 
         // Rediriger vers une page appropriée après l'ajout au panier
         return $this->redirectToRoute('app_panier_index');
-    }
-    #[Route('/somme', name: 'app_panier_index')]
-    public function sommeMontantQuantite(PanierRepository $panierRepository): Response
-    {
-        // Obtenir la somme des montants * quantités
-        $somme = $panierRepository->sommeMontantQuantite();
-
-        return $this->render('/panier/index.html.twig', [
-            'somme' => $somme,
-        ]);
-    }
+    }*/
 
 }

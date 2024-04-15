@@ -2,3 +2,26 @@
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+
+
+ {{ form_start(form, {'attr': {'class': 'form-sample'}}) }}
+                <div class="form-group">
+                    {{ form_label(form.quantitep, 'Quantité') }}
+                    {{ form_widget(form.quantitep, {'attr': {'class': 'form-control', 'placeholder': 'quantitep'}}) }}
+                </div>
+                
+                <div class="form-group">
+                    {{ form_label(form.totalpa, 'total') }}
+                    {{ form_widget(form.totalpa, {'attr': {'class': 'form-control', 'placeholder': 'Nom'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.idv, 'idv') }}
+                    {{ form_widget(form.idv, {'attr': {'class': 'form-control', 'placeholder': 'idv'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.idp, 'idp') }}
+                    {{ form_widget(form.idp, {'attr': {'class': 'form-control', 'placeholder': 'idp'}}) }}
+                </div>    
+                <button class="btn">{{ button_label|default('Save') }}</button>
+
+                {{ form_end(form) }}

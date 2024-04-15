@@ -30,6 +30,7 @@ class PanierRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    
     public function sommeMontantQuantite(): float
     {
         return (float) $this->createQueryBuilder('p')

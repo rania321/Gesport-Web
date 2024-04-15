@@ -90,7 +90,7 @@ class ProduitController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_produit_indexB', [], Response::HTTP_SEE_OTHER);
     }
 
 

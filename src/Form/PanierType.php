@@ -15,14 +15,8 @@ class PanierType extends AbstractType
         $builder
             ->add('quantitep')
             ->add('totalpa')
-            ->add('idv', HiddenType::class, [
-                'mapped' => false, // Empêche ce champ d'être lié à l'entité
-                'data' => '2',     // Valeur constante
-
-            ])
-            ->add('idp', HiddenType::class, [
-                'mapped' => false, // Empêche ce champ d'être lié à l'entité
-            ])
+            ->add('idv')
+            ->add('idp')
         ;
     }
 

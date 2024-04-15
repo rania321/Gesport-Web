@@ -42,15 +42,7 @@ class ProduitType extends AbstractType
             ])
             ->add('imageP')
 
-            ->add('referenceP', TextType::class, [
-                'constraints' => [
-                    new UniqueEntity([
-                        'fields' => 'referenceP',
-                        'message' => 'Cette référence est déjà utilisée.',
-                        'entityClass' => Produit::class,
-                    ]),
-                ],
-            ]);
+            ->add('referenceP');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

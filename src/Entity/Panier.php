@@ -24,7 +24,7 @@ class Panier
 
     #[ORM\ManyToOne(targetEntity: Vente::class)]
     #[ORM\JoinColumn(name: 'idv', referencedColumnName: 'idv')]
-    private ?Vente $idv=null;
+    private ?vente $idv=null;
 
     #[ORM\ManyToOne(targetEntity: Produit::class)]
     #[ORM\JoinColumn(name: 'idp', referencedColumnName: 'idp')]
@@ -71,12 +71,12 @@ class Panier
         return $this;
     }
 
-    public function getIdv(): ?Vente
+    public function getIdv(): ?vente
     {
         return $this->idv;
     }
 
-    public function setIdv(?Vente $idv): static
+    public function setIdv(?vente $idv): static
     {
         $this->idv = $idv;
 
