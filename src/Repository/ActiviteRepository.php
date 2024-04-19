@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Activite;
+use App\Entity\Activitefavoris;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -54,5 +56,21 @@ class ActiviteRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+
+    public function isFavoriteForUser(Activite $activite, User $user): bool
+    {
+        // Récupérer l'activitefavoris correspondant à cette activité et à cet utilisateur
+        $activiteFavoris = $this->createQueryBuilder('a')
+            ->leftJoin('a.activitefavoriss', 'af')
+            ->andWhere('af.activite = :activite')
+            ->andWhere('af.user = :user')
+            ->setParameter('activite', $activite)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        // Vérifier si une réaction "love" existe pour cet utilisateur et cette activité
+        return $activiteFavoris !== null;
+    }
 
 }

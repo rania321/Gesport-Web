@@ -105,25 +105,8 @@ class Activite
         return $this;
     }
 
-    public function isFavoriteForUser(User $user): bool
-    {
-        if ($this->activitefavoriss === null) {
-            return false;
-        }
-
-        foreach ($this->activitefavoriss as $favoris) {
-            if ($favoris->getIdu() === $user) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    /**
-     * @ORM\OneToMany(targetEntity=Activitefavoris::class, mappedBy="activite")
-     */
-    private $activitefavoriss;
+    #[ORM\OneToMany(mappedBy: 'activite', targetEntity: Activitefavoris::class)]
+    private Collection $activitefavoriss;
 
     public function __construct()
     {
@@ -151,7 +134,7 @@ class Activite
     public function removeActivitefavoris(Activitefavoris $activitefavoris): self
     {
         if ($this->activitefavoriss->removeElement($activitefavoris)) {
-            // set the owning side to null (unless already changed)
+            // Définit le côté propriétaire sur null (sauf si déjà modifié)
             if ($activitefavoris->getActivite() === $this) {
                 $activitefavoris->setActivite(null);
             }
@@ -159,6 +142,5 @@ class Activite
 
         return $this;
     }
-
 
 }

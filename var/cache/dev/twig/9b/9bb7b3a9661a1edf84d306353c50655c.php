@@ -166,24 +166,29 @@ class __TwigTemplate_f3a86db0919ad71910ac133becd0e231 extends Template
 </div>
 
 ";
-        // line 47
-        if ((isset($context["isFavorite"]) || array_key_exists("isFavorite", $context) ? $context["isFavorite"] : (function () { throw new RuntimeError('Variable "isFavorite" does not exist.', 47, $this->source); })())) {
-            // line 48
-            echo "    <a href=\"";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("remove_from_favorites", ["ida" => twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 48, $this->source); })()), "ida", [], "any", false, false, false, 48)]), "html", null, true);
-            echo "\" class=\"btn btn-danger\">❤️ Retirer des favoris</a>
-";
+        // line 48
+        echo "    ";
+        if ((isset($context["isFavorite"]) || array_key_exists("isFavorite", $context) ? $context["isFavorite"] : (function () { throw new RuntimeError('Variable "isFavorite" does not exist.', 48, $this->source); })())) {
+            // line 49
+            echo "        <form method=\"post\" action=\"";
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("supprimer_love_activite", ["ida" => twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 49, $this->source); })()), "ida", [], "any", false, false, false, 49)]), "html", null, true);
+            echo "\">
+            <button type=\"submit\">Remove Love</button>
+        </form>
+    ";
         } else {
-            // line 50
-            echo "    <a href=\"";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("add_to_favorites", ["ida" => twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 50, $this->source); })()), "ida", [], "any", false, false, false, 50)]), "html", null, true);
-            echo "\" class=\"btn btn-outline-danger\">🤍 Ajouter aux favoris</a>
-";
+            // line 53
+            echo "        <form method=\"post\" action=\"";
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("ajouter_love_activite", ["ida" => twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 53, $this->source); })()), "ida", [], "any", false, false, false, 53)]), "html", null, true);
+            echo "\">
+            <button type=\"submit\">Add Love</button>
+        </form>
+    ";
         }
-        // line 52
+        // line 57
         echo "
     <a href=\"";
-        // line 53
+        // line 58
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_index");
         echo "\">back to list</a>
 
@@ -217,7 +222,7 @@ class __TwigTemplate_f3a86db0919ad71910ac133becd0e231 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  187 => 53,  184 => 52,  178 => 50,  172 => 48,  170 => 47,  160 => 40,  155 => 38,  150 => 36,  145 => 34,  136 => 30,  128 => 25,  119 => 18,  109 => 17,  79 => 4,  60 => 3,  37 => 1,);
+        return array (  192 => 58,  189 => 57,  181 => 53,  173 => 49,  170 => 48,  160 => 40,  155 => 38,  150 => 36,  145 => 34,  136 => 30,  128 => 25,  119 => 18,  109 => 17,  79 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -268,11 +273,16 @@ class __TwigTemplate_f3a86db0919ad71910ac133becd0e231 extends Template
         </div>
 </div>
 
-{% if isFavorite %}
-    <a href=\"{{ path('remove_from_favorites', {'ida': activite.ida}) }}\" class=\"btn btn-danger\">❤️ Retirer des favoris</a>
-{% else %}
-    <a href=\"{{ path('add_to_favorites', {'ida': activite.ida}) }}\" class=\"btn btn-outline-danger\">🤍 Ajouter aux favoris</a>
-{% endif %}
+{# Afficher le bouton \"Love\" #}
+    {% if isFavorite %}
+        <form method=\"post\" action=\"{{ path('supprimer_love_activite', {'ida': activite.ida}) }}\">
+            <button type=\"submit\">Remove Love</button>
+        </form>
+    {% else %}
+        <form method=\"post\" action=\"{{ path('ajouter_love_activite', {'ida': activite.ida}) }}\">
+            <button type=\"submit\">Add Love</button>
+        </form>
+    {% endif %}
 
     <a href=\"{{ path('app_activite_index') }}\">back to list</a>
 

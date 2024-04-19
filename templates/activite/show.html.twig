@@ -44,11 +44,16 @@
         </div>
 </div>
 
-{% if isFavorite %}
-    <a href="{{ path('remove_from_favorites', {'ida': activite.ida}) }}" class="btn btn-danger">❤️ Retirer des favoris</a>
-{% else %}
-    <a href="{{ path('add_to_favorites', {'ida': activite.ida}) }}" class="btn btn-outline-danger">🤍 Ajouter aux favoris</a>
-{% endif %}
+{# Afficher le bouton "Love" #}
+    {% if isFavorite %}
+        <form method="post" action="{{ path('supprimer_love_activite', {'ida': activite.ida}) }}">
+            <button type="submit">Remove Love</button>
+        </form>
+    {% else %}
+        <form method="post" action="{{ path('ajouter_love_activite', {'ida': activite.ida}) }}">
+            <button type="submit">Add Love</button>
+        </form>
+    {% endif %}
 
     <a href="{{ path('app_activite_index') }}">back to list</a>
 

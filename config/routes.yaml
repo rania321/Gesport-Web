@@ -4,3 +4,13 @@
 app_reservation_new_for_activity:
     path: '/reservation/new/{activityId}'
     controller: 'App\Controller\ReservationactiviteController::newForActivity'
+
+ajouter_love_activite:
+    path: '/activite/{ida}/love'
+    controller: 'App\Controller\ActiviteController::ajouterLove'
+    methods: ['POST']
+
+supprimer_love_activite:
+    path: '/activite/{ida}/love'
+    controller: 'App\Controller\ActiviteController::supprimerLove'
+    methods: ['DELETE']

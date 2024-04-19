@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Activite;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ActivitefavorisRepository;
 
@@ -14,11 +16,13 @@ class Activitefavoris
     private ?int $idf = null;
 
     
-    #[ORM\ManyToOne(targetEntity: User::class,inversedBy: 'activitefavoriss')]
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: 'idu', referencedColumnName: 'idu')]
     private ?User $user= null;
 
     
-    #[ORM\ManyToOne(targetEntity: Activite::class,inversedBy: 'activitefavoriss')]
+    #[ORM\ManyToOne(targetEntity: Activite::class)]
+    #[ORM\JoinColumn(name: 'ida', referencedColumnName: 'ida')]
     private ?Activite $activite = null;
 
     public function getIdf(): ?int

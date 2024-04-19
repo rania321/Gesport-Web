@@ -10,8 +10,6 @@ return [
     'app_activite_edit' => [['ida'], ['_controller' => 'App\\Controller\\ActiviteController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'ida', true], ['text', '/activite']], [], [], []],
     'app_activite_delete' => [['ida'], ['_controller' => 'App\\Controller\\ActiviteController::delete'], [], [['variable', '/', '[^/]++', 'ida', true], ['text', '/activite']], [], [], []],
     'app_activite_reserv' => [['ida'], ['_controller' => 'App\\Controller\\ActiviteController::reserv'], [], [['variable', '/', '[^/]++', 'ida', true], ['text', '/activite/reserv']], [], [], []],
-    'add_to_favorites' => [['ida'], ['_controller' => 'App\\Controller\\ActiviteController::addToFavorites'], [], [['text', '/add_to_favorites'], ['variable', '/', '[^/]++', 'ida', true], ['text', '/activite']], [], [], []],
-    'remove_from_favorites' => [['ida'], ['_controller' => 'App\\Controller\\ActiviteController::removeFromFavorites'], [], [['text', '/remove_from_favorites'], ['variable', '/', '[^/]++', 'ida', true], ['text', '/activite']], [], [], []],
     'base' => [[], ['_controller' => 'App\\Controller\\ExampleController::index'], [], [['text', '/base']], [], [], []],
     'baseBack' => [[], ['_controller' => 'App\\Controller\\ExampleController::indexBack'], [], [['text', '/baseBack']], [], [], []],
     'app_reservationactivite_index' => [[], ['_controller' => 'App\\Controller\\ReservationactiviteController::index'], [], [['text', '/reservationactivite/']], [], [], []],
@@ -42,4 +40,6 @@ return [
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     'app_reservation_new_for_activity' => [['activityId'], ['_controller' => 'App\\Controller\\ReservationactiviteController::newForActivity'], [], [['variable', '/', '[^/]++', 'activityId', true], ['text', '/reservation/new']], [], [], []],
+    'ajouter_love_activite' => [['ida'], ['_controller' => 'App\\Controller\\ActiviteController::ajouterLove'], [], [['text', '/love'], ['variable', '/', '[^/]++', 'ida', true], ['text', '/activite']], [], [], []],
+    'supprimer_love_activite' => [['ida'], ['_controller' => 'App\\Controller\\ActiviteController::supprimerLove'], [], [['text', '/love'], ['variable', '/', '[^/]++', 'ida', true], ['text', '/activite']], [], [], []],
 ];

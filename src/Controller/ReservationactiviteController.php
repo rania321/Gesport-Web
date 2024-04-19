@@ -14,6 +14,19 @@ use App\Entity\Activite;
 use App\Entity\User;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Builder\BuilderInterface;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\Response\QrCodeResponse;
+use Endroid\QrCode\Writer\PngWriter;
+
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\Logo\Logo;
+use Endroid\QrCode\RoundBlockSizeMode;
+use Endroid\QrCode\Writer\ValidationException;
 
 #[Route('/reservationactivite')]
 class ReservationactiviteController extends AbstractController
@@ -193,47 +206,81 @@ class ReservationactiviteController extends AbstractController
             ]);
         }
 
+        //pdfXqrcode
         #[Route('/{idr}/generate-pdf', name: 'app_reservationactivite_generate_pdf', methods: ['GET'])]
         public function generatePDF(Reservationactivite $reservationactivite): Response
         {
-            // Vérifier si la réservation est confirmée
-            if ($reservationactivite->getStatutr() !== 'confirmée') {
-                throw $this->createNotFoundException('Impossible de générer un PDF pour une réservation non confirmée.');
-            }
-        
-            // Créer une instance de Dompdf
-            $options = new Options();
-            $options->set('isHtml5ParserEnabled', true);
-            $dompdf = new Dompdf($options);
-        
-            // Construction du contenu HTML du PDF
-            $html = '<html>';
-            $html .= '<body>';
-            $html .= '<h1>Réservation</h1>';
-            $html .= '<p>ID de la réservation : ' . $reservationactivite->getIdr() . '</p>';
-            // Ajouter d'autres détails de la réservation ici...
-        
-            $html .= '</body>';
-            $html .= '</html>';
-        
-            // Charger le contenu HTML dans Dompdf
-            $dompdf->loadHtml($html);
-        
-            // Rendu du PDF
-            $dompdf->render();
-        
-            // Nom du fichier PDF
-            $fileName = 'reservation_' . $reservationactivite->getIdr() . '.pdf';
-        
-            // Envoi du PDF en sortie
-            return new Response(
-                $dompdf->output(),
-                Response::HTTP_OK,
-                array(
-                    'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'attachment; filename="' . $fileName . '"'
-                )
-            );
+        // Vérifier si la réservation est confirmée
+        if ($reservationactivite->getStatutr() !== 'confirmée') {
+        throw $this->createNotFoundException('Impossible de générer un PDF pour une réservation non confirmée.');
+        } // Créer une instance de Dompdf
+                $options = new Options();
+                $options->set('isHtml5ParserEnabled', true);
+                $dompdf = new Dompdf($options);
+            
+                // Construction du contenu HTML du PDF
+                $html = '<html>';
+                $html .= '<body>';
+                $html .= '<h1>Réservation</h1>';
+                $html .= '<p>ID de la réservation : ' . $reservationactivite->getIdr() . '</p>';
+                // Ajouter d'autres détails de la réservation ici...
+
+                $writer = new PngWriter();
+
+                // Create QR code
+                $qrCode = QrCode::create($reservationactivite->getIda()->getNoma())
+                    ->setEncoding(new Encoding('UTF-8'))
+                    ->setErrorCorrectionLevel(ErrorCorrectionLevel::Low)
+                    ->setSize(300)
+                    ->setMargin(10)
+                    ->setRoundBlockSizeMode(RoundBlockSizeMode::Margin)
+                    ->setForegroundColor(new Color(0, 0, 0))
+                    ->setBackgroundColor(new Color(255, 255, 255));
+
+                // Create generic logo
+                $logo = Logo::create('BackOffice/images/favicon.png')
+                    ->setResizeToWidth(50)
+                    ->setPunchoutBackground(true)
+                ;
+
+                // Create generic label
+                $label = Label::create('Label')
+                    ->setTextColor(new Color(255, 0, 0));
+
+                    $result = (new PngWriter())->write($qrCode);
+
+                    // Validate the result
+                    (new PngWriter())->validateResult($result, $reservationactivite->getIda()->getNoma());
+                
+                    // Convertir les données de l'image en base64
+                    $imageData = $result->getString();
+                    $base64Image = base64_encode($imageData);
+                
+                    // Ajouter le QR code encodé en base64 au HTML
+                    $html .= '<img src="data:image/png;base64,' . $base64Image . '" alt="QR Code"/>';
+            
+                $html .= '</body>';
+                $html .= '</html>';
+            
+                // Charger le contenu HTML dans Dompdf
+                $dompdf->loadHtml($html);
+            
+                // Rendu du PDF
+                $dompdf->render();
+            
+                // Nom du fichier PDF
+                $fileName = 'reservation_' . $reservationactivite->getIdr() . '.pdf';
+            
+                // Envoi du PDF en sortie
+                return new Response(
+                    $dompdf->output(),
+                    Response::HTTP_OK,
+                    array(
+                        'Content-Type' => 'application/pdf',
+                        'Content-Disposition' => 'attachment; filename="' . $fileName . '"'
+                    )
+                );
         }
+
 
 }

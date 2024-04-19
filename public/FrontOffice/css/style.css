@@ -34,6 +34,20 @@
     transition: .5s;
 }
 
+.btn-love {
+    background-image: url(../img/love.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-left: 40px; /* Ajustez ceci pour aligner l'image correctement */
+}
+
+.btn-unlove {
+    background-image: url(../img/unlove.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-left: 40px; /* Ajustez ceci pour aligner l'image correctement */
+}
+
 .btn-square {
     width: 32px;
     height: 32px;

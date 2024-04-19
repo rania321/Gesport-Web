@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Reservationactivite as ReservationactiviteEntity;
 
@@ -70,13 +71,13 @@ class ActiviteController extends AbstractController
 
 
     #[Route('/{ida}', name: 'app_activite_show', methods: ['GET'])]
-    public function show(Activite $activite): Response
+    public function show(Activite $activite, ActiviteRepository $activiteRepository, Request $request): Response
     {
         // Récupérez l'utilisateur par défaut (idU=2)
     $user = $this->getDoctrine()->getRepository(User::class)->find(2);
 
-    // Vérifiez si l'activité est favorite pour l'utilisateur
-    $isFavorite = $activite->isFavoriteForUser($user);
+    // Vérifier si l'activité est favorite pour l'utilisateur actuel
+    $isFavorite = $activiteRepository->isFavoriteForUser($activite, $user);
 
     return $this->render('activite/show.html.twig', [
         'activite' => $activite,
@@ -137,36 +138,55 @@ class ActiviteController extends AbstractController
         ]);
     }
 
-    #[Route('/{ida}/add_to_favorites', name: 'add_to_favorites')]
-    public function addToFavorites(Activite $activite): Response
+    #[Route('/{ida}/love', name: 'ajouter_love_activite', methods: ['POST'])]
+    public function ajouterLove(Activite $activite): JsonResponse
     {
-        // Récupérez l'utilisateur par défaut (idU=2)
-        $user = $this->getDoctrine()->getRepository(User::class)->find(2);
+        // Récupérer l'utilisateur avec l'ID 2 par défaut
+        $userRepository = $this->getDoctrine()->getRepository(User::class);
+        $user = $userRepository->find(2);
 
-        // Vérifiez si l'activité est déjà favorite pour l'utilisateur
-        $isFavorite = $activite->isFavoriteForUser($user);
+        // Vérifier si l'utilisateur a déjà réagi "love" à cette activité
+        $activiteFavorisRepository = $this->getDoctrine()->getRepository(Activitefavoris::class);
+        $activiteFavoris = $activiteFavorisRepository->findOneBy(['activite' => $activite, 'user' => $user]);
 
-        if (!$isFavorite) {
-            // Si l'activité n'est pas encore favorite, ajoutez-la aux favoris
-            $activiteFavoris = new Activitefavoris();
-            $activiteFavoris->setUser($user);
-            $activiteFavoris->setActivite($activite);
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($activiteFavoris);
-            $entityManager->flush();
+        if ($activiteFavoris) {
+            return new JsonResponse(['message' => 'Vous avez déjà réagi love à cette activité.'], 400);
         }
 
-        return $this->redirectToRoute('app_activite_index'); // Redirigez vers la page des activités
+        // Créer une nouvelle réaction "love"
+        $activiteFavoris = new Activitefavoris();
+        $activiteFavoris->setActivite($activite);
+        $activiteFavoris->setUser($user);
+
+        // Enregistrer la réaction "love" dans la base de données
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($activiteFavoris);
+        $entityManager->flush();
+
+        return new JsonResponse(['message' => 'Love ajouté avec succès.']);
     }
 
-    #[Route('/{ida}/remove_from_favorites', name: 'remove_from_favorites')]
-    public function removeFromFavorites(Activitefavoris $activiteFavoris): Response
+    #[Route('/{ida}/love', name: 'supprimer_love_activite', methods: ['DELETE'])]
+    public function supprimerLove(Activite $activite): JsonResponse
     {
+        // Récupérer l'utilisateur avec l'ID 2 par défaut
+        $userRepository = $this->getDoctrine()->getRepository(User::class);
+        $user = $userRepository->find(2);
+
+        // Vérifier si l'utilisateur a réagi "love" à cette activité
+        $activiteFavorisRepository = $this->getDoctrine()->getRepository(Activitefavoris::class);
+        $activiteFavoris = $activiteFavorisRepository->findOneBy(['activite' => $activite, 'user' => $user]);
+
+        if (!$activiteFavoris) {
+            return new JsonResponse(['message' => 'Vous n\'avez pas réagi love à cette activité.'], 400);
+        }
+
+        // Supprimer la réaction "love" de la base de données
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($activiteFavoris);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_activite_index'); // Redirigez vers la page des activités
+        return new JsonResponse(['message' => 'Love supprimé avec succès.']);
     }
+
 }
