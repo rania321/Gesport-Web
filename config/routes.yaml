@@ -4,12 +4,16 @@
 # Route pour le front-end
 
 # config/routes.yaml
-ajouter_au_panier:
-    path: '/ajouter-au-panier/{idp}'
-    controller: 'App\Controller\PanierController::ajouterAuPanier'
+
 
 
 app_panier_index:
     path: /panier/
-    controller: App\Controller\PanierController::index
+    controller: App\Controller\PanierController::indexx
     methods: GET
+
+App\Controller\:
+    resource: '../src/Controller/'
+    type: annotation
+# config/routes.yaml
+

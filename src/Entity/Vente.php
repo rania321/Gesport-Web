@@ -40,7 +40,15 @@ class Vente
     #[ORM\JoinColumn(name: 'idu', referencedColumnName: 'idu')]
     private ?User $idu=null;
 
-    
+    public function __toString(): string
+    {
+        return (string)$this->getIdv(); // Remplacez 'getNom()' par la méthode qui retourne le nom ou l'identifiant de la vente
+    }
+
+
+   
+
+
     public function getIdv(): ?int
     {
         return $this->idv;

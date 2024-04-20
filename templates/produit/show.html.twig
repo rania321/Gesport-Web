@@ -12,7 +12,7 @@
         <tbody>
             <tr>
                 <td rowspan="3">
-                        <img src="{{ asset('FrontOffice/' ~ produit.imagep) }}" class="img-fluid rounded"  alt="{{ produit.nomp }}">
+                    <img src="{{ asset('FrontOffice/' ~ produit.imagep) }}" class="img-fluid rounded"  alt="{{ produit.nomp }}">
                 </td>
                 <td><h3>#{{ produit.referencep }}</h3></td>
             </tr>
@@ -35,20 +35,20 @@
                                 <div class="row g-3">   
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control border-0" id="name" placeholder="Your Name">
-                                            <label for="name">Quantité..</label>
+                                            <input type="text" class="form-control border-0" id="quantite" placeholder="Quantité">
+                                            <label for="quantite">Quantité..</label>
                                         </div>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                        <tr><td>
-                               <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="button" >Ajouter au panier</button>
-                                           
-
+                        <tr>
+                            <td>
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3" onclick="addToCart(event, {{ produit.idp }})" type="button">Ajouter au panier</button>
                                 </div>
-                        </td></tr>
+                            </td>
+                        </tr>
                     </table>
                 </td>
             </tr>
@@ -58,8 +58,34 @@
     <br><br><br><br>
 </div>
 
+<script>
+function addToCart(event, productId) {
+    event.preventDefault(); // Prevent the default form submission
 
+    const quantite = document.getElementById('quantite').value; // Get quantite from input
+    const prixp = parseFloat('{{ produit.prixp }}'); // Retrieve prixp from Twig variable
 
+    const totalpa = quantite * prixp; // Calculate total price
 
+    fetch(`http://127.0.0.1:8000/produit/ajouter-au-panier/${productId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `quantite=${quantite}&prixp=${totalpa}`, // Send quantite and totalpa in request body
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Produit ajouté au panier avec succès');
+        } else {
+            alert('Erreur lors de l\'ajout du produit au panier');
+        }
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error.message);
+    });
+}
 
+</script>
 {% endblock %}
