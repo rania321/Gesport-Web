@@ -51,6 +51,17 @@ class UserController extends AbstractController
             return $this->redirectToRoute('base');
         }
     }
+    private string $blacklistFile = 'blacklist.txt';
+
+    #[Route('/block/{idu}', name: 'app_user_block', methods: ['POST'])]
+    public function blockUser(User $user): Response
+    {
+        // Ajouter l'identifiant de l'utilisateur bloqué dans le fichier
+        file_put_contents($this->blacklistFile, $user->getIdu() . PHP_EOL, FILE_APPEND);
+
+        // Rediriger l'administrateur vers une page de confirmation ou autre
+        return $this->redirectToRoute('app_user_index');
+    }
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
