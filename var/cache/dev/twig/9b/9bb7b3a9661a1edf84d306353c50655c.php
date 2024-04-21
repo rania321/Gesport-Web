@@ -160,35 +160,79 @@ class __TwigTemplate_f3a86db0919ad71910ac133becd0e231 extends Template
         echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 40, $this->source); })()), "descria", [], "any", false, false, false, 40), "html", null, true);
         echo "</p>
             
+
+            ";
+        // line 43
+        if ((isset($context["isFavorite"]) || array_key_exists("isFavorite", $context) ? $context["isFavorite"] : (function () { throw new RuntimeError('Variable "isFavorite" does not exist.', 43, $this->source); })())) {
+            // line 44
+            echo "                <form id=\"removeLoveForm\" method=\"POST\" action=\"";
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("supprimer_love_activite", ["ida" => twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 44, $this->source); })()), "ida", [], "any", false, false, false, 44)]), "html", null, true);
+            echo "\">
+                    <input type=\"hidden\" name=\"_method\" value=\"DELETE\">
+                    <input type=\"hidden\" name=\"_token\" value=\"";
+            // line 46
+            echo twig_escape_filter($this->env, $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 46, $this->source); })()), "ida", [], "any", false, false, false, 46))), "html", null, true);
+            echo "\">
+                    <button type=\"button\" onclick=\"removeLove()\" class=\"btn btn-love\"><img src=\"";
+            // line 47
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("FrontOffice/img/love.png"), "html", null, true);
+            echo "\" alt=\"Remove Love\" style=\"width: 40px; height: 40px;\"></button>
+                </form>
+            ";
+        } else {
+            // line 50
+            echo "                <form method=\"POST\" action=\"";
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("ajouter_love_activite", ["ida" => twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 50, $this->source); })()), "ida", [], "any", false, false, false, 50)]), "html", null, true);
+            echo "\">
+                    <button type=\"submit\" class=\"btn btn-unlove\"><img src=\"";
+            // line 51
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("FrontOffice/img/unlove.png"), "html", null, true);
+            echo "\" alt=\"Add Love\" style=\"width: 40px; height: 40px;\"></button>
+                </form>
+            ";
+        }
+        // line 54
+        echo "
+            <script>
+                function removeLove() {
+                if (confirm('Are you sure you want to remove love?')) {
+                    fetch(document.getElementById('removeLoveForm').getAttribute('action'), {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                        },
+                        body: JSON.stringify({
+                            _token: document.querySelector('input[name=\"_token\"]').value
+                        }),
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to remove love.');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // Rediriger vers la page de détails de l'activité
+                        window.location.href = \"";
+        // line 77
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_show", ["ida" => twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 77, $this->source); })()), "ida", [], "any", false, false, false, 77)]), "html", null, true);
+        echo "\";
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Gérez l'erreur ici si nécessaire
+                    });
+                }
+                }
+            </script>
             </div>
-            
         </div>
 </div>
 
-";
-        // line 48
-        echo "    ";
-        if ((isset($context["isFavorite"]) || array_key_exists("isFavorite", $context) ? $context["isFavorite"] : (function () { throw new RuntimeError('Variable "isFavorite" does not exist.', 48, $this->source); })())) {
-            // line 49
-            echo "        <form method=\"post\" action=\"";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("supprimer_love_activite", ["ida" => twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 49, $this->source); })()), "ida", [], "any", false, false, false, 49)]), "html", null, true);
-            echo "\">
-            <button type=\"submit\">Remove Love</button>
-        </form>
-    ";
-        } else {
-            // line 53
-            echo "        <form method=\"post\" action=\"";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("ajouter_love_activite", ["ida" => twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 53, $this->source); })()), "ida", [], "any", false, false, false, 53)]), "html", null, true);
-            echo "\">
-            <button type=\"submit\">Add Love</button>
-        </form>
-    ";
-        }
-        // line 57
-        echo "
     <a href=\"";
-        // line 58
+        // line 90
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_index");
         echo "\">back to list</a>
 
@@ -222,7 +266,7 @@ class __TwigTemplate_f3a86db0919ad71910ac133becd0e231 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  192 => 58,  189 => 57,  181 => 53,  173 => 49,  170 => 48,  160 => 40,  155 => 38,  150 => 36,  145 => 34,  136 => 30,  128 => 25,  119 => 18,  109 => 17,  79 => 4,  60 => 3,  37 => 1,);
+        return array (  236 => 90,  220 => 77,  195 => 54,  189 => 51,  184 => 50,  178 => 47,  174 => 46,  168 => 44,  166 => 43,  160 => 40,  155 => 38,  150 => 36,  145 => 34,  136 => 30,  128 => 25,  119 => 18,  109 => 17,  79 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -268,21 +312,53 @@ class __TwigTemplate_f3a86db0919ad71910ac133becd0e231 extends Template
                 
             <p class=\"mb-4\">{{ activite.descria }}</p>
             
+
+            {% if isFavorite %}
+                <form id=\"removeLoveForm\" method=\"POST\" action=\"{{ path('supprimer_love_activite', {'ida': activite.ida}) }}\">
+                    <input type=\"hidden\" name=\"_method\" value=\"DELETE\">
+                    <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ activite.ida) }}\">
+                    <button type=\"button\" onclick=\"removeLove()\" class=\"btn btn-love\"><img src=\"{{ asset('FrontOffice/img/love.png') }}\" alt=\"Remove Love\" style=\"width: 40px; height: 40px;\"></button>
+                </form>
+            {% else %}
+                <form method=\"POST\" action=\"{{ path('ajouter_love_activite', {'ida': activite.ida}) }}\">
+                    <button type=\"submit\" class=\"btn btn-unlove\"><img src=\"{{ asset('FrontOffice/img/unlove.png') }}\" alt=\"Add Love\" style=\"width: 40px; height: 40px;\"></button>
+                </form>
+            {% endif %}
+
+            <script>
+                function removeLove() {
+                if (confirm('Are you sure you want to remove love?')) {
+                    fetch(document.getElementById('removeLoveForm').getAttribute('action'), {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                        },
+                        body: JSON.stringify({
+                            _token: document.querySelector('input[name=\"_token\"]').value
+                        }),
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to remove love.');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // Rediriger vers la page de détails de l'activité
+                        window.location.href = \"{{ path('app_activite_show', {'ida': activite.ida}) }}\";
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Gérez l'erreur ici si nécessaire
+                    });
+                }
+                }
+            </script>
             </div>
-            
         </div>
 </div>
-
-{# Afficher le bouton \"Love\" #}
-    {% if isFavorite %}
-        <form method=\"post\" action=\"{{ path('supprimer_love_activite', {'ida': activite.ida}) }}\">
-            <button type=\"submit\">Remove Love</button>
-        </form>
-    {% else %}
-        <form method=\"post\" action=\"{{ path('ajouter_love_activite', {'ida': activite.ida}) }}\">
-            <button type=\"submit\">Add Love</button>
-        </form>
-    {% endif %}
 
     <a href=\"{{ path('app_activite_index') }}\">back to list</a>
 

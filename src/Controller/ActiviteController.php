@@ -138,8 +138,9 @@ class ActiviteController extends AbstractController
         ]);
     }
 
+    //add love react
     #[Route('/{ida}/love', name: 'ajouter_love_activite', methods: ['POST'])]
-    public function ajouterLove(Activite $activite): JsonResponse
+    public function ajouterLove(Activite $activite, Request $request, EntityManagerInterface $entityManager): Response
     {
         // Récupérer l'utilisateur avec l'ID 2 par défaut
         $userRepository = $this->getDoctrine()->getRepository(User::class);
@@ -159,15 +160,16 @@ class ActiviteController extends AbstractController
         $activiteFavoris->setUser($user);
 
         // Enregistrer la réaction "love" dans la base de données
-        $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($activiteFavoris);
         $entityManager->flush();
 
-        return new JsonResponse(['message' => 'Love ajouté avec succès.']);
+        // Rediriger vers la page de détails de l'activité
+        return $this->redirectToRoute('app_activite_show', ['ida' => $activite->getIda()]);
     }
 
-    #[Route('/{ida}/love', name: 'supprimer_love_activite', methods: ['DELETE'])]
-    public function supprimerLove(Activite $activite): JsonResponse
+    //delete love react
+    #[Route('/{ida}/unlove', name: 'supprimer_love_activite', methods: ['DELETE'])]
+    public function supprimerLove(Activite $activite, Request $request, EntityManagerInterface $entityManager): Response
     {
         // Récupérer l'utilisateur avec l'ID 2 par défaut
         $userRepository = $this->getDoctrine()->getRepository(User::class);
@@ -182,11 +184,30 @@ class ActiviteController extends AbstractController
         }
 
         // Supprimer la réaction "love" de la base de données
-        $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($activiteFavoris);
         $entityManager->flush();
 
-        return new JsonResponse(['message' => 'Love supprimé avec succès.']);
+        // Rediriger vers la page de détails de l'activité
+        return $this->redirectToRoute('app_activite_show', ['ida' => $activite->getIda()]);
+    }
+
+    //recherche back
+    #[Route('/rechercheAjax', name: 'rechercheAjax')]
+    public function searchAjax(Request $request, ActiviteRepository $repo)
+    {
+        // Récupérez le paramètre de recherche depuis la requête
+        $query = $request->query->get('q');
+
+        // Récupérez les activites correspondants depuis la base de données
+        $activites = $repo->findActiviteByName($query);
+
+        // Rendre la vue des activites correspondants
+        $html = $this->renderView("activite/indexBack.html.twig", [
+            "activites" => $activites,
+        ]);
+
+        // Renvoyer la réponse avec le HTML rendu
+        return new Response($html);
     }
 
 }

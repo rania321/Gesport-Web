@@ -73,4 +73,13 @@ class ActiviteRepository extends ServiceEntityRepository
         return $activiteFavoris !== null;
     }
 
+    public function findActiviteByName($noma)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->where('a.noma LIKE :noma')
+            ->setParameter('noma', '%' . $noma . '%');
+        
+        return $qb->getQuery()->getResult();
+    }
+
 }

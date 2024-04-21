@@ -208,6 +208,8 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_new");
         echo "\" class=\"btn btn-primary btn-rounded btn-fw\">Ajouter Activité</a>
 <div class=\"table-responsive\">
+<input type=\"text\" id=\"search\" onkeyup=\"search()\" class=\"form-control\" placeholder=\"Search\">
+<div id=\"tabv\">
     <table class=\"table table-striped\">
         <thead>
             <tr>
@@ -222,9 +224,9 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
         </thead>
         <tbody>
         ";
-        // line 120
+        // line 122
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["activites"]) || array_key_exists("activites", $context) ? $context["activites"] : (function () { throw new RuntimeError('Variable "activites" does not exist.', 120, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["activites"]) || array_key_exists("activites", $context) ? $context["activites"] : (function () { throw new RuntimeError('Variable "activites" does not exist.', 122, $this->source); })()));
         $context['_iterated'] = false;
         $context['loop'] = [
           'parent' => $context['_parent'],
@@ -240,50 +242,50 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["activite"]) {
-            // line 121
+            // line 123
             echo "            <tr>
                 
                 <td>";
-            // line 123
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 123), "html", null, true);
+            // line 125
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 125), "html", null, true);
             echo "</td>
                 <td>";
-            // line 124
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "typea", [], "any", false, false, false, 124), "html", null, true);
+            // line 126
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "typea", [], "any", false, false, false, 126), "html", null, true);
             echo "</td>
                 <td>
                     ";
-            // line 126
-            if ((twig_get_attribute($this->env, $this->source, $context["activite"], "dispoa", [], "any", false, false, false, 126) == "Disponible")) {
-                // line 127
+            // line 128
+            if ((twig_get_attribute($this->env, $this->source, $context["activite"], "dispoa", [], "any", false, false, false, 128) == "Disponible")) {
+                // line 129
                 echo "                            <span class=\"badge badge-success\">Disponible</span>
                      ";
             } else {
-                // line 129
+                // line 131
                 echo "                            <span class=\"badge badge-danger\">Non disponible</span>
                      ";
             }
-            // line 131
+            // line 133
             echo "                </td>
                 
                 <td>";
-            // line 133
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "descria", [], "any", false, false, false, 133), "html", null, true);
+            // line 135
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "descria", [], "any", false, false, false, 135), "html", null, true);
             echo "</td>
                 <td><img src=\"";
-            // line 134
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["activite"], "imagea", [], "any", false, false, false, 134))), "html", null, true);
+            // line 136
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["activite"], "imagea", [], "any", false, false, false, 136))), "html", null, true);
             echo "\" class=\"card-img-top\" alt=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 134), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 136), "html", null, true);
             echo "\"></td>
                 <td>
                 <div class=\"d-flex\">
                     <a href=\"";
-            // line 137
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_edit", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 137)]), "html", null, true);
+            // line 139
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_edit", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 139)]), "html", null, true);
             echo "\" class=\"btn btn-warning btn-sm\">Modifier</a>
                     ";
-            // line 138
+            // line 140
             echo twig_include($this->env, $context, "activite/_delete_form.html.twig");
             echo "
                 </div>
@@ -301,7 +303,7 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
             }
         }
         if (!$context['_iterated']) {
-            // line 143
+            // line 145
             echo "            <tr>
                 <td colspan=\"7\">no records found</td>
             </tr>
@@ -310,7 +312,7 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['activite'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 147
+        // line 149
         echo "        </tbody>
     </table>
 
@@ -319,6 +321,36 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
 </div>
 </div>
 </div>
+</div>
+
+<script>
+    function search() {
+        let nameInput = document.getElementById('search');
+    
+        if (nameInput) {
+            let name = nameInput.value;
+            
+            fetch(`/activite/rechercheAjax?q=\${name}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.text())
+            .then(data => {
+                let div = document.getElementById('activites');
+                div.innerHTML = data;
+            })
+            .catch(error => console.error('Error:', error));
+        } else {
+            console.error('One or more elements not found.');
+        }
+    }
+    
+    
+</script> 
+
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -349,7 +381,7 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  314 => 147,  305 => 143,  287 => 138,  283 => 137,  275 => 134,  271 => 133,  267 => 131,  263 => 129,  259 => 127,  257 => 126,  252 => 124,  248 => 123,  244 => 121,  226 => 120,  208 => 105,  201 => 100,  191 => 99,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
+        return array (  316 => 149,  307 => 145,  289 => 140,  285 => 139,  277 => 136,  273 => 135,  269 => 133,  265 => 131,  261 => 129,  259 => 128,  254 => 126,  250 => 125,  246 => 123,  228 => 122,  208 => 105,  201 => 100,  191 => 99,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -460,6 +492,8 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
     <h4 class=\"card-title\">Activités</h4>
     <a href=\"{{ path('app_activite_new') }}\" class=\"btn btn-primary btn-rounded btn-fw\">Ajouter Activité</a>
 <div class=\"table-responsive\">
+<input type=\"text\" id=\"search\" onkeyup=\"search()\" class=\"form-control\" placeholder=\"Search\">
+<div id=\"tabv\">
     <table class=\"table table-striped\">
         <thead>
             <tr>
@@ -508,6 +542,36 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
 </div>
 </div>
 </div>
+</div>
+
+<script>
+    function search() {
+        let nameInput = document.getElementById('search');
+    
+        if (nameInput) {
+            let name = nameInput.value;
+            
+            fetch(`/activite/rechercheAjax?q=\${name}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.text())
+            .then(data => {
+                let div = document.getElementById('activites');
+                div.innerHTML = data;
+            })
+            .catch(error => console.error('Error:', error));
+        } else {
+            console.error('One or more elements not found.');
+        }
+    }
+    
+    
+</script> 
+
 {% endblock %}", "activite/indexBack.html.twig", "C:\\Users\\Rania\\Desktop\\gesportWeb\\templates\\activite\\indexBack.html.twig");
     }
 }

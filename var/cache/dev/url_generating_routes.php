@@ -41,5 +41,6 @@ return [
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     'app_reservation_new_for_activity' => [['activityId'], ['_controller' => 'App\\Controller\\ReservationactiviteController::newForActivity'], [], [['variable', '/', '[^/]++', 'activityId', true], ['text', '/reservation/new']], [], [], []],
     'ajouter_love_activite' => [['ida'], ['_controller' => 'App\\Controller\\ActiviteController::ajouterLove'], [], [['text', '/love'], ['variable', '/', '[^/]++', 'ida', true], ['text', '/activite']], [], [], []],
-    'supprimer_love_activite' => [['ida'], ['_controller' => 'App\\Controller\\ActiviteController::supprimerLove'], [], [['text', '/love'], ['variable', '/', '[^/]++', 'ida', true], ['text', '/activite']], [], [], []],
+    'supprimer_love_activite' => [['ida'], ['_controller' => 'App\\Controller\\ActiviteController::supprimerLove'], [], [['text', '/unlove'], ['variable', '/', '[^/]++', 'ida', true], ['text', '/activite']], [], [], []],
+    'rechercheAjax' => [[], ['_controller' => 'App\\Controller\\ActiviteController::searchAjax'], [], [['text', '/activite/rechercheAjax']], [], [], []],
 ];

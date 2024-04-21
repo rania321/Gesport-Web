@@ -305,17 +305,6 @@ class Activite extends \App\Entity\Activite implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function isFavoriteForUser(\App\Entity\User $user): bool
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'isFavoriteForUser', [$user]);
-
-        return parent::isFavoriteForUser($user);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getActivitefavoriss(): \Doctrine\Common\Collections\Collection
     {
 

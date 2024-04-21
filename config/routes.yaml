@@ -11,6 +11,11 @@ ajouter_love_activite:
     methods: ['POST']
 
 supprimer_love_activite:
-    path: '/activite/{ida}/love'
+    path: '/activite/{ida}/unlove'
     controller: 'App\Controller\ActiviteController::supprimerLove'
     methods: ['DELETE']
+
+rechercheAjax:
+    path: '/activite/rechercheAjax'
+    controller: 'App\Controller\ActiviteController::searchAjax'
+    methods: ['GET']
