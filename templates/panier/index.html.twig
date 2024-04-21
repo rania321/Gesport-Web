@@ -21,15 +21,14 @@
 
         <!-- Contenu du service -->
         <div class="service-content">
+            <h4 class="mb-4">#{{ panier.idp.referencep }}</h4>
             <h5 class="mb-4">{{ panier.idp.nomp }}</h5>
             <p class="mb-0">Quantité: {{ panier.quantitep }}</p>
             <p class="mb-0">Total: {{ panier.totalpa }} dt</p>
             <div class="mt-3">
                 {{ include('panier/_delete_form.html.twig') }}
-                <a href="{{ path('app_panier_edit', {'idpa': panier.idpa}) }}">edit</a>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -54,6 +53,11 @@
             <div class="text-center">
                 <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="{{ path('app_panier_index') }}">Confirmer</a><br><br>
             </div>
+
+            <div class="text-center">
+                <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="{{ path('confirmer_vente') }}">Confirmer</a><br><br>
+            </div>
+
             <br>
 
 </div>

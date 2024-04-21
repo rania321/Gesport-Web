@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gesport - Statistique{% endblock %}
+{% block content %}
+
+<br><br><br><br>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Bloc Revenu du mois -->
+        <div class="col-md-4 grid-margin stretch-card"style="margin-left: 50px;">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Revenu du mois</h4>
+                    <div class="media">
+                        <i class="ti-world icon-md text-info d-flex align-self-end me-3"></i>
+                        <div class="media-body">
+                            <p class="card-text"id="totalMontant">dt</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bloc Statistique - Vente -->
+        <div class="col-lg-6 grid-margin stretch-card" style="margin-left: 50px;">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Statistique - Vente</h4>
+                    <canvas id="barChart" width="785" height="392"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('barChart').getContext('2d');
+    var labels = [];
+    var data = [];
+    var quantities = {}; // Tableau associatif pour stocker les quantités par idp
+
+    {% for vente in ventes %}
+        var idp = '{{ vente.idp.getNomp() }}'; // Utilisation de la méthode getId()
+        var quantite = {{ vente.quantitév }};
+        
+        if (quantities[idp] === undefined) {
+            quantities[idp] = quantite;
+        } else {
+            quantities[idp] += quantite;
+        }
+    {% endfor %}
+
+    // Convertir le tableau associatif en labels et data pour le graphique
+    for (var idp in quantities) {
+        labels.push(idp);
+        data.push(quantities[idp]);
+    }
+
+    var barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Quantité vendue',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+<!-- Script pour calculer le total du montant -->
+<script>
+    var totalMontant = 0; // Variable pour stocker le total du montant
+
+    {% for vente in ventes %}
+        totalMontant += {{ vente.montantv }}; // Ajouter le montant de chaque vente au total
+    {% endfor %}
+
+    document.getElementById('totalMontant').innerText = totalMontant + " dt"; // Afficher le total du montant
+</script>
+
+<br><br>
+<br><br>
+
+{% endblock %}

@@ -11,6 +11,8 @@ use App\Repository\ProduitRepository;
 
 class ExampleController extends AbstractController
 {
+
+
     #[Route('/base', name: 'base')]
      
     public function index(): Response
@@ -78,5 +80,9 @@ class ExampleController extends AbstractController
             'produit' => $produit,
         ]);
     }
+
+
+
+  
 
 }

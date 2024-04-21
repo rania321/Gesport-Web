@@ -93,33 +93,32 @@ class PanierController extends AbstractController
         return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
     }
     
-
-/*
-
-    #[Route('/ajouter-au-panier/{idp}', name: 'ajouter_au_panier')]
-    public function ajouterAuPanier(Request $request, EntityManagerInterface $entityManager, ProduitRepository $produitRepository, $idp): Response
+    #[Route('/confirmer-vente', name: 'confirmer_vente', methods: ['POST'])]
+    public function confirmerVente(EntityManagerInterface $entityManager): Response
     {
-        // Récupérer le produit depuis l'identifiant
-        $produit = $produitRepository->find($idp);
+        $paniers = $this->votreRepository->findAll();
 
-        // Vérifier si le produit existe
-        if (!$produit) {
-            throw $this->createNotFoundException('Le produit n\'existe pas');
+        if (!$paniers) {
+            $this->addFlash('warning', 'Votre panier est vide.');
+            return $this->redirectToRoute('app_panier_index');
         }
 
-        // Créer une nouvelle entrée de panier
-        $panierItem = new Panier();
-        $panierItem->setidv(1);
-        $panierItem->setidp($idp);
-        $panierItem->setQuantitep(1);
-        $panierItem->setTotalpa(1);
+        foreach ($paniers as $panier) {
+            $vente = new Vente();
+            $vente->setIdp($panier->getIdp());
+            $vente->setQuantitév($panier->getQuantitep());
+            $vente->setMontantv($panier->getTotalpa());
 
-        // Persister et flusher l'entité du panier
-        $entityManager->persist($panierItem);
+            $entityManager->persist($vente);
+            $entityManager->remove($panier);
+        }
+
         $entityManager->flush();
 
-        // Rediriger vers une page appropriée après l'ajout au panier
+        $this->addFlash('success', 'Votre vente a été confirmée avec succès.');
+
         return $this->redirectToRoute('app_panier_index');
-    }*/
+    }
+
 
 }

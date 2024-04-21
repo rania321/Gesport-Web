@@ -14,6 +14,18 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/vente')]
 class VenteController extends AbstractController
 {
+
+   #[Route('/StatProduit', name: 'StatProduit', methods: ['GET'])]
+public function indexStat(VenteRepository $venteRepository)
+{
+    $ventes = $venteRepository->findAll();
+    
+    return $this->render('StatProduit.html.twig', [
+        'ventes' => $ventes,
+    ]);
+}
+
+
     #[Route('/', name: 'app_vente_index', methods: ['GET'])]
     public function index(VenteRepository $venteRepository): Response
     {
