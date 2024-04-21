@@ -43,6 +43,10 @@ class UserController extends AbstractController
     {
         // Récupérer l'utilisateur actuellement connecté
         $user = $this->getUser();
+
+        if ($this->isUserBlocked($user)) {
+            return $this->redirectToRoute('mon_compte');
+        }
     
         // Rediriger en fonction du rôle de l'utilisateur
         if ($user->getRoleu() === 'Admin') {
@@ -51,17 +55,80 @@ class UserController extends AbstractController
             return $this->redirectToRoute('base');
         }
     }
-    private string $blacklistFile = 'blacklist.txt';
 
     #[Route('/block/{idu}', name: 'app_user_block', methods: ['POST'])]
     public function blockUser(User $user): Response
-    {
-        // Ajouter l'identifiant de l'utilisateur bloqué dans le fichier
-        file_put_contents($this->blacklistFile, $user->getIdu() . PHP_EOL, FILE_APPEND);
-
-        // Rediriger l'administrateur vers une page de confirmation ou autre
-        return $this->redirectToRoute('app_user_index');
+{
+    // Récupérer l'identifiant de l'utilisateur
+    $userId = $user->getIdu();
+    
+    // Vérifier si l'utilisateur est déjà bloqué
+    if ($this->isUserBlocked($user)) {
+        // Si l'utilisateur est déjà bloqué, ne rien faire
+        return new Response('User is already blocked.', Response::HTTP_BAD_REQUEST);
     }
+    
+    // Ajouter l'identifiant de l'utilisateur bloqué dans le fichier .txt
+    $this->addToBlacklist($userId);
+    
+    // Rediriger l'administrateur vers la page de gestion des utilisateurs
+    return $this->redirectToRoute('app_user_index');
+}
+
+#[Route('/user/unblock/{idu}', name: 'app_user_unblock')]
+public function unblockUser($idu): Response
+{
+    // Récupérer l'identifiant de l'utilisateur à débloquer
+
+    // Définir le chemin absolu vers le fichier de liste noire
+    $blacklistFile = realpath(__DIR__ . '/../../public/blacklist.txt');
+
+    // Récupérer la liste des identifiants bloqués depuis le fichier
+    $blacklistedIds = file($blacklistFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+    // Supprimer l'identifiant de l'utilisateur de la liste noire
+    $key = array_search($idu, $blacklistedIds);
+    if ($key !== false) {
+        unset($blacklistedIds[$key]);
+    }
+
+    // Écrire la nouvelle liste dans le fichier
+    file_put_contents($blacklistFile, implode(PHP_EOL, $blacklistedIds));
+
+    // Rediriger vers une page de confirmation ou une autre page appropriée
+    return $this->redirectToRoute('base');
+}
+
+    
+    // Méthode pour ajouter l'identifiant de l'utilisateur bloqué dans le fichier .txt
+    private function addToBlacklist(int $userId): void
+    {
+        // Définir le chemin du fichier .txt
+        $blacklistFile = 'blacklist.txt';
+    
+        // Ajouter l'identifiant de l'utilisateur bloqué dans le fichier
+        file_put_contents($blacklistFile, $userId . PHP_EOL, FILE_APPEND);
+    }
+    private function isUserBlocked(User $user): bool
+{
+    if ($user === null) {
+        return false; // Ou une autre logique selon vos besoins
+    }
+    // Définir le chemin absolu vers le fichier de liste noire
+    $blacklistFile = realpath(__DIR__ . '/../../public/blacklist.txt'); 
+
+    // Récupérer la liste des identifiants bloqués depuis le fichier
+    $blacklistedIds = file($blacklistFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+    // Vérifier si l'ID de l'utilisateur est dans la liste des identifiants bloqués
+    $isBlocked = in_array($user->getIdu(), $blacklistedIds);
+
+    var_dump($isBlocked); // Ajout pour le débogage
+
+    return $isBlocked;
+}
+    
+    
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -115,7 +182,7 @@ class UserController extends AbstractController
         ]);
     }
     #[Route('/login', name: 'app_login', methods: ['GET', 'POST'])]
-     public function login(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager, SessionInterface $session): Response
+    public function login(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
         $error = null;
     
@@ -133,25 +200,34 @@ class UserController extends AbstractController
                 $userRepository = $this->getDoctrine()->getRepository(User::class);
                 $user = $userRepository->findOneBy(['emailu' => $username]);
     
-                // Vérifie si l'utilisateur existe et si le mot de passe est correct
-                if ($user && $passwordEncoder->isPasswordValid($user, $password)) {
-                    // Stocker les informations de l'utilisateur dans la session
-                    $session->set('user_id', $user->getIdu());
-                    $session->set('username', $user->getUsername());
+                // Vérifie si l'utilisateur existe
+                if ($user) {
+                    // Vérifie si l'utilisateur est bloqué
+                  
+                        // Vérifie si le mot de passe est correct
+                        if ($passwordEncoder->isPasswordValid($user, $password)) {
+                            // Stocker les informations de l'utilisateur dans la session
+                            $session->set('user_id', $user->getIdu());
+                            $session->set('username', $user->getUsername());
     
-                    // Rediriger l'utilisateur en fonction de son rôle
-                    if ($user->getRoleu() === 'Admin') {
-                        // Ajouter un message flash pour indiquer une connexion réussie
-                        $this->addFlash('success', 'Vous êtes connecté en tant que ' . $user->getUsername());
-                        // Redirection vers la page de profil
-                        return $this->redirectToRoute('baseBack');
-                    } else {
-                        // Ajouter un message flash pour indiquer une connexion réussie
-                        $this->addFlash('success', 'Vous êtes connecté en tant que ' . $user->getUsername());
-                        // Redirection vers la page d'administration (ou autre page appropriée)
-                        return $this->redirectToRoute('mon-compte');
+                            // Rediriger l'utilisateur en fonction de son rôle
+                            if ($user->getRoleu() === 'Admin') {
+                                // Ajouter un message flash pour indiquer une connexion réussie
+                                $this->addFlash('success', 'Vous êtes connecté en tant que ' . $user->getUsername());
+                                // Redirection vers la page de profil
+                                return $this->redirectToRoute('baseBack');
+                            } else {
+                                // Ajouter un message flash pour indiquer une connexion réussie
+                                $this->addFlash('success', 'Vous êtes connecté en tant que ' . $user->getUsername());
+                                // Redirection vers la page d'administration (ou autre page appropriée)
+                                return $this->redirectToRoute('mon-compte');
+                            }
+                        } else {
+                            // Ajouter un message flash pour indiquer une erreur d'authentification
+                            $this->addFlash('error', 'Identifiant ou mot de passe incorrect.');
+                        }
                     }
-                } else {
+                 else {
                     // Ajouter un message flash pour indiquer une erreur d'authentification
                     $this->addFlash('error', 'Identifiant ou mot de passe incorrect.');
                 }
@@ -163,6 +239,11 @@ class UserController extends AbstractController
             'error' => $error,
         ]);
     }
+    
+
+
+// Fonction pour vérifier si un utilisateur est bloqué
+
 
     #[Route("/oubli_pass", name: "forgotten_password")]
     public function forgottenPass(
@@ -301,6 +382,13 @@ public function monCompte(Request $request, EntityManagerInterface $entityManage
 {
     // Obtenez l'utilisateur connecté
     $user = $this->getUser();
+    if ($user) {
+        // Si l'utilisateur est connecté, vérifiez s'il est bloqué
+        $isBlocked = $this->isUserBlocked($user);
+    } else {
+        // Si l'utilisateur n'est pas connecté, définissez $isBlocked sur false
+        $isBlocked = false; // ou toute autre logique appropriée
+    }
 
     // Affiche l'e-mail de l'utilisateur connecté dans la console
     if ($user) {
@@ -324,8 +412,10 @@ public function monCompte(Request $request, EntityManagerInterface $entityManage
     return $this->render('user/mon_compte.html.twig', [
         'user' => $user,
         'form' => $form->createView(),
+        'isBlocked' => $isBlocked,
     ]);
 }
+
 
 #[Route('/logout', name: 'app_logout')]
 public function logout(LogoutUrlGeneratorInterface $logoutUrlGenerator): Response

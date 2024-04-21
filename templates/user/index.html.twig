@@ -18,32 +18,37 @@
                 </thead>
                 <tbody>
                     {% for user in users %}
-                    <tr>
-                        <td>{{ user.idu }}</td>
-                        <td>{{ user.nomu }}</td>
-                        <td>{{ user.prenomu }}</td>
-                        <td>{{ user.emailu }}</td>
-                        <td>{{ user.roleu }}</td>
-                        <td>
-                       <span style="display: inline-block;">
-    
-  <span style="display: inline-block;">
-    <a href="{{ path('app_user_show', {'idu': user.idu}) }}" class="btn btn-info btn-sm">Afficher</a>
-    <a href="{{ path('app_user_edit', {'idu': user.idu}) }}" class="btn btn-warning btn-sm">Éditer</a>
-    <form method="post" action="{{ path('app_user_delete', {'idu': user.idu}) }}" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete this item?');">
-        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.idu) }}">
-        <button class="btn btn-danger btn-sm">Delete</button>
-    </form>
-</span>
-
-</span>
-
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>{{ user.idu }}</td>
+                            <td>{{ user.nomu }}</td>
+                            <td>{{ user.prenomu }}</td>
+                            <td>{{ user.emailu }}</td>
+                            <td>{{ user.roleu }}</td>
+                            <td>
+                                <span style="display: inline-block;">
+                                    <a href="{{ path('app_user_show', {'idu': user.idu}) }}" class="btn btn-info btn-sm">Afficher</a>
+                                    <a href="{{ path('app_user_edit', {'idu': user.idu}) }}" class="btn btn-warning btn-sm">Éditer</a>
+                                    <form method="post" action="{{ path('app_user_delete', {'idu': user.idu}) }}" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.idu) }}">
+                                        <button class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </span>
+                                <form method="post" action="{{ path('app_user_block', {'idu': user.idu}) }}" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to block this user?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('block' ~ user.idu) }}">
+                                    <button class="btn btn-secondary btn-sm">Bloquer</button>
+                                </form>
+                                 
+                                    <form method="post" action="{{ path('app_user_unblock', {'idu': user.idu}) }}" style="display: inline-block;" onsubmit="return confirm('Êtes-vous sûr de vouloir débloquer cet utilisateur ?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('unblock' ~ user.idu) }}">
+                                        <button class="btn btn-success btn-sm">Débloquer</button>
+                                    </form>
+                               
+                            </td>
+                        </tr>
                     {% else %}
-                    <tr>
-                        <td colspan="6">Aucun utilisateur trouvé</td>
-                    </tr>
+                        <tr>
+                            <td colspan="6">Aucun utilisateur trouvé</td>
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>
