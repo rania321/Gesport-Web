@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Tournoi index{% endblock %}
+
 {% block header %}
 <div class="container-fluid bg-primary px-5 d-none d-lg-block">
     <div class="row gx-0">
@@ -68,7 +69,61 @@
             <a href="" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Book Now</a>
         </div>
     </nav>
-    {% endblock %}
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+
+<div style="height: 30px;"></div> 
+<div class="container">
+    <div class="row justify-content-center mb-4">
+        <div class="col-8">
+            <div id="calendrier" style="height: 50%; margin-bottom: 20px; margin-top: 30px;"></div>
+        </div>
+        
+        <div class="col-md-3 mb-8">
+            <!-- Div caché pour afficher les détails de l'événement -->
+            <div id="eventDetails" style="display: none; border: 3px solid #fad787; padding: 20px;">
+                <h3 id="eventTitle"></h3>
+                <p id="eventDate"></p>
+                <p id="eventDescription"></p>
+                <p id="eventStatus"></p>
+                <a href="{{ path('app_equipe_index') }}" class="btn btn-primary mt-3">S'inscrire</a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <h2 class="text-primary mb-4">Liste des Tournois</h2>
+            <div class="row">
+                {% for tournoi in tournois %}
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">{{ tournoi.nomt }}</h5>
+                            <p class="card-text text-muted">Date de début: {{ tournoi.datedebutt ? tournoi.datedebutt|date('Y-m-d') : '' }}</p>
+                            <p class="card-text text-muted">Date de fin: {{ tournoi.datefint ? tournoi.datefint|date('Y-m-d') : '' }}</p>
+                            <p class="card-text">{{ tournoi.descrit }}</p>
+                            <p class="card-text">Statut: <span class="text-success">{{ tournoi.statutt }}</span></p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <a href="{{ path('app_equipe_index') }}" class="btn btn-primary mt-3">S'inscrire</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
         
         {% block carousel %}
         <div class="carousel-header">
@@ -137,33 +192,101 @@
     </div>
     {% endblock %}
 
-    {% block content %}
-    <div class="container my-4">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <h2 class="text-primary mb-4">Liste des Tournois</h2>
-                <div class="row">
-                    {% for tournoi in tournois %}
-                    <div class="col-md-6 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title text-primary">{{ tournoi.nomt }}</h5>
-                                <p class="card-text text-muted">Date de début: {{ tournoi.datedebutt ? tournoi.datedebutt|date('Y-m-d') : '' }}</p>
-                                <p class="card-text text-muted">Date de fin: {{ tournoi.datefint ? tournoi.datefint|date('Y-m-d') : '' }}</p>
-                                <p class="card-text">{{ tournoi.descrit }}</p>
-                                <p class="card-text">Statut: <span class="text-success">{{ tournoi.statutt }}</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    {% else %}
-                    <div class="col-md-12">
-                        <p>Aucun enregistrement trouvé</p>
-                    </div>
-                    {% endfor %}
-                </div>
-                <a href="{{ path('app_equipe_index') }}" class="btn btn-primary mt-3">S'inscrire</a>
-            </div>
-        </div>
-    </div>
+    {% block js %}
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('./FrontOffice/lib/easing/easing.min.js')}}"></script>
+    <script src="{{ asset('./FrontOffice/lib/waypoints/waypoints.min.js')}}"></script>
+    <script src="{{ asset('./FrontOffice/lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="{{ asset('./FrontOffice/lib/lightbox/js/lightbox.min.js')}}"></script>
     
+    <!-- Template Javascript -->
+    <script src="{{ asset('./FrontOffice/js/main.js')}}"></script>
+    
+    <!-- Intégration de FullCalendar -->
+    <script src="
+https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
+"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let calendarElt = document.querySelector("#calendrier");
+        let calendar = new FullCalendar.Calendar(calendarElt, {
+            initialView: 'dayGridMonth',
+            locale: 'fr',
+            headerToolbar: {
+                start: 'prev',
+                center: 'title',
+                end: 'next'
+            },
+            events: [
+                {% for tournoi in tournois %}
+                {
+                    title: '{{ tournoi.nomt }} (Début)',
+                    start: '{{ tournoi.datedebutt|date('Y-m-d') }}', 
+                    extendedProps: {
+                        description: '{{ tournoi.descrit }}',
+                        statut: '{{ tournoi.statutt }}'
+                    },
+                    color: generateRandomColor('{{ tournoi.nomt }}') // couleur aléatoire
+                },
+                {
+                    title: '{{ tournoi.nomt }} (Fin)',
+                    start: '{{ tournoi.datefint|date('Y-m-d') }}', 
+                    extendedProps: {
+                        description: '{{ tournoi.descrit }}',
+                        statut: '{{ tournoi.statutt }}'
+                    },
+                    color: getEventColor('{{ tournoi.nomt }}') // Utiliser la même couleur générée pour le début
+                },
+                {% endfor %}
+            ],
+            eventClick: function(info) {
+            displayEventDetails(info.event);
+        }
+        });
+
+        calendar.render();
+    });
+
+    var eventColors = {}; // Dictionnaire pour stocker les couleurs générées pour chaque tournoi
+
+
+    function displayEventDetails(event) {
+        let eventTitle = document.getElementById('eventTitle');
+        let eventDate = document.getElementById('eventDate');
+        let eventDescription = document.getElementById('eventDescription');
+        let eventStatus = document.getElementById('eventStatus');
+        
+
+        eventTitle.textContent = event.title;
+        eventDate.textContent = 'Date: ' + event.start.toDateString();
+        eventDescription.textContent = 'Description: ' + event.extendedProps.description;
+        eventStatus.textContent = 'Statut: ' + event.extendedProps.statut;
+
+        document.getElementById('eventDetails').style.display = 'block';
+    }
+
+
+
+    function generateRandomColor(tournoiNom) {
+        if (!eventColors[tournoiNom]) {
+            eventColors[tournoiNom] = getRandomColor(); // Générer une couleur aléatoire si elle n'a pas déjà été générée pour ce tournoi
+        }
+        return eventColors[tournoiNom];
+    }
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    function getEventColor(tournoiNom) {
+        return eventColors[tournoiNom]; // Récupérer la couleur générée pour ce tournoi
+    }
+</script>
     {% endblock %}
