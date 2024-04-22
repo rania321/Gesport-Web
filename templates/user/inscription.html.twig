@@ -22,7 +22,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <form method="post" novalidate>
-                    {{ form_start(form, {'attr': {'class': 'form-group', 'novalidate': 'novalidate'}}) }}
+                    {{ form_start(form, {'attr': {'class': 'form-group', 'novalidate': 'novalidate', 'id': 'registration'}}) }}
 
                     {# Champ Nom #}
                     <div class="form-group">
@@ -51,6 +51,12 @@
                         {{ form_widget(form.mdpu, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre mot de passe'}}) }}
                         <div class="text-danger"> {{ form_errors(form.mdpu) }}  </div>
                     </div>
+                      {# Champ recaptcha #}
+                       <div class="form-group">
+                       {{ form_label(form.recaptcha, null, {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.recaptcha, {'attr': {'class': 'form-control'}}) }}
+                     {{ form_errors(form.recaptcha) }}
+                </div>
 
                     {# Champ Rôle #}
                     <div class="form-group">
@@ -58,6 +64,7 @@
                         {{ form_widget(form.roleu, {'attr': {'class': 'form-control'}}) }}
                         {{ form_errors(form.roleu) }#}
                     </div>
+                     
 
                     {# Bouton Enregistrer #}
                     <div class="form-group">
@@ -69,6 +76,10 @@
             </div>
         </div>
     </div>
+    
+    <!-- Script reCAPTCHA -->
+    
+
 </body>
 
 </html>

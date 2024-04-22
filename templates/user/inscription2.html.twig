@@ -30,8 +30,12 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-6">
-                <form method="post" novalidate>
+                <form method="post" novalidate id="registration">
                     {% include 'user/inscription.html.twig' %}
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey=6Le52MMpAAAAADqeKWivBt7WBVNhdbxfuTacYRrH></div>
+                    </div>
+                   
                 </form>
             </div>
             <div class="col-sm-6 px-0 d-none d-sm-block">
@@ -40,6 +44,20 @@
             </div>
         </div>
     </div>
+
+    <!-- Script JavaScript -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('registration').addEventListener('submit', function(event) {
+                var recaptchaResponse = grecaptcha.getResponse();
+                if (recaptchaResponse.length === 0) {
+                    event.preventDefault();
+                    alert('Veuillez résoudre le reCAPTCHA.');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

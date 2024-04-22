@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Form\UserType;
+use App\Form\RegisterType;
 use App\Form\ResetPassType;
 use App\Form\NewPasswordType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -154,7 +155,7 @@ public function unblockUser($idu): Response
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user, [
+        $form = $this->createForm(RegisterType::class, $user, [
             'hide_role_field' => true,
         ]);
         $form->handleRequest($request);
