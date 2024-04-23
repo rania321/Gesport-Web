@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Reclamation;
 use App\Form\ReclamationType;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Response as ResponseEntity;
+use App\BadWordFilterBundle\Service\BadWordFilter;
 
 #[Route('/reclamation')]
 class ReclamationController extends AbstractController
@@ -33,8 +35,8 @@ class ReclamationController extends AbstractController
             'search' => $searchQuery,
         ]);
     }
-
-    #[Route('/new', name: 'reclamation_new', methods: ['GET', 'POST'])]
+   
+  #[Route('/new', name: 'reclamation_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ReclamationRepository $reclamationRepository): Response
     {
         $reclamation = new Reclamation();
@@ -46,14 +48,45 @@ class ReclamationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Filtrer les mots inappropriés dans la description
+            $inappropriateWords = ['bad', 'stupid', 'malade','psycho','putin','con','conne','fuck','slut','shit','whore','bitch','ass','dick','salope','merde']; // Liste de mots inappropriés
+            $descrirecFiltered = $this->filterInappropriateWords($reclamation->getDescriRec(), $inappropriateWords);
+            $reclamation->setDescriRec($descrirecFiltered);
             $reclamationRepository->save($reclamation);
             return $this->redirectToRoute('reclamation_index');
+            $this->sendDesktopNotification('New Reclamation Added', 'A new reclamation has been added.');
+            return $this->redirectToRoute('reclamation_index');         
+            $reclamationRepository->add($reclamation);  
+            return $this->redirectToRoute('reclamation_index');
+
         }
 
         return $this->render('reclamation/new.html.twig', [
             'reclamation' => $reclamation,
             'form' => $form->createView(),
+
         ]);
+        return $this->render('reclamation/new.html.twig', [
+            'reclamation' => $reclamation,
+            'form' => $form->createView(),
+        ]);
+    }
+    private function filterInappropriateWords($text, $inappropriateWords) {
+        foreach ($inappropriateWords as $word) {
+            $text = preg_replace("/\b$word\b/i", str_repeat('*', mb_strlen($word)), $text);
+        }
+        return $text;
+    }
+    /**
+     * @Route("/send-desktop-notification", name="send_desktop_notification")
+     */
+    private function sendDesktopNotification($title, $body) {
+        // Create a notification object
+        $notification = new \Symfony\Component\Notifier\Notification\Notification($title);
+        $notification->content($body);
+
+        // Send the notification
+        $this->get('notifier')->send($notification);
     }
 
 
@@ -95,12 +128,13 @@ class ReclamationController extends AbstractController
                 'reclamation' => $reclamation,
                 'delete_form' => $deleteForm->createView(),
             ]);
+            
         }
     
         if ($this->isCsrfTokenValid('delete'.$reclamation->getIdrec(), $request->request->get('_token'))) {
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->remove($reclamation);
-            // $entityManager->flush();
+             $entityManager = $this->getDoctrine()->getManager();
+             $entityManager->remove($reclamation);
+            $entityManager->flush();
 
             $reclamationRepository->delete($reclamation);
     
@@ -130,6 +164,8 @@ class ReclamationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($responseEntity);
             $entityManager->flush();
+          
+
 
             return $this->redirectToRoute('reclamation_view', ['idrec' => $reclamation->getIdrec()]);
         }
@@ -139,5 +175,5 @@ class ReclamationController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
+    
 }

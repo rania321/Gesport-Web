@@ -28,6 +28,7 @@ class ResponseController extends AbstractController
     }
 
     #[Route('/response/new', name: 'response_new', methods: ['GET', 'POST'])]
+    
     public function new(Request $request, ResponseRepository $responseRepository): Response
     {
         $response = new ResponseEntity();
@@ -38,6 +39,7 @@ class ResponseController extends AbstractController
             $responseRepository->save($response);
 
             return $this->redirectToRoute('response_index');
+
         }
 
         return $this->render('response/new.html.twig', [

@@ -20,7 +20,5 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # Your service definitions go here...
-    App\Service\NotificationService:
-        arguments:
-            $notifier: '@Symfony\Component\Notifier\NotifierInterface'
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
