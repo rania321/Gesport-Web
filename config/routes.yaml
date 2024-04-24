@@ -1,0 +1,21 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+app_reservation_new_for_activity:
+    path: '/reservation/new/{activityId}'
+    controller: 'App\Controller\ReservationactiviteController::newForActivity'
+
+ajouter_love_activite:
+    path: '/activite/{ida}/love'
+    controller: 'App\Controller\ActiviteController::ajouterLove'
+    methods: ['POST']
+
+supprimer_love_activite:
+    path: '/activite/{ida}/unlove'
+    controller: 'App\Controller\ActiviteController::supprimerLove'
+    methods: ['DELETE']
+
+rechercheAjax:
+    path: '/activite/rechercheAjax'
+    controller: 'App\Controller\ActiviteController::searchAjax'
+    methods: ['GET']

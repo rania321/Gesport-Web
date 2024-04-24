@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Reservationactivite{% endblock %}
+
+{% block carousel %}
+<div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h3 class="text-white display-3 mb-4">Réservez maintenant !</h3>
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="./base">Accueil</a></li>
+                    <li class="breadcrumb-item active text-white">Activite</li>
+                </ol>    
+            </div>
+        </div>
+{% endblock %}
+{% block content %}
+    <h1>Réserver une activité</h1>
+
+    
+    <a href="{{ path('app_reservationactivite_index') }}">back to list</a>
+
+    
+    <div class="container-fluid booking py-5">
+            <div class="container py-5">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6">
+                        <h5 class="section-booking-title pe-3">Réservation</h5>
+                        <h1 class="text-white mb-4">Réservation en ligne</h1>
+                        <p class="text-white mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur maxime ullam esse fuga blanditiis accusantium pariatur quis sapiente, veniam doloribus praesentium? Repudiandae iste voluptatem fugiat doloribus quasi quo iure officia.
+                        </p>
+                        <a href="{{ path('app_reservationactivite_index') }}" class="btn btn-light text-primary rounded-pill py-3 px-5 mt-2">Mes Réservations</a>
+                    </div>
+                    <div class="col-lg-6">
+                        <h1 class="text-white mb-3">Réserver une activité</h1>
+                        <p class="text-white mb-4">Choisissez <span class="text-warning">l'activité</span> qui vous correspond.</p>
+                            {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        {{ form_widget(form.ida, {'attr': {'class': 'form-select bg-white border-0'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        
+                                        {{ form_widget(form.datedebutr, {'attr': {'class': 'form-control bg-white border-0'}}) }}
+                                        <div class="text-danger">{{ form_errors(form.datedebutr) }}</div>
+                                           
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        
+                                        {{ form_widget(form.heurer, {'attr': {'class': 'form-select bg-white border-0'}}) }}
+                                        
+                                                {{ form_errors(form.heurer) }}
+                                                
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class="col-12">
+                                {{ form_row(form._token) }}
+                                    <button class="btn btn-primary text-white w-100 py-3" type="submit">Réserver</button>
+                                    {{ form_end(form) }}
+                                </div>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
