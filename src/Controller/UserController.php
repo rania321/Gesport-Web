@@ -210,6 +210,15 @@ public function unblockUser($idu): Response
                             // Stocker les informations de l'utilisateur dans la session
                             $session->set('user_id', $user->getIdu());
                             $session->set('username', $user->getUsername());
+                            $verificationCode = $this->generateVerificationCode();
+                            $session->set('verification_code', $verificationCode);
+                            // Stocke l'e-mail dans la session pour l'utiliser ultérieurement
+                            $session->set('email', $username);
+                            $this->sendVerificationCodeByEmail($username, $verificationCode, $mailer);
+        
+                            // Redirige l'utilisateur vers la page de saisie du code de vérification
+                            return $this->redirectToRoute('verify_email');
+                            
     
                             // Rediriger l'utilisateur en fonction de son rôle
                             if ($user->getRoleu() === 'Admin') {
@@ -507,12 +516,65 @@ public function logout(LogoutUrlGeneratorInterface $logoutUrlGenerator): Respons
         $this->addFlash('success', 'Votre compte a été supprimé avec succès.');
         return $this->redirectToRoute('app_logout');
     }
+    #[Route('/verify-email', name: 'verify_email', methods: ['GET', 'POST'])]
+    public function verifyEmail(Request $request, SessionInterface $session): Response
+    {
+        // Vérifie si le code de vérification a été soumis
+        if ($request->isMethod('POST')) {
+            $verificationCode = $request->request->get('verification_code');
+            $storedVerificationCode = $session->get('verification_code');
+            $emailu = $session->get('email');
     
+            // Vérifie si le code de vérification est correct
+            if ($verificationCode === $storedVerificationCode) {
+                // Authentification réussie
+                // Vous pouvez maintenant authentifier l'utilisateur et rediriger vers la page d'accueil, par exemple
+                // Assurez-vous d'effacer les données de session après l'authentification réussie
     
-   
-   
-   
-
-
-
+                $session->remove('verification_code');
+                $session->remove('email');
+    
+                // Ajoutez un message flash pour indiquer une connexion réussie
+                $this->addFlash('success', 'Vous êtes connecté.');
+                return $this->redirectToRoute('accueil');
+            } else {
+                // Ajoute un message flash pour indiquer une erreur de code de vérification
+                $this->addFlash('error', 'Code de vérification incorrect.');
+                return $this->redirectToRoute('verify_email');
+            }
+        }
+    
+        // Affiche le formulaire de saisie du code de vérification
+        return $this->render('user/verify_email.html.twig');
+    }
+    
+    // Méthode pour générer un code de vérification aléatoire
+    private function generateVerificationCode(): string
+    {
+        return rand(100000, 999999); // Génère un code à 6 chiffres
+    }
+    
+    // Méthode pour envoyer le code de vérification par e-mail
+    private function sendVerificationCodeByEmail(string $emailu, string $verificationCode, Swift_Mailer $mailer): void
+    {
+        $message = (new Swift_Message('Code de vérification'))
+            ->setFrom('votre_email@example.com')
+            ->setTo($emailu)
+            ->setBody(
+                "Votre code de vérification est : $verificationCode",
+                'text/plain'
+            );
+    
+        // Envoie l'e-mail
+        $mailer->send($message);
+    }
 }
+    
+    
+   
+   
+   
+
+
+
+
