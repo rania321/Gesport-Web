@@ -6634,6 +6634,14 @@
         <argument key="reservationactivite" type="service_closure" id=".errored..service_locator.H3L_sti.App\Entity\Reservationactivite"/>
       </argument>
     </service>
+    <service id=".service_locator.MQ2naqa" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="reservation" type="service_closure" id=".errored..service_locator.MQ2naqa.App\Entity\Reservationactivite"/>
+        <argument key="reservationactivite" type="service_closure" id=".errored..service_locator.MQ2naqa.App\Entity\Reservationactivite"/>
+      </argument>
+    </service>
     <service id=".service_locator.h..bsSR" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6685,12 +6693,13 @@
         <argument key="user" type="service_closure" id=".errored..service_locator.GPGtF8v.App\Entity\User"/>
       </argument>
     </service>
-    <service id=".service_locator.yOj351V" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.v00DZ.5" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ActiviteController::ajouterLove" type="service_closure" id=".service_locator.OctoH5o"/>
         <argument key="App\Controller\ActiviteController::delete" type="service_closure" id=".service_locator.OctoH5o"/>
         <argument key="App\Controller\ActiviteController::edit" type="service_closure" id=".service_locator.OctoH5o"/>
+        <argument key="App\Controller\ActiviteController::favoris" type="service_closure" id=".service_locator.h..bsSR"/>
         <argument key="App\Controller\ActiviteController::index" type="service_closure" id=".service_locator.h..bsSR"/>
         <argument key="App\Controller\ActiviteController::indexBack" type="service_closure" id=".service_locator.h..bsSR"/>
         <argument key="App\Controller\ActiviteController::new" type="service_closure" id=".service_locator.aKM6MDa"/>
@@ -6701,7 +6710,7 @@
         <argument key="App\Controller\ReservationactiviteController::delete" type="service_closure" id=".service_locator.H3L_sti"/>
         <argument key="App\Controller\ReservationactiviteController::deleteBack" type="service_closure" id=".service_locator.H3L_sti"/>
         <argument key="App\Controller\ReservationactiviteController::edit" type="service_closure" id=".service_locator.H3L_sti"/>
-        <argument key="App\Controller\ReservationactiviteController::editBack" type="service_closure" id=".service_locator.H3L_sti"/>
+        <argument key="App\Controller\ReservationactiviteController::editBack" type="service_closure" id=".service_locator.MQ2naqa"/>
         <argument key="App\Controller\ReservationactiviteController::generatePDF" type="service_closure" id=".service_locator..BdxQPY"/>
         <argument key="App\Controller\ReservationactiviteController::index" type="service_closure" id=".service_locator.JDywqWm"/>
         <argument key="App\Controller\ReservationactiviteController::indexBack" type="service_closure" id=".service_locator.JDywqWm"/>
@@ -6720,6 +6729,7 @@
         <argument key="App\Controller\ActiviteController:ajouterLove" type="service_closure" id=".service_locator.OctoH5o"/>
         <argument key="App\Controller\ActiviteController:delete" type="service_closure" id=".service_locator.OctoH5o"/>
         <argument key="App\Controller\ActiviteController:edit" type="service_closure" id=".service_locator.OctoH5o"/>
+        <argument key="App\Controller\ActiviteController:favoris" type="service_closure" id=".service_locator.h..bsSR"/>
         <argument key="App\Controller\ActiviteController:index" type="service_closure" id=".service_locator.h..bsSR"/>
         <argument key="App\Controller\ActiviteController:indexBack" type="service_closure" id=".service_locator.h..bsSR"/>
         <argument key="App\Controller\ActiviteController:new" type="service_closure" id=".service_locator.aKM6MDa"/>
@@ -6730,7 +6740,7 @@
         <argument key="App\Controller\ReservationactiviteController:delete" type="service_closure" id=".service_locator.H3L_sti"/>
         <argument key="App\Controller\ReservationactiviteController:deleteBack" type="service_closure" id=".service_locator.H3L_sti"/>
         <argument key="App\Controller\ReservationactiviteController:edit" type="service_closure" id=".service_locator.H3L_sti"/>
-        <argument key="App\Controller\ReservationactiviteController:editBack" type="service_closure" id=".service_locator.H3L_sti"/>
+        <argument key="App\Controller\ReservationactiviteController:editBack" type="service_closure" id=".service_locator.MQ2naqa"/>
         <argument key="App\Controller\ReservationactiviteController:generatePDF" type="service_closure" id=".service_locator..BdxQPY"/>
         <argument key="App\Controller\ReservationactiviteController:index" type="service_closure" id=".service_locator.JDywqWm"/>
         <argument key="App\Controller\ReservationactiviteController:indexBack" type="service_closure" id=".service_locator.JDywqWm"/>
@@ -7378,12 +7388,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.yOj351V"/>
+      <argument type="service" id=".service_locator.v00DZ.5"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.yOj351V"/>
+      <argument type="service" id=".service_locator.v00DZ.5"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -7405,6 +7415,7 @@
     <service id=".errored..service_locator.xUrKPVU.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface"/>
     <service id=".errored..service_locator..BdxQPY.App\Entity\Reservationactivite" class="App\Entity\Reservationactivite"/>
     <service id=".errored..service_locator.H3L_sti.App\Entity\Reservationactivite" class="App\Entity\Reservationactivite"/>
+    <service id=".errored..service_locator.MQ2naqa.App\Entity\Reservationactivite" class="App\Entity\Reservationactivite"/>
     <service id=".errored..service_locator.kGqLS5t.App\Entity\Activite" class="App\Entity\Activite"/>
     <service id=".errored..service_locator.OctoH5o.App\Entity\Activite" class="App\Entity\Activite"/>
     <service id=".errored..service_locator.DX5IRBd.App\Entity\Activite" class="App\Entity\Activite"/>
@@ -8363,7 +8374,7 @@
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.yOj351V"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.v00DZ.5"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8388,8 +8399,9 @@
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
     <service id=".service_locator.ZpeEFVF" alias=".service_locator.H3L_sti"/>
+    <service id=".service_locator.WKD5Dmj" alias=".service_locator.MQ2naqa"/>
     <service id=".service_locator.b76MKMg" alias=".service_locator.GPGtF8v"/>
-    <service id=".service_locator.uea_.N7" alias=".service_locator.yOj351V"/>
+    <service id=".service_locator._AK1JQL" alias=".service_locator.v00DZ.5"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.nLLbHFG" alias=".service_locator.QQFRfnL"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>
@@ -8421,6 +8433,7 @@
     <service id=".service_locator.bInR.ll" alias=".service_locator.aKM6MDa"/>
     <service id=".service_locator.EoB5YTF" alias=".service_locator..BdxQPY"/>
     <service id=".service_locator.4O9I8tw" alias=".service_locator.H3L_sti"/>
+    <service id=".service_locator.myNQleK" alias=".service_locator.MQ2naqa"/>
     <service id=".service_locator..F7odSV" alias=".service_locator.h..bsSR"/>
     <service id=".service_locator.xsts9nF" alias=".service_locator.kGqLS5t"/>
     <service id=".service_locator.faoa1Fj" alias=".service_locator.OctoH5o"/>

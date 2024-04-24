@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Activite;
 use App\Entity\User;
@@ -27,6 +28,7 @@ use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\Logo\Logo;
 use Endroid\QrCode\RoundBlockSizeMode;
 use Endroid\QrCode\Writer\ValidationException;
+use PHPMailer\PHPMailer\PHPMailer;
 
 #[Route('/reservationactivite')]
 class ReservationactiviteController extends AbstractController
@@ -127,7 +129,7 @@ class ReservationactiviteController extends AbstractController
     }
 
     #[Route('/{idr}/editBack', name: 'app_reservationactivite_editBack', methods: ['GET', 'POST'])]
-    public function editBack(Request $request, Reservationactivite $reservationactivite, EntityManagerInterface $entityManager): Response
+    public function editBack(Request $request, Reservationactivite $reservationactivite, EntityManagerInterface $entityManager, Reservationactivite $reservation): Response
     {
         $form = $this->createForm(ReservationactiviteType::class, $reservationactivite, [
             'editMode' => true, // Le formulaire est en mode édition
@@ -136,6 +138,42 @@ class ReservationactiviteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+
+            // Créer une nouvelle instance de PHPMailer
+           $mail = new PHPMailer(true);
+           $mail->SMTPDebug = 2;
+
+   
+           try {
+               // Paramètres du serveur
+              $mail->isSMTP();
+
+                $mail->Host = 'smtp-mail.outlook.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'rania.guelmami@esprit.tn';
+                $mail->Password = '211JFT4989@';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port = 587;
+   
+               // Destinataires
+               $mail->setFrom('rania.guelmami@esprit.tn', 'Service de Réservation');
+               $mail->addAddress('raniaguelmami0@gmail.com');
+   
+               // Contenu
+               $mail->isHTML(true);
+               $mail->Subject = 'Confirmation de la reservation ' ;
+               $mail->Body    = 'Cher(e) ' . $reservation->getIdu()->getPrenomu() 
+               . ',<br><br>Votre réservation a été confirmée avec succès. Voici les détails de votre réservation : ' . 
+               '<br>Activité :  ' . $reservation->getIda()->getNoma() . 
+               '<br>Date :  ' . $reservation->getDatedebutr()->format('d/m/Y') . 
+               '<br>Heure :  ' . $reservation->getHeurer() . 
+               '<br>Statut :  ' . $reservation->getStatutr() . 
+               '<br><br>Merci d"avoir choisi notre service. Nous sommes impatients de vous accueillir !<br><br>Cordialement,<br>Service de Réservation';   
+               // Envoyer l'email
+               $mail->send();
+           } catch (Exception $e) {
+               echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+           }
 
             return $this->redirectToRoute('app_reservationactivite_indexBack', [], Response::HTTP_SEE_OTHER);
         }
@@ -282,5 +320,20 @@ class ReservationactiviteController extends AbstractController
                 );
         }
 
+        #[Route('/search', name: 'search_Ajax')]
+        public function searchAjax(Request $request): Response
+        {
+            // Get the search query from the request
+            $searchQuery = $request->query->get('q');
+
+            // Perform the search logic (e.g., query the database)
+            // Replace this with your actual search logic
+            $searchResults = $this->getDoctrine()
+                ->getRepository(ReservationactiviteRepository::class)
+                ->findBySearchQuery($searchQuery);
+
+            // Return the search results as JSON response
+            return new JsonResponse($searchResults);
+        }
 
 }

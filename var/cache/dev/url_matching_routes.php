@@ -33,45 +33,49 @@ return [
                         .'|(*:50)'
                     .')'
                     .'|reserv/([^/]++)(*:73)'
+                    .'|listFav(*:87)'
                     .'|([^/]++)/(?'
-                        .'|love(*:96)'
-                        .'|unlove(*:109)'
+                        .'|love(*:110)'
+                        .'|unlove(*:124)'
                     .')'
-                    .'|rechercheAjax(*:131)'
+                    .'|rechercheAjax(*:146)'
                 .')'
                 .'|/reservation(?'
-                    .'|activite/([^/]++)(?'
-                        .'|/(?'
-                            .'|show(*:183)'
-                            .'|edit(?'
-                                .'|(*:198)'
-                                .'|Back(*:210)'
+                    .'|activite/(?'
+                        .'|([^/]++)(?'
+                            .'|/(?'
+                                .'|show(*:201)'
+                                .'|edit(?'
+                                    .'|(*:216)'
+                                    .'|Back(*:228)'
+                                .')'
+                                .'|back(*:241)'
+                                .'|generate\\-pdf(*:262)'
                             .')'
-                            .'|back(*:223)'
-                            .'|generate\\-pdf(*:244)'
+                            .'|(*:271)'
                         .')'
-                        .'|(*:253)'
+                        .'|search(*:286)'
                     .')'
-                    .'|/new/([^/]++)(*:275)'
+                    .'|/new/([^/]++)(*:308)'
                 .')'
                 .'|/user/([^/]++)(?'
-                    .'|(*:301)'
-                    .'|/edit(*:314)'
-                    .'|(*:322)'
+                    .'|(*:334)'
+                    .'|/edit(*:347)'
+                    .'|(*:355)'
                 .')'
                 .'|/_(?'
-                    .'|error/(\\d+)(?:\\.([^/]++))?(*:362)'
-                    .'|wdt/([^/]++)(*:382)'
+                    .'|error/(\\d+)(?:\\.([^/]++))?(*:395)'
+                    .'|wdt/([^/]++)(*:415)'
                     .'|profiler/([^/]++)(?'
                         .'|/(?'
-                            .'|search/results(*:428)'
-                            .'|router(*:442)'
+                            .'|search/results(*:461)'
+                            .'|router(*:475)'
                             .'|exception(?'
-                                .'|(*:462)'
-                                .'|\\.css(*:475)'
+                                .'|(*:495)'
+                                .'|\\.css(*:508)'
                             .')'
                         .')'
-                        .'|(*:485)'
+                        .'|(*:518)'
                     .')'
                 .')'
             .')/?$}sDu',
@@ -81,29 +85,31 @@ return [
         43 => [[['_route' => 'app_activite_edit', '_controller' => 'App\\Controller\\ActiviteController::edit'], ['ida'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         50 => [[['_route' => 'app_activite_delete', '_controller' => 'App\\Controller\\ActiviteController::delete'], ['ida'], ['POST' => 0], null, false, true, null]],
         73 => [[['_route' => 'app_activite_reserv', '_controller' => 'App\\Controller\\ActiviteController::reserv'], ['ida'], null, null, false, true, null]],
-        96 => [[['_route' => 'ajouter_love_activite', '_controller' => 'App\\Controller\\ActiviteController::ajouterLove'], ['ida'], ['POST' => 0], null, false, false, null]],
-        109 => [[['_route' => 'supprimer_love_activite', '_controller' => 'App\\Controller\\ActiviteController::supprimerLove'], ['ida'], ['DELETE' => 0], null, false, false, null]],
-        131 => [[['_route' => 'rechercheAjax', '_controller' => 'App\\Controller\\ActiviteController::searchAjax'], [], ['GET' => 0], null, false, false, null]],
-        183 => [[['_route' => 'app_reservationactivite_show', '_controller' => 'App\\Controller\\ReservationactiviteController::show'], ['idr'], ['GET' => 0], null, false, false, null]],
-        198 => [[['_route' => 'app_reservationactivite_edit', '_controller' => 'App\\Controller\\ReservationactiviteController::edit'], ['idr'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        210 => [[['_route' => 'app_reservationactivite_editBack', '_controller' => 'App\\Controller\\ReservationactiviteController::editBack'], ['idr'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        223 => [[['_route' => 'app_reservationactivite_deleteBack', '_controller' => 'App\\Controller\\ReservationactiviteController::deleteBack'], ['idr'], ['POST' => 0], null, false, false, null]],
-        244 => [[['_route' => 'app_reservationactivite_generate_pdf', '_controller' => 'App\\Controller\\ReservationactiviteController::generatePDF'], ['idr'], ['GET' => 0], null, false, false, null]],
-        253 => [
+        87 => [[['_route' => 'app_activite_favoris', '_controller' => 'App\\Controller\\ActiviteController::favoris'], [], ['GET' => 0], null, false, false, null]],
+        110 => [[['_route' => 'ajouter_love_activite', '_controller' => 'App\\Controller\\ActiviteController::ajouterLove'], ['ida'], ['POST' => 0], null, false, false, null]],
+        124 => [[['_route' => 'supprimer_love_activite', '_controller' => 'App\\Controller\\ActiviteController::supprimerLove'], ['ida'], ['DELETE' => 0], null, false, false, null]],
+        146 => [[['_route' => 'rechercheAjax', '_controller' => 'App\\Controller\\ActiviteController::searchAjax'], [], ['GET' => 0], null, false, false, null]],
+        201 => [[['_route' => 'app_reservationactivite_show', '_controller' => 'App\\Controller\\ReservationactiviteController::show'], ['idr'], ['GET' => 0], null, false, false, null]],
+        216 => [[['_route' => 'app_reservationactivite_edit', '_controller' => 'App\\Controller\\ReservationactiviteController::edit'], ['idr'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        228 => [[['_route' => 'app_reservationactivite_editBack', '_controller' => 'App\\Controller\\ReservationactiviteController::editBack'], ['idr'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        241 => [[['_route' => 'app_reservationactivite_deleteBack', '_controller' => 'App\\Controller\\ReservationactiviteController::deleteBack'], ['idr'], ['POST' => 0], null, false, false, null]],
+        262 => [[['_route' => 'app_reservationactivite_generate_pdf', '_controller' => 'App\\Controller\\ReservationactiviteController::generatePDF'], ['idr'], ['GET' => 0], null, false, false, null]],
+        271 => [
             [['_route' => 'app_reservationactivite_showBack', '_controller' => 'App\\Controller\\ReservationactiviteController::showBack'], ['idr'], ['GET' => 0], null, false, true, null],
             [['_route' => 'app_reservationactivite_delete', '_controller' => 'App\\Controller\\ReservationactiviteController::delete'], ['idr'], ['POST' => 0], null, false, true, null],
         ],
-        275 => [[['_route' => 'app_reservation_new_for_activity', '_controller' => 'App\\Controller\\ReservationactiviteController::newForActivity'], ['activityId'], null, null, false, true, null]],
-        301 => [[['_route' => 'app_user_show', '_controller' => 'App\\Controller\\UserController::show'], ['idu'], ['GET' => 0], null, false, true, null]],
-        314 => [[['_route' => 'app_user_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['idu'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        322 => [[['_route' => 'app_user_delete', '_controller' => 'App\\Controller\\UserController::delete'], ['idu'], ['POST' => 0], null, false, true, null]],
-        362 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        382 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
-        428 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
-        442 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
-        462 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
-        475 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
-        485 => [
+        286 => [[['_route' => 'search_Ajax', '_controller' => 'App\\Controller\\ReservationactiviteController::searchAjax'], [], null, null, false, false, null]],
+        308 => [[['_route' => 'app_reservation_new_for_activity', '_controller' => 'App\\Controller\\ReservationactiviteController::newForActivity'], ['activityId'], null, null, false, true, null]],
+        334 => [[['_route' => 'app_user_show', '_controller' => 'App\\Controller\\UserController::show'], ['idu'], ['GET' => 0], null, false, true, null]],
+        347 => [[['_route' => 'app_user_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['idu'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        355 => [[['_route' => 'app_user_delete', '_controller' => 'App\\Controller\\UserController::delete'], ['idu'], ['POST' => 0], null, false, true, null]],
+        395 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
+        415 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
+        461 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
+        475 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
+        495 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
+        508 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
+        518 => [
             [['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

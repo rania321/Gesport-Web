@@ -44,11 +44,11 @@
                 <form id="removeLoveForm" method="POST" action="{{ path('supprimer_love_activite', {'ida': activite.ida}) }}">
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ activite.ida) }}">
-                    <button type="button" onclick="removeLove()" class="btn btn-love"><img src="{{ asset('FrontOffice/img/love.png') }}" alt="Remove Love" style="width: 40px; height: 40px;"></button>
+                    <button type="button" onclick="removeLove()" class="btn"><img src="{{ asset('FrontOffice/img/love.png') }}" alt="Remove Love" style="width: 40px; height: 40px;"></button>
                 </form>
             {% else %}
                 <form method="POST" action="{{ path('ajouter_love_activite', {'ida': activite.ida}) }}">
-                    <button type="submit" class="btn btn-unlove"><img src="{{ asset('FrontOffice/img/unlove.png') }}" alt="Add Love" style="width: 40px; height: 40px;"></button>
+                    <button type="submit" class="btn "><img src="{{ asset('FrontOffice/img/unlove.png') }}" alt="Add Love" style="width: 40px; height: 40px;"></button>
                 </form>
             {% endif %}
 

@@ -187,7 +187,7 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
 
     }
 
-    // line 99
+    // line 101
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -197,34 +197,37 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "content"));
 
-        // line 100
+        // line 102
         echo "<div class=\"content-wrapper\">
-<div class=\"col-lg-12 grid-margin stretch-card\">
-<div class=\"card\">
-<div class=\"card-body\">
-<h4 class=\"card-title\">Reservations</h4>
-   <!-- <a href=\"";
-        // line 105
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_new");
-        echo "\" class=\"btn btn-primary btn-rounded btn-fw\">Ajouter Réservation</a> -->
-<div class=\"table-responsive\">
-    <table class=\"table table-striped\">
-        <thead>
-            <tr>
-              <!--  <th>Idr</th> -->
-                <th>Activité</th>
-                <th>Prénom User</th>
-                <th>Date</th>
-                <th>Heure</th>
-                <th>Statut</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        ";
-        // line 120
+    <div class=\"col-lg-12 grid-margin stretch-card\">
+        <div class=\"card\">
+            <div class=\"card-body\">
+                <h4 class=\"card-title\">Reservations</h4>
+                <div class=\"table-responsive\">
+                    <div class=\"ms-md-auto pe-md-3 d-flex align-items-center\">
+                        <div class=\"input-group\">
+                            <span class=\"input-group-text text-body\"><i class=\"fas fa-search\" aria-hidden=\"true\"></i></span>
+                            <input type=\"text\" class=\"form-control\" id=\"searchInput\" placeholder=\"Type here...\">
+                        </div>
+                    </div>
+                    <div id=\"searchResults\"> <!-- Ajout de la zone de résultats de recherche -->
+                    <div id=\"tabv\">
+                        <table class=\"table table-striped\">
+                            <thead>
+                                <tr>
+                                    <th>Activité</th>
+                                    <th>Prénom User</th>
+                                    <th>Date</th>
+                                    <th>Heure</th>
+                                    <th>Statut</th>
+                                    <th>actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ";
+        // line 128
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["reservationactivites"]) || array_key_exists("reservationactivites", $context) ? $context["reservationactivites"] : (function () { throw new RuntimeError('Variable "reservationactivites" does not exist.', 120, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["reservationactivites"]) || array_key_exists("reservationactivites", $context) ? $context["reservationactivites"] : (function () { throw new RuntimeError('Variable "reservationactivites" does not exist.', 128, $this->source); })()));
         $context['_iterated'] = false;
         $context['loop'] = [
           'parent' => $context['_parent'],
@@ -240,60 +243,56 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["reservationactivite"]) {
-            // line 121
-            echo "            <tr>
-              <!--  <td>";
-            // line 122
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 122), "html", null, true);
-            echo "</td> -->
-                <td>";
-            // line 123
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "ida", [], "any", false, false, false, 123), "noma", [], "any", false, false, false, 123), "html", null, true);
+            // line 129
+            echo "                                    <tr>
+                                        <td>";
+            // line 130
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "ida", [], "any", false, false, false, 130), "noma", [], "any", false, false, false, 130), "html", null, true);
             echo "</td>
-                <td>";
-            // line 124
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idu", [], "any", false, false, false, 124), "prenomu", [], "any", false, false, false, 124), "html", null, true);
+                                        <td>";
+            // line 131
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idu", [], "any", false, false, false, 131), "prenomu", [], "any", false, false, false, 131), "html", null, true);
             echo "</td>
-                <td>";
-            // line 125
-            ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "datedebutr", [], "any", false, false, false, 125)) ? (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "datedebutr", [], "any", false, false, false, 125), "Y-m-d"), "html", null, true))) : (print ("")));
+                                        <td>";
+            // line 132
+            ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "datedebutr", [], "any", false, false, false, 132)) ? (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "datedebutr", [], "any", false, false, false, 132), "Y-m-d"), "html", null, true))) : (print ("")));
             echo "</td>
-                <td>";
-            // line 126
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "heurer", [], "any", false, false, false, 126), "html", null, true);
-            echo "</td>
-                <td>
-                    ";
-            // line 128
-            if ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "statutr", [], "any", false, false, false, 128) == "confirmée")) {
-                // line 129
-                echo "                            <span class=\"badge badge-success\">Confirmée</span>
-                     ";
-            } else {
-                // line 131
-                echo "                            <span class=\"badge badge-warning\">En cours</span>
-                     ";
-            }
+                                        <td>";
             // line 133
-            echo "                </td>
-                <td>
-                <div class=\"d-flex\">
-                    <a href=\"";
-            // line 136
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_showBack", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 136)]), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "heurer", [], "any", false, false, false, 133), "html", null, true);
+            echo "</td>
+                                        <td>
+                                            ";
+            // line 135
+            if ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "statutr", [], "any", false, false, false, 135) == "confirmée")) {
+                // line 136
+                echo "                                                <span class=\"badge badge-success\">Confirmée</span>
+                                            ";
+            } else {
+                // line 138
+                echo "                                                <span class=\"badge badge-warning\">En cours</span>
+                                            ";
+            }
+            // line 140
+            echo "                                        </td>
+                                        <td>
+                                            <div class=\"d-flex\">
+                                                <a href=\"";
+            // line 143
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_showBack", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 143)]), "html", null, true);
             echo "\" class=\"btn btn-info btn-sm\">show</a>
-                    <a href=\"";
-            // line 137
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_editBack", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 137)]), "html", null, true);
+                                                <a href=\"";
+            // line 144
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_editBack", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 144)]), "html", null, true);
             echo "\" class=\"btn btn-warning btn-sm\">edit</a>
-                    ";
-            // line 138
+                                                ";
+            // line 145
             echo twig_include($this->env, $context, "reservationactivite/_delete_form1.html.twig");
             echo "
-                </div>
-                </td>
-            </tr>
-        ";
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ";
             $context['_iterated'] = true;
             ++$context['loop']['index0'];
             ++$context['loop']['index'];
@@ -305,24 +304,28 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
             }
         }
         if (!$context['_iterated']) {
-            // line 143
-            echo "            <tr>
-                <td colspan=\"5\">no records found</td>
-            </tr>
-        ";
+            // line 150
+            echo "                                    <tr>
+                                        <td colspan=\"5\">no records found</td>
+                                    </tr>
+                                ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['reservationactivite'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 147
-        echo "        </tbody>
-    </table>
+        // line 154
+        echo "                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
-</div>
-</div>
-<div class=\"row\">
+
 <!-- Code de l'histogramme des statistiques -->
+<div class=\"content-wrapper\">
             <div class=\"col-lg-6 grid-margin stretch-card\">
               <div class=\"card\">
                 <div class=\"card-body\">
@@ -335,8 +338,8 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var statistiquesData = ";
-        // line 166
-        echo json_encode((isset($context["statistiques"]) || array_key_exists("statistiques", $context) ? $context["statistiques"] : (function () { throw new RuntimeError('Variable "statistiques" does not exist.', 166, $this->source); })()));
+        // line 177
+        echo json_encode((isset($context["statistiques"]) || array_key_exists("statistiques", $context) ? $context["statistiques"] : (function () { throw new RuntimeError('Variable "statistiques" does not exist.', 177, $this->source); })()));
         echo ";
         
         var ctx = document.getElementById('statistiquesChart').getContext('2d');
@@ -370,6 +373,7 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
         });
     });
 </script>
+
             <div class=\"col-lg-6 grid-margin stretch-card\">
               <div class=\"card\">
                 <div class=\"card-body\">
@@ -382,20 +386,13 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
           </div>
           </div>
 
-
-
-
-
-
   <!-- Code du pie chart pour les statistiques -->
-
-
 <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var statistiquesData = ";
-        // line 222
-        echo json_encode((isset($context["statistiques"]) || array_key_exists("statistiques", $context) ? $context["statistiques"] : (function () { throw new RuntimeError('Variable "statistiques" does not exist.', 222, $this->source); })()));
+        // line 227
+        echo json_encode((isset($context["statistiques"]) || array_key_exists("statistiques", $context) ? $context["statistiques"] : (function () { throw new RuntimeError('Variable "statistiques" does not exist.', 227, $this->source); })()));
         echo ";
         
         var ctx = document.getElementById('statistiquesPieChart').getContext('2d');
@@ -430,6 +427,41 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
     });
 </script>
 
+
+<script>
+document.addEventListener(\"DOMContentLoaded\", function() {
+    var searchInput = document.getElementById('searchInput');
+    var tabv = document.getElementById('tabv');
+    var searchResults = document.getElementById('searchResults');
+    var tableHead = tabv.querySelector('thead').outerHTML;
+
+    searchInput.addEventListener('input', function() {
+        var searchTerm = searchInput.value.trim().toLowerCase();
+        var matchedReserv = [];
+
+        // Sélectionnez toutes les lignes du tableau
+        var rows = tabv.querySelectorAll('tbody tr');
+
+        rows.forEach(function(row) {
+            var activityName = row.querySelector('td:first-child').textContent.toLowerCase();
+            var userName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+            if (activityName.includes(searchTerm) || userName.includes(searchTerm)) {
+                matchedReserv.push(row.outerHTML);
+            }
+        });
+
+        // Affichez les résultats de la recherche avec la classe de table appropriée
+        if (matchedReserv.length > 0) {
+            searchResults.innerHTML = '<table class=\"table table-striped\">' + tableHead + '<tbody>' + matchedReserv.join('') + '</tbody></table>';
+        } else {
+            // Supprimez le contenu de la zone d'affichage des résultats s'il n'y a aucun résultat trouvé
+            searchResults.innerHTML = '';
+        }
+    });
+});
+
+</script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -460,7 +492,7 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  398 => 222,  339 => 166,  318 => 147,  309 => 143,  291 => 138,  287 => 137,  283 => 136,  278 => 133,  274 => 131,  270 => 129,  268 => 128,  263 => 126,  259 => 125,  255 => 124,  251 => 123,  247 => 122,  244 => 121,  226 => 120,  208 => 105,  201 => 100,  191 => 99,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
+        return array (  395 => 227,  342 => 177,  317 => 154,  308 => 150,  290 => 145,  286 => 144,  282 => 143,  277 => 140,  273 => 138,  269 => 136,  267 => 135,  262 => 133,  258 => 132,  254 => 131,  250 => 130,  247 => 129,  229 => 128,  201 => 102,  191 => 101,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -563,62 +595,73 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
 </nav>
 {% endblock %}
 
+
+
 {% block content %}
 <div class=\"content-wrapper\">
-<div class=\"col-lg-12 grid-margin stretch-card\">
-<div class=\"card\">
-<div class=\"card-body\">
-<h4 class=\"card-title\">Reservations</h4>
-   <!-- <a href=\"{{ path('app_reservationactivite_new') }}\" class=\"btn btn-primary btn-rounded btn-fw\">Ajouter Réservation</a> -->
-<div class=\"table-responsive\">
-    <table class=\"table table-striped\">
-        <thead>
-            <tr>
-              <!--  <th>Idr</th> -->
-                <th>Activité</th>
-                <th>Prénom User</th>
-                <th>Date</th>
-                <th>Heure</th>
-                <th>Statut</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for reservationactivite in reservationactivites %}
-            <tr>
-              <!--  <td>{{ reservationactivite.idr }}</td> -->
-                <td>{{ reservationactivite.ida.noma }}</td>
-                <td>{{ reservationactivite.idu.prenomu }}</td>
-                <td>{{ reservationactivite.datedebutr ? reservationactivite.datedebutr|date('Y-m-d') : '' }}</td>
-                <td>{{ reservationactivite.heurer }}</td>
-                <td>
-                    {% if reservationactivite.statutr == 'confirmée' %}
-                            <span class=\"badge badge-success\">Confirmée</span>
-                     {% else %}
-                            <span class=\"badge badge-warning\">En cours</span>
-                     {% endif %}
-                </td>
-                <td>
-                <div class=\"d-flex\">
-                    <a href=\"{{ path('app_reservationactivite_showBack', {'idr': reservationactivite.idr}) }}\" class=\"btn btn-info btn-sm\">show</a>
-                    <a href=\"{{ path('app_reservationactivite_editBack', {'idr': reservationactivite.idr}) }}\" class=\"btn btn-warning btn-sm\">edit</a>
-                    {{ include('reservationactivite/_delete_form1.html.twig') }}
+    <div class=\"col-lg-12 grid-margin stretch-card\">
+        <div class=\"card\">
+            <div class=\"card-body\">
+                <h4 class=\"card-title\">Reservations</h4>
+                <div class=\"table-responsive\">
+                    <div class=\"ms-md-auto pe-md-3 d-flex align-items-center\">
+                        <div class=\"input-group\">
+                            <span class=\"input-group-text text-body\"><i class=\"fas fa-search\" aria-hidden=\"true\"></i></span>
+                            <input type=\"text\" class=\"form-control\" id=\"searchInput\" placeholder=\"Type here...\">
+                        </div>
+                    </div>
+                    <div id=\"searchResults\"> <!-- Ajout de la zone de résultats de recherche -->
+                    <div id=\"tabv\">
+                        <table class=\"table table-striped\">
+                            <thead>
+                                <tr>
+                                    <th>Activité</th>
+                                    <th>Prénom User</th>
+                                    <th>Date</th>
+                                    <th>Heure</th>
+                                    <th>Statut</th>
+                                    <th>actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for reservationactivite in reservationactivites %}
+                                    <tr>
+                                        <td>{{ reservationactivite.ida.noma }}</td>
+                                        <td>{{ reservationactivite.idu.prenomu }}</td>
+                                        <td>{{ reservationactivite.datedebutr ? reservationactivite.datedebutr|date('Y-m-d') : '' }}</td>
+                                        <td>{{ reservationactivite.heurer }}</td>
+                                        <td>
+                                            {% if reservationactivite.statutr == 'confirmée' %}
+                                                <span class=\"badge badge-success\">Confirmée</span>
+                                            {% else %}
+                                                <span class=\"badge badge-warning\">En cours</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class=\"d-flex\">
+                                                <a href=\"{{ path('app_reservationactivite_showBack', {'idr': reservationactivite.idr}) }}\" class=\"btn btn-info btn-sm\">show</a>
+                                                <a href=\"{{ path('app_reservationactivite_editBack', {'idr': reservationactivite.idr}) }}\" class=\"btn btn-warning btn-sm\">edit</a>
+                                                {{ include('reservationactivite/_delete_form1.html.twig') }}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan=\"5\">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan=\"5\">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
-</div>
-</div>
-<div class=\"row\">
+
 <!-- Code de l'histogramme des statistiques -->
+<div class=\"content-wrapper\">
             <div class=\"col-lg-6 grid-margin stretch-card\">
               <div class=\"card\">
                 <div class=\"card-body\">
@@ -663,6 +706,7 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
         });
     });
 </script>
+
             <div class=\"col-lg-6 grid-margin stretch-card\">
               <div class=\"card\">
                 <div class=\"card-body\">
@@ -675,14 +719,7 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
           </div>
           </div>
 
-
-
-
-
-
   <!-- Code du pie chart pour les statistiques -->
-
-
 <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -720,6 +757,41 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
     });
 </script>
 
+
+<script>
+document.addEventListener(\"DOMContentLoaded\", function() {
+    var searchInput = document.getElementById('searchInput');
+    var tabv = document.getElementById('tabv');
+    var searchResults = document.getElementById('searchResults');
+    var tableHead = tabv.querySelector('thead').outerHTML;
+
+    searchInput.addEventListener('input', function() {
+        var searchTerm = searchInput.value.trim().toLowerCase();
+        var matchedReserv = [];
+
+        // Sélectionnez toutes les lignes du tableau
+        var rows = tabv.querySelectorAll('tbody tr');
+
+        rows.forEach(function(row) {
+            var activityName = row.querySelector('td:first-child').textContent.toLowerCase();
+            var userName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+            if (activityName.includes(searchTerm) || userName.includes(searchTerm)) {
+                matchedReserv.push(row.outerHTML);
+            }
+        });
+
+        // Affichez les résultats de la recherche avec la classe de table appropriée
+        if (matchedReserv.length > 0) {
+            searchResults.innerHTML = '<table class=\"table table-striped\">' + tableHead + '<tbody>' + matchedReserv.join('') + '</tbody></table>';
+        } else {
+            // Supprimez le contenu de la zone d'affichage des résultats s'il n'y a aucun résultat trouvé
+            searchResults.innerHTML = '';
+        }
+    });
+});
+
+</script>
 {% endblock %}", "reservationactivite/indexBack.html.twig", "C:\\Users\\Rania\\Desktop\\gesportWeb\\templates\\reservationactivite\\indexBack.html.twig");
     }
 }

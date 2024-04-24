@@ -201,25 +201,28 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "content"));
 
         // line 83
-        echo "   <h1>     </h1> 
+        echo "<a href=\"";
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_favoris");
+        echo "\" class=\"btn btn-light text-primary rounded-pill py-3 px-5 mt-2\">Mes Favoris</a>
+   <h1>     </h1> 
     <div class=\"row\">
         ";
-        // line 85
+        // line 86
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["activites"]) || array_key_exists("activites", $context) ? $context["activites"] : (function () { throw new RuntimeError('Variable "activites" does not exist.', 85, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["activites"]) || array_key_exists("activites", $context) ? $context["activites"] : (function () { throw new RuntimeError('Variable "activites" does not exist.', 86, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["activite"]) {
-            // line 86
+            // line 87
             echo "            <div class=\"col-md-4\">
                 <div class=\"card mb-4\">
                     <div class=\"blog-item\">
                      <div class=\"blog-img\">
                         <div class=\"blog-img-inner\">     
                             <img src=\"";
-            // line 91
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["activite"], "imagea", [], "any", false, false, false, 91))), "html", null, true);
+            // line 92
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["activite"], "imagea", [], "any", false, false, false, 92))), "html", null, true);
             echo "\" class=\"img-fluid w-100 rounded-top\" alt=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 91), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 92), "html", null, true);
             echo "\">
                             <div class=\"blog-icon\">
                                         <a href=\"#\" class=\"my-auto\"><i class=\"fas fa-link fa-2x text-white\"></i></a>
@@ -228,29 +231,29 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
                     </div>   
                     <div class=\"card-body\">
                         <h5 class=\"card-title\">";
-            // line 98
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 98), "html", null, true);
+            // line 99
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 99), "html", null, true);
             echo "</h5>
                         <p class=\"card-text\">";
-            // line 99
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "descria", [], "any", false, false, false, 99), "html", null, true);
+            // line 100
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "descria", [], "any", false, false, false, 100), "html", null, true);
             echo "</p>
                         <a href=\"";
-            // line 100
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_show", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 100)]), "html", null, true);
+            // line 101
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_show", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 101)]), "html", null, true);
             echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Voir</a>
                         ";
-            // line 101
-            if ((twig_get_attribute($this->env, $this->source, $context["activite"], "dispoa", [], "any", false, false, false, 101) == "Disponible")) {
-                // line 102
+            // line 102
+            if ((twig_get_attribute($this->env, $this->source, $context["activite"], "dispoa", [], "any", false, false, false, 102) == "Disponible")) {
+                // line 103
                 echo "                        <a href=\"";
-                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservation_new_for_activity", ["activityId" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 102)]), "html", null, true);
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservation_new_for_activity", ["activityId" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 103)]), "html", null, true);
                 echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Reserver</a>
                         ";
             }
-            // line 104
+            // line 105
             echo "                    <!--    <a href=\"";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_new", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 104)]), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_new", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 105)]), "html", null, true);
             echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Réserver</a>  -->
                     </div>
                     </div>
@@ -260,7 +263,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 110
+            // line 111
             echo "            <div class=\"col\">
                 <p>No records found</p>
             </div>
@@ -269,9 +272,41 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['activite'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 114
+        // line 115
         echo "    </div>
-";
+
+
+    ";
+        // line 119
+        echo "    <style>
+        #google_translate_element {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-shadow: inset 0 0 0 0 var(--bs-primary);
+            border: 1px solid #8B0000;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+        }
+
+        #google_translate_element:hover {
+            cursor: pointer;
+            opacity: 0.9;
+            box-shadow: inset 0 0 0 0 var(--bs-primary);
+        }
+        #google_translate_element {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+    </style>
+    <div id=\"google_translate_element\"></div>
+    <script type=\"text/javascript\" src=\"//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit\"></script>
+    <script type=\"text/javascript\">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -301,7 +336,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
      */
     public function getDebugInfo()
     {
-        return array (  273 => 114,  264 => 110,  252 => 104,  246 => 102,  244 => 101,  240 => 100,  236 => 99,  232 => 98,  220 => 91,  213 => 86,  208 => 85,  204 => 83,  194 => 82,  175 => 72,  165 => 71,  90 => 5,  80 => 4,  61 => 3,  38 => 1,);
+        return array (  281 => 119,  276 => 115,  267 => 111,  255 => 105,  249 => 103,  247 => 102,  243 => 101,  239 => 100,  235 => 99,  223 => 92,  216 => 87,  211 => 86,  204 => 83,  194 => 82,  175 => 72,  165 => 71,  90 => 5,  80 => 4,  61 => 3,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -388,6 +423,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
         </div>
 {% endblock %}
 {% block content %}
+<a href=\"{{ path('app_activite_favoris') }}\" class=\"btn btn-light text-primary rounded-pill py-3 px-5 mt-2\">Mes Favoris</a>
    <h1>     </h1> 
     <div class=\"row\">
         {% for activite in activites %}
@@ -420,6 +456,38 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
             </div>
         {% endfor %}
     </div>
+
+
+    {# TRADUCTION #}
+    <style>
+        #google_translate_element {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-shadow: inset 0 0 0 0 var(--bs-primary);
+            border: 1px solid #8B0000;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+        }
+
+        #google_translate_element:hover {
+            cursor: pointer;
+            opacity: 0.9;
+            box-shadow: inset 0 0 0 0 var(--bs-primary);
+        }
+        #google_translate_element {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+    </style>
+    <div id=\"google_translate_element\"></div>
+    <script type=\"text/javascript\" src=\"//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit\"></script>
+    <script type=\"text/javascript\">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    {# TRADUCTION #}
 {% endblock %}
 
 ", "activite/index.html.twig", "C:\\Users\\Rania\\Desktop\\gesportWeb\\templates\\activite\\index.html.twig");

@@ -208,7 +208,24 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_new");
         echo "\" class=\"btn btn-primary btn-rounded btn-fw\">Ajouter Activité</a>
 <div class=\"table-responsive\">
-<input type=\"text\" id=\"search\" onkeyup=\"search()\" class=\"form-control\" placeholder=\"Search\">
+<div class=\"ms-md-auto pe-md-3 d-flex align-items-center\">
+                        <div class=\"input-group\">
+                            <input type=\"text\" class=\"form-control\" id=\"searchInput\" placeholder=\"Type here...\">
+                        </div>
+                    </div>
+ <div class=\"tri-dropdown\" >
+    <select onchange=\"handleChange(this)\" class=\"btn btn-primary dropdown-toggle\">
+        <option value=\"\">Trier par...</option>
+        <option value=\"noma_asc\">Nom Ascendant</option>
+        <option value=\"noma_desc\">Nom Descendant</option>
+        <option value=\"dispoa_asc\">Disponibilté Ascendant</option>
+        <option value=\"dispoa_desc\">Disponibilité Descendant</option>
+        <option value=\"descria_asc\">Description Ascendant</option>
+        <option value=\"descria_desc\">Description Descendant</option>
+    </select>
+</div>
+
+                    <div id=\"searchResults\"> 
 <div id=\"tabv\">
     <table class=\"table table-striped\">
         <thead>
@@ -224,9 +241,9 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
         </thead>
         <tbody>
         ";
-        // line 122
+        // line 139
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["activites"]) || array_key_exists("activites", $context) ? $context["activites"] : (function () { throw new RuntimeError('Variable "activites" does not exist.', 122, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["activites"]) || array_key_exists("activites", $context) ? $context["activites"] : (function () { throw new RuntimeError('Variable "activites" does not exist.', 139, $this->source); })()));
         $context['_iterated'] = false;
         $context['loop'] = [
           'parent' => $context['_parent'],
@@ -242,50 +259,49 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["activite"]) {
-            // line 123
+            // line 140
             echo "            <tr>
-                
                 <td>";
-            // line 125
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 125), "html", null, true);
+            // line 141
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 141), "html", null, true);
             echo "</td>
                 <td>";
-            // line 126
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "typea", [], "any", false, false, false, 126), "html", null, true);
+            // line 142
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "typea", [], "any", false, false, false, 142), "html", null, true);
             echo "</td>
                 <td>
                     ";
-            // line 128
-            if ((twig_get_attribute($this->env, $this->source, $context["activite"], "dispoa", [], "any", false, false, false, 128) == "Disponible")) {
-                // line 129
+            // line 144
+            if ((twig_get_attribute($this->env, $this->source, $context["activite"], "dispoa", [], "any", false, false, false, 144) == "Disponible")) {
+                // line 145
                 echo "                            <span class=\"badge badge-success\">Disponible</span>
                      ";
             } else {
-                // line 131
+                // line 147
                 echo "                            <span class=\"badge badge-danger\">Non disponible</span>
                      ";
             }
-            // line 133
+            // line 149
             echo "                </td>
                 
                 <td>";
-            // line 135
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "descria", [], "any", false, false, false, 135), "html", null, true);
+            // line 151
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "descria", [], "any", false, false, false, 151), "html", null, true);
             echo "</td>
                 <td><img src=\"";
-            // line 136
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["activite"], "imagea", [], "any", false, false, false, 136))), "html", null, true);
+            // line 152
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["activite"], "imagea", [], "any", false, false, false, 152))), "html", null, true);
             echo "\" class=\"card-img-top\" alt=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 136), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 152), "html", null, true);
             echo "\"></td>
                 <td>
                 <div class=\"d-flex\">
                     <a href=\"";
-            // line 139
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_edit", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 139)]), "html", null, true);
+            // line 155
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_edit", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 155)]), "html", null, true);
             echo "\" class=\"btn btn-warning btn-sm\">Modifier</a>
                     ";
-            // line 140
+            // line 156
             echo twig_include($this->env, $context, "activite/_delete_form.html.twig");
             echo "
                 </div>
@@ -303,7 +319,7 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
             }
         }
         if (!$context['_iterated']) {
-            // line 145
+            // line 161
             echo "            <tr>
                 <td colspan=\"7\">no records found</td>
             </tr>
@@ -312,7 +328,7 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['activite'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 149
+        // line 165
         echo "        </tbody>
     </table>
 
@@ -322,34 +338,87 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
 </div>
 </div>
 </div>
+</div>
 
 <script>
-    function search() {
-        let nameInput = document.getElementById('search');
-    
-        if (nameInput) {
-            let name = nameInput.value;
-            
-            fetch(`/activite/rechercheAjax?q=\${name}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(response => response.text())
-            .then(data => {
-                let div = document.getElementById('activites');
-                div.innerHTML = data;
-            })
-            .catch(error => console.error('Error:', error));
+document.addEventListener(\"DOMContentLoaded\", function() {
+    var searchInput = document.getElementById('searchInput');
+    var tabv = document.getElementById('tabv');
+    var searchResults = document.getElementById('searchResults');
+    var tableHead = tabv.querySelector('thead').outerHTML;
+
+    searchInput.addEventListener('input', function() {
+        var searchTerm = searchInput.value.trim().toLowerCase();
+        var matchedReserv = [];
+
+        // Sélectionnez toutes les lignes du tableau
+        var rows = tabv.querySelectorAll('tbody tr');
+
+        rows.forEach(function(row) {
+            var activityName = row.querySelector('td:first-child').textContent.toLowerCase();
+            var userName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+            if (activityName.includes(searchTerm) || userName.includes(searchTerm)) {
+                matchedReserv.push(row.outerHTML);
+            }
+        });
+
+        // Affichez les résultats de la recherche avec la classe de table appropriée
+        if (matchedReserv.length > 0) {
+            searchResults.innerHTML = '<table class=\"table table-striped\">' + tableHead + '<tbody>' + matchedReserv.join('') + '</tbody></table>';
         } else {
-            console.error('One or more elements not found.');
+            // Supprimez le contenu de la zone d'affichage des résultats s'il n'y a aucun résultat trouvé
+            searchResults.innerHTML = '';
         }
+    });
+});
+
+</script>
+
+<script>
+function handleChange(select) {
+    var selectedOption = select.value;
+    if (selectedOption !== \"\") {
+        var tri = \"\";
+        var order = \"\";
+
+        switch (selectedOption) {
+            case \"noma_asc\":
+                tri = \"noma\";
+                order = \"asc\";
+                break;
+            case \"noma_desc\":
+                tri = \"noma\";
+                order = \"desc\";
+                break;
+            case \"dispoa_asc\":
+                tri = \"dispoa\";
+                order = \"asc\";
+                break;
+            case \"dispoa_desc\":
+                tri = \"dispoa\";
+                order = \"desc\";
+                break;
+            case \"descria_asc\":
+                tri = \"descria\";
+                order = \"asc\";
+                break;
+            case \"descria_desc\":
+                tri = \"descria\";
+                order = \"desc\";
+                break;
+            default:
+                break;
+        }
+
+        // Redirection vers la route avec les paramètres de tri
+        window.location.href = \"";
+        // line 248
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_indexBack");
+        echo "\" + \"?tri=\" + tri + \"&order=\" + order;
     }
-    
-    
-</script> 
+}
+</script>
 
 ";
         
@@ -381,7 +450,7 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  316 => 149,  307 => 145,  289 => 140,  285 => 139,  277 => 136,  273 => 135,  269 => 133,  265 => 131,  261 => 129,  259 => 128,  254 => 126,  250 => 125,  246 => 123,  228 => 122,  208 => 105,  201 => 100,  191 => 99,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
+        return array (  417 => 248,  332 => 165,  323 => 161,  305 => 156,  301 => 155,  293 => 152,  289 => 151,  285 => 149,  281 => 147,  277 => 145,  275 => 144,  270 => 142,  266 => 141,  263 => 140,  245 => 139,  208 => 105,  201 => 100,  191 => 99,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -492,7 +561,24 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
     <h4 class=\"card-title\">Activités</h4>
     <a href=\"{{ path('app_activite_new') }}\" class=\"btn btn-primary btn-rounded btn-fw\">Ajouter Activité</a>
 <div class=\"table-responsive\">
-<input type=\"text\" id=\"search\" onkeyup=\"search()\" class=\"form-control\" placeholder=\"Search\">
+<div class=\"ms-md-auto pe-md-3 d-flex align-items-center\">
+                        <div class=\"input-group\">
+                            <input type=\"text\" class=\"form-control\" id=\"searchInput\" placeholder=\"Type here...\">
+                        </div>
+                    </div>
+ <div class=\"tri-dropdown\" >
+    <select onchange=\"handleChange(this)\" class=\"btn btn-primary dropdown-toggle\">
+        <option value=\"\">Trier par...</option>
+        <option value=\"noma_asc\">Nom Ascendant</option>
+        <option value=\"noma_desc\">Nom Descendant</option>
+        <option value=\"dispoa_asc\">Disponibilté Ascendant</option>
+        <option value=\"dispoa_desc\">Disponibilité Descendant</option>
+        <option value=\"descria_asc\">Description Ascendant</option>
+        <option value=\"descria_desc\">Description Descendant</option>
+    </select>
+</div>
+
+                    <div id=\"searchResults\"> 
 <div id=\"tabv\">
     <table class=\"table table-striped\">
         <thead>
@@ -509,7 +595,6 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
         <tbody>
         {% for activite in activites %}
             <tr>
-                
                 <td>{{ activite.noma }}</td>
                 <td>{{ activite.typea }}</td>
                 <td>
@@ -543,34 +628,84 @@ class __TwigTemplate_1436a77965574ae1a72f0b9fbfc48976 extends Template
 </div>
 </div>
 </div>
+</div>
 
 <script>
-    function search() {
-        let nameInput = document.getElementById('search');
-    
-        if (nameInput) {
-            let name = nameInput.value;
-            
-            fetch(`/activite/rechercheAjax?q=\${name}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(response => response.text())
-            .then(data => {
-                let div = document.getElementById('activites');
-                div.innerHTML = data;
-            })
-            .catch(error => console.error('Error:', error));
+document.addEventListener(\"DOMContentLoaded\", function() {
+    var searchInput = document.getElementById('searchInput');
+    var tabv = document.getElementById('tabv');
+    var searchResults = document.getElementById('searchResults');
+    var tableHead = tabv.querySelector('thead').outerHTML;
+
+    searchInput.addEventListener('input', function() {
+        var searchTerm = searchInput.value.trim().toLowerCase();
+        var matchedReserv = [];
+
+        // Sélectionnez toutes les lignes du tableau
+        var rows = tabv.querySelectorAll('tbody tr');
+
+        rows.forEach(function(row) {
+            var activityName = row.querySelector('td:first-child').textContent.toLowerCase();
+            var userName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+            if (activityName.includes(searchTerm) || userName.includes(searchTerm)) {
+                matchedReserv.push(row.outerHTML);
+            }
+        });
+
+        // Affichez les résultats de la recherche avec la classe de table appropriée
+        if (matchedReserv.length > 0) {
+            searchResults.innerHTML = '<table class=\"table table-striped\">' + tableHead + '<tbody>' + matchedReserv.join('') + '</tbody></table>';
         } else {
-            console.error('One or more elements not found.');
+            // Supprimez le contenu de la zone d'affichage des résultats s'il n'y a aucun résultat trouvé
+            searchResults.innerHTML = '';
         }
+    });
+});
+
+</script>
+
+<script>
+function handleChange(select) {
+    var selectedOption = select.value;
+    if (selectedOption !== \"\") {
+        var tri = \"\";
+        var order = \"\";
+
+        switch (selectedOption) {
+            case \"noma_asc\":
+                tri = \"noma\";
+                order = \"asc\";
+                break;
+            case \"noma_desc\":
+                tri = \"noma\";
+                order = \"desc\";
+                break;
+            case \"dispoa_asc\":
+                tri = \"dispoa\";
+                order = \"asc\";
+                break;
+            case \"dispoa_desc\":
+                tri = \"dispoa\";
+                order = \"desc\";
+                break;
+            case \"descria_asc\":
+                tri = \"descria\";
+                order = \"asc\";
+                break;
+            case \"descria_desc\":
+                tri = \"descria\";
+                order = \"desc\";
+                break;
+            default:
+                break;
+        }
+
+        // Redirection vers la route avec les paramètres de tri
+        window.location.href = \"{{ path('app_activite_indexBack') }}\" + \"?tri=\" + tri + \"&order=\" + order;
     }
-    
-    
-</script> 
+}
+</script>
 
 {% endblock %}", "activite/indexBack.html.twig", "C:\\Users\\Rania\\Desktop\\gesportWeb\\templates\\activite\\indexBack.html.twig");
     }

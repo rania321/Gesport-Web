@@ -8,6 +8,7 @@ use App\Entity\Activitefavoris;
 use App\Form\ActiviteType;
 use App\Form\ReservationactiviteType;
 use App\Repository\ActiviteRepository;
+use App\Repository\ActivitefavorisRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,10 +29,31 @@ class ActiviteController extends AbstractController
     }
 
     #[Route('/back', name: 'app_activite_indexBack', methods: ['GET'])]
-    public function indexBack(ActiviteRepository $activiteRepository): Response
+    public function indexBack(ActiviteRepository $activiteRepository, Request $request): Response
     {
+        // Récupérer le paramètre de tri depuis la requête
+        $tri = $request->query->get('tri');
+        $order = $request->query->get('order');
+        $activites = $activiteRepository->findAll();
+         // Effectuez le tri en fonction du paramètre
+        if ($tri === 'noma') {
+            // Tri par date
+            usort($activites, function($a, $b) use ($order) {
+                return ($order === 'desc' ? -1 : 1) * ($a->getNoma() <=> $b->getNoma());
+            });
+        } elseif ($tri === 'dispoa') {
+            // Tri par catégorie
+            usort($activites, function($a, $b) use ($order) {
+                return ($order === 'desc' ? -1 : 1) * strcmp($a->getDispoa(), $b->getDispoa());
+            });
+        } elseif ($tri === 'descria') {
+            // Tri par statut
+            usort($activites, function($a, $b) use ($order) {
+                return ($order === 'desc' ? -1 : 1) * strcmp($a->getDescria(), $b->getDescria());
+            });
+        }
         return $this->render('activite/indexBack.html.twig', [
-            'activites' => $activiteRepository->findAll(),
+            'activites' => $activites,
         ]);
     }
 
@@ -192,7 +214,7 @@ class ActiviteController extends AbstractController
     }
 
     //recherche back
-    #[Route('/rechercheAjax', name: 'rechercheAjax')]
+    #[Route('/rechercheAjax', name: 'rechercheAjax', methods: ['GET'])]
     public function searchAjax(Request $request, ActiviteRepository $repo)
     {
         // Récupérez le paramètre de recherche depuis la requête
@@ -208,6 +230,15 @@ class ActiviteController extends AbstractController
 
         // Renvoyer la réponse avec le HTML rendu
         return new Response($html);
+    }
+
+    //liste des activites favoris
+    #[Route('/listFav', name: 'app_activite_favoris', methods: ['GET'])]
+    public function favoris(ActiviteRepository $activiteRepository): Response
+    {
+        return $this->render('activite/favoris.html.twig', [
+            'activites' => $activiteRepository->findAll(),
+        ]);
     }
 
 }

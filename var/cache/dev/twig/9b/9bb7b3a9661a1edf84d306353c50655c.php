@@ -173,7 +173,7 @@ class __TwigTemplate_f3a86db0919ad71910ac133becd0e231 extends Template
             // line 46
             echo twig_escape_filter($this->env, $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 46, $this->source); })()), "ida", [], "any", false, false, false, 46))), "html", null, true);
             echo "\">
-                    <button type=\"button\" onclick=\"removeLove()\" class=\"btn btn-love\"><img src=\"";
+                    <button type=\"button\" onclick=\"removeLove()\" class=\"btn\"><img src=\"";
             // line 47
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("FrontOffice/img/love.png"), "html", null, true);
             echo "\" alt=\"Remove Love\" style=\"width: 40px; height: 40px;\"></button>
@@ -184,7 +184,7 @@ class __TwigTemplate_f3a86db0919ad71910ac133becd0e231 extends Template
             echo "                <form method=\"POST\" action=\"";
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("ajouter_love_activite", ["ida" => twig_get_attribute($this->env, $this->source, (isset($context["activite"]) || array_key_exists("activite", $context) ? $context["activite"] : (function () { throw new RuntimeError('Variable "activite" does not exist.', 50, $this->source); })()), "ida", [], "any", false, false, false, 50)]), "html", null, true);
             echo "\">
-                    <button type=\"submit\" class=\"btn btn-unlove\"><img src=\"";
+                    <button type=\"submit\" class=\"btn \"><img src=\"";
             // line 51
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("FrontOffice/img/unlove.png"), "html", null, true);
             echo "\" alt=\"Add Love\" style=\"width: 40px; height: 40px;\"></button>
@@ -317,11 +317,11 @@ class __TwigTemplate_f3a86db0919ad71910ac133becd0e231 extends Template
                 <form id=\"removeLoveForm\" method=\"POST\" action=\"{{ path('supprimer_love_activite', {'ida': activite.ida}) }}\">
                     <input type=\"hidden\" name=\"_method\" value=\"DELETE\">
                     <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ activite.ida) }}\">
-                    <button type=\"button\" onclick=\"removeLove()\" class=\"btn btn-love\"><img src=\"{{ asset('FrontOffice/img/love.png') }}\" alt=\"Remove Love\" style=\"width: 40px; height: 40px;\"></button>
+                    <button type=\"button\" onclick=\"removeLove()\" class=\"btn\"><img src=\"{{ asset('FrontOffice/img/love.png') }}\" alt=\"Remove Love\" style=\"width: 40px; height: 40px;\"></button>
                 </form>
             {% else %}
                 <form method=\"POST\" action=\"{{ path('ajouter_love_activite', {'ida': activite.ida}) }}\">
-                    <button type=\"submit\" class=\"btn btn-unlove\"><img src=\"{{ asset('FrontOffice/img/unlove.png') }}\" alt=\"Add Love\" style=\"width: 40px; height: 40px;\"></button>
+                    <button type=\"submit\" class=\"btn \"><img src=\"{{ asset('FrontOffice/img/unlove.png') }}\" alt=\"Add Love\" style=\"width: 40px; height: 40px;\"></button>
                 </form>
             {% endif %}
 

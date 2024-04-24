@@ -78,10 +78,12 @@ return [[
 '[C]App%5CController%5CActiviteController%23delete' => 1,
 'App%5CController%5CActiviteController%23reserv' => 0,
 '[C]App%5CController%5CActiviteController%23reserv' => 1,
-'App%5CController%5CActiviteController%23addToFavorites' => 0,
-'[C]App%5CController%5CActiviteController%23addToFavorites' => 1,
-'App%5CController%5CActiviteController%23removeFromFavorites' => 0,
-'[C]App%5CController%5CActiviteController%23removeFromFavorites' => 1,
+'App%5CController%5CActiviteController%23ajouterLove' => 0,
+'[C]App%5CController%5CActiviteController%23ajouterLove' => 1,
+'App%5CController%5CActiviteController%23supprimerLove' => 0,
+'[C]App%5CController%5CActiviteController%23supprimerLove' => 1,
+'App%5CController%5CActiviteController%23searchAjax' => 0,
+'[C]App%5CController%5CActiviteController%23searchAjax' => 1,
 'App%5CController%5CExampleController' => 0,
 '[C]App%5CController%5CExampleController' => 1,
 'App%5CController%5CExampleController%23index' => 0,
@@ -112,10 +114,6 @@ return [[
 '[C]App%5CController%5CReservationactiviteController%23newForActivity' => 1,
 'App%5CController%5CReservationactiviteController%23generatePDF' => 0,
 '[C]App%5CController%5CReservationactiviteController%23generatePDF' => 1,
-'App%5CController%5CReservationactiviteController%23qrCode' => 0,
-'[C]App%5CController%5CReservationactiviteController%23qrCode' => 1,
-'App%5CController%5CReservationactiviteController%23qrGenerator' => 0,
-'[C]App%5CController%5CReservationactiviteController%23qrGenerator' => 1,
 'App%5CController%5CUserController' => 0,
 '[C]App%5CController%5CUserController' => 1,
 'App%5CController%5CUserController%23index' => 0,
@@ -152,8 +150,6 @@ return [[
 '[C]App%5CEntity%5CActivite%23getImagea' => 1,
 'App%5CEntity%5CActivite%23setImagea' => 0,
 '[C]App%5CEntity%5CActivite%23setImagea' => 1,
-'App%5CEntity%5CActivite%23isFavoriteForUser' => 0,
-'[C]App%5CEntity%5CActivite%23isFavoriteForUser' => 1,
 'App%5CEntity%5CActivite%23__construct' => 0,
 '[C]App%5CEntity%5CActivite%23__construct' => 1,
 'App%5CEntity%5CActivite%23getActivitefavoriss' => 0,
@@ -174,7 +170,7 @@ return [[
 '[C]App%5CEntity%5CActivite%24descria' => 1,
 'App%5CEntity%5CActivite%24imagea' => 0,
 '[C]App%5CEntity%5CActivite%24imagea' => 1,
-'App%5CEntity%5CActivite%24activitefavoriss' => 2,
+'App%5CEntity%5CActivite%24activitefavoriss' => 0,
 '[C]App%5CEntity%5CActivite%24activitefavoriss' => 1,
 'App%5CEntity%5CActivitefavoris' => 0,
 '[C]App%5CEntity%5CActivitefavoris' => 1,
@@ -466,7 +462,7 @@ return [[
 '[C]App%5CEntity%5CResponse%23setContenurep' => 1,
 'App%5CEntity%5CResponse%24idrep' => 0,
 '[C]App%5CEntity%5CResponse%24idrep' => 1,
-'App%5CEntity%5CResponse%24idrec' => 3,
+'App%5CEntity%5CResponse%24idrec' => 2,
 '[C]App%5CEntity%5CResponse%24idrec' => 1,
 'App%5CEntity%5CResponse%24daterep' => 0,
 '[C]App%5CEntity%5CResponse%24daterep' => 1,
@@ -1166,30 +1162,8 @@ return [[
 ], [
 
 0 => [],
-1 => 1713551476,
+1 => 1713700942,
 2 => static function () {
-    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
-        $o = [
-            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\OneToMany'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\OneToMany')),
-        ],
-        null,
-        [
-            'stdClass' => [
-                'mappedBy' => [
-                    'activite',
-                ],
-                'targetEntity' => [
-                    'App\\Entity\\Activitefavoris',
-                ],
-            ],
-        ],
-        [
-            $o[0],
-        ],
-        []
-    );
-},
-3 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [
             clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
