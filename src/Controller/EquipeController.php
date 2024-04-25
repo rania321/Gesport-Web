@@ -17,12 +17,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use MercurySeries\FlashyBundle\FlashyNotifier;
+
 
 #[Route('/equipe')]
 class EquipeController extends AbstractController
 {
     #[Route('/', name: 'app_equipe_index', methods: ['GET', 'POST'])]
-    public function index(Request $request, EquipeRepository $equipeRepository, EntityManagerInterface $entityManager, JoueurRepository $joueurRepository): Response
+    public function index(Request $request, EquipeRepository $equipeRepository, EntityManagerInterface $entityManager, JoueurRepository $joueurRepository,FlashyNotifier $flashy): Response
     {
         $userRepository = $this->getDoctrine()->getRepository(User::class);
         $user = $userRepository->find(2); 
@@ -44,7 +46,8 @@ class EquipeController extends AbstractController
         $inscritournoi->setTournoi($tournoi);
         $entityManager->persist($inscritournoi);
         $entityManager->flush();
-    
+        $editUrl = $this->generateUrl('app_equipe_edit', ['ide' => $equipe->getIde()]);
+        $flashy->warning('votre equipe est inscrite', $editUrl);
     
             return $this->redirectToRoute('app_equipe_show', ['ide' => $equipe->getIde()]);
         }
@@ -152,7 +155,7 @@ public function show(Request $request, Equipe $equipe, JoueurRepository $joueurR
 
     return $this->render('equipe/show.html.twig', [
         'equipe' => $equipe,
-        'joueurs' => $joueurs, // Passer les joueurs à la vue
+        'joueurs' => $joueurs, 
         'joueur' => $joueur,
         'joueurForm' => $joueurForm->createView(),
     ]);
