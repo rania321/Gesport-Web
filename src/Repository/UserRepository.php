@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 /**
  * @extends ServiceEntityRepository<User>
@@ -46,6 +48,36 @@ class UserRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+    public function search(string $query): JsonResponse
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->andWhere($qb->expr()->orX(
+            $qb->expr()->like('u.nomu', ':query'),
+            $qb->expr()->like('u.prenomu', ':query'),
+            $qb->expr()->like('u.emailu', ':query')
+        ))
+        ->setParameter('query', '%' . $query . '%');
+
+        $users = $qb->getQuery()->getResult();
+
+        if (!empty($users)) {
+            $jsonData = [];
+            foreach ($users as $user) {
+                $jsonData[] = [
+                    'idu' => $user->getIdu(),
+                    'nomu' => $user->getNomu(),
+                    'prenomu' => $user->getPrenomu(),
+                    'emailu' => $user->getEmailu(),
+                    'roleu' => $user->getRoleu(),
+                ];
+            }
+
+            return new JsonResponse($jsonData);
+        } else {
+            return new JsonResponse([]);
+        }
+    }
+
 
 //    /**
 //     * @return User[] Returns an array of User objects

@@ -24,6 +24,8 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\SerializerInterface;
 
 
 
@@ -87,8 +89,16 @@ class UserController extends AbstractController
             return $this->redirectToRoute('baseBack');
         } 
     }
-    
-    
+   
+    #[Route('/search', name: 'user_search', methods: ['POST'])]
+    public function search(Request $request, UserRepository $userRepository): JsonResponse
+    {
+        $query = $request->request->get('query');
+
+        $users = $userRepository->search($query);
+
+        return $users;
+    }
     
     
 
