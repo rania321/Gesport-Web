@@ -39,23 +39,58 @@ class UserController extends AbstractController
             'users' => $userRepository->findAll(),
         ]);
     }
+
     #[Route('/user/redirect', name: 'app_user_redirect')]
-    public function redirectAfterLogin(): Response
+    public function redirectAfterLogin(Request $request, Swift_Mailer $mailer, SessionInterface $session): Response
     {
         // Récupérer l'utilisateur actuellement connecté
         $user = $this->getUser();
-
+    
+        // Vérifier si l'utilisateur est bloqué
         if ($this->isUserBlocked($user)) {
+            // Rediriger l'utilisateur vers une page appropriée pour les utilisateurs bloqués
             return $this->redirectToRoute('mon_compte');
         }
     
-        // Rediriger en fonction du rôle de l'utilisateur
+        // Vérifier si le code de vérification est requis pour les utilisateurs de rôle "user"
+        if ($user->getRoleu() === 'user') {
+            // Vérifier si le code de vérification est déjà généré
+            $verificationCode = $session->get('verification_code');
+    
+            if (!$verificationCode) {
+                // Créer le formulaire de saisie de l'e-mail
+                $form = $this->createForm(ResetPassType::class);
+                $form->handleRequest($request);
+    
+                if ($form->isSubmitted() && $form->isValid()) {
+                    // Si le formulaire est soumis et valide, appeler la fonction sendVerificationCode pour envoyer le code de vérification
+                    $this->sendVerificationCode($request, $mailer, $session);
+                    $this->addFlash('success', 'Un e-mail de vérification a été envoyé à votre adresse.');
+    
+                    // Redirection vers une autre page ou affichage d'un message de succès
+                    //return $this->redirectToRoute('page_de_verification');
+                }
+    
+                // Afficher le formulaire pour saisir l'e-mail
+                return $this->render('user/twofactor.html.twig', [
+                    'form' => $form->createView(),
+                ]);
+            }
+    
+            // Si le code de vérification est déjà généré, rediriger l'utilisateur vers la page de saisie du code de vérification
+            return $this->redirectToRoute('enter_verification_code');
+        }
+    
+        // Si le code de vérification n'est pas requis et que l'utilisateur n'est pas bloqué,
+        // rediriger en fonction du rôle de l'utilisateur
         if ($user->getRoleu() === 'Admin') {
             return $this->redirectToRoute('baseBack');
-        } else {
-            return $this->redirectToRoute('base');
-        }
+        } 
     }
+    
+    
+    
+    
 
     #[Route('/block/{idu}', name: 'app_user_block', methods: ['POST'])]
     public function blockUser(User $user): Response
@@ -182,17 +217,18 @@ public function unblockUser($idu): Response
             'form' => $form->createView(),
         ]);
     }
+    
     #[Route('/login', name: 'app_login', methods: ['GET', 'POST'])]
-    public function login(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager, SessionInterface $session): Response
+    public function login(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager, SessionInterface $session, Swift_Mailer $mailer): Response
     {
         $error = null;
-    
+
         // Vérifie si le formulaire de connexion a été soumis
         if ($request->isMethod('POST')) {
             // Récupère les données du formulaire
             $username = $request->request->get('email');
             $password = $request->request->get('password');
-    
+
             // Vérifie si l'email est vide
             if (empty($username)) {
                 $error = new \Exception('Email cannot be empty.');
@@ -200,56 +236,35 @@ public function unblockUser($idu): Response
                 // Récupère l'utilisateur depuis la base de données en fonction de l'adresse e-mail
                 $userRepository = $this->getDoctrine()->getRepository(User::class);
                 $user = $userRepository->findOneBy(['emailu' => $username]);
-    
+
                 // Vérifie si l'utilisateur existe
                 if ($user) {
-                    // Vérifie si l'utilisateur est bloqué
-                  
-                        // Vérifie si le mot de passe est correct
-                        if ($passwordEncoder->isPasswordValid($user, $password)) {
-                            // Stocker les informations de l'utilisateur dans la session
-                            $session->set('user_id', $user->getIdu());
-                            $session->set('username', $user->getUsername());
-                            $verificationCode = $this->generateVerificationCode();
-                            $session->set('verification_code', $verificationCode);
-                            // Stocke l'e-mail dans la session pour l'utiliser ultérieurement
-                            $session->set('email', $username);
-                            $this->sendVerificationCodeByEmail($username, $verificationCode, $mailer);
-        
-                            // Redirige l'utilisateur vers la page de saisie du code de vérification
-                            return $this->redirectToRoute('verify_email');
-                            
-    
-                            // Rediriger l'utilisateur en fonction de son rôle
-                            if ($user->getRoleu() === 'Admin') {
-                                // Ajouter un message flash pour indiquer une connexion réussie
-                                $this->addFlash('success', 'Vous êtes connecté en tant que ' . $user->getUsername());
-                                // Redirection vers la page de profil
-                                return $this->redirectToRoute('baseBack');
-                            } else {
-                                // Ajouter un message flash pour indiquer une connexion réussie
-                                $this->addFlash('success', 'Vous êtes connecté en tant que ' . $user->getUsername());
-                                // Redirection vers la page d'administration (ou autre page appropriée)
-                                return $this->redirectToRoute('mon-compte');
-                            }
-                        } else {
-                            // Ajouter un message flash pour indiquer une erreur d'authentification
-                            $this->addFlash('error', 'Identifiant ou mot de passe incorrect.');
-                        }
+                    // Vérifie si le mot de passe est correct
+                    if ($passwordEncoder->isPasswordValid($user, $password)) {
+                        // Générer et envoyer le code de vérification par e-mail
+                        $session->set('user_id', $user->getIdu());
+                        $session->set('email', $username);
+                       
+
+                        // Rediriger l'utilisateur vers la page de saisie du code de vérification
+                        
+                        // Vous pouvez ajouter d'autres redirections ici si nécessaire
+                    } else {
+                        // Ajouter un message flash pour indiquer une erreur d'authentification
+                        $this->addFlash('error', 'Identifiant ou mot de passe incorrect.');
                     }
-                 else {
+                } else {
                     // Ajouter un message flash pour indiquer une erreur d'authentification
                     $this->addFlash('error', 'Identifiant ou mot de passe incorrect.');
                 }
             }
         }
-    
+
         // Affiche le formulaire de connexion avec éventuelle erreur
         return $this->render('user/login.html.twig', [
             'error' => $error,
         ]);
     }
-    
 
 
 // Fonction pour vérifier si un utilisateur est bloqué
@@ -436,6 +451,29 @@ public function logout(LogoutUrlGeneratorInterface $logoutUrlGenerator): Respons
     // Rediriger l'utilisateur vers l'URL de déconnexion
     return $this->redirect($logoutUrl);
 }
+#[Route('/enter-verification-code', name: 'enter_verification_code')]
+public function enterVerificationCode(Request $request): Response
+{
+    // Vérifier si le formulaire de saisie du code de vérification est soumis
+    if ($request->isMethod('POST')) {
+        $verificationCodeFromEmail = $request->request->get('verification_code');
+        $session = $this->get('session');
+        $verificationCode = $session->get('verification_code');
+
+        // Vérifier si le code saisi est correct
+        if ($verificationCodeFromEmail === $verificationCode) {
+            // Rediriger l'utilisateur vers la page souhaitée après avoir saisi le bon code
+            return $this->redirectToRoute('base'); // Remplacez 'base' par la route souhaitée
+        } else {
+            // Ajouter un message d'erreur pour indiquer que le code est incorrect
+            $this->addFlash('error', 'Le code de vérification est incorrect.');
+        }
+    }
+
+    // Afficher le formulaire de saisie du code de vérification
+    return $this->render('user/enter_verification_code.html.twig');
+}
+
 
 
 
@@ -516,58 +554,60 @@ public function logout(LogoutUrlGeneratorInterface $logoutUrlGenerator): Respons
         $this->addFlash('success', 'Votre compte a été supprimé avec succès.');
         return $this->redirectToRoute('app_logout');
     }
-    #[Route('/verify-email', name: 'verify_email', methods: ['GET', 'POST'])]
-    public function verifyEmail(Request $request, SessionInterface $session): Response
-    {
-        // Vérifie si le code de vérification a été soumis
-        if ($request->isMethod('POST')) {
-            $verificationCode = $request->request->get('verification_code');
-            $storedVerificationCode = $session->get('verification_code');
-            $emailu = $session->get('email');
-    
-            // Vérifie si le code de vérification est correct
-            if ($verificationCode === $storedVerificationCode) {
-                // Authentification réussie
-                // Vous pouvez maintenant authentifier l'utilisateur et rediriger vers la page d'accueil, par exemple
-                // Assurez-vous d'effacer les données de session après l'authentification réussie
-    
-                $session->remove('verification_code');
-                $session->remove('email');
-    
-                // Ajoutez un message flash pour indiquer une connexion réussie
-                $this->addFlash('success', 'Vous êtes connecté.');
-                return $this->redirectToRoute('accueil');
-            } else {
-                // Ajoute un message flash pour indiquer une erreur de code de vérification
-                $this->addFlash('error', 'Code de vérification incorrect.');
-                return $this->redirectToRoute('verify_email');
-            }
-        }
-    
-        // Affiche le formulaire de saisie du code de vérification
-        return $this->render('user/verify_email.html.twig');
-    }
+
+
+   
     
     // Méthode pour générer un code de vérification aléatoire
-    private function generateVerificationCode(): string
+    public function generateVerificationCode(): string
     {
         return rand(100000, 999999); // Génère un code à 6 chiffres
     }
     
     // Méthode pour envoyer le code de vérification par e-mail
-    private function sendVerificationCodeByEmail(string $emailu, string $verificationCode, Swift_Mailer $mailer): void
-    {
-        $message = (new Swift_Message('Code de vérification'))
-            ->setFrom('votre_email@example.com')
-            ->setTo($emailu)
-            ->setBody(
-                "Votre code de vérification est : $verificationCode",
-                'text/plain'
-            );
+    public function sendVerificationCode(Request $request, Swift_Mailer $mailer, SessionInterface $session): Response {
+        // Créez le formulaire
+        $form = $this->createForm(ResetPassType::class);
+        
+        // Traitez le formulaire
+        $form->handleRequest($request);
     
-        // Envoie l'e-mail
-        $mailer->send($message);
+        // Si le formulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupérez les données du formulaire
+            $formData = $form->getData();
+            $emailu = $formData['emailu']; // Assurez-vous que le champ dans votre formulaire est nommé 'email'
+    
+            // Générez un code de vérification unique (vous devrez implémenter cette logique)
+            $verificationCode = $this->generateVerificationCode();
+    
+            // Stockez le code de vérification dans la session
+            $session->set('verification_code', $verificationCode);
+    
+            // Envoyez le code de vérification par e-mail à l'utilisateur
+            $message = (new \Swift_Message('Code de vérification'))
+                ->setFrom('your_email@example.com') // Remplacez par votre adresse e-mail
+                ->setTo($emailu)
+                ->setBody(
+                    "Votre code de vérification est : $verificationCode"
+                );
+    
+            // Envoyez l'e-mail
+            $mailer->send($message);
+    
+            // Ajoutez un message flash pour indiquer que l'e-mail de vérification a été envoyé
+            $this->addFlash('success', 'Un e-mail de vérification a été envoyé à votre adresse.');
+    
+            // Redirection vers une autre page ou affichage d'un message de succès
+            //return $this->redirectToRoute('page_de_verification');
+        }
+    
+        // Affichez le formulaire
+        return $this->render('user/forgotten_password.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
+    
 }
     
     
