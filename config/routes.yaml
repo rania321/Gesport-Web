@@ -14,8 +14,3 @@ supprimer_love_activite:
     path: '/activite/{ida}/unlove'
     controller: 'App\Controller\ActiviteController::supprimerLove'
     methods: ['DELETE']
-
-rechercheAjax:
-    path: '/activite/rechercheAjax'
-    controller: 'App\Controller\ActiviteController::searchAjax'
-    methods: ['GET']

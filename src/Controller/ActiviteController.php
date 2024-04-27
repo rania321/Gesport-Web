@@ -212,28 +212,9 @@ class ActiviteController extends AbstractController
         // Rediriger vers la page de détails de l'activité
         return $this->redirectToRoute('app_activite_show', ['ida' => $activite->getIda()]);
     }
-
-    //recherche back
-    #[Route('/rechercheAjax', name: 'rechercheAjax', methods: ['GET'])]
-    public function searchAjax(Request $request, ActiviteRepository $repo)
-    {
-        // Récupérez le paramètre de recherche depuis la requête
-        $query = $request->query->get('q');
-
-        // Récupérez les activites correspondants depuis la base de données
-        $activites = $repo->findActiviteByName($query);
-
-        // Rendre la vue des activites correspondants
-        $html = $this->renderView("activite/indexBack.html.twig", [
-            "activites" => $activites,
-        ]);
-
-        // Renvoyer la réponse avec le HTML rendu
-        return new Response($html);
-    }
-
+    
     //liste des activites favoris
-    #[Route('/listFav', name: 'app_activite_favoris', methods: ['GET'])]
+    #[Route('/favoris', name: 'app_activite_favoris', methods: ['GET'])]
     public function favoris(ActiviteRepository $activiteRepository): Response
     {
         return $this->render('activite/favoris.html.twig', [

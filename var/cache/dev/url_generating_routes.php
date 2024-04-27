@@ -10,7 +10,9 @@ return [
     'app_activite_edit' => [['ida'], ['_controller' => 'App\\Controller\\ActiviteController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'ida', true], ['text', '/activite']], [], [], []],
     'app_activite_delete' => [['ida'], ['_controller' => 'App\\Controller\\ActiviteController::delete'], [], [['variable', '/', '[^/]++', 'ida', true], ['text', '/activite']], [], [], []],
     'app_activite_reserv' => [['ida'], ['_controller' => 'App\\Controller\\ActiviteController::reserv'], [], [['variable', '/', '[^/]++', 'ida', true], ['text', '/activite/reserv']], [], [], []],
-    'app_activite_favoris' => [[], ['_controller' => 'App\\Controller\\ActiviteController::favoris'], [], [['text', '/activite/listFav']], [], [], []],
+    'app_activitefavoris' => [[], ['_controller' => 'App\\Controller\\ActivitefavorisController::index'], [], [['text', '/activitefavoris']], [], [], []],
+    'app_activite_favoris' => [[], ['_controller' => 'App\\Controller\\ActivitefavorisController::favoris'], [], [['text', '/favoris']], [], [], []],
+    'rechercheAjax' => [[], ['_controller' => 'App\\Controller\\ActivitefavorisController::searchAjax'], [], [['text', '/rechercheAjax']], [], [], []],
     'base' => [[], ['_controller' => 'App\\Controller\\ExampleController::index'], [], [['text', '/base']], [], [], []],
     'baseBack' => [[], ['_controller' => 'App\\Controller\\ExampleController::indexBack'], [], [['text', '/baseBack']], [], [], []],
     'app_reservationactivite_index' => [[], ['_controller' => 'App\\Controller\\ReservationactiviteController::index'], [], [['text', '/reservationactivite/']], [], [], []],
@@ -44,5 +46,4 @@ return [
     'app_reservation_new_for_activity' => [['activityId'], ['_controller' => 'App\\Controller\\ReservationactiviteController::newForActivity'], [], [['variable', '/', '[^/]++', 'activityId', true], ['text', '/reservation/new']], [], [], []],
     'ajouter_love_activite' => [['ida'], ['_controller' => 'App\\Controller\\ActiviteController::ajouterLove'], [], [['text', '/love'], ['variable', '/', '[^/]++', 'ida', true], ['text', '/activite']], [], [], []],
     'supprimer_love_activite' => [['ida'], ['_controller' => 'App\\Controller\\ActiviteController::supprimerLove'], [], [['text', '/unlove'], ['variable', '/', '[^/]++', 'ida', true], ['text', '/activite']], [], [], []],
-    'rechercheAjax' => [[], ['_controller' => 'App\\Controller\\ActiviteController::searchAjax'], [], [['text', '/activite/rechercheAjax']], [], [], []],
 ];

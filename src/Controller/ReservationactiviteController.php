@@ -29,6 +29,7 @@ use Endroid\QrCode\Logo\Logo;
 use Endroid\QrCode\RoundBlockSizeMode;
 use Endroid\QrCode\Writer\ValidationException;
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 #[Route('/reservationactivite')]
 class ReservationactiviteController extends AbstractController
@@ -139,9 +140,12 @@ class ReservationactiviteController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            // Générer le PDF
+        $pdfContent = $this->generatePDF($reservationactivite);
+
             // Créer une nouvelle instance de PHPMailer
            $mail = new PHPMailer(true);
-           $mail->SMTPDebug = 2;
+           $mail->SMTPDebug = false;
 
    
            try {
@@ -156,25 +160,27 @@ class ReservationactiviteController extends AbstractController
                 $mail->Port = 587;
    
                // Destinataires
-               $mail->setFrom('rania.guelmami@esprit.tn', 'Service de Réservation');
+               $mail->setFrom('rania.guelmami@esprit.tn', 'Service de Reservation');
                $mail->addAddress('raniaguelmami0@gmail.com');
    
                // Contenu
                $mail->isHTML(true);
                $mail->Subject = 'Confirmation de la reservation ' ;
-               $mail->Body    = 'Cher(e) ' . $reservation->getIdu()->getPrenomu() 
-               . ',<br><br>Votre réservation a été confirmée avec succès. Voici les détails de votre réservation : ' . 
-               '<br>Activité :  ' . $reservation->getIda()->getNoma() . 
-               '<br>Date :  ' . $reservation->getDatedebutr()->format('d/m/Y') . 
-               '<br>Heure :  ' . $reservation->getHeurer() . 
-               '<br>Statut :  ' . $reservation->getStatutr() . 
-               '<br><br>Merci d"avoir choisi notre service. Nous sommes impatients de vous accueillir !<br><br>Cordialement,<br>Service de Réservation';   
+                // Rendre la vue Twig en chaîne HTML
+                $htmlContent = $this->renderView('activite/emailPerso.html.twig', [
+                    'reservation' => $reservation,
+                ]);
+                $mail->Body = $htmlContent;
+
+                // Attacher le PDF à l'e-mail
+            $mail->addStringAttachment($pdfContent, 'reservation.pdf', 'base64', 'application/pdf');
                // Envoyer l'email
                $mail->send();
            } catch (Exception $e) {
                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
            }
-
+            // Flush des changements dans la base de données
+            $entityManager->flush();
             return $this->redirectToRoute('app_reservationactivite_indexBack', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -248,10 +254,7 @@ class ReservationactiviteController extends AbstractController
         #[Route('/{idr}/generate-pdf', name: 'app_reservationactivite_generate_pdf', methods: ['GET'])]
         public function generatePDF(Reservationactivite $reservationactivite): Response
         {
-        // Vérifier si la réservation est confirmée
-        if ($reservationactivite->getStatutr() !== 'confirmée') {
-        throw $this->createNotFoundException('Impossible de générer un PDF pour une réservation non confirmée.');
-        } // Créer une instance de Dompdf
+         // Créer une instance de Dompdf
                 $options = new Options();
                 $options->set('isHtml5ParserEnabled', true);
                 $dompdf = new Dompdf($options);
@@ -260,8 +263,15 @@ class ReservationactiviteController extends AbstractController
                 $html = '<html>';
                 $html .= '<body>';
                 $html .= '<h1>Réservation</h1>';
-                $html .= '<p>ID de la réservation : ' . $reservationactivite->getIdr() . '</p>';
-                // Ajouter d'autres détails de la réservation ici...
+                $html .= '<p>ID de la réservation : ' . $reservationactivite->getIdr() .
+                'Cher(e) ' . $reservationactivite->getIdu()->getPrenomu() 
+                . ',<br><br>Votre réservation a été confirmée avec succès. Voici les détails de votre réservation : ' . 
+                '<br>Activité :  ' . $reservationactivite->getIda()->getNoma() . 
+                '<br>Date :  ' . $reservationactivite->getDatedebutr()->format('d/m/Y') . 
+                '<br>Heure :  ' . $reservationactivite->getHeurer() . 
+                '<br>Statut :  ' . $reservationactivite->getStatutr() . 
+                '<br><br>Merci d"avoir choisi notre service. Nous sommes impatients de vous accueillir !' . '</p>';
+
 
                 $writer = new PngWriter();
 

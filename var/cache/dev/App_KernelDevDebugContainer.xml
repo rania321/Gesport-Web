@@ -344,6 +344,13 @@
         <argument type="service" id=".service_locator.mx0UMmY.App\Controller\ActiviteController"/>
       </call>
     </service>
+    <service id="App\Controller\ActivitefavorisController" class="App\Controller\ActivitefavorisController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.mx0UMmY.App\Controller\ActivitefavorisController"/>
+      </call>
+    </service>
     <service id="App\Controller\ExampleController" class="App\Controller\ExampleController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -6215,6 +6222,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ActiviteController" class="App\Controller\ActiviteController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ActiviteController" class="App\Controller\ActiviteController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ActiviteController" class="App\Controller\ActiviteController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ActivitefavorisController" class="App\Controller\ActivitefavorisController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ActivitefavorisController" class="App\Controller\ActivitefavorisController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\ActivitefavorisController" class="App\Controller\ActivitefavorisController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ExampleController" class="App\Controller\ExampleController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ExampleController" class="App\Controller\ExampleController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ExampleController" class="App\Controller\ExampleController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6668,6 +6678,12 @@
         <argument key="activite" type="service_closure" id=".errored..service_locator.DX5IRBd.App\Entity\Activite"/>
       </argument>
     </service>
+    <service id=".service_locator.pMa_4Q1" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="activitefavorisRepository" type="service_closure" id="App\Repository\ActivitefavorisRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.vKmjUQy" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6693,7 +6709,7 @@
         <argument key="user" type="service_closure" id=".errored..service_locator.GPGtF8v.App\Entity\User"/>
       </argument>
     </service>
-    <service id=".service_locator.v00DZ.5" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.FDYsh.u" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ActiviteController::ajouterLove" type="service_closure" id=".service_locator.OctoH5o"/>
@@ -6704,9 +6720,10 @@
         <argument key="App\Controller\ActiviteController::indexBack" type="service_closure" id=".service_locator.h..bsSR"/>
         <argument key="App\Controller\ActiviteController::new" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\ActiviteController::reserv" type="service_closure" id=".service_locator.DX5IRBd"/>
-        <argument key="App\Controller\ActiviteController::searchAjax" type="service_closure" id=".service_locator.vKmjUQy"/>
         <argument key="App\Controller\ActiviteController::show" type="service_closure" id=".service_locator.kGqLS5t"/>
         <argument key="App\Controller\ActiviteController::supprimerLove" type="service_closure" id=".service_locator.OctoH5o"/>
+        <argument key="App\Controller\ActivitefavorisController::favoris" type="service_closure" id=".service_locator.pMa_4Q1"/>
+        <argument key="App\Controller\ActivitefavorisController::searchAjax" type="service_closure" id=".service_locator.vKmjUQy"/>
         <argument key="App\Controller\ReservationactiviteController::delete" type="service_closure" id=".service_locator.H3L_sti"/>
         <argument key="App\Controller\ReservationactiviteController::deleteBack" type="service_closure" id=".service_locator.H3L_sti"/>
         <argument key="App\Controller\ReservationactiviteController::edit" type="service_closure" id=".service_locator.H3L_sti"/>
@@ -6734,9 +6751,10 @@
         <argument key="App\Controller\ActiviteController:indexBack" type="service_closure" id=".service_locator.h..bsSR"/>
         <argument key="App\Controller\ActiviteController:new" type="service_closure" id=".service_locator.aKM6MDa"/>
         <argument key="App\Controller\ActiviteController:reserv" type="service_closure" id=".service_locator.DX5IRBd"/>
-        <argument key="App\Controller\ActiviteController:searchAjax" type="service_closure" id=".service_locator.vKmjUQy"/>
         <argument key="App\Controller\ActiviteController:show" type="service_closure" id=".service_locator.kGqLS5t"/>
         <argument key="App\Controller\ActiviteController:supprimerLove" type="service_closure" id=".service_locator.OctoH5o"/>
+        <argument key="App\Controller\ActivitefavorisController:favoris" type="service_closure" id=".service_locator.pMa_4Q1"/>
+        <argument key="App\Controller\ActivitefavorisController:searchAjax" type="service_closure" id=".service_locator.vKmjUQy"/>
         <argument key="App\Controller\ReservationactiviteController:delete" type="service_closure" id=".service_locator.H3L_sti"/>
         <argument key="App\Controller\ReservationactiviteController:deleteBack" type="service_closure" id=".service_locator.H3L_sti"/>
         <argument key="App\Controller\ReservationactiviteController:edit" type="service_closure" id=".service_locator.H3L_sti"/>
@@ -7194,6 +7212,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.mx0UMmY" method="withContext"/>
     </service>
+    <service id=".service_locator.mx0UMmY.App\Controller\ActivitefavorisController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ActivitefavorisController"/>
+      <argument>App\Controller\ActivitefavorisController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.mx0UMmY" method="withContext"/>
+    </service>
     <service id=".service_locator.mx0UMmY.App\Controller\ExampleController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ExampleController"/>
       <argument>App\Controller\ExampleController</argument>
@@ -7388,12 +7412,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.v00DZ.5"/>
+      <argument type="service" id=".service_locator.FDYsh.u"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.v00DZ.5"/>
+      <argument type="service" id=".service_locator.FDYsh.u"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8374,7 +8398,7 @@
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.v00DZ.5"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.FDYsh.u"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8401,7 +8425,7 @@
     <service id=".service_locator.ZpeEFVF" alias=".service_locator.H3L_sti"/>
     <service id=".service_locator.WKD5Dmj" alias=".service_locator.MQ2naqa"/>
     <service id=".service_locator.b76MKMg" alias=".service_locator.GPGtF8v"/>
-    <service id=".service_locator._AK1JQL" alias=".service_locator.v00DZ.5"/>
+    <service id=".service_locator.ZV8FAp9" alias=".service_locator.FDYsh.u"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.nLLbHFG" alias=".service_locator.QQFRfnL"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>
@@ -8438,6 +8462,7 @@
     <service id=".service_locator.xsts9nF" alias=".service_locator.kGqLS5t"/>
     <service id=".service_locator.faoa1Fj" alias=".service_locator.OctoH5o"/>
     <service id=".service_locator.mkoPeTP" alias=".service_locator.DX5IRBd"/>
+    <service id=".service_locator.IenMbmO" alias=".service_locator.pMa_4Q1"/>
     <service id=".service_locator.YPWipFA" alias=".service_locator.vKmjUQy"/>
     <service id=".service_locator.HO7.gFw" alias=".service_locator.Q1F27w5"/>
     <service id=".service_locator.Zp0NSXM" alias=".service_locator.4T4EJFR"/>

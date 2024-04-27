@@ -100,12 +100,12 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
                 </div>
                 <div class=\"col-lg-4 text-center text-lg-end\">
                     <div class=\"d-inline-flex align-items-center\" style=\"height: 45px;\">
-                        <a href=\"#\"><small class=\"me-3 text-light\"><i class=\"fa fa-user me-2\"></i>Register</small></a>
+                        <a href=\"#\"><small class=\"me-3 text-light\"><i class=\"fa fa-activite me-2\"></i>Register</small></a>
                         <a href=\"#\"><small class=\"me-3 text-light\"><i class=\"fa fa-sign-in-alt me-2\"></i>Login</small></a>
                         <div class=\"dropdown\">
                             <a href=\"#\" class=\"dropdown-toggle text-light\" data-bs-toggle=\"dropdown\"><small><i class=\"fa fa-home me-2\"></i> My Dashboard</small></a>
                             <div class=\"dropdown-menu rounded\">
-                                <a href=\"#\" class=\"dropdown-item\"><i class=\"fas fa-user-alt me-2\"></i> My Profile</a>
+                                <a href=\"#\" class=\"dropdown-item\"><i class=\"fas fa-activite-alt me-2\"></i> My Profile</a>
                                 <a href=\"#\" class=\"dropdown-item\"><i class=\"fas fa-comment-alt me-2\"></i> Inbox</a>
                                 <a href=\"#\" class=\"dropdown-item\"><i class=\"fas fa-bell me-2\"></i> Notifications</a>
                                 <a href=\"#\" class=\"dropdown-item\"><i class=\"fas fa-cog me-2\"></i> Account Settings</a>
@@ -205,24 +205,27 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_favoris");
         echo "\" class=\"btn btn-light text-primary rounded-pill py-3 px-5 mt-2\">Mes Favoris</a>
    <h1>     </h1> 
+   <!-- Champ de recherche -->
+        <input type=\"text\" id=\"search\" class=\"form-control\" placeholder=\"Search\">
+<div id= \"tabv\">
     <div class=\"row\">
         ";
-        // line 86
+        // line 89
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["activites"]) || array_key_exists("activites", $context) ? $context["activites"] : (function () { throw new RuntimeError('Variable "activites" does not exist.', 86, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["activites"]) || array_key_exists("activites", $context) ? $context["activites"] : (function () { throw new RuntimeError('Variable "activites" does not exist.', 89, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["activite"]) {
-            // line 87
+            // line 90
             echo "            <div class=\"col-md-4\">
                 <div class=\"card mb-4\">
                     <div class=\"blog-item\">
                      <div class=\"blog-img\">
                         <div class=\"blog-img-inner\">     
                             <img src=\"";
-            // line 92
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["activite"], "imagea", [], "any", false, false, false, 92))), "html", null, true);
+            // line 95
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["activite"], "imagea", [], "any", false, false, false, 95))), "html", null, true);
             echo "\" class=\"img-fluid w-100 rounded-top\" alt=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 92), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 95), "html", null, true);
             echo "\">
                             <div class=\"blog-icon\">
                                         <a href=\"#\" class=\"my-auto\"><i class=\"fas fa-link fa-2x text-white\"></i></a>
@@ -231,29 +234,29 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
                     </div>   
                     <div class=\"card-body\">
                         <h5 class=\"card-title\">";
-            // line 99
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 99), "html", null, true);
+            // line 102
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 102), "html", null, true);
             echo "</h5>
                         <p class=\"card-text\">";
-            // line 100
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "descria", [], "any", false, false, false, 100), "html", null, true);
+            // line 103
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "descria", [], "any", false, false, false, 103), "html", null, true);
             echo "</p>
                         <a href=\"";
-            // line 101
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_show", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 101)]), "html", null, true);
+            // line 104
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_show", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 104)]), "html", null, true);
             echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Voir</a>
                         ";
-            // line 102
-            if ((twig_get_attribute($this->env, $this->source, $context["activite"], "dispoa", [], "any", false, false, false, 102) == "Disponible")) {
-                // line 103
+            // line 105
+            if ((twig_get_attribute($this->env, $this->source, $context["activite"], "dispoa", [], "any", false, false, false, 105) == "Disponible")) {
+                // line 106
                 echo "                        <a href=\"";
-                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservation_new_for_activity", ["activityId" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 103)]), "html", null, true);
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservation_new_for_activity", ["activityId" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 106)]), "html", null, true);
                 echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Reserver</a>
                         ";
             }
-            // line 105
+            // line 108
             echo "                    <!--    <a href=\"";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_new", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 105)]), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_new", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 108)]), "html", null, true);
             echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Réserver</a>  -->
                     </div>
                     </div>
@@ -263,7 +266,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 111
+            // line 114
             echo "            <div class=\"col\">
                 <p>No records found</p>
             </div>
@@ -272,12 +275,39 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['activite'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 115
+        // line 118
         echo "    </div>
+    </div>
+    </div>
 
+<!-- Inclusion de jQuery -->
+    <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>
+    
+    <!-- Script JavaScript pour la recherche AJAX -->
+   <script>
+        \$(document).ready(function() {
+            \$('#search').on('keyup', function() {
+                var query = \$(this).val();
+                console.log(query);
+                \$.ajax({
+                    url: '";
+        // line 132
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("rechercheAjax");
+        echo "',
+                    type: 'GET',
+                    data: { q: query },
+                    success: function(response) {
+                        console.log(response);
+                        \$('#tabv').html(\$(response).find('#tabv').html());
+                    }
+                });
+            });
+        });
+
+    </script>
 
     ";
-        // line 119
+        // line 146
         echo "    <style>
         #google_translate_element {
             display: inline-block;
@@ -336,7 +366,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
      */
     public function getDebugInfo()
     {
-        return array (  281 => 119,  276 => 115,  267 => 111,  255 => 105,  249 => 103,  247 => 102,  243 => 101,  239 => 100,  235 => 99,  223 => 92,  216 => 87,  211 => 86,  204 => 83,  194 => 82,  175 => 72,  165 => 71,  90 => 5,  80 => 4,  61 => 3,  38 => 1,);
+        return array (  311 => 146,  295 => 132,  279 => 118,  270 => 114,  258 => 108,  252 => 106,  250 => 105,  246 => 104,  242 => 103,  238 => 102,  226 => 95,  219 => 90,  214 => 89,  204 => 83,  194 => 82,  175 => 72,  165 => 71,  90 => 5,  80 => 4,  61 => 3,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -358,12 +388,12 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
                 </div>
                 <div class=\"col-lg-4 text-center text-lg-end\">
                     <div class=\"d-inline-flex align-items-center\" style=\"height: 45px;\">
-                        <a href=\"#\"><small class=\"me-3 text-light\"><i class=\"fa fa-user me-2\"></i>Register</small></a>
+                        <a href=\"#\"><small class=\"me-3 text-light\"><i class=\"fa fa-activite me-2\"></i>Register</small></a>
                         <a href=\"#\"><small class=\"me-3 text-light\"><i class=\"fa fa-sign-in-alt me-2\"></i>Login</small></a>
                         <div class=\"dropdown\">
                             <a href=\"#\" class=\"dropdown-toggle text-light\" data-bs-toggle=\"dropdown\"><small><i class=\"fa fa-home me-2\"></i> My Dashboard</small></a>
                             <div class=\"dropdown-menu rounded\">
-                                <a href=\"#\" class=\"dropdown-item\"><i class=\"fas fa-user-alt me-2\"></i> My Profile</a>
+                                <a href=\"#\" class=\"dropdown-item\"><i class=\"fas fa-activite-alt me-2\"></i> My Profile</a>
                                 <a href=\"#\" class=\"dropdown-item\"><i class=\"fas fa-comment-alt me-2\"></i> Inbox</a>
                                 <a href=\"#\" class=\"dropdown-item\"><i class=\"fas fa-bell me-2\"></i> Notifications</a>
                                 <a href=\"#\" class=\"dropdown-item\"><i class=\"fas fa-cog me-2\"></i> Account Settings</a>
@@ -425,6 +455,9 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
 {% block content %}
 <a href=\"{{ path('app_activite_favoris') }}\" class=\"btn btn-light text-primary rounded-pill py-3 px-5 mt-2\">Mes Favoris</a>
    <h1>     </h1> 
+   <!-- Champ de recherche -->
+        <input type=\"text\" id=\"search\" class=\"form-control\" placeholder=\"Search\">
+<div id= \"tabv\">
     <div class=\"row\">
         {% for activite in activites %}
             <div class=\"col-md-4\">
@@ -456,7 +489,31 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
             </div>
         {% endfor %}
     </div>
+    </div>
+    </div>
 
+<!-- Inclusion de jQuery -->
+    <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>
+    
+    <!-- Script JavaScript pour la recherche AJAX -->
+   <script>
+        \$(document).ready(function() {
+            \$('#search').on('keyup', function() {
+                var query = \$(this).val();
+                console.log(query);
+                \$.ajax({
+                    url: '{{ path('rechercheAjax') }}',
+                    type: 'GET',
+                    data: { q: query },
+                    success: function(response) {
+                        console.log(response);
+                        \$('#tabv').html(\$(response).find('#tabv').html());
+                    }
+                });
+            });
+        });
+
+    </script>
 
     {# TRADUCTION #}
     <style>
