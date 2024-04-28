@@ -52,13 +52,18 @@
 </div>
 {{ form_end(form) }}
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function validateDates() {
         var startDate = new Date(document.getElementById('tournoi_datedebutt').value);
         var endDate = new Date(document.getElementById('tournoi_datefint').value);
 
         if (startDate > endDate) {
-            alert('La date de début doit être antérieure à la date de fin.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: 'La date de début doit être antérieure à la date de fin.'
+            });
             return false; // Prevent form submission
         }
         return true; // Allow form submission

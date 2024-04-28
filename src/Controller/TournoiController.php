@@ -21,6 +21,8 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use DateTime;
+use Joli\JoliNotif\Notification;
+use Joli\JoliNotif\NotifierFactory;
 
 #[Route('/tournoi')]
 class TournoiController extends AbstractController
@@ -74,9 +76,11 @@ class TournoiController extends AbstractController
     
             $entityManager->persist($tournoi);
             $entityManager->flush();
-    
+            $this->sendNotification();
             $this->addFlash('success', 'Le tournoi a été créé avec succès.');
     
+            
+
             return $this->redirectToRoute('app_tournoi_indexBack', [], Response::HTTP_SEE_OTHER);
         }
     
@@ -161,7 +165,26 @@ class TournoiController extends AbstractController
         return $this->redirectToRoute('app_tournoi_indexBack', [], Response::HTTP_SEE_OTHER);
     }
 
+    private function sendNotification(): void
+    {
+        // Create a notifier
+        $notifier = NotifierFactory::create();
+    
+        // Create a notification
+        $notification = (new Notification())
+            ->setTitle('GeSport: nouveaux tournoi')
+            ->setBody('un nouveaux tournoi a été ajouter a la liste des tournois .')
+            ->setIcon('/BackOffice/images/nouveau.png');
+    
+        // Send the notification
+        $notifier->send($notification);
+    }
 
 
+   
+
+  
+
+   
     
 }

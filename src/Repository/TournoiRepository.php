@@ -46,6 +46,14 @@ class TournoiRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-
+public function searchByNom($query)
+    {
+    return $this->createQueryBuilder('s')
+        ->andWhere('s.nomt LIKE :query')
+        ->setParameter('query', $query.'%')
+        ->orderBy('s.nomt', 'ASC')
+        ->getQuery()
+        ->getResult();
+    }
 
 }

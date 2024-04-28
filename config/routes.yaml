@@ -2,3 +2,36 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+
+
+#  Tri date asc
+tournoi_display_sorted_by_date_asc:
+    path: '/tri/sorted_by_date_asc'
+    controller: App\Controller\TriController::displaySortedByDateASC
+
+#  Tri lieu asc
+tournoi_display_sorted_by_lieu_asc:
+    path: '/tri/sorted_by_lieu_asc'
+    controller: App\Controller\TriController::displaySortedByLieuASC
+
+#  Tri statut asc
+tournoi_display_sorted_by_statut_asc:
+    path: '/tri/sorted_by_statut_asc'
+    controller: App\Controller\TriController::displaySortedByStatutASC
+
+
+
+#  Tri date desc
+tournoi_display_sorted_by_date_desc:
+    path: '/tri/sorted_by_date_desc'
+    controller: App\Controller\TriController::displaySortedByDateDESC
+
+#  Tri lieu desc
+tournoi_display_sorted_by_lieu_desc:
+    path: '/tri/sorted_by_lieu_desc'
+    controller: App\Controller\TriController::displaySortedByLieuDESC
+
+#  Tri statut desc
+tournoi_display_sorted_by_statut_desc:
+    path: '/tri/sorted_by_statut_desc'
+    controller: App\Controller\TriController::displaySortedByStatutDESC
