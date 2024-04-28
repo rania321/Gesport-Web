@@ -12,21 +12,27 @@ use App\Form\ReclamationType;
 use App\Form\ResponseType;
 use App\Repository\ReclamationRepository;
 use App\Repository\ResponseRepository;
+use Knp\Component\Pager\PaginatorInterface;
 
 class ResponseController extends AbstractController
 {
     #[Route('/response', name: 'response_index', methods: ['GET'])]
-    public function index(Request $request, ResponseRepository $responseRepository): Response
+    public function index(Request $request, ResponseRepository $responseRepository, PaginatorInterface $paginator): Response
     {
         $searchQuery = $request->query->get('search', '');
-        $responses = $responseRepository->findBySearchQuery($searchQuery);
+        $queryBuilder = $responseRepository->findBySearchQuery($searchQuery);
+
+        $pagination = $paginator->paginate(
+            $queryBuilder, /* query NOT result */
+            $request->query->getInt('page', 1), /* page number */
+            10 /* limit per page */
+        );
 
         return $this->render('response/index.html.twig', [
-            'responses' => $responses,
+            'pagination' => $pagination,
             'search' => $searchQuery,
         ]);
     }
-
     #[Route('/response/new', name: 'response_new', methods: ['GET', 'POST'])]
     
     public function new(Request $request, ResponseRepository $responseRepository): Response
@@ -73,7 +79,12 @@ class ResponseController extends AbstractController
     // src/Controller/ResponseController.php
 
     #[Route('/response/{idrep}/delete', name: 'response_delete', methods: ['GET', 'POST'])]
-    public function delete(Request $request, ResponseEntity $response, ResponseRepository $responseRepository, ReclamationRepository $reclamationRepository): Response
+    public function delete(
+        Request $request, 
+        ResponseEntity $response, 
+        ResponseRepository $responseRepository, 
+        ReclamationRepository $reclamationRepository
+    ): Response
     {
         if ($request->isMethod('GET')) {
             $deleteForm = $this->createFormBuilder()
@@ -89,12 +100,13 @@ class ResponseController extends AbstractController
     
         if ($this->isCsrfTokenValid('delete'.$response->getIdrep(), $request->request->get('_token'))) {
             $reclamation = $response->getReclamation();
-            $reclamation->setStatutrec('non traitee');
-            $reclamationRepository->save($reclamation);
-
             
-
-
+            // Check if the reclamation exists
+            if ($reclamation) {
+                $reclamation->setStatutrec('non traitee');
+                $reclamationRepository->save($reclamation);
+            }
+    
             $responseRepository->delete($response);
             $this->addFlash('success', 'The response has been deleted.');
     

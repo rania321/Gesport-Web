@@ -48,12 +48,14 @@ class Response
 
     public function getIdrec(): ?int
     {
-        return $this->idrec;
+        return $this->reclamation ? $this->reclamation->getIdrec() : null;
     }
 
     public function setIdrec(int $idrec): static
     {
-        $this->idrec = $idrec;
+        if ($this->reclamation) {
+            $this->reclamation->setIdrec($idrec);
+        }
 
         return $this;
     }
@@ -81,4 +83,5 @@ class Response
 
         return $this;
     }
+    
 }

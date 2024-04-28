@@ -42,6 +42,9 @@ class Reclamation
     #[ORM\OneToMany(targetEntity: Response::class, mappedBy: 'reclamation')]
     private Collection $responses;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $archive = true;
+
     public function __construct()
     {
         $this->responses = new ArrayCollection();
@@ -132,6 +135,30 @@ class Reclamation
         $this->statutrec = $statutrec;
 
         return $this;
+    }
+
+    public function isArchive(): ?bool
+    {
+        return $this->archive;
+    }
+
+    public function setArchive(?bool $archive): static
+    {
+        $this->archive = $archive;
+
+        return $this;
+    }
+    public function updateArchiveStatus(): void
+    {
+        if ($this->daterec !== null) {
+            $now = new \DateTime();
+            $threeDaysAgo = (new \DateTime())->sub(new \DateInterval('P3D'));
+            if ($this->daterec < $threeDaysAgo && $this->daterec < $now) {
+                $this->archive = true;
+            } else {
+                $this->archive = false;
+            }
+        }
     }
 
 }

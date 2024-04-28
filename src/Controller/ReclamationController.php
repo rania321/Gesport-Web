@@ -22,19 +22,46 @@ class ReclamationController extends AbstractController
     public function index(Request $request, ReclamationRepository $reclamationRepository, PaginatorInterface $paginator): Response
     {
         $searchQuery = $request->query->get('search', '');
-        $queryBuilder = $reclamationRepository->findBySearchQuery($searchQuery);
-
+    
+        // Modify the query to fetch only archived records
+        $queryBuilder = $reclamationRepository->findBy([
+            'archive' => true
+        ]);
+    
         $pagination = $paginator->paginate(
             $queryBuilder, /* query NOT result */
             $request->query->getInt('page', 1), /* page number */
             10 /* limit per page */
         );
-
+    
         return $this->render('reclamation/index.html.twig', [
             'pagination' => $pagination,
             'search' => $searchQuery,
         ]);
     }
+
+    #[Route('/achived', name: 'reclamation_index_arch', methods: ['GET'])]
+public function index1(Request $request, ReclamationRepository $reclamationRepository, PaginatorInterface $paginator): Response
+{
+    $searchQuery = $request->query->get('search', '');
+
+    // Modify the query to fetch only archived records
+    $queryBuilder = $reclamationRepository->findBy([
+        'archive' => false
+    ]);
+
+    $pagination = $paginator->paginate(
+        $queryBuilder, /* query NOT result */
+        $request->query->getInt('page', 1), /* page number */
+        10 /* limit per page */
+    );
+
+    return $this->render('reclamation/indexarchiv.html.twig', [
+        'pagination' => $pagination,
+        'search' => $searchQuery,
+    ]);
+}
+    
    
   #[Route('/new', name: 'reclamation_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ReclamationRepository $reclamationRepository): Response
@@ -54,6 +81,7 @@ class ReclamationController extends AbstractController
             $reclamation->setDescriRec($descrirecFiltered);
             $reclamationRepository->save($reclamation);
             return $this->redirectToRoute('reclamation_index');
+            $this->addFlash('success', 'The reclamation has been deleted.');
             $this->sendDesktopNotification('New Reclamation Added', 'A new reclamation has been added.');
             return $this->redirectToRoute('reclamation_index');         
             $reclamationRepository->add($reclamation);  
@@ -95,7 +123,9 @@ class ReclamationController extends AbstractController
     {
         return $this->render('reclamation/show.html.twig', [
             'reclamation' => $reclamation,
+            
         ]);
+           
     }
 
     #[Route('/{idrec}/edit', name: 'reclamation_edit', methods: ['GET', 'POST'])]
@@ -108,6 +138,8 @@ class ReclamationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $reclamationRepository->save($reclamation);
             return $this->redirectToRoute('reclamation_index');
+            $this->addFlash('success', 'The reclamation has been deleted.');
+
         }
 
         return $this->render('reclamation/edit.html.twig', [
@@ -139,6 +171,7 @@ class ReclamationController extends AbstractController
             $reclamationRepository->delete($reclamation);
     
             $this->addFlash('success', 'The reclamation has been deleted.');
+
     
             return $this->redirectToRoute('reclamation_index');
         }
