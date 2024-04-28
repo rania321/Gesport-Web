@@ -72,10 +72,7 @@
 </div>
 {% endblock %}
 
-
-
 {% block content %}
-
 <div style="height: 30px;"></div> 
 <div class="container">
     <div class="row justify-content-center mb-4">
@@ -85,9 +82,12 @@
         
         <div class="col-md-3 mb-8">
             <!-- Div caché pour afficher les détails de l'événement -->
+            <div style="height: 100px;"></div> 
+
             <div id="eventDetails" style="display: none; border: 3px solid #fad787; padding: 20px;">
                 <h3 id="eventTitle"></h3>
                 <p id="eventDate"></p>
+                <!-- Utilisation de JavaScript pour afficher les descriptions des événements -->
                 <p id="eventDescription"></p>
                 <p id="eventStatus"></p>
                 <a href="{{ path('app_equipe_index') }}" class="btn btn-primary mt-3">S'inscrire</a>
@@ -110,7 +110,9 @@
                             <h5 class="card-title text-primary">{{ tournoi.nomt }}</h5>
                             <p class="card-text text-muted">Date de début: {{ tournoi.datedebutt ? tournoi.datedebutt|date('Y-m-d') : '' }}</p>
                             <p class="card-text text-muted">Date de fin: {{ tournoi.datefint ? tournoi.datefint|date('Y-m-d') : '' }}</p>
-                            <p class="card-text">{{ tournoi.descrit }}</p>
+                            <!-- Utilisation de JavaScript pour afficher les descriptions des événements -->
+                            <p class="card-text"> <a href="https://www.google.com/maps/search/?api=1&query={{ tournoi.descrit }}">{{ tournoi.descrit }}</a></p>
+
                             <p class="card-text">Statut: <span class="text-success">{{ tournoi.statutt }}</span></p>
                         </div>
                     </div>
@@ -121,93 +123,86 @@
         </div>
     </div>
 </div>
-
-
-{% endblock %}
+{% endblock %}  
         
-        {% block carousel %}
-        <div class="carousel-header">
-            <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-bs-target="#carouselId" data-bs-slide-to="0" class=""></li>
-                    <li data-bs-target="#carouselId" data-bs-slide-to="1" class=""></li>
-                    <li data-bs-target="#carouselId" data-bs-slide-to="2" class="active" aria-current="true"></li>
-                </ol>
-                <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item">
-                        <img src="{{ asset('./FrontOffice/img/sport.jpg')}}" class="img-fluid" alt="Image">
-                        <div class="carousel-caption">
-                            <div class="p-3" style="max-width: 900px;">
-                                <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;"></h4>
-                                <h1 class="display-2 text-capitalize text-white mb-4">GET FIT GET STRONGER!</h1>
-                                <p class="mb-5 fs-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                </p>
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="#">Discover Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{asset('./FrontOffice/img/foot.jpg')}}" class="img-fluid" alt="Image">
-                        <div class="carousel-caption">
-                            <div class="p-3" style="max-width: 900px;">
-                                <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;"></h4>
-                                <h1 class="display-2 text-capitalize text-white mb-4">GET FIT GET STRONGER!</h1>
-                                <p class="mb-5 fs-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                </p>
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="#">Discover Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item active">
-                        <img src="{{ asset('./FrontOffice/img/ten.webp')}}" class="img-fluid" alt="Image">
-                        <div class="carousel-caption">
-                            <div class="p-3" style="max-width: 900px;">
-                                <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;"></h4>
-                                <h1 class="display-2 text-capitalize text-white mb-4">GET FIT GET STRONGER!</h1>
-                                <p class="mb-5 fs-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                </p>
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="#">Discover Now</a>
-                                </div>
-                            </div>
+{% block carousel %}
+<div class="carousel-header">
+    <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-bs-target="#carouselId" data-bs-slide-to="0" class=""></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="1" class=""></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="2" class="active" aria-current="true"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item">
+                <img src="{{ asset('./FrontOffice/img/sport.jpg')}}" class="img-fluid" alt="Image">
+                <div class="carousel-caption">
+                    <div class="p-3" style="max-width: 900px;">
+                        <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;"></h4>
+                        <h1 class="display-2 text-capitalize text-white mb-4">GET FIT GET STRONGER!</h1>
+                        <p class="mb-5 fs-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        </p>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="#">Discover Now</a>
                         </div>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon btn bg-primary" aria-hidden="false"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
-                    <span class="carousel-control-next-icon btn bg-primary" aria-hidden="false"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+            </div>
+            <div class="carousel-item">
+                <img src="{{asset('./FrontOffice/img/foot.jpg')}}" class="img-fluid" alt="Image">
+                <div class="carousel-caption">
+                    <div class="p-3" style="max-width: 900px;">
+                        <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;"></h4>
+                        <h1 class="display-2 text-capitalize text-white mb-4">GET FIT GET STRONGER!</h1>
+                        <p class="mb-5 fs-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        </p>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="#">Discover Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item active">
+                <img src="{{ asset('./FrontOffice/img/ten.webp')}}" class="img-fluid" alt="Image">
+                <div class="carousel-caption">
+                    <div class="p-3" style="max-width: 900px;">
+                        <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;"></h4>
+                        <h1 class="display-2 text-capitalize text-white mb-4">GET FIT GET STRONGER!</h1>
+                        <p class="mb-5 fs-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        </p>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="#">Discover Now</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
-      
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon btn bg-primary" aria-hidden="false"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+            <span class="carousel-control-next-icon btn bg-primary" aria-hidden="false"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
 
-    {% block js %}
-    <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('./FrontOffice/lib/easing/easing.min.js')}}"></script>
-    <script src="{{ asset('./FrontOffice/lib/waypoints/waypoints.min.js')}}"></script>
-    <script src="{{ asset('./FrontOffice/lib/owlcarousel/owl.carousel.min.js')}}"></script>
-    <script src="{{ asset('./FrontOffice/lib/lightbox/js/lightbox.min.js')}}"></script>
+{% block js %}
+<!-- JavaScript Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('./FrontOffice/lib/easing/easing.min.js')}}"></script>
+<script src="{{ asset('./FrontOffice/lib/waypoints/waypoints.min.js')}}"></script>
+<script src="{{ asset('./FrontOffice/lib/owlcarousel/owl.carousel.min.js')}}"></script>
+<script src="{{ asset('./FrontOffice/lib/lightbox/js/lightbox.min.js')}}"></script>
     
-    <!-- Template Javascript -->
-    <script src="{{ asset('./FrontOffice/js/main.js')}}"></script>
+<!-- Template Javascript -->
+<script src="{{ asset('./FrontOffice/js/main.js')}}"></script>
     
-    <!-- Intégration de FullCalendar -->
-    <script src="
-https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
-"></script>
+<!-- Intégration de FullCalendar -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         let calendarElt = document.querySelector("#calendrier");
@@ -242,8 +237,8 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
                 {% endfor %}
             ],
             eventClick: function(info) {
-            displayEventDetails(info.event);
-        }
+                displayEventDetails(info.event);
+            }
         });
 
         calendar.render();
@@ -251,23 +246,19 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
 
     var eventColors = {}; // Dictionnaire pour stocker les couleurs générées pour chaque tournoi
 
-
     function displayEventDetails(event) {
         let eventTitle = document.getElementById('eventTitle');
         let eventDate = document.getElementById('eventDate');
         let eventDescription = document.getElementById('eventDescription');
         let eventStatus = document.getElementById('eventStatus');
         
-
         eventTitle.textContent = event.title;
         eventDate.textContent = 'Date: ' + event.start.toDateString();
-        eventDescription.textContent = 'Description: ' + event.extendedProps.description;
+        eventDescription.innerHTML = 'Lieu: <a href="https://www.google.com/maps/search/?api=1&query=' + event.extendedProps.description + '">' + event.extendedProps.description + '</a>';
         eventStatus.textContent = 'Statut: ' + event.extendedProps.statut;
 
         document.getElementById('eventDetails').style.display = 'block';
     }
-
-
 
     function generateRandomColor(tournoiNom) {
         if (!eventColors[tournoiNom]) {
@@ -289,4 +280,4 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js
         return eventColors[tournoiNom]; // Récupérer la couleur générée pour ce tournoi
     }
 </script>
-    {% endblock %}
+{% endblock %}

@@ -109,18 +109,19 @@
                 <h4 class="card-title" style="color: rgb(7, 76, 141);">Liste des Tournois</h4>
               </div>
               <div class="col-md-6 text-end">
-                <a href="{{ path('app_tournoi_new') }}" class="btn btn-primary">Créer un nouveau tournoi</a>
+                <a href="{{ path('app_tournoi_new') }}" class="btn btn-inverse-primary">Créer un nouveau tournoi</a>
               </div>
             </div>
             <div class="row mb-3">
               
               <div class="col-md-6">
-                <label for="search-input" class="form-label">Rechercher un tournoi :</label>
-                <input type="text" id="search" placeholder="Recherche par nom" class="form-control">
+                <label for="search-input" class="icon-search">
+                  Rechercher un tournoi :</label>
+                <input type="text" id="search" placeholder="par nom" class="form-control">
               </div>
               <div class="col-md-6 ">
                 <label for="tri" class="form-label">Trier les tournois :</label>
-                <select id="tri" onchange="sortTournoi()" class="form-select">
+                <select id="tri" onchange="sortTournoi()" class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split">
                   <option value="">Choisir...</option>
                   <option value="{{ path('tournoi_display_sorted_by_date_asc') }}">Date croissante</option>
                   <option value="{{ path('tournoi_display_sorted_by_date_desc') }}">Date décroissante</option>
@@ -139,7 +140,7 @@
                     <th scope="col">Nom Tournoi</th>
                     <th scope="col">Date de début</th>
                     <th scope="col">Date de fin</th>
-                    <th scope="col"> lieu</th>
+                    <th scope="col"> Lieu</th>
                     <th scope="col">Statut</th>
                     <th scope="col">Actions</th>
                   </tr>
