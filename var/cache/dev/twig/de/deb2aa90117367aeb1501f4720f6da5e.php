@@ -201,8 +201,11 @@ class __TwigTemplate_1a66b27b4367f6ec14c24954c82ff71f extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "content"));
 
         // line 84
+        echo "<script src=\"https://code.responsivevoice.org/responsivevoice.js\"></script>
+";
+        // line 85
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["reservationactivites"]) || array_key_exists("reservationactivites", $context) ? $context["reservationactivites"] : (function () { throw new RuntimeError('Variable "reservationactivites" does not exist.', 84, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["reservationactivites"]) || array_key_exists("reservationactivites", $context) ? $context["reservationactivites"] : (function () { throw new RuntimeError('Variable "reservationactivites" does not exist.', 85, $this->source); })()));
         $context['loop'] = [
           'parent' => $context['_parent'],
           'index0' => 0,
@@ -217,72 +220,72 @@ class __TwigTemplate_1a66b27b4367f6ec14c24954c82ff71f extends Template
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["reservationactivite"]) {
-            // line 85
+            // line 86
             echo "<div class=\"container mt-4\">
 <div class=\"row mb-4\">
         <div class=\"col\">
             <div class=\"card\">
                 <div class=\"card-header\">
                     <h2>";
-            // line 90
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "ida", [], "any", false, false, false, 90), "noma", [], "any", false, false, false, 90), "html", null, true);
+            // line 91
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "ida", [], "any", false, false, false, 91), "noma", [], "any", false, false, false, 91), "html", null, true);
             echo "</h2>
                 </div>
                 <div class=\"card-body\">
                     <dl class=\"row\">
                         <dt class=\"col-sm-3\">Activité:</dt>
                         <dd class=\"col-sm-9\">";
-            // line 95
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "ida", [], "any", false, false, false, 95), "noma", [], "any", false, false, false, 95), "html", null, true);
+            // line 96
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "ida", [], "any", false, false, false, 96), "noma", [], "any", false, false, false, 96), "html", null, true);
             echo "</dd>
 
                         <dt class=\"col-sm-3\">Date:</dt>
                         <dd class=\"col-sm-9\">";
-            // line 98
-            ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "datedebutr", [], "any", false, false, false, 98)) ? (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "datedebutr", [], "any", false, false, false, 98), "Y-m-d"), "html", null, true))) : (print ("")));
+            // line 99
+            ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "datedebutr", [], "any", false, false, false, 99)) ? (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "datedebutr", [], "any", false, false, false, 99), "Y-m-d"), "html", null, true))) : (print ("")));
             echo "</dd>
 
                         <dt class=\"col-sm-3\">Heure:</dt>
                         <dd class=\"col-sm-9\">";
-            // line 101
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "heurer", [], "any", false, false, false, 101), "html", null, true);
+            // line 102
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "heurer", [], "any", false, false, false, 102), "html", null, true);
             echo "</dd>
 
                         <dt class=\"col-sm-3\">Statut:</dt>
                         <dd class=\"col-sm-9\">
                             ";
-            // line 105
-            if ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "statutr", [], "any", false, false, false, 105) == "confirmée")) {
-                // line 106
+            // line 106
+            if ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "statutr", [], "any", false, false, false, 106) == "confirmée")) {
+                // line 107
                 echo "                                <span class=\"badge bg-success\">Confirmée</span>
                            ";
             } else {
-                // line 108
+                // line 109
                 echo "                                <span class=\"badge bg-warning\">En cours</span>
                             ";
             }
-            // line 110
+            // line 111
             echo "                        </dd>
                     </dl>
                    <div class=\"d-flex\">
                     <a href=\"";
-            // line 113
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_edit", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 113)]), "html", null, true);
+            // line 114
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_edit", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 114)]), "html", null, true);
             echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">modifier</a>
                     ";
-            // line 114
+            // line 115
             echo twig_include($this->env, $context, "reservationactivite/_delete_form.html.twig");
             echo "
                     ";
-            // line 115
-            if ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "statutr", [], "any", false, false, false, 115) == "confirmée")) {
-                // line 116
+            // line 116
+            if ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "statutr", [], "any", false, false, false, 116) == "confirmée")) {
+                // line 117
                 echo "                                <a href=\"";
-                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_generate_pdf", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 116)]), "html", null, true);
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_generate_pdf", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 117)]), "html", null, true);
                 echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Télécharger PDF</a>
                     ";
             }
-            // line 118
+            // line 119
             echo "                    </div>
                 </div>
                 
@@ -303,7 +306,25 @@ class __TwigTemplate_1a66b27b4367f6ec14c24954c82ff71f extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['reservationactivite'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 126
+        // line 127
+        echo "
+";
+        // line 128
+        if (array_key_exists("successMessage", $context)) {
+            // line 129
+            echo "                                        <script>
+                                            function readTextWithResponsiveVoice(text) {
+                                                responsiveVoice.speak(text, \"French Female\", { volume: 1 });
+                                            }
+                                            readTextWithResponsiveVoice('";
+            // line 133
+            echo twig_escape_filter($this->env, (isset($context["successMessage"]) || array_key_exists("successMessage", $context) ? $context["successMessage"] : (function () { throw new RuntimeError('Variable "successMessage" does not exist.', 133, $this->source); })()), "html", null, true);
+            echo "');
+                                        </script>
+                                        
+        ";
+        }
+        // line 137
         echo "
 ";
         
@@ -335,7 +356,7 @@ class __TwigTemplate_1a66b27b4367f6ec14c24954c82ff71f extends Template
      */
     public function getDebugInfo()
     {
-        return array (  307 => 126,  286 => 118,  280 => 116,  278 => 115,  274 => 114,  270 => 113,  265 => 110,  261 => 108,  257 => 106,  255 => 105,  248 => 101,  242 => 98,  236 => 95,  228 => 90,  221 => 85,  204 => 84,  194 => 83,  175 => 72,  165 => 71,  90 => 5,  80 => 4,  61 => 3,  38 => 1,);
+        return array (  328 => 137,  321 => 133,  315 => 129,  313 => 128,  310 => 127,  289 => 119,  283 => 117,  281 => 116,  277 => 115,  273 => 114,  268 => 111,  264 => 109,  260 => 107,  258 => 106,  251 => 102,  245 => 99,  239 => 96,  231 => 91,  224 => 86,  207 => 85,  204 => 84,  194 => 83,  175 => 72,  165 => 71,  90 => 5,  80 => 4,  61 => 3,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -423,6 +444,7 @@ class __TwigTemplate_1a66b27b4367f6ec14c24954c82ff71f extends Template
 {% endblock %}
 
 {% block content %}
+<script src=\"https://code.responsivevoice.org/responsivevoice.js\"></script>
 {% for reservationactivite in reservationactivites %}
 <div class=\"container mt-4\">
 <div class=\"row mb-4\">
@@ -465,6 +487,16 @@ class __TwigTemplate_1a66b27b4367f6ec14c24954c82ff71f extends Template
     </div>  
 </div>    
 {% endfor %}
+
+{% if successMessage is defined %}
+                                        <script>
+                                            function readTextWithResponsiveVoice(text) {
+                                                responsiveVoice.speak(text, \"French Female\", { volume: 1 });
+                                            }
+                                            readTextWithResponsiveVoice('{{ successMessage }}');
+                                        </script>
+                                        
+        {% endif %}
 
 {% endblock %}
 ", "reservationactivite/index.html.twig", "C:\\Users\\Rania\\Desktop\\gesportWeb\\templates\\reservationactivite\\index.html.twig");

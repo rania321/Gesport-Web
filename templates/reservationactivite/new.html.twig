@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+
 {% block header %}
 <div class="container-fluid bg-primary px-5 d-none d-lg-block">
             <div class="row gx-0">
@@ -79,6 +80,7 @@
         </div>
 {% endblock %}
 {% block content %}
+
     <h1>Réserver une activité</h1>
 
     <div class="col-lg-8 col-xl-9">
@@ -149,6 +151,15 @@
                                 <div class="col-12">
                                 {{ form_row(form._token) }}
                                     <button class="btn btn-primary text-white w-100 py-3" type="submit">Réserver</button>
+                                    {% if successMessage is defined %}
+                                        <script>
+                                            function readTextWithResponsiveVoice(text) {
+                                                responsiveVoice.speak(text, "French Female", { volume: 1 });
+                                            }
+                                            readTextWithResponsiveVoice('{{ successMessage }}');
+                                        </script>
+                                        <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
+                                    {% endif %}
                                     {{ form_end(form) }}
                                 </div>
                                 
@@ -159,4 +170,7 @@
             </div>
         </div>
         {% endif %}
+        
+
+        
 {% endblock %}

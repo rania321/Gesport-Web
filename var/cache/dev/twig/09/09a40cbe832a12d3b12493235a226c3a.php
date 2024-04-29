@@ -52,8 +52,8 @@ class __TwigTemplate_7a5bc1ecba3b1755922c780c4d8d56c8 extends Template
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f2f2f2;
-            border: 1px solid #17447a;
+            background-color: #ffffff;
+            border: 3px solid #17447a;
         }
         .logo {
             float: left;
@@ -62,36 +62,36 @@ class __TwigTemplate_7a5bc1ecba3b1755922c780c4d8d56c8 extends Template
         .icons {
             float: right;
         }
+        h1 {
+            color: #17447a; /* Couleur bleue pour les titres */
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div class=\"container\">
-        <img src=\"";
-        // line 27
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("FrontOffice/img/logo1.png"), "html", null, true);
-        echo "\" alt=\"Votre logo\" class=\"logo\">
         <h1>Confirmation de réservation</h1>
         <p>Cher(e) ";
-        // line 29
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 29, $this->source); })()), "idu", [], "any", false, false, false, 29), "prenomu", [], "any", false, false, false, 29), "html", null, true);
+        // line 32
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 32, $this->source); })()), "idu", [], "any", false, false, false, 32), "prenomu", [], "any", false, false, false, 32), "html", null, true);
         echo ",</p>
         <p>Votre réservation a été confirmée avec succès. Voici les détails de votre réservation :</p>
         <ul>
             <li>Activité : ";
-        // line 32
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 32, $this->source); })()), "ida", [], "any", false, false, false, 32), "noma", [], "any", false, false, false, 32), "html", null, true);
+        // line 35
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 35, $this->source); })()), "ida", [], "any", false, false, false, 35), "noma", [], "any", false, false, false, 35), "html", null, true);
         echo "</li>
             <li>Date : ";
-        // line 33
-        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 33, $this->source); })()), "datedebutr", [], "any", false, false, false, 33), "d/m/Y"), "html", null, true);
+        // line 36
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 36, $this->source); })()), "datedebutr", [], "any", false, false, false, 36), "d/m/Y"), "html", null, true);
         echo "</li>
             <li>Heure : ";
-        // line 34
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 34, $this->source); })()), "heurer", [], "any", false, false, false, 34), "html", null, true);
+        // line 37
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 37, $this->source); })()), "heurer", [], "any", false, false, false, 37), "html", null, true);
         echo "</li>
             <li>Statut : ";
-        // line 35
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 35, $this->source); })()), "statutr", [], "any", false, false, false, 35), "html", null, true);
+        // line 38
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 38, $this->source); })()), "statutr", [], "any", false, false, false, 38), "html", null, true);
         echo "</li>
         </ul>
         <p>Merci d'avoir choisi notre service. Nous sommes impatients de vous accueillir !</p>
@@ -131,7 +131,7 @@ class __TwigTemplate_7a5bc1ecba3b1755922c780c4d8d56c8 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  94 => 35,  90 => 34,  86 => 33,  82 => 32,  76 => 29,  71 => 27,  43 => 1,);
+        return array (  94 => 38,  90 => 37,  86 => 36,  82 => 35,  76 => 32,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -148,8 +148,8 @@ class __TwigTemplate_7a5bc1ecba3b1755922c780c4d8d56c8 extends Template
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f2f2f2;
-            border: 1px solid #17447a;
+            background-color: #ffffff;
+            border: 3px solid #17447a;
         }
         .logo {
             float: left;
@@ -158,11 +158,14 @@ class __TwigTemplate_7a5bc1ecba3b1755922c780c4d8d56c8 extends Template
         .icons {
             float: right;
         }
+        h1 {
+            color: #17447a; /* Couleur bleue pour les titres */
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div class=\"container\">
-        <img src=\"{{ asset('FrontOffice/img/logo1.png') }}\" alt=\"Votre logo\" class=\"logo\">
         <h1>Confirmation de réservation</h1>
         <p>Cher(e) {{ reservation.idu.prenomu }},</p>
         <p>Votre réservation a été confirmée avec succès. Voici les détails de votre réservation :</p>

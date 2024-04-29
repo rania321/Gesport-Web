@@ -25,7 +25,7 @@ return [
     'app_reservationactivite_delete' => [['idr'], ['_controller' => 'App\\Controller\\ReservationactiviteController::delete'], [], [['variable', '/', '[^/]++', 'idr', true], ['text', '/reservationactivite']], [], [], []],
     'app_reservationactivite_deleteBack' => [['idr'], ['_controller' => 'App\\Controller\\ReservationactiviteController::deleteBack'], [], [['text', '/back'], ['variable', '/', '[^/]++', 'idr', true], ['text', '/reservationactivite']], [], [], []],
     'app_reservationactivite_generate_pdf' => [['idr'], ['_controller' => 'App\\Controller\\ReservationactiviteController::generatePDF'], [], [['text', '/generate-pdf'], ['variable', '/', '[^/]++', 'idr', true], ['text', '/reservationactivite']], [], [], []],
-    'search_Ajax' => [[], ['_controller' => 'App\\Controller\\ReservationactiviteController::searchAjax'], [], [['text', '/reservationactivite/search']], [], [], []],
+    'app_reservationactivite_archive' => [[], ['_controller' => 'App\\Controller\\ReservationactiviteController::archive'], [], [['text', '/reservationactivite/back/archive']], [], [], []],
     'app_user_index' => [[], ['_controller' => 'App\\Controller\\UserController::index'], [], [['text', '/user/']], [], [], []],
     'app_user_new' => [[], ['_controller' => 'App\\Controller\\UserController::new'], [], [['text', '/user/new']], [], [], []],
     'app_user_show' => [['idu'], ['_controller' => 'App\\Controller\\UserController::show'], [], [['variable', '/', '[^/]++', 'idu', true], ['text', '/user']], [], [], []],

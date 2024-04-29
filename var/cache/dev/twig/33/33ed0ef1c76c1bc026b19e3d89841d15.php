@@ -201,7 +201,9 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "content"));
 
         // line 83
-        echo "<a href=\"";
+        echo "<script src=\"https://code.responsivevoice.org/responsivevoice.js\"></script>
+<a href=\"";
+        // line 84
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_favoris");
         echo "\" class=\"btn btn-light text-primary rounded-pill py-3 px-5 mt-2\">Mes Favoris</a>
    <h1>     </h1> 
@@ -210,22 +212,22 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
 <div id= \"tabv\">
     <div class=\"row\">
         ";
-        // line 89
+        // line 90
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["activites"]) || array_key_exists("activites", $context) ? $context["activites"] : (function () { throw new RuntimeError('Variable "activites" does not exist.', 89, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["activites"]) || array_key_exists("activites", $context) ? $context["activites"] : (function () { throw new RuntimeError('Variable "activites" does not exist.', 90, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["activite"]) {
-            // line 90
+            // line 91
             echo "            <div class=\"col-md-4\">
                 <div class=\"card mb-4\">
                     <div class=\"blog-item\">
                      <div class=\"blog-img\">
                         <div class=\"blog-img-inner\">     
                             <img src=\"";
-            // line 95
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["activite"], "imagea", [], "any", false, false, false, 95))), "html", null, true);
+            // line 96
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["activite"], "imagea", [], "any", false, false, false, 96))), "html", null, true);
             echo "\" class=\"img-fluid w-100 rounded-top\" alt=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 95), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 96), "html", null, true);
             echo "\">
                             <div class=\"blog-icon\">
                                         <a href=\"#\" class=\"my-auto\"><i class=\"fas fa-link fa-2x text-white\"></i></a>
@@ -234,29 +236,29 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
                     </div>   
                     <div class=\"card-body\">
                         <h5 class=\"card-title\">";
-            // line 102
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 102), "html", null, true);
+            // line 103
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "noma", [], "any", false, false, false, 103), "html", null, true);
             echo "</h5>
                         <p class=\"card-text\">";
-            // line 103
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "descria", [], "any", false, false, false, 103), "html", null, true);
+            // line 104
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["activite"], "descria", [], "any", false, false, false, 104), "html", null, true);
             echo "</p>
                         <a href=\"";
-            // line 104
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_show", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 104)]), "html", null, true);
+            // line 105
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_activite_show", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 105)]), "html", null, true);
             echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Voir</a>
                         ";
-            // line 105
-            if ((twig_get_attribute($this->env, $this->source, $context["activite"], "dispoa", [], "any", false, false, false, 105) == "Disponible")) {
-                // line 106
+            // line 106
+            if ((twig_get_attribute($this->env, $this->source, $context["activite"], "dispoa", [], "any", false, false, false, 106) == "Disponible")) {
+                // line 107
                 echo "                        <a href=\"";
-                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservation_new_for_activity", ["activityId" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 106)]), "html", null, true);
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservation_new_for_activity", ["activityId" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 107)]), "html", null, true);
                 echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Reserver</a>
                         ";
             }
-            // line 108
+            // line 109
             echo "                    <!--    <a href=\"";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_new", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 108)]), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_new", ["ida" => twig_get_attribute($this->env, $this->source, $context["activite"], "ida", [], "any", false, false, false, 109)]), "html", null, true);
             echo "\" class=\"btn btn-primary rounded-pill py-2 px-4\">Réserver</a>  -->
                     </div>
                     </div>
@@ -266,7 +268,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 114
+            // line 115
             echo "            <div class=\"col\">
                 <p>No records found</p>
             </div>
@@ -275,7 +277,23 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['activite'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 118
+        // line 119
+        echo "        ";
+        if (array_key_exists("successMessage", $context)) {
+            // line 120
+            echo "                                        <script>
+                                            function readTextWithResponsiveVoice(text) {
+                                                responsiveVoice.speak(text, \"French Female\", { volume: 1 });
+                                            }
+                                            readTextWithResponsiveVoice('";
+            // line 124
+            echo twig_escape_filter($this->env, (isset($context["successMessage"]) || array_key_exists("successMessage", $context) ? $context["successMessage"] : (function () { throw new RuntimeError('Variable "successMessage" does not exist.', 124, $this->source); })()), "html", null, true);
+            echo "');
+                                        </script>
+                                        
+        ";
+        }
+        // line 128
         echo "    </div>
     </div>
     </div>
@@ -291,7 +309,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
                 console.log(query);
                 \$.ajax({
                     url: '";
-        // line 132
+        // line 142
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("rechercheAjax");
         echo "',
                     type: 'GET',
@@ -307,7 +325,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
     </script>
 
     ";
-        // line 146
+        // line 156
         echo "    <style>
         #google_translate_element {
             display: inline-block;
@@ -366,7 +384,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
      */
     public function getDebugInfo()
     {
-        return array (  311 => 146,  295 => 132,  279 => 118,  270 => 114,  258 => 108,  252 => 106,  250 => 105,  246 => 104,  242 => 103,  238 => 102,  226 => 95,  219 => 90,  214 => 89,  204 => 83,  194 => 82,  175 => 72,  165 => 71,  90 => 5,  80 => 4,  61 => 3,  38 => 1,);
+        return array (  329 => 156,  313 => 142,  297 => 128,  290 => 124,  284 => 120,  281 => 119,  272 => 115,  260 => 109,  254 => 107,  252 => 106,  248 => 105,  244 => 104,  240 => 103,  228 => 96,  221 => 91,  216 => 90,  207 => 84,  204 => 83,  194 => 82,  175 => 72,  165 => 71,  90 => 5,  80 => 4,  61 => 3,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -453,6 +471,7 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
         </div>
 {% endblock %}
 {% block content %}
+<script src=\"https://code.responsivevoice.org/responsivevoice.js\"></script>
 <a href=\"{{ path('app_activite_favoris') }}\" class=\"btn btn-light text-primary rounded-pill py-3 px-5 mt-2\">Mes Favoris</a>
    <h1>     </h1> 
    <!-- Champ de recherche -->
@@ -488,6 +507,15 @@ class __TwigTemplate_a5efe53a64e58c33a570817a53fd259c extends Template
                 <p>No records found</p>
             </div>
         {% endfor %}
+        {% if successMessage is defined %}
+                                        <script>
+                                            function readTextWithResponsiveVoice(text) {
+                                                responsiveVoice.speak(text, \"French Female\", { volume: 1 });
+                                            }
+                                            readTextWithResponsiveVoice('{{ successMessage }}');
+                                        </script>
+                                        
+        {% endif %}
     </div>
     </div>
     </div>

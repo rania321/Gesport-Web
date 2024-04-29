@@ -81,6 +81,7 @@
 {% endblock %}
 
 {% block content %}
+<script src="https://code.responsivevoice.org/responsivevoice.js"></script>
 {% for reservationactivite in reservationactivites %}
 <div class="container mt-4">
 <div class="row mb-4">
@@ -123,5 +124,15 @@
     </div>  
 </div>    
 {% endfor %}
+
+{% if successMessage is defined %}
+                                        <script>
+                                            function readTextWithResponsiveVoice(text) {
+                                                responsiveVoice.speak(text, "French Female", { volume: 1 });
+                                            }
+                                            readTextWithResponsiveVoice('{{ successMessage }}');
+                                        </script>
+                                        
+        {% endif %}
 
 {% endblock %}

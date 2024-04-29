@@ -54,5 +54,62 @@ class  ReservationactiviteRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+    /**
+     * Retourne les réservations qui ont dépassé la date d'aujourd'hui.
+     *
+     * @return Reservationactivite[]|null
+     */
+    public function findArchiveReservations(): ?array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.datedebutr < :today')
+            ->setParameter('today', new \DateTime('today'))
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Retourne les réservations qui sont dans le futur.
+     *
+     * @return Reservationactivite[]|null
+     */
+    public function findFutureReservations(): ?array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.datedebutr > :today')
+            ->setParameter('today', new \DateTime('today'))
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countTotalReservations(): int
+    {
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r.idr)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function findMostPopularHour(): ?array
+    {
+        return $this->createQueryBuilder('r')
+            ->select('r.heurer', 'COUNT(r.heurer)')
+            ->groupBy('r.heurer')
+            ->orderBy('COUNT(r.heurer)', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+
+    public function findClientFidele(): array
+    {
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r) as count', 'u.nomu as user')
+            ->leftJoin('r.idu', 'u') // Utilisation de l'alias 'r' pour la réservation et 'u' pour l'utilisateur
+            ->groupBy('u.idu')
+            ->getQuery()
+            ->getResult();
+    }
 
 }

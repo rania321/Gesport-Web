@@ -199,7 +199,12 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
 
         // line 102
         echo "<div class=\"content-wrapper\">
+<a href=\"";
+        // line 103
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_archive");
+        echo "\" class=\"btn btn-primary btn-rounded btn-fw\">Archive</a>
     <div class=\"col-lg-12 grid-margin stretch-card\">
+    
         <div class=\"card\">
             <div class=\"card-body\">
                 <h4 class=\"card-title\">Reservations</h4>
@@ -225,9 +230,9 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
                             </thead>
                             <tbody>
                                 ";
-        // line 128
+        // line 130
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["reservationactivites"]) || array_key_exists("reservationactivites", $context) ? $context["reservationactivites"] : (function () { throw new RuntimeError('Variable "reservationactivites" does not exist.', 128, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["reservationactivites"]) || array_key_exists("reservationactivites", $context) ? $context["reservationactivites"] : (function () { throw new RuntimeError('Variable "reservationactivites" does not exist.', 130, $this->source); })()));
         $context['_iterated'] = false;
         $context['loop'] = [
           'parent' => $context['_parent'],
@@ -243,50 +248,50 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["reservationactivite"]) {
-            // line 129
+            // line 131
             echo "                                    <tr>
                                         <td>";
-            // line 130
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "ida", [], "any", false, false, false, 130), "noma", [], "any", false, false, false, 130), "html", null, true);
-            echo "</td>
-                                        <td>";
-            // line 131
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idu", [], "any", false, false, false, 131), "prenomu", [], "any", false, false, false, 131), "html", null, true);
-            echo "</td>
-                                        <td>";
             // line 132
-            ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "datedebutr", [], "any", false, false, false, 132)) ? (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "datedebutr", [], "any", false, false, false, 132), "Y-m-d"), "html", null, true))) : (print ("")));
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "ida", [], "any", false, false, false, 132), "noma", [], "any", false, false, false, 132), "html", null, true);
             echo "</td>
                                         <td>";
             // line 133
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "heurer", [], "any", false, false, false, 133), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idu", [], "any", false, false, false, 133), "prenomu", [], "any", false, false, false, 133), "html", null, true);
+            echo "</td>
+                                        <td>";
+            // line 134
+            ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "datedebutr", [], "any", false, false, false, 134)) ? (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "datedebutr", [], "any", false, false, false, 134), "Y-m-d"), "html", null, true))) : (print ("")));
+            echo "</td>
+                                        <td>";
+            // line 135
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "heurer", [], "any", false, false, false, 135), "html", null, true);
             echo "</td>
                                         <td>
                                             ";
-            // line 135
-            if ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "statutr", [], "any", false, false, false, 135) == "confirmée")) {
-                // line 136
+            // line 137
+            if ((twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "statutr", [], "any", false, false, false, 137) == "confirmée")) {
+                // line 138
                 echo "                                                <span class=\"badge badge-success\">Confirmée</span>
                                             ";
             } else {
-                // line 138
+                // line 140
                 echo "                                                <span class=\"badge badge-warning\">En cours</span>
                                             ";
             }
-            // line 140
+            // line 142
             echo "                                        </td>
                                         <td>
                                             <div class=\"d-flex\">
                                                 <a href=\"";
-            // line 143
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_showBack", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 143)]), "html", null, true);
+            // line 145
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_showBack", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 145)]), "html", null, true);
             echo "\" class=\"btn btn-info btn-sm\">show</a>
                                                 <a href=\"";
-            // line 144
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_editBack", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 144)]), "html", null, true);
+            // line 146
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationactivite_editBack", ["idr" => twig_get_attribute($this->env, $this->source, $context["reservationactivite"], "idr", [], "any", false, false, false, 146)]), "html", null, true);
             echo "\" class=\"btn btn-warning btn-sm\">edit</a>
                                                 ";
-            // line 145
+            // line 147
             echo twig_include($this->env, $context, "reservationactivite/_delete_form1.html.twig");
             echo "
                                             </div>
@@ -304,7 +309,7 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
             }
         }
         if (!$context['_iterated']) {
-            // line 150
+            // line 152
             echo "                                    <tr>
                                         <td colspan=\"5\">no records found</td>
                                     </tr>
@@ -313,77 +318,66 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['reservationactivite'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 154
+        // line 156
         echo "                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
+    
+</div>
+<div class=\"statistics-details d-flex align-items-center justify-content-between\">
+<div>
+    <p class=\"statistics-title\">Nombre total de réservations :</p>
+   <h3 class=\"rate-percentage\">";
+        // line 169
+        echo twig_escape_filter($this->env, (isset($context["nombreReservations"]) || array_key_exists("nombreReservations", $context) ? $context["nombreReservations"] : (function () { throw new RuntimeError('Variable "nombreReservations" does not exist.', 169, $this->source); })()), "html", null, true);
+        echo "</h3>
+</div>
+<div>
+    <p class=\"statistics-title\">L'heure la plus populaire des réservations :</p>
+   <h3 class=\"rate-percentage\">";
+        // line 173
+        echo twig_escape_filter($this->env, (isset($context["mostPopularHour"]) || array_key_exists("mostPopularHour", $context) ? $context["mostPopularHour"] : (function () { throw new RuntimeError('Variable "mostPopularHour" does not exist.', 173, $this->source); })()), "html", null, true);
+        echo "</h3>
+</div>
+<div>
+    <p class=\"statistics-title\">Le client fidèle :</p>
+    ";
+        // line 177
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["fideleClients"]) || array_key_exists("fideleClients", $context) ? $context["fideleClients"] : (function () { throw new RuntimeError('Variable "fideleClients" does not exist.', 177, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["client"]) {
+            // line 178
+            echo "            <h3 class=\"rate-percentage\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["client"], "user", [], "any", false, false, false, 178), "html", null, true);
+            echo " </h3>
+        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['client'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 180
+        echo "  
 </div>
 </div>
+</div>
+
 
 <!-- Code de l'histogramme des statistiques -->
 <div class=\"content-wrapper\">
             <div class=\"col-lg-6 grid-margin stretch-card\">
               <div class=\"card\">
                 <div class=\"card-body\">
-                  <h4 class=\"card-title\">Chart</h4>
-                  <canvas id=\"statistiquesChart\" style=\"height: 400px;\"></canvas>
-                </div>
-              </div>
-            </div>
-            <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var statistiquesData = ";
-        // line 177
-        echo json_encode((isset($context["statistiques"]) || array_key_exists("statistiques", $context) ? $context["statistiques"] : (function () { throw new RuntimeError('Variable "statistiques" does not exist.', 177, $this->source); })()));
-        echo ";
-        
-        var ctx = document.getElementById('statistiquesChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['En cours', 'confirmées'],
-                datasets: [{
-                    label: 'Nombre de réservations',
-                    data: [statistiquesData.en_cours, statistiquesData.confirmées],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-    });
-</script>
-
-            <div class=\"col-lg-6 grid-margin stretch-card\">
-              <div class=\"card\">
-                <div class=\"card-body\">
-                  <h4 class=\"card-title\">Chart</h4>
+                  <h4 class=\"card-title\">Les Statuts</h4>
                   <canvas id=\"statistiquesPieChart\" width=\"432\" height=\"432\" style=\"display: block; box-sizing: border-box; height: 432px; width: 432px;\"></canvas>
                   
                 </div>
               </div>
             </div>
-          </div>
           </div>
 
   <!-- Code du pie chart pour les statistiques -->
@@ -391,8 +385,8 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var statistiquesData = ";
-        // line 227
-        echo json_encode((isset($context["statistiques"]) || array_key_exists("statistiques", $context) ? $context["statistiques"] : (function () { throw new RuntimeError('Variable "statistiques" does not exist.', 227, $this->source); })()));
+        // line 203
+        echo json_encode((isset($context["statistiques"]) || array_key_exists("statistiques", $context) ? $context["statistiques"] : (function () { throw new RuntimeError('Variable "statistiques" does not exist.', 203, $this->source); })()));
         echo ";
         
         var ctx = document.getElementById('statistiquesPieChart').getContext('2d');
@@ -426,6 +420,8 @@ class __TwigTemplate_a76741dde4ee3c0c0fdf0c0f18d3e655 extends Template
         });
     });
 </script>
+
+
 
 
 <script>
@@ -492,7 +488,7 @@ document.addEventListener(\"DOMContentLoaded\", function() {
      */
     public function getDebugInfo()
     {
-        return array (  395 => 227,  342 => 177,  317 => 154,  308 => 150,  290 => 145,  286 => 144,  282 => 143,  277 => 140,  273 => 138,  269 => 136,  267 => 135,  262 => 133,  258 => 132,  254 => 131,  250 => 130,  247 => 129,  229 => 128,  201 => 102,  191 => 101,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
+        return array (  389 => 203,  364 => 180,  355 => 178,  351 => 177,  344 => 173,  337 => 169,  322 => 156,  313 => 152,  295 => 147,  291 => 146,  287 => 145,  282 => 142,  278 => 140,  274 => 138,  272 => 137,  267 => 135,  263 => 134,  259 => 133,  255 => 132,  252 => 131,  234 => 130,  204 => 103,  201 => 102,  191 => 101,  89 => 5,  79 => 4,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -599,7 +595,9 @@ document.addEventListener(\"DOMContentLoaded\", function() {
 
 {% block content %}
 <div class=\"content-wrapper\">
+<a href=\"{{ path('app_reservationactivite_archive') }}\" class=\"btn btn-primary btn-rounded btn-fw\">Archive</a>
     <div class=\"col-lg-12 grid-margin stretch-card\">
+    
         <div class=\"card\">
             <div class=\"card-body\">
                 <h4 class=\"card-title\">Reservations</h4>
@@ -655,68 +653,42 @@ document.addEventListener(\"DOMContentLoaded\", function() {
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
+    
+</div>
+<div class=\"statistics-details d-flex align-items-center justify-content-between\">
+<div>
+    <p class=\"statistics-title\">Nombre total de réservations :</p>
+   <h3 class=\"rate-percentage\">{{ nombreReservations }}</h3>
+</div>
+<div>
+    <p class=\"statistics-title\">L'heure la plus populaire des réservations :</p>
+   <h3 class=\"rate-percentage\">{{ mostPopularHour }}</h3>
+</div>
+<div>
+    <p class=\"statistics-title\">Le client fidèle :</p>
+    {% for client in fideleClients %}
+            <h3 class=\"rate-percentage\">{{ client.user }} </h3>
+        {% endfor %}
+  
 </div>
 </div>
+</div>
+
 
 <!-- Code de l'histogramme des statistiques -->
 <div class=\"content-wrapper\">
             <div class=\"col-lg-6 grid-margin stretch-card\">
               <div class=\"card\">
                 <div class=\"card-body\">
-                  <h4 class=\"card-title\">Chart</h4>
-                  <canvas id=\"statistiquesChart\" style=\"height: 400px;\"></canvas>
-                </div>
-              </div>
-            </div>
-            <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var statistiquesData = {{ statistiques|json_encode|raw }};
-        
-        var ctx = document.getElementById('statistiquesChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['En cours', 'confirmées'],
-                datasets: [{
-                    label: 'Nombre de réservations',
-                    data: [statistiquesData.en_cours, statistiquesData.confirmées],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-    });
-</script>
-
-            <div class=\"col-lg-6 grid-margin stretch-card\">
-              <div class=\"card\">
-                <div class=\"card-body\">
-                  <h4 class=\"card-title\">Chart</h4>
+                  <h4 class=\"card-title\">Les Statuts</h4>
                   <canvas id=\"statistiquesPieChart\" width=\"432\" height=\"432\" style=\"display: block; box-sizing: border-box; height: 432px; width: 432px;\"></canvas>
                   
                 </div>
               </div>
             </div>
-          </div>
           </div>
 
   <!-- Code du pie chart pour les statistiques -->
@@ -756,6 +728,8 @@ document.addEventListener(\"DOMContentLoaded\", function() {
         });
     });
 </script>
+
+
 
 
 <script>

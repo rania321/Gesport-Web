@@ -21,11 +21,22 @@ use App\Entity\Reservationactivite as ReservationactiviteEntity;
 class ActiviteController extends AbstractController
 {
     #[Route('/', name: 'app_activite_index', methods: ['GET'])]
-    public function index(ActiviteRepository $activiteRepository): Response
+    public function index(ActiviteRepository $activiteRepository, Request $request): Response
     {
+
+        $successMessage = 'Bienvenue! Choisissez lactivité qui vous correspond !';
+        $this->readTextWithResponsiveVoice($successMessage);
+
+        // Stocker le message dans une variable de session pour qu'il soit accessible côté client
+        $request->getSession()->set('success_message', $successMessage);
         return $this->render('activite/index.html.twig', [
             'activites' => $activiteRepository->findAll(),
+            'successMessage' => $request->getSession()->get('success_message'), // Passer le message de succès au template
         ]);
+    }
+    private function readTextWithResponsiveVoice(string $text): void
+    {
+        echo '<script>responsiveVoice.speak("' . $text . '", "French Female", {volume: 1});</script>';
     }
 
     #[Route('/back', name: 'app_activite_indexBack', methods: ['GET'])]
@@ -150,6 +161,12 @@ class ActiviteController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($reservationactiviteEntity);
             $entityManager->flush();
+            // Lecture du message de succès avec ResponsiveVoice
+            $successMessage = 'Veuillez réserver lactivité.'. $reservationactiviteEntity->getIda()->getNoma();
+            $this->readTextWithResponsiveVoice($successMessage);
+
+            // Stocker le message dans une variable de session pour qu'il soit accessible côté client
+            $request->getSession()->set('success_message', $successMessage);
 
             return $this->redirectToRoute('app_activite_reserv', ['ida' => $activite->getIda()]);
         }
@@ -157,6 +174,7 @@ class ActiviteController extends AbstractController
         return $this->renderForm('reservationactivite/new.html.twig', [
             'activite' => $activite,
             'form' => $form,
+            'successMessage' => $request->getSession()->get('success_message'), // Passer le message de succès au template
         ]);
     }
 

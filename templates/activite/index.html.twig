@@ -80,6 +80,7 @@
         </div>
 {% endblock %}
 {% block content %}
+<script src="https://code.responsivevoice.org/responsivevoice.js"></script>
 <a href="{{ path('app_activite_favoris') }}" class="btn btn-light text-primary rounded-pill py-3 px-5 mt-2">Mes Favoris</a>
    <h1>     </h1> 
    <!-- Champ de recherche -->
@@ -115,6 +116,15 @@
                 <p>No records found</p>
             </div>
         {% endfor %}
+        {% if successMessage is defined %}
+                                        <script>
+                                            function readTextWithResponsiveVoice(text) {
+                                                responsiveVoice.speak(text, "French Female", { volume: 1 });
+                                            }
+                                            readTextWithResponsiveVoice('{{ successMessage }}');
+                                        </script>
+                                        
+        {% endif %}
     </div>
     </div>
     </div>

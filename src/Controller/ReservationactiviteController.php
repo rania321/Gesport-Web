@@ -22,7 +22,7 @@ use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
 use Endroid\QrCode\Label\Label;
 use Endroid\QrCode\Response\QrCodeResponse;
 use Endroid\QrCode\Writer\PngWriter;
-
+use DateTime;
 use Endroid\QrCode\Color\Color;
 use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\Logo\Logo;
@@ -30,19 +30,28 @@ use Endroid\QrCode\RoundBlockSizeMode;
 use Endroid\QrCode\Writer\ValidationException;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[Route('/reservationactivite')]
 class ReservationactiviteController extends AbstractController
 {
+
     #[Route('/', name: 'app_reservationactivite_index', methods: ['GET'])]
-    public function index(ReservationactiviteRepository $reservationactiviteRepository): Response
+    public function index(ReservationactiviteRepository $reservationactiviteRepository, Request $request): Response
     {
         // Récupérer les réservations pour l'utilisateur par défaut avec l'ID 2
         $defaultUser = $this->getDoctrine()->getRepository(User::class)->find(2);
         $reservationactivites = $reservationactiviteRepository->findBy(['idu' => $defaultUser]);
 
+        $successMessage = 'Vous trouvez ici toutes vos réservations. Si votre réservation est confirmée, veuillez consulter votre boite mail ou téléchargez le pdf en cliquant dessous';
+        $this->readTextWithResponsiveVoice($successMessage);
+
+        // Stocker le message dans une variable de session pour qu'il soit accessible côté client
+        $request->getSession()->set('success_message', $successMessage);
+
         return $this->render('reservationactivite/index.html.twig', [
             'reservationactivites' => $reservationactivites,
+            'successMessage' => $request->getSession()->get('success_message'), // Passer le message de succès au template
         ]);
     }
 
@@ -50,7 +59,8 @@ class ReservationactiviteController extends AbstractController
     public function indexBack(ReservationactiviteRepository $reservationactiviteRepository): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $entites = $entityManager->getRepository(ReservationActivite::class)->findAll(); 
+        $entites = $entityManager->getRepository(ReservationActivite::class)->findAll();
+        
         
         $statistiques = [
             'en_cours' => 0,
@@ -64,13 +74,28 @@ class ReservationactiviteController extends AbstractController
                 $statistiques['confirmées']++;
             }
         }
-        
+
+        $nombreReservations = $reservationactiviteRepository->countTotalReservations();
+        // Utiliser le repository pour trouver l'heure la plus populaire
+        $mostPopularHourArray = $reservationactiviteRepository->findMostPopularHour();
+
+        // Extraire l'heure la plus populaire du tableau
+        $mostPopularHour = '';
+        if (!empty($mostPopularHourArray)) {
+            $mostPopularHour = reset($mostPopularHourArray);
+        }
+
+        $fideleClients = $reservationactiviteRepository->findClientFidele();
+
         return $this->render('reservationactivite/indexBack.html.twig', [
-            'reservationactivites' => $reservationactiviteRepository->findAll(),
+            'reservationactivites' => $reservationactiviteRepository->findFutureReservations(),
             'statistiques' => $statistiques,
+            'nombreReservations' => $nombreReservations,
+            'mostPopularHour' => $mostPopularHour,
+            'fideleClients' => $fideleClients,
         ]);
     }
-    
+
 
     #[Route('/new', name: 'app_reservationactivite_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -85,14 +110,25 @@ class ReservationactiviteController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($reservationactivite);
             $entityManager->flush();
+             // Lecture du message de succès avec ResponsiveVoice
+             $successMessage = 'Veuillez réserver lactivité.'. $reservationactivite->getIda()->getNoma();
+            $this->readTextWithResponsiveVoice($successMessage);
 
-            return $this->redirectToRoute('app_reservationactivite_index', [], Response::HTTP_SEE_OTHER);
+            // Stocker le message dans une variable de session pour qu'il soit accessible côté client
+            $request->getSession()->set('success_message', $successMessage);
+
+            return $this->redirectToRoute('app_reservationactivite_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('reservationactivite/new.html.twig', [
             'reservationactivite' => $reservationactivite,
             'form' => $form,
+            'successMessage' => $request->getSession()->get('success_message'), // Passer le message de succès au template
         ]);
+    }
+    private function readTextWithResponsiveVoice(string $text): void
+    {
+        echo '<script>responsiveVoice.speak("' . $text . '", "French Female", {volume: 1});</script>';
     }
 
     #[Route('/{idr}/show', name: 'app_reservationactivite_show', methods: ['GET'])]
@@ -161,7 +197,7 @@ class ReservationactiviteController extends AbstractController
    
                // Destinataires
                $mail->setFrom('rania.guelmami@esprit.tn', 'Service de Reservation');
-               $mail->addAddress('raniaguelmami0@gmail.com');
+               $mail->addAddress($reservationactivite->getIdu()->getEmailu());
    
                // Contenu
                $mail->isHTML(true);
@@ -239,14 +275,21 @@ class ReservationactiviteController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($reservation);
-                $entityManager->flush();
+                // Lecture du message de succès avec ResponsiveVoice
+                $successMessage = 'Votre reservation';
+                $this->readTextWithResponsiveVoice($successMessage);
 
+                // Stocker le message dans une variable de session pour qu'il soit accessible côté client
+                $request->getSession()->set('success_message', $successMessage);
+
+                $entityManager->flush();
                 return $this->redirectToRoute('app_reservationactivite_index');
             }
 
             return $this->render('reservationactivite/new.html.twig', [
                 'activite' => $activite,
                 'form' => $form->createView(),
+                'successMessage' => $request->getSession()->get('success_message'), // Passer le message de succès au template
             ]);
         }
 
@@ -257,21 +300,47 @@ class ReservationactiviteController extends AbstractController
          // Créer une instance de Dompdf
                 $options = new Options();
                 $options->set('isHtml5ParserEnabled', true);
+                $imagePath = $this->getParameter('kernel.project_dir') . '/public/FrontOffice/img/logo1.png';
+                $imageBase64 = $this->imageToBase64($imagePath);
                 $dompdf = new Dompdf($options);
             
+                
                 // Construction du contenu HTML du PDF
                 $html = '<html>';
                 $html .= '<body>';
-                $html .= '<h1>Réservation</h1>';
-                $html .= '<p>ID de la réservation : ' . $reservationactivite->getIdr() .
-                'Cher(e) ' . $reservationactivite->getIdu()->getPrenomu() 
-                . ',<br><br>Votre réservation a été confirmée avec succès. Voici les détails de votre réservation : ' . 
-                '<br>Activité :  ' . $reservationactivite->getIda()->getNoma() . 
-                '<br>Date :  ' . $reservationactivite->getDatedebutr()->format('d/m/Y') . 
-                '<br>Heure :  ' . $reservationactivite->getHeurer() . 
-                '<br>Statut :  ' . $reservationactivite->getStatutr() . 
-                '<br><br>Merci d"avoir choisi notre service. Nous sommes impatients de vous accueillir !' . '</p>';
+                
+                // Ajouter le cadre
+                $html .= '<div style="border: 2px solid #17447a; padding: 20px; margin: 20px;">';
 
+                // Ajouter le logo avec asset()
+                
+                $html .= '<img src="'. $imageBase64 .'" alt="Logo" style="width: 132px; height: 87px;">';
+                
+
+                // Ajouter la date actuelle
+                $html .= '<div style="text-align: right; margin-bottom: 20px; color: #17447a;">';
+                $html .= '<p>Date: ' . date('d/m/Y') . '</p>';
+                $html .= '</div>';
+
+                // Ajouter le titre
+                $html .= '<div style="text-align: center; margin-bottom: 20px;">';
+                $html .= '<h1>Réservation confirmée !</h1>';
+                $html .= '</div>';
+
+                $html .= '<div style="text-align: center;">';
+                $html .= '<br>Nous avons le plaisir de vous confirmer votre réservation N°'. $reservationactivite->getIdr() .
+                '<br>Vous trouverez ci-dessous les détails de votre réservation. ' ;
+                $html .= '</div>';
+                $html .= '<br><br>';
+                // Création du tableau pour les détails de la réservation
+                $html .= '<table style="width:100%"; border-collapse: collapse; margin-bottom:20px;">';
+                $html .= '<tr><td style="width:30%; padding:10px;"><b>Cher(e) :</b></td><td style="padding:10px;">' . $reservationactivite->getIdu()->getPrenomu() . ' ' . $reservationactivite->getIdu()->getNomu() . '</td></tr>';
+                $html .= '<tr><td style="width:30%; padding:10px;"><b>Activité :</b></td><td style="padding:10px;">' . $reservationactivite->getIda()->getNoma() . '</td></tr>';
+                $html .= '<tr><td style="width:30%; padding:10px;"><b>Date :</b></td><td style="padding:10px;">' . $reservationactivite->getDatedebutr()->format('d/m/Y') . '</td></tr>';
+                $html .= '<tr><td style="width:30%; padding:10px;"><b>Heure :</b></td><td style="padding:10px;">' . $reservationactivite->getHeurer() . '</td></tr>';
+                $html .= '<tr><td style="width:30%; padding:10px;"><b>Statut :</b></td><td style="padding:10px;">' . $reservationactivite->getStatutr() . '</td></tr>';
+                $html .= '</table>';
+                
 
                 $writer = new PngWriter();
 
@@ -279,7 +348,7 @@ class ReservationactiviteController extends AbstractController
                 $qrCode = QrCode::create($reservationactivite->getIda()->getNoma())
                     ->setEncoding(new Encoding('UTF-8'))
                     ->setErrorCorrectionLevel(ErrorCorrectionLevel::Low)
-                    ->setSize(300)
+                    ->setSize(200)
                     ->setMargin(10)
                     ->setRoundBlockSizeMode(RoundBlockSizeMode::Margin)
                     ->setForegroundColor(new Color(0, 0, 0))
@@ -304,9 +373,15 @@ class ReservationactiviteController extends AbstractController
                     $imageData = $result->getString();
                     $base64Image = base64_encode($imageData);
                 
+                    $html .= '<div style="text-align:center;">';
                     // Ajouter le QR code encodé en base64 au HTML
                     $html .= '<img src="data:image/png;base64,' . $base64Image . '" alt="QR Code"/>';
+                    $html .= '</div>';
+                    $html .= '<div style="text-align: center;">';
+                    $html .= '<br>Présentez ce QR code pour y accéder ! <br><br><b>Centre Sportif, 123 Rue de la Paix, 75000 Ariana,nTel : 99646424 ,Email : info@centresportif.com</b>';
+                    $html .= '</div>';
             
+                    $html .= '</div>'; // fermer le cadre
                 $html .= '</body>';
                 $html .= '</html>';
             
@@ -330,20 +405,23 @@ class ReservationactiviteController extends AbstractController
                 );
         }
 
-        #[Route('/search', name: 'search_Ajax')]
-        public function searchAjax(Request $request): Response
-        {
-            // Get the search query from the request
-            $searchQuery = $request->query->get('q');
+        private function imageToBase64(string $path): string
+    {
+        $file = new File($path);
+        $data = base64_encode(file_get_contents($file->getPathname()));
+        return 'data:' . $file->getMimeType() . ';base64,' . $data;
+    }
 
-            // Perform the search logic (e.g., query the database)
-            // Replace this with your actual search logic
-            $searchResults = $this->getDoctrine()
-                ->getRepository(ReservationactiviteRepository::class)
-                ->findBySearchQuery($searchQuery);
+    #[Route('/back/archive', name: 'app_reservationactivite_archive', methods: ['GET'])]
+    public function archive(Request $request): Response
+    {
+        // Récupérer les réservations qui ont dépassé la date d'aujourd'hui
+        $archiveReservations = $this->getDoctrine()->getRepository(Reservationactivite::class)->findArchiveReservations();
 
-            // Return the search results as JSON response
-            return new JsonResponse($searchResults);
-        }
+        return $this->render('reservationactivite/archive.html.twig', [
+            'archiveReservations' => $archiveReservations,
+        ]);
+    }
+
 
 }
