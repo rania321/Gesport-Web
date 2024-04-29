@@ -45,4 +45,16 @@ class EquipeRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function countEquipesByTournoi(): array
+{
+    return $this->createQueryBuilder('e')
+        ->select('COUNT(e) as count', 't.nomt as tournoi')
+        ->leftJoin('e.Tournoi', 't')
+        ->groupBy('t.idt')
+        ->getQuery()
+        ->getResult();
+}
+
+
 }

@@ -1,6 +1,6 @@
 {% extends 'baseBack.html.twig' %}
 
-{% block title %}Tournoi{% endblock %}
+{% block title %}Statistiques{% endblock %}
 {% block sidebar %}
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
 <ul class="nav">
@@ -38,7 +38,7 @@
   </ul>
 </div>
 </li>
-<li class="nav-item">
+<li class="nav-item active">
 <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
   <i class="menu-icon mdi mdi-chart-line"></i>
   <span class="menu-title">Charts</span>
@@ -46,11 +46,11 @@
 </a>
 <div class="collapse" id="charts">
   <ul class="nav flex-column sub-menu">
-    <li class="nav-item"> <a class="nav-link" href="../pages/charts/chartjs.html">ChartJs</a></li>
+    <li class="nav-item active"> <a class="nav-link" href="../pages/charts/chartjs.html">ChartJs</a></li>
   </ul>
 </div>
 </li>
-<li class="nav-item active">
+<li class="nav-item ">
 <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
   <i class="menu-icon mdi mdi-table"></i>
   <span class="menu-title">Tournois</span>
@@ -59,7 +59,7 @@
 <div class="collapse" id="tables">
   <ul class="nav flex-column sub-menu">
     <li class="nav-item"> <a class="nav-link" href="{{ path('app_equipe_indexBack') }}">Equipes</a></li>
-    <li class="nav-item active "> <a class="nav-link" href="{{ path('app_tournoi_indexBack') }}">Tournois</a></li>
+    <li class="nav-item "> <a class="nav-link" href="{{ path('app_tournoi_indexBack') }}">Tournois</a></li>
   </ul>
 </div>
 </li>
@@ -97,79 +97,81 @@
 {% endblock %}
 
 {% block content %}
-<div class="main-panel">
-  <div class="content-wrapper">
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header">
-            <div style="height: 20px;"></div> 
+    <canvas id="chart" width="20" height="40"></canvas>
 
-            <h2 class="card-title">Détails du Tournoi</h2>
-          </div>
-          <div class="card-body">
-            <table class="table table-bordered">
-              <tbody>
-                <tr>
-                  <th>Nom du Tournoi</th>
-                  <td>{{ tournoi.nomt }}</td>
-                </tr>
-                <tr>
-                  <th>Date de début</th>
-                  <td>{{ tournoi.datedebutt ? tournoi.datedebutt|date('Y-m-d') : '' }}</td>
-                </tr>
-                <tr>
-                  <th>Date de fin</th>
-                  <td>{{ tournoi.datefint ? tournoi.datefint|date('Y-m-d') : '' }}</td>
-                </tr>
-                <tr>
-                  <th>Description</th>
-                  <td><a href="https://www.google.com/maps/search/?api=1&query={{ tournoi.descrit }}" target="_blank" style="text-decoration: none; color: black;">{{ tournoi.descrit }}</a>
-                  </tr>
-                <tr>
-                  <th>Statut</th>
-                  <td>{{ tournoi.statutt }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div style="height: 50px;"></div> 
-        <div class="card">
-          <div class="card-header">
-            <div style="height: 20px;"></div> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var data = {{ stats|json_encode|raw }};
+        var labels = [];
+        var values = [];
 
-            <h2 class="card-title">Équipes Inscrites</h2>
-          </div>
-          <div class="card-body">
-            <div class="row">
-            
-              {% for equipe in equipesInscrites %}
-              <div class="col-md-6 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ equipe.getNome }}</h5>
-                        <form method="post" action="{{ path('app_equipe_deleteinscri', {'ide': equipe.ide}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ equipe.ide) }}">
-                            <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-               {% endfor %}
-            
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-    <div style="height: 20px;"></div> 
+        data.forEach(function(item) {
+            labels.push(item.tournoi);
+            values.push(item.count);
+        });
 
-    <a href="{{ path('app_tournoi_indexBack') }}" class="btn btn-inverse-warning">Retour à la liste</a>
-  </div>
-</div>
+        var total = values.reduce(function(a, b) {
+            return a + b;
+        });
 
+        var percentages = values.map(function(value) {
+            return (value / total) * 100;
+        });
 
+        var chart = new Chart('chart', {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    //label: 'Répartition des équipes par tournoi',
+                    data: percentages,
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 1,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            boxWidth: 15
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                var label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                var value = context.formattedValue || '';
+                                if (value) {
+                                    label += value + '%';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 {% endblock %}

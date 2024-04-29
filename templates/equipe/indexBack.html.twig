@@ -42,12 +42,12 @@
 <li class="nav-item">
 <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
   <i class="menu-icon mdi mdi-chart-line"></i>
-  <span class="menu-title">Charts</span>
+  <span class="menu-title">Statistiques</span>
   <i class="menu-arrow"></i>
 </a>
 <div class="collapse" id="charts">
   <ul class="nav flex-column sub-menu">
-    <li class="nav-item"> <a class="nav-link" href="../pages/charts/chartjs.html">ChartJs</a></li>
+    <li class="nav-item"> <a class="nav-link" href="{{ path('app_equipe_stat') }}">Statistiques des equipes </a></li>
   </ul>
 </div>
 </li>
@@ -106,6 +106,7 @@
       </div>
       <div class="col-sm-4 d-flex justify-content-end">
         <a href="{{ path('app_equipe_newBack') }}" class="btn btn-inverse-primary mb-3">Create New</a>
+
     </div>
     </div>
 

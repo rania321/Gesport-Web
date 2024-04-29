@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Tournoi;
+use App\Entity\Equipe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -56,4 +57,8 @@ public function searchByNom($query)
         ->getResult();
     }
 
+
+   
+
+    
 }

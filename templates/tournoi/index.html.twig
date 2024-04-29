@@ -110,8 +110,8 @@
                             <h5 class="card-title text-primary">{{ tournoi.nomt }}</h5>
                             <p class="card-text text-muted">Date de début: {{ tournoi.datedebutt ? tournoi.datedebutt|date('Y-m-d') : '' }}</p>
                             <p class="card-text text-muted">Date de fin: {{ tournoi.datefint ? tournoi.datefint|date('Y-m-d') : '' }}</p>
-                            <!-- Utilisation de JavaScript pour afficher les descriptions des événements -->
-                            <p class="card-text"> <a href="https://www.google.com/maps/search/?api=1&query={{ tournoi.descrit }}">{{ tournoi.descrit }}</a></p>
+                            <p class="card-text">     Lieu: <a href="https://www.google.com/maps/search/?api=1&query={{ tournoi.descrit }}" target="_blank">{{ tournoi.descrit }}</a>
+                            </p>
 
                             <p class="card-text">Statut: <span class="text-success">{{ tournoi.statutt }}</span></p>
                         </div>
@@ -254,7 +254,7 @@
         
         eventTitle.textContent = event.title;
         eventDate.textContent = 'Date: ' + event.start.toDateString();
-        eventDescription.innerHTML = 'Lieu: <a href="https://www.google.com/maps/search/?api=1&query=' + event.extendedProps.description + '">' + event.extendedProps.description + '</a>';
+        eventDescription.innerHTML = 'Lieu: <a href="https://www.google.com/maps/search/?api=1&query=' + event.extendedProps.description + '" target="_blank">' + event.extendedProps.description + '</a>';
         eventStatus.textContent = 'Statut: ' + event.extendedProps.statut;
 
         document.getElementById('eventDetails').style.display = 'block';
@@ -279,5 +279,8 @@
     function getEventColor(tournoiNom) {
         return eventColors[tournoiNom]; // Récupérer la couleur générée pour ce tournoi
     }
+
+
+    
 </script>
 {% endblock %}

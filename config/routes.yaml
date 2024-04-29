@@ -35,3 +35,8 @@ tournoi_display_sorted_by_lieu_desc:
 tournoi_display_sorted_by_statut_desc:
     path: '/tri/sorted_by_statut_desc'
     controller: App\Controller\TriController::displaySortedByStatutDESC
+
+app_equipe_stat:
+    path: /stats/stats
+    controller: App\Controller\StatsController::stats
+
