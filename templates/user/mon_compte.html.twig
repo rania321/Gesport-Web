@@ -7,13 +7,13 @@
         {% if isBlocked %}
            <div class="alert alert-danger" role="alert" style="font-size: 24px; text-align: center;">
                Votre compte est bloqué. Veuillez contacter l'administrateur.
-                <script>
-        // Redirection vers la page de déconnexion après 4 secondes
-        setTimeout(function() {
-            window.location.href = "{{ path('app_logout') }}";
-        }, 4000); // 4000 millisecondes = 4 secondes
-    </script>
-            </div>
+               <script>
+                   // Redirection vers la page de déconnexion après 4 secondes
+                   setTimeout(function() {
+                       window.location.href = "{{ path('app_logout') }}";
+                   }, 4000); // 4000 millisecondes = 4 secondes
+               </script>
+           </div>
         {% else %}
             {# Formulaire de modification des informations de l'utilisateur #}
             <div class="user-form my-5 text-center">

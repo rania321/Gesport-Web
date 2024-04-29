@@ -58,8 +58,9 @@ class UserController extends AbstractController
         if ($user->getRoleu() === 'user') {
             // Vérifier si le code de vérification est déjà généré
             $verificationCode = $session->get('verification_code');
+            $verificationCodeCorrect = $session->get('verification_code_correct');
     
-            if (!$verificationCode) {
+            if (!$verificationCode && !$verificationCodeCorrect) {
                 // Créer le formulaire de saisie de l'e-mail
                 $form = $this->createForm(ResetPassType::class);
                 $form->handleRequest($request);
@@ -77,10 +78,10 @@ class UserController extends AbstractController
                 return $this->render('user/twofactor.html.twig', [
                     'form' => $form->createView(),
                 ]);
+            } else {
+                // Si le code de vérification est déjà généré et est correct, rediriger l'utilisateur vers une autre page
+                return $this->redirectToRoute('enter_verification_code');
             }
-    
-            // Si le code de vérification est déjà généré, rediriger l'utilisateur vers la page de saisie du code de vérification
-            return $this->redirectToRoute('enter_verification_code');
         }
     
         // Si le code de vérification n'est pas requis et que l'utilisateur n'est pas bloqué,
@@ -413,24 +414,46 @@ public function resetPassword(Request $request, UserPasswordEncoderInterface $pa
 
     
 #[Route('/mon-compte', name: 'mon_compte')]
-public function monCompte(Request $request, EntityManagerInterface $entityManager): Response
+public function monCompte(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
 {
     // Obtenez l'utilisateur connecté
     $user = $this->getUser();
-    if ($user) {
-        // Si l'utilisateur est connecté, vérifiez s'il est bloqué
-        $isBlocked = $this->isUserBlocked($user);
-    } else {
-        // Si l'utilisateur n'est pas connecté, définissez $isBlocked sur false
-        $isBlocked = false; // ou toute autre logique appropriée
+    
+    if (!$user) {
+        // Rediriger l'utilisateur vers la page de connexion s'il n'est pas connecté
+        return $this->redirectToRoute('app_login');
+    }
+    $isBlocked = $this->isUserBlocked($user);
+
+    // Vérifiez si l'utilisateur est un administrateur
+    if ($user->getRoleu() === 'Admin'||$isBlocked ) {
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        // Traitez le formulaire s'il est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            $this->addFlash('success', 'Vos informations ont été mises à jour avec succès.');
+            return $this->redirectToRoute('mon_compte');
+        }
+
+        // Afficher le compte de l'administrateur directement sans effectuer la vérification
+        return $this->render('user/mon_compte.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+            'isBlocked' => $isBlocked, // L'administrateur n'est jamais bloqué
+        ]);
     }
 
-    // Affiche l'e-mail de l'utilisateur connecté dans la console
-    if ($user) {
-        dump('User email:', $user->getEmailu());
-    } else {
-        dump('User not logged in.');
+    // Vérifiez si le code de vérification est correct
+    $verificationCodeCorrect = $session->get('verification_code_correct', false);
+    if (!$verificationCodeCorrect) {
+        // Rediriger l'utilisateur vers la page de saisie du code de vérification
+        return $this->redirectToRoute('enter_verification_code');
     }
+
+    // Vérifiez si l'utilisateur est bloqué
+    $isBlocked = $this->isUserBlocked($user);
 
     // Créez un formulaire pour éditer les informations de l'utilisateur
     $form = $this->createForm(UserType::class, $user);
@@ -455,6 +478,7 @@ public function monCompte(Request $request, EntityManagerInterface $entityManage
 #[Route('/logout', name: 'app_logout')]
 public function logout(LogoutUrlGeneratorInterface $logoutUrlGenerator): Response
 {
+    $session->set('verification_code_correct', false);
     // Générer l'URL de déconnexion
     $logoutUrl = $logoutUrlGenerator->logout();
 
@@ -472,6 +496,7 @@ public function enterVerificationCode(Request $request): Response
 
         // Vérifier si le code saisi est correct
         if ($verificationCodeFromEmail === $verificationCode) {
+            $session->set('verification_code_correct', true);
             // Rediriger l'utilisateur vers la page souhaitée après avoir saisi le bon code
             return $this->redirectToRoute('base'); // Remplacez 'base' par la route souhaitée
         } else {
