@@ -1,0 +1,58 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Edit Reservationactivite{% endblock %}
+
+
+{% block content %}
+<div class="content-wrapper">
+<div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Formulaire de modification</h4>
+                  <p class="card-description">
+                    Modifier cette réservation
+                  </p>
+                  {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                  <form class="forms-sample">
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">Activite</label>
+                      {{ form_widget(form.ida, {'attr': {'class': 'form-control'}}) }}
+                      <dd class="col-sm-9">{{ reservationactivite.ida.noma }}</dd>
+                    </div>
+                     <div class="form-group">
+                      <label for="exampleInputEmail1">User</label>
+                      <dd class="col-sm-9">{{ reservationactivite.idu.prenomu }}</dd>
+                    </div> 
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Date</label>
+                      {{ form_widget(form.datedebutr, {'attr': {'class': 'form-control'}}) }}
+                      <div class="text-danger">{{ form_errors(form.datedebutr) }}</div>
+                      
+                    </div>
+                    <div class="form-group">
+                      <label>Heure</label>
+                      {{ form_widget(form.heurer, {'attr': {'class': 'form-control'}}) }}
+                      <div class="text-danger">{{ form_errors(form.heurer) }}</div>
+                      
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputConfirmPassword1">Statut</label>
+                      {{ form_widget(form.statutr, {'attr': {'class': 'form-control'}}) }}
+                      <div class="text-danger">{{ form_errors(form.statutr) }}</div>
+                      
+                    </div>
+                    {{ form_row(form._token) }}
+                    <button type="submit" class="btn btn-primary me-2">Modifier</button>
+                    
+                    <a href="{{ path('app_reservationactivite_indexBack') }}" class="btn btn-light">La liste</a>
+                    {{ include('reservationactivite/_delete_form.html.twig') }}
+                  </form>
+                  {{ form_end(form) }}
+                </div>
+              </div>
+            </div>
+            </div>
+
+
+    
+{% endblock %}

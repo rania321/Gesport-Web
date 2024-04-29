@@ -1,0 +1,46 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Reservation Detail</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Activite</th>
+                                    <td>{{ reservationactivite.ida.noma }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Client</th>
+                                    <td>{{ reservationactivite.idu.prenomu }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Date</th>
+                                    <td>{{ reservationactivite.datedebutr ? reservationactivite.datedebutr|date('Y-m-d') : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Heure</th>
+                                    <td>{{ reservationactivite.heurer }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Statut</th>
+                                    <td>{{ reservationactivite.statutr }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="{{ path('app_reservationactivite_indexBack') }}" class="btn btn-light">Back to list</a>
+                    <a href="{{ path('app_reservationactivite_editBack', {'idr': reservationactivite.idr}) }}" class="btn btn-warning">Edit</a>
+                    {{ include('reservationactivite/_delete_form1.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

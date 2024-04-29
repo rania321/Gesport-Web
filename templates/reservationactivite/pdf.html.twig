@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmation de réservation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .info {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    .info p {
+      margin: 0;
+    }
+
+    .info label {
+      display: inline-block;
+      width: 120px;
+      font-weight: bold;
+    }
+
+    .info span {
+      display: inline-block;
+      margin-left: 20px;
+    }
+
+    .qr-code {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .qr-code img {
+      width: 100px;
+      height: 100px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .footer p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Confirmation de réservation</h1>
+    </div>
+
+    <div class="info">
+      <p>
+        <label>ID de réservation:</label>
+        <span>{{ reservationactivite[0].idr }}</span>
+      </p>
+      <p>
+        <label>Cher(e):</label>
+        <span>{{ reservationactivite[0].idu.prenomu }}</span>
+      </p>
+      <p>
+        <label>Activité:</label>
+        <span>{{ reservationactivite[0].ida.noma }}</span>
+      </p>
+      <p>
+        <label>Date:</label>
+        <span>{{ reservationactivite[0].datedebutr | date("d/m/Y") }}</span>
+      </p>
+      <p>
+        <label>Heure:</label>
+        <span>{{ reservationactivite[0].heurer }}</span>
+      </p>
+      <p>
+        <label>Statut:</label>
+        <span>{{ reservationactivite[0].statutr }}</span>
+      </p>
+    </div>
+
+
+    <div class="footer">
+      <p>Merci d'avoir choisi notre service. Nous sommes impatients de vous accueillir!</p>
+    </div>
+  </div>
+</body>
+</html>
