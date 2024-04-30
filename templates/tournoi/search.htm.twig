@@ -1,0 +1,55 @@
+<table id="results" class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Nom Tournoi</th>
+        <th scope="col">Date de début</th>
+        <th scope="col">Date de fin</th>
+        <th scope="col">Description</th>
+        <th scope="col">Statut</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tournoi in tournois %}
+      <tr>
+          <td>{{ tournoi.nomt }}</td>
+          <td>{{ tournoi.datedebutt ? tournoi.datedebutt|date('d/m/Y') : '' }}</td>
+          <td>{{ tournoi.datefint ? tournoi.datefint|date('d/m/Y') : '' }}</td>
+          <td>{{ tournoi.descrit }}</td>
+          <td>
+            <span class="badge 
+            {% if tournoi.statutt == 'Terminé' %}
+              badge-danger
+            {% elseif tournoi.statutt == 'À venir' %}
+              badge-primary
+            {% else %}
+              badge-success
+            {% endif %}
+          ">
+            {{ tournoi.statutt }}
+          </span>
+          </td>
+          <td>
+            <div class="d-flex">
+              <a href="{{ path('app_tournoi_show', {'idt': tournoi.idt}) }}" class="btn btn-sm btn-outline-info btn-inverse-info me-1">
+                <i class="mdi mdi-eye"></i> Show
+              </a>
+              <a href="{{ path('app_tournoi_edit', {'idt': tournoi.idt}) }}" class="btn btn-sm btn-outline-warning btn-inverse-warning me-1">
+                <i class="mdi mdi-pencil"></i> Edit
+              </a>
+              <form method="post" action="{{ path('app_tournoi_delete', {'idt': tournoi.idt}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tournoi.idt) }}">
+                <button type="submit" class="btn btn-sm btn-danger btn-inverse-danger" style="font-size: 13px;">
+                  <i class="mdi mdi-delete"></i> Delete
+                </button>
+                  </form>
+              </div>
+          </td>
+      </tr>
+      {% else %}
+      <tr>
+          <td colspan="6">Aucun tournoi trouvé</td>
+      </tr>
+      {% endfor %}
+  </tbody>
+  </table>

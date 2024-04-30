@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ma Page</title>
+  <!-- Inclure Bootstrap via CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="card mx-auto" style="width: 18rem;">
+    <img src="https://mailtrap.io/wp-content/uploads/2019/09/How-to-Send-an-Email-Using-Windows-PowerShell_API_transparent.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <!-- Votre code Twig -->
+      <div id="main">
+        <!-- Post -->
+        <section class="post">
+          <header class="major" style="color: #333;">
+          
+            <h1 style="color: #007bff; text-align:center;">donner votre email</h1>
+          </header>
+          <div class="section-content">
+            <div class="col-md-12">
+              <fieldset style="border: 1px solid #ccc; padding: 20px; border-radius: 10px; background-color: #f9f9f9;">
+                {{ form_start(form) }}
+
+                {{ form_row(form.emailu, {'attr': {'class': 'form-control', 'style': 'color: blue;' }}) }}
+                </br>
+                {{ form_row(form.envoyer, {'attr': {'class': 'btn btn-primary', 'style': 'background-color: green;' }}) }}
+
+                {{ form_end(form) }}
+              </fieldset>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- Fin de votre code Twig -->
+    </div>
+  </div>
+</div>
+
+<!-- Script pour jQuery (nécessaire pour Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- Scripts pour Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

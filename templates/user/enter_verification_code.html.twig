@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ma Page</title>
+  <!-- Inclure Bootstrap via CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="card mx-auto" style="width: 18rem;">
+    <img src="https://www.svgrepo.com/show/381142/password-protection-privacy-access-verification-code.svg" class="card-img-top" alt="...">
+    <div class="card-body">
+      <!-- Votre code Twig -->
+      <div id="main">
+        <!-- Post -->
+        <section class="post">
+          <header class="major" style="color: #333;">
+          
+            <h1 style="color: #007bff; text-align:center;">donner votre code </h1>
+          </header>
+          <div class="section-content">
+            <div class="col-md-12">
+               <form method="post">
+        <div class="form-group">
+            <label for="verification_code">Code de vérification</label>
+            <input type="text" id="verification_code" name="verification_code" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Valider</button>
+        <br/>
+        <br/>
+        <p>donner ton email pour envoyer le code ? <a href="{{path('app_user_redirect')}}" class="link-info">clic ici</a></p>
+    </form>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- Fin de votre code Twig -->
+    </div>
+  </div>
+</div>
+
+<!-- Script pour jQuery (nécessaire pour Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- Scripts pour Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
