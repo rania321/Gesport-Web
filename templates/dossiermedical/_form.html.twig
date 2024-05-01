@@ -1,0 +1,16 @@
+{{ form_start(form, {'attr': {'class': 'my-form-class'}}) }}
+    <div class="form-group">
+        {{ form_label(form.poidsdm, 'Poids', {'label_attr': {'class': 'my-label-class'}}) }}
+        {{ form_widget(form.poidsdm, {'attr': {'class': 'form-control my-input-class'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.tailledm, 'Taille', {'label_attr': {'class': 'my-label-class'}}) }}
+        {{ form_widget(form.tailledm, {'attr': {'class': 'form-control my-input-class'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.agedm, 'Âge', {'label_attr': {'class': 'my-label-class'}}) }}
+        {{ form_widget(form.agedm, {'attr': {'class': 'form-control my-input-class'}}) }}
+    </div>
+    <!-- Ajoutez d'autres champs ici -->
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

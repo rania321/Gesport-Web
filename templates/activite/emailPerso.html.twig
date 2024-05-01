@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de réservation</title>
+    <style>
+        /* Ajoutez vos styles CSS personnalisés ici */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 3px solid #17447a;
+        }
+        .logo {
+            float: left;
+            margin-right: 20px;
+        }
+        .icons {
+            float: right;
+        }
+        h1 {
+            color: #17447a; /* Couleur bleue pour les titres */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Confirmation de réservation</h1>
+        <p>Cher(e) {{ reservation.idu.prenomu }},</p>
+        <p>Votre réservation a été confirmée avec succès. Voici les détails de votre réservation :</p>
+        <ul>
+            <li>Activité : {{ reservation.ida.noma }}</li>
+            <li>Date : {{ reservation.datedebutr|date('d/m/Y') }}</li>
+            <li>Heure : {{ reservation.heurer }}</li>
+            <li>Statut : {{ reservation.statutr }}</li>
+        </ul>
+        <p>Merci d'avoir choisi notre service. Nous sommes impatients de vous accueillir !</p>
+        <div class="icons">
+            <!-- Ajoutez vos icônes ici -->
+        </div>
+    </div>
+</body>
+</html>

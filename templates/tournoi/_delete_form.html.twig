@@ -1,0 +1,3 @@
+<form method="post" action="{{ path('app_tournoi_delete', {'idt': tournoi.idt}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tournoi.idt) }}">
+    <button type="submit" class="btn btn-inverse-danger btn-xs" style="font-size: 13px;">Delete</button></form>
