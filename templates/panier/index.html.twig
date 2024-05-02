@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gesport - Panier{% endblock %}
+
+{% block content %}
+<br><br>
+
+    <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+            <h5 class="section-title px-3">PANIER</h5>
+            <h1 class="mb-4">Nourrissez votre corps, vivez pleinement fit !</h1> 
+    </div>
+
+
+<div class="row g-4">
+{% for panier in paniers %}
+    <div class="col-12" style="margin-left: 100px; margin-right: 200px;">
+    <div class="service-content-inner d-flex align-items-start bg-white border border-primary rounded p-4">
+
+        <!-- Image à gauche -->
+        <img src="{{ asset('FrontOffice/' ~ panier.idp.imagep) }}" class="img-fluid rounded me-4" alt="{{ panier.idp.nomp }}" style="max-width: 200px; max-height: 200px;">
+
+        <!-- Contenu du service -->
+        <div class="service-content">
+            <h4 class="mb-4">#{{ panier.idp.referencep }}</h4>
+            <h5 class="mb-4">{{ panier.idp.nomp }}</h5>
+            <p class="mb-0">Quantité: {{ panier.quantitep }}</p>
+            <p class="mb-0">Total: {{ panier.totalpa }} dt</p>
+            <div class="mt-3">
+                {{ include('panier/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>
+
+    {% else %}
+    <div class="col-12">
+        <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 ps-0">
+            <div class="service-icon p-4">
+                <i class="fa fa-shopping-cart fa-4x text-primary"></i>
+            </div>
+            <div class="service-content">
+                <h5 class="mb-4">Aucun panier trouvé</h5>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    
+<div class="mx-auto text-center mb-5" style="max-width: 900px;">
+
+            <h2 class="mb-4">Total : {{ somme }} dt</h2> 
+    </div>
+            <div class="text-center">
+                <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="{{ path('confirmer_vente') }}">Confirmer</a><br><br>
+            </div>
+            <br>
+    </div>
+
+
+{% endblock %}

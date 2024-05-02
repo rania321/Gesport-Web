@@ -1,0 +1,50 @@
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"> Ajouter un produit</h4>
+                <p class="card-description">*Merci de remplir tous les champs</p>
+                <p class="card-description">*Saisissez la bonne référence pour modifier un produit</p>
+
+
+
+
+
+                {{ form_start(form, {'attr': {'class': 'form-sample'}}) }}
+                <div class="form-group">
+                    {{ form_label(form.referenceP, 'Référence') }}
+                    {{ form_widget(form.referenceP, {'attr': {'class': 'form-control', 'placeholder': 'Référence'}}) }}
+                </div>
+                
+                <div class="form-group">
+                    {{ form_label(form.nomP, 'Nom') }}
+                    {{ form_widget(form.nomP, {'attr': {'class': 'form-control', 'placeholder': 'Nom'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.descriP, 'Description') }}
+                    {{ form_widget(form.descriP, {'attr': {'class': 'form-control', 'placeholder': 'Description'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.PrixP, 'Prix') }}
+                    {{ form_widget(form.PrixP, {'attr': {'class': 'form-control', 'placeholder': 'Prix'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.StockP, 'Stock') }}
+                    {{ form_widget(form.StockP, {'attr': {'class': 'form-control', 'placeholder': 'Stock'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.imageP, 'Image') }}
+                    {{ form_widget(form.imageP, {'attr': {'class': 'form-control', 'placeholder': 'Image'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.DateAjoutP, 'Date') }}
+                    {{ form_widget(form.DateAjoutP, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <button type="submit" class="btn btn-primary me-2">Ajouter</button>
+                <button class="btn btn-light">Modifier</button>
+                <a href="{{ path('app_produit_indexB') }}">Voir liste des produits</a>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>

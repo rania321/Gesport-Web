@@ -1,0 +1,26 @@
+{{ form_start(formFront, {'attr': {'class': 'mt-4 form', 'enctype': 'multipart/form-data', 'novalidate': 'novalidate'}}) }}
+
+    <div class="mb-3">
+        {{ form_label(formFront.nome, 'Nom de l\'équipe', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(formFront.nome, {'attr': {'class': 'form-control'}}) }}
+        <div class="text-danger">{{ form_errors(form.nome) }}</div>
+
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Statut de l'équipe</label>
+        <input type="text" class="form-control" value="Inscrite" readonly>
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(formFront.Tournoi, 'Tournoi', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(formFront.Tournoi, {'attr': {'class': 'form-select'}}) }}
+        <div class="text-danger">{{ form_errors(form.Tournoi) }}</div>
+
+    </div>
+
+    <div class="d-grid">
+        <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    </div>
+
+{{ form_end(formFront) }}

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    {# Contenu de votre page, y compris le formulaire #}
+    {% if user %}
+        {% if isBlocked %}
+           <div class="alert alert-danger" role="alert" style="font-size: 24px; text-align: center;">
+               Votre compte est bloqué. Veuillez contacter l'administrateur.
+               <script>
+                   // Redirection vers la page de déconnexion après 4 secondes
+                   setTimeout(function() {
+                       window.location.href = "{{ path('app_logout') }}";
+                   }, 4000); // 4000 millisecondes = 4 secondes
+               </script>
+           </div>
+        {% else %}
+            {# Formulaire de modification des informations de l'utilisateur #}
+            <div class="user-form my-5 text-center">
+                <h2>Modifier les informations du compte</h2>
+                <form method="post" action="{{ path('app_user_edituser', {'idu': user.idu}) }}" class="needs-validation" novalidate>
+                    {{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
+                    {{ form_row(form.emailu, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_row(form.nomu, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_row(form.prenomu, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_row(form.mdpu, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_row(form.roleu, {'attr': {'class': 'form-control'}}) }}
+                    {# Ajoutez d'autres champs selon vos besoins #}
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                    </div>
+                    {{ form_end(form) }}
+                </form>
+            </div>
+
+            {# Formulaire de suppression du compte utilisateur #}
+            <div class="user-form my-5 text-center">
+                <form action="{{ path('delete_account', { 'idu': user.idu }) }}" method="post" class="needs-validation" novalidate>
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.idu) }}">
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-danger">Supprimer mon compte</button>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+    {% else %}
+        <p>You are not logged in.</p>
+    {% endif %}
+
+{% endblock %}

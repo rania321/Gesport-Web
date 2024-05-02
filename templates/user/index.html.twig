@@ -1,0 +1,111 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Liste des Utilisateurs</h1>
+        <a href="{{ path('app_user_new') }}" class="btn btn-primary mb-3">Créer un nouvel utilisateur</a>
+
+        <!-- Champ de recherche -->
+        <div class="form-group">
+            <input type="text" id="search-input" class="form-control" placeholder="Rechercher...">
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="user-list">
+                <thead class="thead-dark">
+                    <tr>
+                       
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Rôle</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            
+                            <td>{{ user.nomu }}</td>
+                            <td>{{ user.prenomu }}</td>
+                            <td>{{ user.emailu }}</td>
+                            <td>{{ user.roleu }}</td>
+                            <td>
+                                <span style="display: inline-block;">
+                                    <a href="{{ path('app_user_show', {'idu': user.idu}) }}" class="btn btn-info btn-sm">Afficher</a>
+                                    <a href="{{ path('app_user_edit', {'idu': user.idu}) }}" class="btn btn-warning btn-sm">Éditer</a>
+                                    <form method="post" action="{{ path('app_user_delete', {'idu': user.idu}) }}" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.idu) }}">
+                                        <button class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </span>
+                                <form method="post" action="{{ path('app_user_block', {'idu': user.idu}) }}" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to block this user?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('block' ~ user.idu) }}">
+                                    <button class="btn btn-secondary btn-sm">Bloquer</button>
+                                </form>
+                                 
+                                    <form method="post" action="{{ path('app_user_unblock', {'idu': user.idu}) }}" style="display: inline-block;" onsubmit="return confirm('Êtes-vous sûr de vouloir débloquer cet utilisateur ?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('unblock' ~ user.idu) }}">
+                                        <button class="btn btn-success btn-sm">Débloquer</button>
+                                    </form>
+                               
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">Aucun utilisateur trouvé</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Inclusion de jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Script JavaScript pour la recherche AJAX -->
+    <script>
+   $(document).ready(function() {
+        $('#search-input').on('input', function() {
+            var query = $(this).val();
+            $.ajax({
+                url: '{{ path('user_search') }}',
+                method: 'POST',
+                data: { query: query },
+                dataType: 'json',
+                success: function(response) {
+                    var userListHtml = '';
+                    if (Array.isArray(response)) {
+                        // Traitement pour un tableau de résultats
+                        response.forEach(function(user) {
+                            userListHtml += '<tr>';
+                            userListHtml += '<td>' + user.nomu + '</td>';
+                            userListHtml += '<td>' + user.prenomu + '</td>';
+                            userListHtml += '<td>' + user.emailu + '</td>';
+                            userListHtml += '<td>' + user.roleu + '</td>';
+                            userListHtml += '<td>' 
+                            // Ajoutez ici les boutons d'action pour chaque utilisateur
+                            userListHtml += '</td>';
+                            userListHtml += '</tr>';
+                        });
+                    } else {
+                        // Traitement pour un objet JSON unique
+                        userListHtml += '<tr>';
+                        userListHtml += '<td>' + response.nomu + '</td>';
+                        userListHtml += '<td>' + response.prenomu + '</td>';
+                        userListHtml += '<td>' + response.emailu + '</td>';
+                        userListHtml += '<td>' + response.roleu + '</td>';
+                        userListHtml += '<td>';
+                        // Ajoutez ici les boutons d'action pour l'utilisateur unique
+                        userListHtml += '</td>';
+                        userListHtml += '</tr>';
+                    }
+                    $('#user-list tbody').html(userListHtml);
+                }
+            });
+        });
+    });
+
+    </script>
+{% endblock %}
