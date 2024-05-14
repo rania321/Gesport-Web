@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block carousel %}
+<div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h3 class="text-white display-3 mb-4">Nos Activités</h3>
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="./base">Accueil</a></li>
+                    <li class="breadcrumb-item active text-white">Activite</li>
+                </ol>    
+            </div>
+        </div>
+{% endblock %}
+
+{% block content %}
+    <div>
+        {% for message in messages %}
+            {% if message.fromBot %}
+                <div class="bot-message">{{ message.text }}</div>
+            {% else %}
+                <div class="user-message">{{ message.text }}</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <form action="{{ path('botman_handle') }}" method="post">
+        <input type="text" name="message" id="message" placeholder="Type your message here..." autocomplete="off">
+        <button type="submit">Send</button>
+    </form>
+{% endblock %}

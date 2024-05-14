@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Joueur{% endblock %}
+{% block carousel %}
+<div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h3 class="text-white display-3 mb-4">Joueurs</h3>
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="./base">Accueil</a></li>
+                    <li class="breadcrumb-item active text-white">Activite</li>
+                </ol>    
+            </div>
+        </div>
+{% endblock %}
+
+{% block content %}
+    <h1>Create new Joueur</h1>
+
+    {{ include('joueur/_form.html.twig') }}
+
+    <a href="{{ path('app_joueur_index') }}">back to list</a>
+{% endblock %}

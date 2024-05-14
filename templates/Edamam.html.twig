@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de Calories</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .input-group button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .input-group button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Calculateur de Calories</h2>
+    <div class="input-group">
+        <input type="text" id="foodName" name="foodName" placeholder="Nom de l'aliment">
+        <input type="text" id="quantity" name="quantity" placeholder="Quantité">
+        <button onclick="searchCalories()">Rechercher</button>
+        
+        
+    </div>
+    <div class="result" id="caloriesResult">
+        {% if resultats %}
+            <p>Nombre de calories pour {{ resultats.quantity }} de {{ resultats.name }} : {{ resultats.calories }}</p>
+        {% else %}
+            <p>Aucun résultat trouvé</p>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    function searchCalories() {
+        var foodName = document.getElementById("foodName").value;
+        var quantity = document.getElementById("quantity").value;
+            var url = "{{ path('Edamamm', {'foodName': 'FOOD_NAME', 'quantity': 'QUANTITY'}) }}"
+        .replace('FOOD_NAME', encodeURIComponent(foodName))
+        .replace('QUANTITY', encodeURIComponent(quantity));
+        window.location.href = url; // Redirect to the generated URL
+        // Faire une requête AJAX vers votre controller Symfony
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    document.getElementById("caloriesResult").innerText = "Nombre de calories : " + response.calories;
+                } else {
+                    console.error("Erreur lors de la requête : " + xhr.status);
+                }
+            }
+        };
+
+        xhr.open("GET", "/api/edamam?foodName=" + encodeURIComponent(foodName) + "&quantity=" + encodeURIComponent(quantity));
+        xhr.send();
+    }
+</script>
+
+</body>
+</html>

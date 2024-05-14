@@ -1,0 +1,116 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Gesport - Statistique{% endblock %}
+{% block content %}
+
+<br><br><br><br>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Bloc Statistique - Vente -->
+        <div class="col-lg-6 grid-margin stretch-card" style="margin-left: 50px;">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Statistique - Vente</h4>
+                    <canvas id="barChart" width="785" height="392"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bloc Revenu du mois -->
+        <div class="col-md-4 grid-margin stretch-card" style="margin-left: 50px;">
+            <div class="card">
+                <div class="card-body">
+                
+                    <h4 class="card-title">Revenu du mois</h4>
+                    <div class="media">
+                        <i class="ti-world icon-md text-info d-flex align-self-end me-3"></i>
+                        <div class="media-body">
+                            <p class="card-text" id="totalMontant">dt</p>
+                            <br>
+                        </div>
+                    </div>
+                    <br>
+                    <h4 class="card-title">Produit le plus vendu</h4>
+                    <div class="media">
+                        <i class="ti-world icon-md text-info d-flex align-self-end me-3"></i>
+                        <div class="media-body">
+                            <p class="card-text" id="revenu2"></p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('barChart').getContext('2d');
+    var labels = [];
+    var data = [];
+    var quantities = {};
+
+    {% for vente in ventes %}
+        var idp = '{{ vente.idp.getNomp() }}';
+        var quantite = {{ vente.quantitév }};
+        
+        if (quantities[idp] === undefined) {
+            quantities[idp] = quantite;
+        } else {
+            quantities[idp] += quantite;
+        }
+    {% endfor %}
+
+    for (var idp in quantities) {
+        labels.push(idp);
+        data.push(quantities[idp]);
+    }
+
+    var barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Quantité vendue',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Calcul du montant total
+    var totalMontant = 0;
+    {% for vente in ventes %}
+        totalMontant += {{ vente.montantv }};
+    {% endfor %}
+    document.getElementById('totalMontant').innerText = totalMontant + " dt";
+
+    // Trouver l'idp avec la quantité la plus grande
+    var maxQuantity = 0;
+    var maxIdp = null;
+
+    for (var idp in quantities) {
+        if (quantities[idp] > maxQuantity) {
+            maxQuantity = quantities[idp];
+            maxIdp = idp;
+        }
+    }
+
+    document.getElementById('revenu2').innerText = maxIdp;
+</script>
+
+<br><br>
+<br><br>
+
+{% endblock %}

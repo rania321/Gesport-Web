@@ -1,0 +1,99 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Archive des réservations{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+<a href="{{ path('app_reservationactivite_indexBack') }}" class="btn btn-primary btn-rounded btn-fw">Réservations</a>
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Reservations</h4>
+                <div class="table-responsive">
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                        <div class="input-group">
+                            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="searchInput" placeholder="Type here...">
+                        </div>
+                    </div>
+                    <div id="searchResults"> <!-- Ajout de la zone de résultats de recherche -->
+                    <div id="tabv">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Activité</th>
+                                    <th>Prénom User</th>
+                                    <th>Date</th>
+                                    <th>Heure</th>
+                                    <th>Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for reservationactivite in archiveReservations %}
+                                    <tr>
+                                        <td>{{ reservationactivite.ida.noma }}</td>
+                                        <td>{{ reservationactivite.idu.prenomu }}</td>
+                                        <td>{{ reservationactivite.datedebutr ? reservationactivite.datedebutr|date('Y-m-d') : '' }}</td>
+                                        <td>{{ reservationactivite.heurer }}</td>
+                                        <td>
+                                            {% if reservationactivite.statutr == 'confirmée' %}
+                                                <span class="badge badge-success">Confirmée</span>
+                                            {% else %}
+                                                <span class="badge badge-warning">En cours</span>
+                                            {% endif %}
+                                        </td>
+                                        
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="5">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var searchInput = document.getElementById('searchInput');
+    var tabv = document.getElementById('tabv');
+    var searchResults = document.getElementById('searchResults');
+    var tableHead = tabv.querySelector('thead').outerHTML;
+
+    searchInput.addEventListener('input', function() {
+        var searchTerm = searchInput.value.trim().toLowerCase();
+        var matchedReserv = [];
+
+        // Sélectionnez toutes les lignes du tableau
+        var rows = tabv.querySelectorAll('tbody tr');
+
+        rows.forEach(function(row) {
+            var activityName = row.querySelector('td:first-child').textContent.toLowerCase();
+            var userName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+            if (activityName.includes(searchTerm) || userName.includes(searchTerm)) {
+                matchedReserv.push(row.outerHTML);
+            }
+        });
+
+        // Affichez les résultats de la recherche avec la classe de table appropriée
+        if (matchedReserv.length > 0) {
+            searchResults.innerHTML = '<table class="table table-striped">' + tableHead + '<tbody>' + matchedReserv.join('') + '</tbody></table>';
+        } else {
+            // Supprimez le contenu de la zone d'affichage des résultats s'il n'y a aucun résultat trouvé
+            searchResults.innerHTML = '';
+        }
+    });
+});
+
+</script>
+{% endblock %}

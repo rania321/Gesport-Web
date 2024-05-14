@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipe index{% endblock %}
+{% block carousel %}
+<div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h3 class="text-white display-3 mb-4">Equipes</h3>
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="./base">Accueil</a></li>
+                    <li class="breadcrumb-item active text-white">Activite</li>
+                </ol>    
+            </div>
+        </div>
+{% endblock %}
+   
+    {% block content %}
+    <!-- Content Start -->
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div style="height: 30px;"></div> 
+                    <div class="card-body text-center  d-flex align-items-center justify-content-center"> {# Ajout de la classe text-center pour centrer le texte horizontalement #}
+                        
+                        <h5 class="mb-4">Create New</h5>
+                        <h2 class="mb-0">Equipe</h2>
+                    </div>
+                    <div class="card-body">
+                        {{ include('equipe/_formFront.html.twig', {'form': formFront}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body text-center">                        
+                        <h1 class="mb-3">Liste des équipes</h1>
+                        <div class="card-body" style="max-height: 360px; overflow-y: scroll;">
+                            {% if equipes is not empty %}
+                                <table class="table table-striped" >
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Equipe</th>
+                                            <th scope="col">Tournoi</th>
+                                            <th scope="col">Capitaine</th>
+                                            <th scope="col">Statut</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for equipe in equipes %}
+                                            <tr>
+                                                <td>{{ equipe.nome }}</td>
+                                                <td>{{ equipe.tournoi.nomt }}</td>
+                                                <td>{{ equipe.user.nomu }}</td>
+                                                <td>{{ equipe.statute }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                <div class="alert alert-info" role="alert">
+                                    Aucune équipe n'a été ajoutée pour le moment.
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+        
+            </div>
+        </div>
+    </div>
+    <!-- Content End -->
+{% endblock %}

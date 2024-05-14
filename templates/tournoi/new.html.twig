@@ -1,0 +1,25 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}New Tournoi{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+      <div class="col-md-8 offset-md-2">
+          <div style="height: 30px;"></div> 
+              
+          <h2>Create new Tournoi</h2>
+          <div style="height: 20px;"></div> 
+
+          <div class="card">
+              <div class="card-body" style="width: 100%; margin: 0 auto;">
+                  {{ include('tournoi/_form.html.twig') }}
+              </div>
+          </div>
+          <div style="height: 20px;"></div> 
+          <a href="{{ path('app_tournoi_indexBack') }}" class="btn btn-inverse-warning">Back to List</a>
+          <div style="height: 40px;"></div> 
+      </div>
+  </div>
+</div>
+{% endblock %}

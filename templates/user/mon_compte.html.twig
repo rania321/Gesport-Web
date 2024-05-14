@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+{% block carousel %}
+<div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h3 class="text-white display-3 mb-4">Nos Activités</h3>
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="./base">Accueil</a></li>
+                    <li class="breadcrumb-item active text-white">Activite</li>
+                </ol>    
+            </div>
+        </div>
+{% endblock %}
+
+{% block content %}
+
+    {% if user %}
+        {% if isBlocked %}
+           <div class="alert alert-danger" role="alert">
+               Votre compte est bloqué. Veuillez contacter l'administrateur.
+               <script>
+                   setTimeout(function() {
+                       window.location.href = "{{ path('app_logout') }}";
+                   }, 4000);
+               </script>
+           </div>
+        {% else %}
+            <div class="user-details my-5" >
+                <h2 class="text-center mb-4">Détails du compte</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-6" style="margin-left: 10px;">
+                        <h4>Modifier les informations du compte</h4>
+                        <form method="post" action="{{ path('app_user_edituser', {'idu': user.idu}) }}" class="needs-validation" novalidate>
+                            {{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
+                            {{ form_row(form.emailu, {'attr': {'class': 'form-control mb-3'}}) }}
+                            {{ form_row(form.nomu, {'attr': {'class': 'form-control mb-3'}}) }}
+                            {{ form_row(form.prenomu, {'attr': {'class': 'form-control mb-3'}}) }}
+                            {{ form_row(form.mdpu, {'attr': {'class': 'form-control mb-3'}}) }}
+                            {{ form_row(form.roleu, {'attr': {'class': 'form-control mb-3'}}) }}
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                            </div>
+                            {{ form_end(form) }}
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="text-right">Supprimer le compte</h4>
+                        <form action="{{ path('delete_account', { 'idu': user.idu }) }}" method="post" class="needs-validation" novalidate>
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.idu) }}">
+                            <p class="text-danger text-right">Attention : Cette action est irréversible.</p>
+                            <div class="col-12 text-right">
+                                <button type="submit" class="btn btn-danger">Supprimer mon compte</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        <p class="text-center">Vous n'êtes pas connecté.</p>
+    {% endif %}
+
+{% endblock %}

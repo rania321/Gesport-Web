@@ -1,0 +1,26 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}New Equipe{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div style="height: 30px;"></div> 
+       <h1>Create new Equipe</h1>
+       <div style="height: 20px;"></div> 
+
+        <div class="card">
+          <div class="card-body" style="width: 100%; margin: 0 auto;">
+    {{ include('equipe/_form.html.twig') }}
+</div>
+</div>
+<div style="height: 20px;"></div> 
+    <a href="{{ path('app_equipe_indexBack') }}"class="btn btn-inverse-warning">Back to List</a>
+    <div style="height: 40px;"></div> 
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

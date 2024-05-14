@@ -1,0 +1,55 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Gesport - Menu{% endblock %}
+{% block carousel %}
+<div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h3 class="text-white display-3 mb-4">Le Menu</h3>
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="./base">Accueil</a></li>
+                    <li class="breadcrumb-item active text-white">Activite</li>
+                </ol>    
+            </div>
+        </div>
+{% endblock %}
+
+{% block content %}
+
+<br><br>
+        <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                    <h5 class="section-title px-3">Buvette</h5>
+                    <h1 class="mb-0">Menu</h1>
+        </div>
+
+<div class="tab-class text-center">
+    <ul class="nav nav-pills d-inline-flex justify-content-center mb-5">
+        <li class="nav-item">
+            <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
+                <span class="text-dark" style="width: 150px;">All</span>
+            </a>
+        </li>
+    </ul>
+<div class="tab-content">
+    <div id="tab-1" class="tab-pane fade show p-0 active">
+        <div class="row g-4">
+            {% for produit in produits %}
+            <div class="col-lg-6">
+                <div class="destination-img m-4"> <!-- Ajout de la classe de marge -->
+                    <img src="{{ asset('FrontOffice/' ~ produit.imagep) }}" class="img-fluid rounded"  alt="{{ produit.nomp }}">
+                    <div class="destination-overlay p-4">
+                        <h4 class="text-black mb-2 mt-3">{{ produit.nomp }} </h4>
+                        <h6 class="text-black mb-2 mt-3">{{ produit.prixp }} dt</h6>
+                        <a href="{{ path('app_produit_show', {'idp': produit.idp}) }}" class="btn btn-primary text-white rounded-pill border py-2 px-3">Afficher</a>
+                    </div>
+                      
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+</div>
+
+{% endblock %}
