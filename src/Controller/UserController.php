@@ -185,7 +185,7 @@ public function unblockUser($idu): Response
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setRoleu('user');
+            $user->setRoleu('utulisateur');
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -207,7 +207,7 @@ public function unblockUser($idu): Response
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setRoleu('user');
+            $user->setRoleu('utulisateur');
             // Encodez le mot de passe
             $encodedPassword = $passwordEncoder->encodePassword(
                 $user,

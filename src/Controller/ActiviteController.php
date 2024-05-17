@@ -210,8 +210,8 @@ class ActiviteController extends AbstractController
     {
         // Récupérer l'utilisateur avec l'ID 2 par défaut
         $userRepository = $this->getDoctrine()->getRepository(User::class);
-        $user = $userRepository->find(2);
-
+        //$user = $userRepository->find(2);
+        $user = $this->getUser();
         // Vérifier si l'utilisateur a déjà réagi "love" à cette activité
         $activiteFavorisRepository = $this->getDoctrine()->getRepository(Activitefavoris::class);
         $activiteFavoris = $activiteFavorisRepository->findOneBy(['activite' => $activite, 'user' => $user]);
@@ -239,8 +239,8 @@ class ActiviteController extends AbstractController
     {
         // Récupérer l'utilisateur avec l'ID 2 par défaut
         $userRepository = $this->getDoctrine()->getRepository(User::class);
-        $user = $userRepository->find(2);
-
+        //$user = $userRepository->find(2);
+        $user = $this->getUser();
         // Vérifier si l'utilisateur a réagi "love" à cette activité
         $activiteFavorisRepository = $this->getDoctrine()->getRepository(Activitefavoris::class);
         $activiteFavoris = $activiteFavorisRepository->findOneBy(['activite' => $activite, 'user' => $user]);

@@ -21,7 +21,7 @@
                     <div class="blog-item">
                      <div class="blog-img">
                         <div class="blog-img-inner">     
-                            <img src="{{ asset('uploads/' ~ activitefavoris.activite.imagea) }}" class="img-fluid w-100 rounded-top" alt="{{ activitefavoris.activite.noma }}">
+                            <img src="{{ path('user_images' , {'imageName': activitefavoris.activite.imagea|url_encode}) }}" class="img-fluid w-100 rounded-top" alt="{{ activitefavoris.activite.noma }}">
                             <div class="blog-icon">
                                         <a href="#" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>
                             </div>

@@ -17,6 +17,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 #[Route('/produit')]
 class ProduitController extends AbstractController
@@ -129,6 +134,15 @@ class ProduitController extends AbstractController
             'produit' => $produit,
             'form' => $form,
         ]);
+    }
+
+    #[Route('/user-images/{imageName}', name: 'user_image')]
+    public function getUserImage(string $imageName): Response
+    {
+        $imagePath = 'C:\xampp\htdocs\image\\' . $imageName;
+        
+        // Return the image as a response
+        return new BinaryFileResponse($imagePath);
     }
 
     #[Route('/{idp}', name: 'app_produit_show', methods: ['GET'])]

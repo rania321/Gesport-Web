@@ -23,7 +23,7 @@
         <tbody>
             <tr>
                 <td rowspan="3">
-                    <img src="{{ asset('FrontOffice/' ~ produit.imagep) }}" class="img-fluid rounded"  alt="{{ produit.nomp }}">
+                    <img src="{{ path('user_image' , {'imageName': produit.imagep|url_encode}) }}" class="img-fluid rounded"  alt="{{ produit.nomp }}">
                 </td>
                 <td><h3>#{{ produit.referencep }}</h3></td>
             </tr>

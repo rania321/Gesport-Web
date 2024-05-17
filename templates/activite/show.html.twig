@@ -27,7 +27,7 @@
             
                <!-- <th>Imagea</th>  -->
                <div class="border rounded">
-                <img src="{{ asset('uploads/' ~ activite.imagea) }}" class="img-fluid rounded"  alt="{{ activite.noma }}">
+                <img src="{{ path('user_images' , {'imageName': activite.imagea|url_encode}) }}" class="img-fluid rounded"  alt="{{ activite.noma }}">
             </div>
             </div>
             <div class="col-lg-6">

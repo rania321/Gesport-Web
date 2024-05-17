@@ -28,7 +28,7 @@
     <div class="service-content-inner d-flex align-items-start bg-white border border-primary rounded p-4">
 
         <!-- Image à gauche -->
-        <img src="{{ asset('FrontOffice/' ~ panier.idp.imagep) }}" class="img-fluid rounded me-4" alt="{{ panier.idp.nomp }}" style="max-width: 200px; max-height: 200px;">
+        <img src="{{ path('user_image' , {'imageName': panier.idp.imagep|url_encode}) }}" class="img-fluid rounded me-4" alt="{{ panier.idp.nomp }}" style="max-width: 200px; max-height: 200px;">
 
         <!-- Contenu du service -->
         <div class="service-content">
